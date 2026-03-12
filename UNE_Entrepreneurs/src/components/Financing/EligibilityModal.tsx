@@ -3,8 +3,9 @@
 // ============================================================
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, MapPin, Briefcase, CircleDollarSign, Users, Scale, AlertTriangle, CheckCircle2, XCircle, ArrowRight, Save, LogIn } from 'lucide-react';
+import { Search, MapPin, Briefcase, CircleDollarSign, Users, Scale, AlertTriangle, CheckCircle2, XCircle, ArrowRight, LogIn } from 'lucide-react';
 import type { FinancingProgram, UserProfile } from '../../types/financing';
+import { toast } from 'sonner';
 import { REGIONS, SECTORS } from '../../types/financing';
 import { checkEligibility } from '../../utils/financingUtils';
 import { useAuth } from '../../context/AuthContext';
@@ -20,11 +21,11 @@ export default function EligibilityModal({ program, onClose, onShowSuggestions }
   const navigate = useNavigate();
 
   const [profile, setProfile] = useState<Partial<UserProfile>>({
-    region: user?.region || '',
-    sector: user?.sector || '',
-    annualRevenue: user?.annualRevenue || null,
-    employees: user?.employees || null,
-    legalStatus: user?.legalStatus || 'informal',
+    region: '',
+    sector: '',
+    annualRevenue: null,
+    employees: null,
+    legalStatus: 'informal',
   });
 
   const [result, setResult] = useState<ReturnType<typeof checkEligibility> | null>(null);
@@ -33,6 +34,13 @@ export default function EligibilityModal({ program, onClose, onShowSuggestions }
     e.preventDefault();
     const finalProfile = profile as UserProfile;
     const checkResult = checkEligibility(finalProfile, program.eligibility);
+    if (checkResult.result === 'qualifies') {
+      toast.success('¡Usted cumple con los requisitos principales!');
+    } else if (checkResult.result === 'possibly') {
+      toast.info('Complete todos los campos para una mejor evaluación.');
+    } else {
+      toast.error('Lo sentimos, no cumple con los requisitos de este programa.');
+    }
     setResult(checkResult);
   };
 

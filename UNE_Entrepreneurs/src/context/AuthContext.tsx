@@ -4,7 +4,7 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
 
 interface AuthUser {
-  id: number;
+  id: string;
   name: string;
   email: string;
   isAdmin: boolean;
@@ -22,14 +22,14 @@ const AuthContext = createContext<AuthContextType | null>(null);
 // Usuarios simulados
 const MOCK_USERS: (AuthUser & { password: string })[] = [
   {
-    id: 1,
+    id: '1',
     name: 'Admin UNE',
     email: 'admin@une.cr',
     password: 'admin123',
     isAdmin: true,
   },
   {
-    id: 2,
+    id: '2',
     name: 'María López',
     email: 'maria@example.com',
     password: 'user123',

@@ -8,6 +8,7 @@ import {
   CheckCircle2, Paperclip, Flag, Heart, PlusCircle, 
   Phone, Mail, Globe, FileText, Handshake, Search, XCircle, CheckCircle, AlertCircle
 } from 'lucide-react';
+import { toast } from 'sonner';
 import type { FinancingProgram } from '../../types/financing';
 import { FINANCING_TYPES, FINANCING_STATUS } from '../../types/financing';
 import { getFinancingProgramById, addFavorite, addToBudget } from '../../services/FinancingService';
@@ -35,14 +36,13 @@ export default function FinancingDetail() {
   // Actions
   const [favorited, setFavorited] = useState(false);
   const [budgetAdded, setBudgetAdded] = useState(false);
-  const [alert, setAlert] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
     const fetchProgram = async () => {
       if (!id) return;
       setLoading(true);
       try {
-        const data = await getFinancingProgramById(Number(id));
+        const data = await getFinancingProgramById(id);
         setProgram(data);
       } catch (err) {
         console.error('Error al cargar programa:', err);
@@ -54,10 +54,7 @@ export default function FinancingDetail() {
     fetchProgram();
   }, [id]);
 
-  const showAlertMessage = (type: 'success' | 'error', message: string) => {
-    setAlert({ type, message });
-    setTimeout(() => setAlert(null), 4000);
-  };
+
 
   const handleFavorite = async () => {
     if (!user || !program) return;
@@ -68,10 +65,10 @@ export default function FinancingDetail() {
         createdAt: new Date().toISOString(),
       });
       setFavorited(true);
-      showAlertMessage('success', 'Programa guardado en favoritos');
+      toast.success('Programa guardado en favoritos');
     } catch (err) {
       console.error('Error:', err);
-      showAlertMessage('error', 'Error al guardar en favoritos');
+      toast.error('Error al guardar en favoritos');
     }
   };
 
@@ -88,10 +85,10 @@ export default function FinancingDetail() {
         note: `Ingreso estimado por programa: ${program.name}`,
       });
       setBudgetAdded(true);
-      showAlertMessage('success', 'Programa agregado al presupuesto simulado');
+      toast.success('Programa agregado al presupuesto simulado');
     } catch (err) {
       console.error('Error:', err);
-      showAlertMessage('error', 'Error al agregar al presupuesto');
+      toast.error('Error al agregar al presupuesto');
     }
   };
 
@@ -135,17 +132,7 @@ export default function FinancingDetail() {
       <FinancingNavbar />
 
       <div className="financingDetailPage">
-        {/* Alert */}
-        {alert && (
-          <div
-            className={`financingAlert ${
-              alert.type === 'success' ? 'financingAlertSuccess' : 'financingAlertError'
-            }`}
-            style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-          >
-            {alert.type === 'success' ? <CheckCircle size={18} /> : <XCircle size={18} />} {alert.message}
-          </div>
-        )}
+
 
         {/* Breadcrumbs */}
         <nav className="financingBreadcrumbs" aria-label="Migas de pan">

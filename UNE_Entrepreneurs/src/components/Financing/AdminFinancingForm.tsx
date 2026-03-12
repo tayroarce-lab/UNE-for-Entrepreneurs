@@ -9,7 +9,7 @@ import { isValidUrl, sanitizeHtml } from '../../utils/financingUtils';
 
 interface AdminFinancingFormProps {
   program?: FinancingProgram | null;
-  onSave: (program: Omit<FinancingProgram, 'id'> & { id?: number }) => void;
+  onSave: (program: Omit<FinancingProgram, 'id'> & { id?: string }) => void;
   onCancel: () => void;
   loading?: boolean;
 }
@@ -50,7 +50,7 @@ export default function AdminFinancingForm({
   onCancel,
   loading = false,
 }: AdminFinancingFormProps) {
-  const [formData, setFormData] = useState<Omit<FinancingProgram, 'id'> & { id?: number }>(
+  const [formData, setFormData] = useState<Omit<FinancingProgram, 'id'> & { id?: string }>(
     program ? { ...program } : { ...emptyProgram }
   );
   const [errors, setErrors] = useState<FormErrors>({});

@@ -26,7 +26,7 @@ export interface Attachment {
 }
 
 export interface FinancingProgram {
-  id?: number;
+  id?: string;
   name: string;
   type: FinancingType;
   amountRange: string;
@@ -43,15 +43,15 @@ export interface FinancingProgram {
   lastVerified: string;
   sourceUrl: string;
   notes?: string;
-  createdBy?: number;
+  createdBy?: string;
   attachments?: Attachment[];
   closedReason?: string;
 }
 
 export interface Application {
-  id?: number;
-  programId: number;
-  userId?: number;
+  id?: string;
+  programId: string;
+  userId?: string;
   name: string;
   email: string;
   phone: string;
@@ -61,24 +61,24 @@ export interface Application {
 }
 
 export interface Report {
-  id?: number;
-  programId: number;
-  userId?: number;
+  id?: string;
+  programId: string;
+  userId?: string;
   note: string;
   createdAt: string;
 }
 
 export interface Favorite {
-  id?: number;
-  userId: number;
-  programId: number;
+  id?: string;
+  userId: string;
+  programId: string;
   createdAt: string;
 }
 
 export interface UserBudgetEntry {
-  id?: number;
-  userId: number;
-  programId: number;
+  id?: string;
+  userId: string;
+  programId: string;
   programName: string;
   estimatedAmount: number;
   type: 'income';

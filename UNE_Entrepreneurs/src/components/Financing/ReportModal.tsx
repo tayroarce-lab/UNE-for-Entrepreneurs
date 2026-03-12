@@ -3,11 +3,12 @@
 // ============================================================
 import { useState } from 'react';
 import { Flag, CheckCircle2, AlertTriangle, Send } from 'lucide-react';
+import { toast } from 'sonner';
 import { createReport } from '../../services/FinancingService';
 import { useAuth } from '../../context/AuthContext';
 
 interface ReportModalProps {
-  programId: number;
+  programId: string;
   programName: string;
   onClose: () => void;
 }
@@ -34,6 +35,7 @@ export default function ReportModal({ programId, programName, onClose }: ReportM
         note: note.trim(),
         createdAt: new Date().toISOString(),
       });
+      toast.success('Reporte enviado con éxito');
       setSubmitted(true);
     } catch (err) {
       console.error('Error al enviar reporte:', err);

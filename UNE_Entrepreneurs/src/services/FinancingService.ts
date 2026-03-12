@@ -52,7 +52,7 @@ export async function getFinancingPrograms(filters?: {
   return { data, total: total || data.length };
 }
 
-export async function getFinancingProgramById(id: number): Promise<FinancingProgram> {
+export async function getFinancingProgramById(id: string): Promise<FinancingProgram> {
   const response = await fetch(`${API_BASE}/financingPrograms/${id}`);
   return handleResponse<FinancingProgram>(response);
 }
@@ -69,7 +69,7 @@ export async function createFinancingProgram(
 }
 
 export async function updateFinancingProgram(
-  id: number,
+  id: string,
   program: Partial<FinancingProgram>
 ): Promise<FinancingProgram> {
   const response = await fetch(`${API_BASE}/financingPrograms/${id}`, {
@@ -80,7 +80,7 @@ export async function updateFinancingProgram(
   return handleResponse<FinancingProgram>(response);
 }
 
-export async function deleteFinancingProgram(id: number): Promise<void> {
+export async function deleteFinancingProgram(id: string): Promise<void> {
   const response = await fetch(`${API_BASE}/financingPrograms/${id}`, {
     method: 'DELETE',
   });
@@ -124,7 +124,7 @@ export async function createReport(report: Omit<Report, 'id'>): Promise<Report> 
 
 // --------------- Favorites ---------------
 
-export async function getFavorites(userId: number): Promise<Favorite[]> {
+export async function getFavorites(userId: string): Promise<Favorite[]> {
   const response = await fetch(`${API_BASE}/favorites?userId=${userId}`);
   return handleResponse<Favorite[]>(response);
 }
@@ -140,7 +140,7 @@ export async function addFavorite(
   return handleResponse<Favorite>(response);
 }
 
-export async function removeFavorite(id: number): Promise<void> {
+export async function removeFavorite(id: string): Promise<void> {
   const response = await fetch(`${API_BASE}/favorites/${id}`, {
     method: 'DELETE',
   });
@@ -151,7 +151,7 @@ export async function removeFavorite(id: number): Promise<void> {
 
 // --------------- User Budget ---------------
 
-export async function getUserBudget(userId: number): Promise<UserBudgetEntry[]> {
+export async function getUserBudget(userId: string): Promise<UserBudgetEntry[]> {
   const response = await fetch(`${API_BASE}/userBudget?userId=${userId}`);
   return handleResponse<UserBudgetEntry[]>(response);
 }
@@ -171,5 +171,6 @@ export async function addToBudget(
 
 export async function getTags(): Promise<string[]> {
   const response = await fetch(`${API_BASE}/tags`);
-  return handleResponse<string[]>(response);
+  const data = await handleResponse<{ list: string[] }>(response);
+  return data.list || [];
 }

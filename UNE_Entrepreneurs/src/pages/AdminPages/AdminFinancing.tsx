@@ -2,7 +2,9 @@
 // Página Admin — Gestión de Financiamientos CRUD — UNE
 // ============================================================
 import { useState, useEffect, useCallback } from 'react';
-import { Landmark, Plus, Search, ClipboardList, Pencil, Copy, CheckCircle, Lock, Trash2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Landmark, Plus, Search, ClipboardList, Pencil, Copy, CheckCircle, Lock, Trash2 } from 'lucide-react';
+import Swal from 'sweetalert2';
+import { toast } from 'sonner';
 import type { FinancingProgram, FinancingType, FinancingStatus } from '../../types/financing';
 import { FINANCING_TYPES, FINANCING_STATUS, REGIONS } from '../../types/financing';
 import {
@@ -26,7 +28,6 @@ export default function AdminFinancingPage() {
   const [saving, setSaving] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [editingProgram, setEditingProgram] = useState<FinancingProgram | null>(null);
-  const [alert, setAlert] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   // Filters
   const [searchQuery, setSearchQuery] = useState('');
@@ -39,10 +40,7 @@ export default function AdminFinancingPage() {
   const [total, setTotal] = useState(0);
   const limit = 10;
 
-  const showAlert = (type: 'success' | 'error', message: string) => {
-    setAlert({ type, message });
-    setTimeout(() => setAlert(null), 4000);
-  };
+
 
   const fetchPrograms = useCallback(async () => {
     setLoading(true);
@@ -61,7 +59,7 @@ export default function AdminFinancingPage() {
       setTotal(result.total);
     } catch (error) {
       console.error('Error al cargar programas:', error);
-      showAlert('error', 'Error al cargar los programas de financiamiento');
+      toast.error('Error al cargar los programas de financiamiento');
     } finally {
       setLoading(false);
     }
@@ -72,39 +70,53 @@ export default function AdminFinancingPage() {
   }, [fetchPrograms]);
 
   // ---- CRUD Handlers ----
-  const handleSave = async (programData: Omit<FinancingProgram, 'id'> & { id?: number }) => {
+  const handleSave = async (programData: Omit<FinancingProgram, 'id'> & { id?: string }) => {
     setSaving(true);
     try {
       if (programData.id) {
         await updateFinancingProgram(programData.id, programData);
-        showAlert('success', `Programa "${programData.name}" actualizado correctamente`);
+        toast.success(`Programa "${programData.name}" actualizado correctamente`);
       } else {
         await createFinancingProgram({
           ...programData,
           createdBy: user?.id,
         });
-        showAlert('success', `Programa "${programData.name}" creado correctamente`);
+        toast.success(`Programa "${programData.name}" creado correctamente`);
       }
       setShowForm(false);
       setEditingProgram(null);
       fetchPrograms();
     } catch (error) {
       console.error('Error al guardar:', error);
-      showAlert('error', 'Error al guardar el programa');
+      toast.error('Error al guardar el programa');
     } finally {
       setSaving(false);
     }
   };
 
   const handleDelete = async (program: FinancingProgram) => {
-    if (!window.confirm(`¿Está seguro de eliminar el programa "${program.name}"?`)) return;
-    try {
-      await deleteFinancingProgram(program.id!);
-      showAlert('success', `Programa "${program.name}" eliminado`);
-      fetchPrograms();
-    } catch (error) {
-      console.error('Error al eliminar:', error);
-      showAlert('error', 'Error al eliminar el programa');
+    const result = await Swal.fire({
+      title: '¿Está seguro?',
+      text: `Se eliminará el programa "${program.name}". Esta acción no se puede deshacer.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'var(--uneRed)',
+      cancelButtonColor: 'var(--textMuted)',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      background: 'var(--bgWhite)',
+      color: 'var(--textPrimary)'
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await deleteFinancingProgram(program.id!);
+        toast.success(`Programa "${program.name}" eliminado`);
+        fetchPrograms();
+      } catch (error) {
+        console.error('Error al eliminar:', error);
+        toast.error('Error al eliminar el programa');
+      }
     }
   };
 
@@ -126,27 +138,41 @@ export default function AdminFinancingPage() {
         ...program,
         lastVerified: new Date().toISOString().split('T')[0],
       });
-      showAlert('success', `"${program.name}" marcado como verificado hoy`);
+      toast.success(`"${program.name}" marcado como verificado hoy`);
       fetchPrograms();
     } catch (error) {
       console.error('Error:', error);
-      showAlert('error', 'Error al actualizar verificación');
+      toast.error('Error al actualizar verificación');
     }
   };
 
   const handleClose = async (program: FinancingProgram) => {
-    const reason = window.prompt('Ingrese la razón de cierre (opcional):');
-    try {
-      await updateFinancingProgram(program.id!, {
-        ...program,
-        status: 'closed',
-        closedReason: reason || undefined,
-      });
-      showAlert('success', `"${program.name}" marcado como cerrado`);
-      fetchPrograms();
-    } catch (error) {
-      console.error('Error:', error);
-      showAlert('error', 'Error al cerrar programa');
+    const { value: reason, isConfirmed } = await Swal.fire({
+      title: 'Cerrar Programa',
+      input: 'textarea',
+      inputLabel: 'Razón del cierre (opcional):',
+      inputPlaceholder: 'Ej: Fondos agotados, fin de convocatoria...',
+      showCancelButton: true,
+      confirmButtonText: 'Cerrar Programa',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: 'var(--uneRed)',
+      background: 'var(--bgWhite)',
+      color: 'var(--textPrimary)'
+    });
+
+    if (isConfirmed) {
+      try {
+        await updateFinancingProgram(program.id!, {
+          ...program,
+          status: 'closed',
+          closedReason: reason || undefined,
+        });
+        toast.success(`"${program.name}" marcado como cerrado`);
+        fetchPrograms();
+      } catch (error) {
+        console.error('Error:', error);
+        toast.error('Error al cerrar programa');
+      }
     }
   };
 
@@ -170,18 +196,7 @@ export default function AdminFinancingPage() {
       <FinancingNavbar />
 
       <div className="financingAdminContainer">
-        {/* Alert */}
-        {alert && (
-          <div
-            className={`financingAlert ${
-              alert.type === 'success' ? 'financingAlertSuccess' : 'financingAlertError'
-            }`}
-            style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-          >
-            {alert.type === 'success' ? <CheckCircle2 size={18} /> : <AlertCircle size={18} />}
-            {alert.message}
-          </div>
-        )}
+
 
         {/* Header */}
         <div className="financingAdminHeader">

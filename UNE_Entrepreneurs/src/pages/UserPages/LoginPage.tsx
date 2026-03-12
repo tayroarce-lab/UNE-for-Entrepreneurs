@@ -3,6 +3,7 @@
 // ============================================================
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 import { useAuth } from '../../context/AuthContext';
 import FinancingNavbar from '../../components/Financing/FinancingNavbar';
 import '../../styles/financing.css';
@@ -22,8 +23,10 @@ export default function LoginPage() {
 
     const success = await login(email, password);
     if (success) {
+      toast.success('Bienvenido de nuevo');
       navigate('/financiamiento');
     } else {
+      toast.error('Credenciales incorrectas. Intente de nuevo.');
       setError('Credenciales incorrectas. Intente de nuevo.');
     }
     setLoading(false);

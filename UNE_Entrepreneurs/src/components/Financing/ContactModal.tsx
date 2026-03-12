@@ -3,6 +3,7 @@
 // ============================================================
 import { useState } from 'react';
 import { Mail, CheckCircle2, ChevronRight, Send } from 'lucide-react';
+import { toast } from 'sonner';
 import type { FinancingProgram } from '../../types/financing';
 import { createApplication } from '../../services/FinancingService';
 import { useAuth } from '../../context/AuthContext';
@@ -50,6 +51,7 @@ export default function ContactModal({ program, onClose }: ContactModalProps) {
         createdAt: new Date().toISOString(),
         status: 'new',
       });
+      toast.success('Mensaje enviado. Un asesor le contactará pronto.');
       setSubmitted(true);
     } catch (err) {
       console.error('Error al enviar contacto UNE:', err);
