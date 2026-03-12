@@ -14,11 +14,11 @@ import { FINANCING_TYPES, FINANCING_STATUS } from '../../types/financing';
 import { getFinancingProgramById, addFavorite, addToBudget } from '../../services/FinancingService';
 import { formatDate, formatCurrency, sanitizeHtml } from '../../utils/financingUtils';
 import { useAuth } from '../../context/AuthContext';
-import FinancingNavbar from '../../components/Financing/FinancingNavbar';
-import FinancingFooter from '../../components/Financing/FinancingFooter';
-import EligibilityModal from '../../components/Financing/EligibilityModal';
-import ContactModal from '../../components/Financing/ContactModal';
-import ReportModal from '../../components/Financing/ReportModal';
+import FinancingNavbar from './FinancingNavbar';
+import FinancingFooter from './FinancingFooter';
+import EligibilityModal from './EligibilityModal';
+import ContactModal from './ContactModal';
+import ReportModal from './ReportModal';
 import '../../styles/financing.css';
 
 export default function FinancingDetail() {

@@ -7,10 +7,10 @@ import type { FinancingProgram, FinancingType, UserProfile } from '../../types/f
 import { FINANCING_TYPES, REGIONS } from '../../types/financing';
 import { getFinancingPrograms } from '../../services/FinancingService';
 import { checkEligibility } from '../../utils/financingUtils';
-import FinancingCard from '../../components/Financing/FinancingCard';
-import FinancingNavbar from '../../components/Financing/FinancingNavbar';
-import FinancingFooter from '../../components/Financing/FinancingFooter';
-import EligibilityModal from '../../components/Financing/EligibilityModal';
+import FinancingCard from './FinancingCard';
+import FinancingNavbar from './FinancingNavbar';
+import FinancingFooter from './FinancingFooter';
+import EligibilityModal from './EligibilityModal';
 import '../../styles/financing.css';
 
 export default function UserFinancingCatalog() {

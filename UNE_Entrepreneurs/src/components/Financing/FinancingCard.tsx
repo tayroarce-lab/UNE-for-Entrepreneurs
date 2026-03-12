@@ -2,7 +2,7 @@
 // Tarjeta de Programa de Financiamiento — UNE
 // ============================================================
 import { Link } from 'react-router-dom';
-import { Landmark, ArrowRight } from 'lucide-react';
+import { Landmark } from 'lucide-react';
 import type { FinancingProgram } from '../../types/financing';
 import { FINANCING_TYPES } from '../../types/financing';
 
@@ -84,13 +84,24 @@ export default function FinancingCard({ program, onCheckEligibility }: Financing
 
       {/* Single CTA button — matching mockup */}
       <div className="financingCardFooter" style={{ padding: '0 1.25rem 1.25rem' }}>
-        <Link
-          to={`/financiamiento/${program.id}`}
-          className="financingCardCta"
-          style={{ width: '100%', textAlign: 'center', textDecoration: 'none', display: 'block' }}
-        >
-          Ver Detalles
-        </Link>
+        <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+          <Link
+            to={`/financiamiento/${program.id}`}
+            className="financingCardCta"
+            style={{ flex: 1, textAlign: 'center', textDecoration: 'none' }}
+          >
+            Detalles
+          </Link>
+          {onCheckEligibility && !isClosed && (
+            <button
+              onClick={() => onCheckEligibility(program)}
+              className="financingBtn financingBtnSecondary"
+              style={{ padding: '8px 12px', fontSize: '0.85rem' }}
+            >
+              ¿Califico?
+            </button>
+          )}
+        </div>
       </div>
     </article>
   );

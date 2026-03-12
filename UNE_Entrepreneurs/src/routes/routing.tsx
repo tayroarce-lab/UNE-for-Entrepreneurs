@@ -2,10 +2,10 @@
 // Routing principal — UNE Costa Rica
 // ============================================================
 import { createBrowserRouter } from 'react-router-dom';
-import UserFinancingCatalog from '../pages/UserPages/FinancingCatalog';
-import FinancingDetail from '../pages/UserPages/FinancingDetail';
-import AdminFinancingPage from '../pages/AdminPages/AdminFinancing';
-import LoginPage from '../pages/UserPages/LoginPage';
+import UserFinancingCatalog from '../components/Financing/FinancingCatalog';
+import FinancingDetail from '../components/Financing/FinancingDetail';
+import AdminFinancingPage from '../components/Financing/AdminFinancing';
+import LoginPage from '../components/Financing/LoginPage';
 
 const router = createBrowserRouter([
   {

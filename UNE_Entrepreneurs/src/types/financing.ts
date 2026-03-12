@@ -42,6 +42,7 @@ export interface FinancingProgram {
   status: FinancingStatus;
   lastVerified: string;
   sourceUrl: string;
+  description?: string;
   notes?: string;
   createdBy?: string;
   attachments?: Attachment[];

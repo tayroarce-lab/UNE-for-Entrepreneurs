@@ -15,8 +15,8 @@ import {
 } from '../../services/FinancingService';
 import { formatDate } from '../../utils/financingUtils';
 import { useAuth } from '../../context/AuthContext';
-import AdminFinancingForm from '../../components/Financing/AdminFinancingForm';
-import FinancingNavbar from '../../components/Financing/FinancingNavbar';
+import AdminFinancingForm from './AdminFinancingForm';
+import FinancingNavbar from './FinancingNavbar';
 import '../../styles/financing.css';
 
 export default function AdminFinancingPage() {

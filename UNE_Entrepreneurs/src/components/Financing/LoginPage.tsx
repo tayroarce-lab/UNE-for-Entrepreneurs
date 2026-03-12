@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useAuth } from '../../context/AuthContext';
-import FinancingNavbar from '../../components/Financing/FinancingNavbar';
+import FinancingNavbar from './FinancingNavbar';
 import '../../styles/financing.css';
 
 export default function LoginPage() {
