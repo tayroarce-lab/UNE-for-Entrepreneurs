@@ -71,7 +71,7 @@ export default function LoginPage() {
               marginBottom: '2rem',
             }}
           >
-            Acceda a su cuenta UNE Entrepreneurs
+            Acceda a su cuenta UNE
           </p>
 
           {error && (

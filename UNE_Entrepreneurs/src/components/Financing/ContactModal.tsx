@@ -1,5 +1,5 @@
 // ============================================================
-// Modal de Contacto UNE — UNE Entrepreneurs
+// Modal de Contacto — UNE Costa Rica
 // ============================================================
 import { useState } from 'react';
 import { Mail, CheckCircle2, ChevronRight, Send } from 'lucide-react';

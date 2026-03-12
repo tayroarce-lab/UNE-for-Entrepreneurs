@@ -2,7 +2,7 @@
 // Tarjeta de Programa de Financiamiento — UNE
 // ============================================================
 import { Link } from 'react-router-dom';
-import { Landmark, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Landmark, ArrowRight } from 'lucide-react';
 import type { FinancingProgram } from '../../types/financing';
 import { FINANCING_TYPES } from '../../types/financing';
 
@@ -28,84 +28,69 @@ export default function FinancingCard({ program, onCheckEligibility }: Financing
       style={{ opacity: isClosed ? 0.75 : 1 }}
       aria-label={`Programa de financiamiento: ${program.name}`}
     >
-      <div className="financingCardHeader">
-        <div className="financingCardBankIcon">
-          <Landmark size={24} color="var(--uneGold)" />
-        </div>
-        <div style={{ flex: 1 }}>
+      {/* Header: Bank badge + Tag badges */}
+      <div className="financingCardHeader" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ width: '36px', height: '36px', background: 'var(--uneCream)', borderRadius: 'var(--radiusSm)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <Landmark size={18} color="var(--uneGold)" />
+          </div>
           <span className="financingCardBankBadge">
             {FINANCING_TYPES[program.type]}
           </span>
-          <h3 className="financingCardTitle">{program.name}</h3>
-        </div>
-      </div>
-
-      <div className="financingCardBody">
-        <div className="financingCardAmount">
-          <span className="financingCardAmountLabel">Monto</span>
-          <div className="financingCardAmountValue">
-            {program.minAmount === 0
-              ? `Hasta ${formatAmount(program.maxAmount)}`
-              : `${formatAmount(program.minAmount)} - ${formatAmount(program.maxAmount)}`}
-          </div>
-        </div>
-
-        <ul className="financingCardFeatures">
-          <li>
-            <CheckCircle2 size={16} className="text-uneGold" style={{ flexShrink: 0, color: 'var(--uneGold)' }} />
-            <span>Región: {program.region}</span>
-          </li>
-          <li>
-            <CheckCircle2 size={16} className="text-uneGold" style={{ flexShrink: 0, color: 'var(--uneGold)' }} />
-            <span>
-              Empresa {program.eligibility.legalStatus === 'formal' ? 'Formal (Tributación)' : 'Asesoramiento Integral'}
-            </span>
-          </li>
-          <li>
-            <CheckCircle2 size={16} className="text-uneGold" style={{ flexShrink: 0, color: 'var(--uneGold)' }} />
-            <span>
-              {program.type === 'loan' ? 'Requiere Análisis de Crédito' : 'Requiere Presentar Proyecto'}
-            </span>
-          </li>
-        </ul>
-
-        {/* Tags */}
-        <div className="financingTagsList">
-          {program.tags.slice(0, 3).map((tag) => (
-            <span key={tag} className="financingTag" style={{ fontSize: '0.7rem', padding: '0.15rem 0.4rem' }}>
-              {tag}
-            </span>
-          ))}
-          {program.tags.length > 3 && (
-            <span className="financingTag" style={{ fontSize: '0.7rem' }}>
-              +{program.tags.length - 3}
+          {isClosed && (
+            <span style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--errorRed)', background: 'var(--errorBg)', padding: '2px 8px', borderRadius: '4px' }}>
+              Cerrado
             </span>
           )}
         </div>
+        {/* Tags float right in header */}
+        <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+          {program.tags.slice(0, 2).map((tag) => (
+            <span key={tag} className="financingTag" style={{ fontSize: '0.65rem', padding: '2px 6px' }}>
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
 
-      <div className="financingCardFooter">
+      {/* Body */}
+      <div className="financingCardBody">
+        <h3 className="financingCardName">{program.name}</h3>
+        <p className="financingCardDescription">
+          {program.description
+            ? program.description.length > 100
+              ? program.description.substring(0, 100) + '...'
+              : program.description
+            : `Financiamiento para empresas en ${program.region}. ${program.eligibility.legalStatus === 'formal' ? 'Empresa Formal (Tributación).' : 'Asesoramiento Integral.'}`
+          }
+        </p>
+
+        {/* Financial Metrics — 2 columns like the mockup */}
+        <div className="financingCardMeta" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0', borderTop: '1px solid var(--borderLight)', marginTop: '12px', paddingTop: '12px' }}>
+          <div className="financingCardMetaItem">
+            <span className="financingCardMetaLabel">Monto Mín.</span>
+            <span className="financingCardMetaValueSecondary" style={{ fontSize: '1rem', fontWeight: 700 }}>
+              {program.minAmount === 0 ? '—' : formatAmount(program.minAmount)}
+            </span>
+          </div>
+          <div className="financingCardMetaItem">
+            <span className="financingCardMetaLabel">Monto Máx.</span>
+            <span className="financingCardMetaValue" style={{ fontSize: '1rem', fontWeight: 700 }}>
+              {formatAmount(program.maxAmount)}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Single CTA button — matching mockup */}
+      <div className="financingCardFooter" style={{ padding: '0 1.25rem 1.25rem' }}>
         <Link
           to={`/financiamiento/${program.id}`}
-          className="financingBtn financingBtnSecondary financingBtnSm"
+          className="financingCardCta"
+          style={{ width: '100%', textAlign: 'center', textDecoration: 'none', display: 'block' }}
         >
           Ver Detalles
         </Link>
-        {!isClosed && onCheckEligibility && (
-          <button
-            className="financingBtn financingBtnPrimary financingBtnSm"
-            style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
-            onClick={() => onCheckEligibility(program)}
-            aria-label={`Verificar elegibilidad para ${program.name}`}
-          >
-            Ver si califico <ArrowRight size={14} />
-          </button>
-        )}
-        {isClosed && (
-          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--errorRed)', marginLeft: 'auto' }}>
-            Cerrado
-          </span>
-        )}
       </div>
     </article>
   );

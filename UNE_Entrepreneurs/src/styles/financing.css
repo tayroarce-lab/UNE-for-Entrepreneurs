@@ -105,6 +105,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
 }
 
 .financingNavbarLogo {
@@ -123,6 +124,51 @@ a:hover {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.financingNavbarLinks {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.financingNavbarLinks a,
+.financingNavbarLinks button {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: var(--radiusSm);
+  transition: all var(--transitionFast);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--fontFamily);
+}
+
+.financingNavbarLinks a:hover,
+.financingNavbarLinks button:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.12);
+}
+
+.financingNavbarLinks a.active {
+  color: #fff;
+  border-bottom: 2px solid var(--uneGold);
+}
+
+.navbarCta {
+  background: var(--uneGold) !important;
+  color: var(--uneRedDark) !important;
+  font-weight: 600 !important;
+  border-radius: var(--radiusSm) !important;
+  padding: 8px 18px !important;
+}
+
+.navbarCta:hover {
+  background: var(--uneGoldLight) !important;
+  transform: translateY(-1px);
 }
 
 .financingNavbarLinks {
@@ -351,6 +397,8 @@ a:hover {
   accent-color: var(--uneRed);
   width: 16px;
   height: 16px;
+  margin: 0;
+  flex-shrink: 0;
 }
 
 .financingFilterSelect {
@@ -380,6 +428,7 @@ a:hover {
 
 .financingFilterRange input {
   flex: 1;
+  min-width: 0;
   padding: 8px 10px;
   border: 1px solid var(--borderColor);
   border-radius: var(--radiusSm);
@@ -457,11 +506,11 @@ a:hover {
    ============================================================ */
 .financingCardsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1100px) {
   .financingCardsGrid {
     grid-template-columns: 1fr;
   }
@@ -1737,6 +1786,51 @@ a:hover {
   margin-top: auto;
 }
 
+.financingContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.financingFooterGrid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.financingFooterCol h4 {
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.financingFooterCol a,
+.financingFooterLinks a {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.7) !important;
+  padding: 3px 0;
+  transition: color var(--transitionFast);
+}
+
+.financingFooterCol a:hover,
+.financingFooterLinks a:hover {
+  color: var(--uneGoldLight) !important;
+}
+
+.financingFooterLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.financingFooterLinks li {
+  color: rgba(255,255,255,0.7);
+}
+
 .financingFooterContent {
   max-width: 1280px;
   margin: 0 auto;
@@ -1751,6 +1845,12 @@ a:hover {
   font-weight: 700;
   color: #fff;
   margin-bottom: 0.75rem;
+}
+
+.financingFooterDesc {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.7);
 }
 
 .financingFooterText {
@@ -1793,15 +1893,16 @@ a:hover {
 .financingFooterSocial {
   display: flex;
   gap: 12px;
+  margin-top: 0.75rem;
 }
 
 .financingFooterSocial a {
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.6) !important;
   font-size: 1rem;
 }
 
 .financingFooterSocial a:hover {
-  color: var(--uneGoldLight);
+  color: var(--uneGoldLight) !important;
 }
 
 /* ============================================================

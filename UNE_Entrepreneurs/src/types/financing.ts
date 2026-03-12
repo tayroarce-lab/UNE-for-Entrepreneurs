@@ -1,5 +1,5 @@
 // ============================================================
-// Tipos para el módulo de Financiamientos — UNE Entrepreneurs
+// Tipos para el módulo de Financiamientos — UNE Costa Rica
 // ============================================================
 
 export type FinancingType = 'loan' | 'grant' | 'subsidy' | 'equity' | 'other';

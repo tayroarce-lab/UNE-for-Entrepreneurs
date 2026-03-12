@@ -1,5 +1,5 @@
 // ============================================================
-// Footer — UNE Entrepreneurs
+// Footer — UNE Costa Rica
 // ============================================================
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Facebook, Linkedin, Instagram } from 'lucide-react';
@@ -66,7 +66,7 @@ export default function FinancingFooter() {
             &copy; {currentYear} Unión Nacional de Emprendedores (UNE). Todos los derechos reservados.
           </p>
           <p style={{ marginTop: '0.5rem', fontSize: '0.75rem', opacity: 0.8 }}>
-            FinanciaPyme CR es una plataforma informativa. Las condiciones finales de crédito
+            UNE Costa Rica es una plataforma informativa. Las condiciones finales de crédito
             están sujetas a la aprobación de la entidad financiera respectiva.
           </p>
         </div>

@@ -136,7 +136,7 @@ export default function UserFinancingCatalog() {
       {/* Hero Section */}
       <section className="financingHero" id="financingHero">
         <span className="financingHeroSubtitle">
-          UNA INICIATIVA CONJUNTA DE &nbsp;|&nbsp; FINANCIAPYME CR &amp; UNE COSTA RICA
+          UNIÓN NACIONAL DE EMPRENDEDORES &nbsp;|&nbsp; UNE COSTA RICA
         </span>
         <h1 className="financingHeroTitle">
           Encuentre el financiamiento ideal para su negocio
@@ -382,7 +382,7 @@ export default function UserFinancingCatalog() {
         <div>
           <span className="financingTestimonialLabel">CASO DE ÉXITO</span>
           <h3 className="financingTestimonialQuote">
-            "Gracias a FinanciaPyme CR, logramos expandir nuestro taller de artesanías en Cartago."
+            "Gracias a UNE Costa Rica, logramos expandir nuestro taller de artesanías en Cartago."
           </h3>
           <p className="financingTestimonialText">
             "Encontramos el crédito del BNCR que mejor se ajustaba a nuestro flujo de caja. El

@@ -1,5 +1,5 @@
 // ============================================================
-// Modal Analizar Elegibilidad — UNE Entrepreneurs
+// Modal Analizar Elegibilidad — UNE Costa Rica
 // ============================================================
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';

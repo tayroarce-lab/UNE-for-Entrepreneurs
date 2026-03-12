@@ -1,5 +1,5 @@
 // ============================================================
-// App principal — UNE Entrepreneurs
+// App principal \u2014 UNE Costa Rica
 // ============================================================
 import { RouterProvider } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';

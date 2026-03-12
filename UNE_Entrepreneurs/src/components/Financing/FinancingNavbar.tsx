@@ -1,158 +1,85 @@
 // ============================================================
-// Barra de Navegación — UNE Entrepreneurs
+// Barra de Navegación — UNE Costa Rica
 // ============================================================
-import { useState } from 'react';
+
 import { NavLink, Link, useNavigate } from 'react-router-dom';
-import { Landmark, LogOut, LayoutDashboard, UserCircle, Menu, X } from 'lucide-react';
+import { LogOut, LayoutDashboard, UserCircle } from 'lucide-react';
+import uneLogo from '../../assets/logo_une.png';
 import { useAuth } from '../../context/AuthContext';
 
 export default function FinancingNavbar() {
   const { user, isAdmin, logout } = useAuth();
   const navigate = useNavigate();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
 
   const handleLogout = () => {
     logout();
-    setMobileMenuOpen(false);
     navigate('/');
   };
 
   return (
     <nav className="financingNavbar" aria-label="Navegación principal">
-      <div className="financingContainer financingNavContainer">
-        {/* Logo */}
-        <Link to="/" className="financingLogoGroup" aria-label="Volver al inicio">
-          <div className="financingLogoIcon">
-            <Landmark size={24} color="#fff" />
-          </div>
-          <div>
-            <div className="financingLogoTitle">FinanciaPyme CR</div>
-            <div className="financingLogoSubtitle">Red Empresarial UNE</div>
-          </div>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <div className="financingNavLinks">
-          <NavLink
-            to="/financiamiento"
-            className={({ isActive }) =>
-              `financingNavLink ${isActive ? 'active' : ''}`
-            }
-            end
-          >
-            Catálogo de Financiamientos
-          </NavLink>
-
-          {isAdmin && (
-            <NavLink
-              to="/admin/financiamiento"
-              className={({ isActive }) =>
-                `financingNavLink ${isActive ? 'active' : ''}`
-              }
-            >
-              <LayoutDashboard size={18} style={{ marginRight: '6px' }} />
-              Admin
-            </NavLink>
-          )}
-
-          {user ? (
-            <div className="financingUserActions">
-              <span className="financingUserName">
-                <UserCircle size={18} style={{ marginRight: '6px' }} />
-                {user.name}
-              </span>
-              <button
-                className="financingBtn financingBtnSecondary financingBtnSm"
-                onClick={handleLogout}
-              >
-                <LogOut size={16} style={{ marginRight: '6px' }} /> Salir
-              </button>
-            </div>
-          ) : (
-            <div className="financingUserActions">
-              <Link to="/login" className="financingBtn financingBtnSecondary">
-                Iniciar Sesión
-              </Link>
-              <Link to="/registro" className="financingBtn financingBtnPrimary">
-                Registrarse
-              </Link>
-            </div>
-          )}
+      {/* Logo */}
+      <Link to="/" className="financingNavbarBrand" aria-label="Volver al inicio">
+        <div style={{ background: 'rgba(255,255,255,0.15)', borderRadius: '50%', width: '38px', height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <img src={uneLogo} alt="Logo UNE" style={{ height: '28px', width: '28px', objectFit: 'contain' }} />
         </div>
+        <span className="financingNavbarLogo">UNE</span>
+        <span className="financingNavbarLogoAccent">Unión Nacional de Emprendedores</span>
+      </Link>
 
-        {/* Mobile menu toggle */}
-        <button
-          className="financingMobileMenuBtn"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Menú principal"
+      {/* Navigation Links */}
+      <div className="financingNavbarLinks">
+        <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? 'active' : '')}
+          end
         >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
+          Inicio
+        </NavLink>
+        <NavLink
+          to="/financiamiento"
+          className={({ isActive }) => (isActive ? 'active' : '')}
+          end
+        >
+          Créditos
+        </NavLink>
 
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="financingMobileMenu">
+        {isAdmin && (
           <NavLink
-            to="/financiamiento"
-            onClick={() => setMobileMenuOpen(false)}
-            className={({ isActive }) =>
-              `financingNavLink ${isActive ? 'active' : ''}`
-            }
-            end
+            to="/admin/financiamiento"
+            className={({ isActive }) => (isActive ? 'active' : '')}
           >
-            Catálogo de Financiamientos
+            <LayoutDashboard size={18} style={{ marginRight: '6px', verticalAlign: 'middle', display: 'inline-block' }} />
+            Admin
           </NavLink>
+        )}
 
-          {isAdmin && (
-            <NavLink
-              to="/admin/financiamiento"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `financingNavLink ${isActive ? 'active' : ''}`
-              }
+        {user ? (
+          <div style={{ display: 'flex', alignItems: 'center', marginLeft: '8px' }}>
+            <span style={{ color: '#fff', fontSize: '0.875rem', fontWeight: 500, display: 'flex', alignItems: 'center' }}>
+              <UserCircle size={18} style={{ marginRight: '6px' }} />
+              {user.name}
+            </span>
+            <button
+              className="navbarCta"
+              onClick={handleLogout}
+              style={{ marginLeft: '12px', border: 'none', display: 'flex', alignItems: 'center' }}
             >
-              <LayoutDashboard size={18} style={{ marginRight: '6px' }} />
-              Dashboard Admin
-            </NavLink>
-          )}
-
-          <div style={{ padding: '1rem', borderTop: '1px solid var(--borderLight)' }}>
-            {user ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <span className="financingUserName">
-                  <UserCircle size={18} style={{ marginRight: '6px' }} />
-                  {user.name}
-                </span>
-                <button
-                  className="financingBtn financingBtnSecondary"
-                  style={{ width: '100%' }}
-                  onClick={handleLogout}
-                >
-                  <LogOut size={16} style={{ marginRight: '6px' }} /> Cerrar Sesión
-                </button>
-              </div>
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <Link
-                  to="/login"
-                  className="financingBtn financingBtnSecondary"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Iniciar Sesión
-                </Link>
-                <Link
-                  to="/registro"
-                  className="financingBtn financingBtnPrimary"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Registrarse
-                </Link>
-              </div>
-            )}
+              <LogOut size={16} style={{ marginRight: '6px' }} /> Salir
+            </button>
           </div>
-        </div>
-      )}
+        ) : (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '8px' }}>
+            <Link to="/login" style={{ fontSize: '0.875rem' }}>
+              Iniciar Sesión
+            </Link>
+            <Link to="/registro" className="navbarCta">
+              Registrar Mi PyME
+            </Link>
+          </div>
+        )}
+      </div>
     </nav>
   );
 }

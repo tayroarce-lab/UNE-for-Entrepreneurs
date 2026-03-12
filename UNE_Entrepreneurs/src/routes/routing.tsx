@@ -1,5 +1,5 @@
 // ============================================================
-// Routing principal — UNE Entrepreneurs
+// Routing principal — UNE Costa Rica
 // ============================================================
 import { createBrowserRouter } from 'react-router-dom';
 import UserFinancingCatalog from '../pages/UserPages/FinancingCatalog';
