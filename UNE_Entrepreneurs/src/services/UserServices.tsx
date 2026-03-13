@@ -1,5 +1,7 @@
+import { toast } from 'sonner'
+
 //PATCH
-async function patchUsuarios(usuario,id){
+async function patchUsuarios(usuario: any, id: string | number){
 
        try {
 
@@ -17,8 +19,8 @@ async function patchUsuarios(usuario,id){
         return datosUsuarios;
         
     } catch (error) {
-        
         console.error("Error al actualizar los cambios", error);
+        toast.error("Error al actualizar los cambios del usuario");
     }
 }
 
@@ -28,7 +30,7 @@ async function patchUsuarios(usuario,id){
 
 
 
-async function deleteUsuarios(id){
+async function deleteUsuarios(id: string | number){
 
        try {
 
@@ -41,8 +43,8 @@ async function deleteUsuarios(id){
         return datosUsuarios;
         
     } catch (error) {
-        
         console.error("Error al Eliminar el registro", error);
+        toast.error("Error al eliminar el usuario");
     }
 }
 
@@ -57,10 +59,11 @@ async function getUser() {
         return datos;
     } catch (error) {
         console.error("Error al obtener los usuarios", error);
+        toast.error("Error de conexión al obtener usuarios");
     }
 }
 
-async function postUser(usuario) {
+async function postUser(usuario: any) {
     try {
         const respuesta = await fetch("http://localhost:3001/usuarios", {
             method: "POST",
@@ -73,6 +76,7 @@ async function postUser(usuario) {
         return datos;
     } catch (error) {
         console.error("Error al registrar el usuario", error);
+        toast.error("Error al registrar el usuario");
     }
 }
 
