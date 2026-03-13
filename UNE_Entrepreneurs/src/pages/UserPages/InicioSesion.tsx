@@ -1,2 +1,9 @@
-/* Aqui se deberá de hacer la funciónalidad de iniciar sesión utilizando el servicio de usuarios y db.json "usuarios" */
-/* ASHLEY*/
+import InicioSesionComponent from '../../components/UserComponents/InicioSesion'
+
+/**
+ * InicioSesion: Punto de entrada para la página de login.
+ * Solo invoca el componente de negocio/interfaz.
+ */
+export default function InicioSesion() {
+  return <InicioSesionComponent />
+}

@@ -1,83 +1,62 @@
-//PATCH
-async function patchUsuarios(usuario,id){
+// ============================================================
+// UserServices: Servicio de usuarios para comunicación con db.json
+// Servidor: json-server en http://localhost:3001
+// ============================================================
 
-       try {
+const API_URL = "http://localhost:3001/usuarios";
 
-        const respuesta = await fetch("http://localhost:3001/usuarios/"+id,{
-            method:"PATCH",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify(usuario)
-
-        })
-
-        const datosUsuarios= await respuesta.json();
-
-        return datosUsuarios;
-        
-    } catch (error) {
-        
-        console.error("Error al actualizar los cambios", error);
-    }
-}
-
-
-
-//DELETE
-
-
-
-async function deleteUsuarios(id){
-
-       try {
-
-        const respuesta = await fetch("http://localhost:3001/usuarios/"+id,{
-            method:"DELETE",
-        })
-
-        const datosUsuarios= await respuesta.json();
-
-        return datosUsuarios;
-        
-    } catch (error) {
-        
-        console.error("Error al Eliminar el registro", error);
-    }
-}
-
-
-
-
-
+// GET - Obtener todos los usuarios
 async function getUser() {
-    try {
-        const respuesta = await fetch("http://localhost:3001/usuarios")
-        const datos = await respuesta.json();
-        return datos;
-    } catch (error) {
-        console.error("Error al obtener los usuarios", error);
-    }
+  const respuesta = await fetch(API_URL);
+  if (!respuesta.ok) {
+    throw new Error(`Error al obtener usuarios: ${respuesta.status}`);
+  }
+  const datos = await respuesta.json();
+  return datos;
 }
 
-async function postUser(usuario) {
-    try {
-        const respuesta = await fetch("http://localhost:3001/usuarios", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(usuario)
-        })
-        const datos = await respuesta.json();
-        return datos;
-    } catch (error) {
-        console.error("Error al registrar el usuario", error);
-    }
+// POST - Registrar un nuevo usuario
+async function postUser(usuario: any) {
+  const respuesta = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(usuario)
+  });
+  if (!respuesta.ok) {
+    throw new Error(`Error al registrar usuario: ${respuesta.status}`);
+  }
+  const datos = await respuesta.json();
+  return datos;
+}
+
+// PATCH - Actualizar un usuario
+async function patchUsuarios(usuario: any, id: string | number) {
+  const respuesta = await fetch(`${API_URL}/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(usuario)
+  });
+  if (!respuesta.ok) {
+    throw new Error(`Error al actualizar usuario: ${respuesta.status}`);
+  }
+  const datosUsuarios = await respuesta.json();
+  return datosUsuarios;
+}
+
+// DELETE - Eliminar un usuario
+async function deleteUsuarios(id: string | number) {
+  const respuesta = await fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
+  });
+  if (!respuesta.ok) {
+    throw new Error(`Error al eliminar usuario: ${respuesta.status}`);
+  }
+  const datosUsuarios = await respuesta.json();
+  return datosUsuarios;
 }
 
 export default { patchUsuarios, deleteUsuarios, getUser, postUser }
-
-
-
-

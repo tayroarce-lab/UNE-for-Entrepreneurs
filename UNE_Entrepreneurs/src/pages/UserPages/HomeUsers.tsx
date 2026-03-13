@@ -1,2 +1,8 @@
-/* Home, página principal de los usuarios
-/* ASHLEY*/
+import EstructuraHome from '../../components/UserComponents/EstructuraHome'
+
+export default function HomeUsers() {
+  return <EstructuraHome />
+}
+
+
+
