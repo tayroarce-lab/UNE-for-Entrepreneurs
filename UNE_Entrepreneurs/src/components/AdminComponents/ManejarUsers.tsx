@@ -1,2 +1,0 @@
-/* CRUD USERS */
-/* COTO */

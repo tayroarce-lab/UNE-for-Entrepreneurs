@@ -1,6 +1,5 @@
-import Routing from './routes/routing';
-import './App.css';
-import { Toaster } from 'sonner';
+import { useState } from 'react'
+import './App.css'
 
 /**
  * App: Componente raíz que invoca el sistema de rutas.
@@ -8,10 +7,9 @@ import { Toaster } from 'sonner';
 function App() {
   return (
     <>
-      <Toaster richColors closeButton />
-      <Routing />
+
     </>
-  );
+  )
 }
 
 export default App;
