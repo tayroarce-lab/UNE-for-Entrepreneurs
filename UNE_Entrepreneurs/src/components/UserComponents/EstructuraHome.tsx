@@ -47,7 +47,14 @@ export default function EstructuraHome() {
                 <div className="hero-buttons">
                   <button
                     className="btn-primary"
-                    onClick={() => scrollTo('catalogo')}
+                    onClick={() => {
+                      const session = localStorage.getItem('userSession');
+                      if (session) {
+                        navigate('/financiamiento');
+                      } else {
+                        scrollTo('catalogo');
+                      }
+                    }}
                   >
                     Ver Catálogo <ArrowRight size={18} style={{ marginLeft: '8px' }} />
                   </button>
