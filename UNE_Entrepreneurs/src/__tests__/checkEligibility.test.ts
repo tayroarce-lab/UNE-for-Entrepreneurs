@@ -13,10 +13,10 @@ let failed = 0;
 
 function assert(condition: boolean, testName: string) {
   if (condition) {
-    console.log(`  ✅ ${testName}`);
+    console.log(`  [Icon] ${testName}`);
     passed++;
   } else {
-    console.error(`  ❌ ${testName}`);
+    console.error(`  [Icon] ${testName}`);
     failed++;
   }
 }
@@ -32,10 +32,10 @@ const eligibility: Eligibility = {
 
 // ============ TEST SUITE ============
 
-console.log('\n🧪 Test Suite: checkEligibility\n');
+console.log('\n[Icon] Test Suite: checkEligibility\n');
 
 // ---- Test 1: Usuario que califica completamente ----
-console.log('📋 Test 1: Usuario califica completamente');
+console.log('[Icon] Test 1: Usuario califica completamente');
 {
   const user: UserProfile = {
     region: 'San José',
@@ -50,7 +50,7 @@ console.log('📋 Test 1: Usuario califica completamente');
 }
 
 // ---- Test 2: Usuario no califica por región ----
-console.log('\n📋 Test 2: No califica por región');
+console.log('\n[Icon] Test 2: No califica por región');
 {
   const eligRegional: Eligibility = {
     ...eligibility,
@@ -69,7 +69,7 @@ console.log('\n📋 Test 2: No califica por región');
 }
 
 // ---- Test 3: Usuario no califica por sector ----
-console.log('\n📋 Test 3: No califica por sector');
+console.log('\n[Icon] Test 3: No califica por sector');
 {
   const user: UserProfile = {
     region: 'San José',
@@ -84,7 +84,7 @@ console.log('\n📋 Test 3: No califica por sector');
 }
 
 // ---- Test 4: Usuario no califica por ingreso bajo ----
-console.log('\n📋 Test 4: No califica por ingreso insuficiente');
+console.log('\n[Icon] Test 4: No califica por ingreso insuficiente');
 {
   const user: UserProfile = {
     region: 'San José',
@@ -99,7 +99,7 @@ console.log('\n📋 Test 4: No califica por ingreso insuficiente');
 }
 
 // ---- Test 5: Usuario no califica por exceso de empleados ----
-console.log('\n📋 Test 5: No califica por exceso de empleados');
+console.log('\n[Icon] Test 5: No califica por exceso de empleados');
 {
   const user: UserProfile = {
     region: 'San José',
@@ -114,7 +114,7 @@ console.log('\n📋 Test 5: No califica por exceso de empleados');
 }
 
 // ---- Test 6: Usuario no califica por estatus legal ----
-console.log('\n📋 Test 6: No califica por estatus legal');
+console.log('\n[Icon] Test 6: No califica por estatus legal');
 {
   const user: UserProfile = {
     region: 'San José',
@@ -129,7 +129,7 @@ console.log('\n📋 Test 6: No califica por estatus legal');
 }
 
 // ---- Test 7: Resultado "Posiblemente" — datos faltantes ----
-console.log('\n📋 Test 7: Posiblemente califica (datos faltantes)');
+console.log('\n[Icon] Test 7: Posiblemente califica (datos faltantes)');
 {
   const user: UserProfile = {
     region: 'San José',
@@ -152,7 +152,7 @@ console.log('\n📋 Test 7: Posiblemente califica (datos faltantes)');
 }
 
 // ---- Test 8: Califica con "Nacional" en regiones ----
-console.log('\n📋 Test 8: Nacional = cualquier región');
+console.log('\n[Icon] Test 8: Nacional = cualquier región');
 {
   const user: UserProfile = {
     region: 'Limón',
@@ -166,7 +166,7 @@ console.log('\n📋 Test 8: Nacional = cualquier región');
 }
 
 // ---- Test 9: Sectores vacíos = cualquier sector ----
-console.log('\n📋 Test 9: Sectors vacío = cualquiera');
+console.log('\n[Icon] Test 9: Sectors vacío = cualquiera');
 {
   const eligAny: Eligibility = {
     ...eligibility,
@@ -187,7 +187,7 @@ console.log('\n📋 Test 9: Sectors vacío = cualquiera');
 }
 
 // ---- Test 10: Múltiples razones de no calificación ----
-console.log('\n📋 Test 10: Múltiples razones de no calificación');
+console.log('\n[Icon] Test 10: Múltiples razones de no calificación');
 {
   const eligStrict: Eligibility = {
     regions: ['Heredia'],
@@ -210,7 +210,7 @@ console.log('\n📋 Test 10: Múltiples razones de no calificación');
 
 // ---- Summary ----
 console.log('\n' + '='.repeat(50));
-console.log(`📊 Resultados: ${passed} passed, ${failed} failed de ${passed + failed} tests`);
+console.log(`[Icon] Resultados: ${passed} passed, ${failed} failed de ${passed + failed} tests`);
 console.log('='.repeat(50));
 
 if (failed > 0) {

@@ -3,7 +3,7 @@
 // ============================================================
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, MapPin, Briefcase, CircleDollarSign, Users, Scale, AlertTriangle, CheckCircle2, XCircle, ArrowRight, LogIn } from 'lucide-react';
+import { Search, MapPin, Briefcase, CircleDollarSign, Users, Scale, AlertTriangle, CheckCircle2, XCircle, ArrowRight, LogIn, X } from 'lucide-react';
 import type { FinancingProgram, UserProfile } from '../../types/financing';
 import { toast } from 'sonner';
 import { REGIONS, SECTORS } from '../../types/financing';
@@ -59,7 +59,7 @@ export default function EligibilityModal({ program, onClose, onShowSuggestions }
             Verificación de Elegibilidad
           </h2>
           <button className="financingModalClose" onClick={onClose} aria-label="Cerrar modal">
-            ✕
+            <X size={20} />
           </button>
         </div>
 

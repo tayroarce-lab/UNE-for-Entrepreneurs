@@ -106,7 +106,7 @@ export async function createApplication(
   });
   // Simular envío de correo
   console.info(
-    `📧 Correo simulado enviado a contacto del programa y a contactUNE@une.cr con los datos de la aplicación.`
+    `[Email] Correo simulado enviado a contacto del programa y a contactUNE@une.cr con los datos de la aplicación.`
   );
   return handleResponse<Application>(response);
 }

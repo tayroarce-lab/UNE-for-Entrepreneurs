@@ -2,7 +2,7 @@
 // Página Usuario — Catálogo de Financiamientos — UNE
 // ============================================================
 import { useState, useEffect, useCallback } from 'react';
-import { Search, Trash2, Pin } from 'lucide-react';
+import { Search, Trash2, Pin, Building2 } from 'lucide-react';
 import type { FinancingProgram, FinancingType, UserProfile } from '../../types/financing';
 import { FINANCING_TYPES, REGIONS } from '../../types/financing';
 import { getFinancingPrograms } from '../../services/FinancingService';
@@ -376,7 +376,10 @@ export default function UserFinancingCatalog() {
               textAlign: 'center',
             }}
           >
-            🏢 EMPRESARIA<br />COSTARRICENSE
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Building2 size={48} style={{ marginBottom: '1rem' }} />
+              <span>EMPRESARIA<br />COSTARRICENSE</span>
+            </div>
           </div>
         </div>
         <div>
