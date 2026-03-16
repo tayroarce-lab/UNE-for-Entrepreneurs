@@ -7,8 +7,8 @@ function CambioCredenciales() {
   return (
     <div>
         <h1><KeyRound size={24} /> Cambio de Credenciales</h1>
-        <button onClick={() => window.location.href = "./Configuraciones"}><ArrowLeft size={16} /> Volver</button>
-        <button onClick={() => window.location.href = "./AdminDashboard"}><LayoutDashboard size={16} /> Dashboard</button>
+        <button onClick={() => window.location.href = "/Configuraciones"}><ArrowLeft size={16} /> Volver</button>
+        <button onClick={() => window.location.href = "/AdminDashboard"}><LayoutDashboard size={16} /> Dashboard</button>
 
         <form onSubmit={(e) => {
             e.preventDefault();

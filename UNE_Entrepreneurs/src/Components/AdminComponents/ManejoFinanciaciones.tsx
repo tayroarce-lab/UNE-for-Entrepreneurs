@@ -53,7 +53,7 @@ function ManejoFinanciaciones() {
       <div className="admin-main-wrap">
         <header>
             <h1><Banknote size={24} /> Manejo de Financiaciones</h1>
-            <button onClick={() => window.location.href = "./AdminDashboard"}><ArrowLeft size={16} /> Volver a Dashboard</button>
+            <button onClick={() => window.location.href = "/AdminDashboard"}><ArrowLeft size={16} /> Volver a Dashboard</button>
         </header>
         
         <div>

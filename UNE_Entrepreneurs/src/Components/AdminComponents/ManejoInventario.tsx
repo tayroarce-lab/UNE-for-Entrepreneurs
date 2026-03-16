@@ -51,7 +51,7 @@ function ManejoInventario() {
       <div className="admin-main-wrap">
         <header>
             <h1><Package size={24} /> Manejo de Inventario</h1>
-            <button onClick={() => window.location.href = "./AdminDashboard"}><ArrowLeft size={16} /> Volver a Dashboard</button>
+            <button onClick={() => window.location.href = "/AdminDashboard"}><ArrowLeft size={16} /> Volver a Dashboard</button>
         </header>
         
         <section>

@@ -61,7 +61,7 @@ function Configuraciones() {
             <div className="admin-main-wrap">
                 <header>
                 <h1><Settings size={24} /> Configuraciones</h1>
-                <button onClick={() => window.location.href = "./AdminDashboard"}><ArrowLeft size={16} /> Volver</button>
+                <button onClick={() => window.location.href = "/AdminDashboard"}><ArrowLeft size={16} /> Volver</button>
                 <button onClick={handleLogout}><LogOut size={16} /> Cerrar Sesión</button>
             </header>
 
@@ -89,15 +89,15 @@ function Configuraciones() {
 
                 <article>
                     <h2><Shield size={20} /> Roles y Permisos</h2>
-                    <button onClick={() => window.location.href = "./Configuraciones/RolesPermisos"}><Shield size={16} /> Gestionar Roles y Permisos</button>
+                    <button onClick={() => window.location.href = "/Configuraciones/RolesPermisos"}><Shield size={16} /> Gestionar Roles y Permisos</button>
                 </article>
                 <article>
                     <h2><Bell size={20} /> Notificaciones</h2>
-                    <button onClick={() => window.location.href = "./Configuraciones/Notificaciones"}><Bell size={16} /> Gestionar Notificaciones</button>
+                    <button onClick={() => window.location.href = "/Configuraciones/Notificaciones"}><Bell size={16} /> Gestionar Notificaciones</button>
                 </article>
                 <article>
                     <h2><KeyRound size={20} /> Cambio de Credenciales</h2>
-                    <button onClick={() => window.location.href = "./Configuraciones/CambioCredenciales"}><KeyRound size={16} /> Gestionar Cambio de Credenciales</button>
+                    <button onClick={() => window.location.href = "/Configuraciones/CambioCredenciales"}><KeyRound size={16} /> Gestionar Cambio de Credenciales</button>
                 </article>
             </section>
             

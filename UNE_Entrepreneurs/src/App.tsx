@@ -7,6 +7,9 @@ import ManejoInventario from './Components/AdminComponents/ManejoInventario'
 import ManejoFinanciaciones from './Components/AdminComponents/ManejoFinanciaciones'
 import GestionTipsNoticias from './Components/AdminComponents/GestionTipsNoticias'
 import Configuraciones from './Components/AdminComponents/Configuraciones'
+import Notificaciones from './Components/AdminComponents/Configuración/Notificaciones'
+import CambioCredenciales from './Components/AdminComponents/Configuración/CambioCredenciales'
+import RolesPermisos from './Components/AdminComponents/Configuración/RolesPermisos'
 
 function App() {
   const path = window.location.pathname;
@@ -37,6 +40,15 @@ function App() {
       break;
     case '/Configuraciones':
       Component = Configuraciones;
+      break;
+    case '/Configuraciones/Notificaciones':
+      Component = Notificaciones;
+      break;
+    case '/Configuraciones/CambioCredenciales':
+      Component = CambioCredenciales;
+      break;
+    case '/Configuraciones/RolesPermisos':
+      Component = RolesPermisos;
       break;
     default:
       Component = AdminDashboard;

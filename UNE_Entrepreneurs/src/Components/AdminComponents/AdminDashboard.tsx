@@ -44,11 +44,11 @@ function AdminDashboard() {
       <nav>
         <h2>UNE Costa Rica</h2>
         <ul>
-          <li><a href="./AdminDashboard" className="active"><LayoutDashboard size={18} /> Dashboard</a></li>
-          <li><a href="./ManejarUsuarios"><Users size={18} /> Gestión de Usuarios</a></li>
-          <li><a href="./ManejoFinanciaciones"><Banknote size={18} /> Financiaciones</a></li>
-          <li><a href="./GestionTipsNoticias"><Newspaper size={18} /> Tips y Noticias</a></li>
-          <li><a href="./Configuraciones"><Settings size={18} /> Configuración</a></li>
+          <li><a href="/AdminDashboard" className="active"><LayoutDashboard size={18} /> Dashboard</a></li>
+          <li><a href="/ManejarUsuarios"><Users size={18} /> Gestión de Usuarios</a></li>
+          <li><a href="/ManejoFinanciaciones"><Banknote size={18} /> Financiaciones</a></li>
+          <li><a href="/GestionTipsNoticias"><Newspaper size={18} /> Tips y Noticias</a></li>
+          <li><a href="/Configuraciones"><Settings size={18} /> Configuración</a></li>
         </ul>
       </nav>
 

@@ -7,8 +7,8 @@ function RolesPermisos() {
   return (
     <div>
         <h1><Shield size={24} /> Roles y Permisos</h1>
-        <button onClick={() => window.location.href = "./Configuraciones"}><ArrowLeft size={16} /> Volver</button>
-        <button onClick={() => window.location.href = "./AdminDashboard"}><LayoutDashboard size={16} /> Dashboard</button>
+        <button onClick={() => window.location.href = "/Configuraciones"}><ArrowLeft size={16} /> Volver</button>
+        <button onClick={() => window.location.href = "/AdminDashboard"}><LayoutDashboard size={16} /> Dashboard</button>
 
         <main>
           <section>

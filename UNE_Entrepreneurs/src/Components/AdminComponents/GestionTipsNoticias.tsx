@@ -57,7 +57,7 @@ function GestionTipsNoticias() {
       <div className="admin-main-wrap">
         <header>
             <h1><Newspaper size={24} /> Gestión de Tips y Noticias</h1>
-            <button onClick={() => window.location.href = "./AdminDashboard"}><ArrowLeft size={16} /> Volver a Dashboard</button>
+            <button onClick={() => window.location.href = "/AdminDashboard"}><ArrowLeft size={16} /> Volver a Dashboard</button>
         </header>
         
         <section>
