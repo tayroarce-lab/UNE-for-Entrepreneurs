@@ -2,6 +2,7 @@
 // Contexto de autenticación simulado
 // ============================================================
 import { createContext, useContext, useState, type ReactNode } from 'react';
+import UserServices from '../services/UserServices';
 
 interface AuthUser {
   id: string;
@@ -19,23 +20,6 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-// Usuarios simulados
-const MOCK_USERS: (AuthUser & { password: string })[] = [
-  {
-    id: '1',
-    name: 'Admin UNE',
-    email: 'admin@une.cr',
-    password: 'admin123',
-    isAdmin: true,
-  },
-  {
-    id: '2',
-    name: 'María López',
-    email: 'maria@example.com',
-    password: 'user123',
-    isAdmin: false,
-  },
-];
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(() => {
@@ -44,26 +28,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   });
 
   const login = async (email: string, password: string): Promise<boolean> => {
-    // Simular delay de red
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    try {
+      const users = await UserServices.getUser();
+      if (!users) return false;
 
-    const found = MOCK_USERS.find(
-      (u) => u.email === email && u.password === password
-    );
+      const found = users.find(
+        (u: any) => u.email === email && u.password === password
+      );
 
-    if (found) {
-      const authUser: AuthUser = {
-        id: found.id,
-        name: found.name,
-        email: found.email,
-        isAdmin: found.isAdmin,
-      };
-      setUser(authUser);
-      localStorage.setItem('uneUser', JSON.stringify(authUser));
-      localStorage.setItem('token', 'mock-jwt-token');
-      return true;
+      if (found) {
+        const authUser: AuthUser = {
+          id: String(found.id),
+          name: found.nombre || found.name || 'Usuario',
+          email: found.email,
+          isAdmin: found.role === 'admin' || found.email === 'admin@une.cr',
+        };
+        setUser(authUser);
+        localStorage.setItem('uneUser', JSON.stringify(authUser));
+        localStorage.setItem('token', 'mock-jwt-token');
+        return true;
+      }
+      return false;
+    } catch (err) {
+      console.error('Error logging in:', err);
+      return false;
     }
-    return false;
   };
 
   const logout = () => {

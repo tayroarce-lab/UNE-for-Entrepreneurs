@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import Routing from './routes/routing'
+import { AuthProvider } from './context/AuthContext'
 import './App.css'
 
 /**
@@ -6,9 +7,9 @@ import './App.css'
  */
 function App() {
   return (
-    <>
-
-    </>
+    <AuthProvider>
+      <Routing />
+    </AuthProvider>
   )
 }
 

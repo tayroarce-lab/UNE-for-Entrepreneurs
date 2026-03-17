@@ -4,7 +4,7 @@ const PrivateRoutes = () => {
     const estaAutenticado = localStorage.getItem("token");
 
     if (!estaAutenticado) {
-        return <Navigate to="/" />;
+        return <Navigate to="/login" />;
     }
 
     return <Outlet />;

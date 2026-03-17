@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { notifications } from '../../utils/notifications'
 import { LogIn, UserPlus, LogOut } from 'lucide-react'
+import { useAuth } from '../../context/AuthContext'
 
 /**
  * NavbarUsers: Barra de navegación principal.
@@ -10,23 +10,9 @@ import { LogIn, UserPlus, LogOut } from 'lucide-react'
  * - Si el usuario está en otra página, navega a "/" y luego hace scroll.
  */
 export default function NavbarUsers() {
-  const [user, setUser] = useState<{ nombre: string; email: string } | null>(null);
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
-  useEffect(() => {
-    const session = localStorage.getItem('userSession');
-    if (session) {
-      try {
-        const parsed = JSON.parse(session);
-        if (parsed && parsed.nombre) {
-          setUser(parsed);
-        }
-      } catch {
-        // Si el JSON está corrupto, lo ignoramos
-      }
-    }
-  }, []);
 
   /**
    * scrollToSection: Hace scroll suave a una sección por su id.
@@ -77,10 +63,10 @@ export default function NavbarUsers() {
     );
 
     if (confirmed) {
-      localStorage.removeItem('userSession');
+      logout();
       notifications.success('Sesión cerrada correctamente');
       setTimeout(() => {
-        window.location.href = '/';
+        navigate('/');
       }, 1000);
     }
   };
@@ -102,15 +88,16 @@ export default function NavbarUsers() {
         </div>
         <ul className="navbar-links">
           <li><a href="/" onClick={scrollToTop}>Inicio</a></li>
-          <li><a href="/#catalogo" onClick={(e) => scrollToSection(e, 'catalogo')}>Catálogo</a></li>
+          <li><a href="/financiamiento" onClick={(e) => { e.preventDefault(); navigate('/financiamiento'); }}>Financiamiento</a></li>
           <li><a href="/#noticias" onClick={(e) => scrollToSection(e, 'noticias')}>Noticias</a></li>
           <li><a href="/#contacto" onClick={(e) => scrollToSection(e, 'contacto')}>Contacto</a></li>
+          {user && <li><a href="/presupuesto" onClick={(e) => { e.preventDefault(); navigate('/presupuesto'); }}>Mi Panel</a></li>}
 
           {user ? (
             <li className="navbar-profile">
-              <div className="profile-avatar">{getInitials(user.nombre)}</div>
+              <div className="profile-avatar">{getInitials(user.name)}</div>
               <div className="profile-info">
-                <span className="profile-name">{user.nombre}</span>
+                <span className="profile-name">{user.name}</span>
                 <span className="profile-email">{user.email}</span>
               </div>
               <button className="btn-logout" onClick={handleLogout}>
