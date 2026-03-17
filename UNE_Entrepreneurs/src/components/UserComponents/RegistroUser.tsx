@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import UserServices from '../../services/UserServices'
-import NavbarUsers from './NavbarUsers'
-import FooterUsers from './FooterUsers'
+import Navbar from '../Shared/Navbar'
+import Footer from '../Shared/Footer'
 import { notifications } from '../../utils/notifications'
 import { ArrowLeft } from 'lucide-react'
+
+import type { User } from '../../types/user'
 
 /**
  * RegistroUserComponent: Página de registro con Navbar y Footer integrados.
@@ -81,7 +83,7 @@ export default function RegistroUserComponent() {
       }
 
       // Crear el objeto del nuevo usuario
-      const nuevoUsuario = {
+      const nuevoUsuario: Omit<User, 'id'> = {
         nombre: formData.nombre.trim(),
         email: formData.email.trim(),
         password: formData.password,
@@ -114,7 +116,7 @@ export default function RegistroUserComponent() {
 
   return (
     <div className="register-page-layout">
-      <NavbarUsers />
+      <Navbar />
 
       <div className="register-container">
         <div className="register-box">
@@ -196,7 +198,7 @@ export default function RegistroUserComponent() {
         </div>
       </div>
 
-      <FooterUsers />
+      <Footer />
     </div>
   )
 }

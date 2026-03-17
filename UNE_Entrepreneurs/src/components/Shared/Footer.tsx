@@ -1,25 +1,18 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { MapPin, Mail, Phone, Facebook, Twitter, Instagram } from 'lucide-react'
 
-/**
- * FooterUsers: Pie de página completo con múltiples columnas.
- * Los enlaces de Acceso Rápido usan navegación SPA con react-router.
- */
-export default function FooterUsers() {
+export default function Footer() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  /** Navegar a una ruta SPA sin recargar la página */
   const goTo = (e: React.MouseEvent, path: string) => {
     e.preventDefault();
     navigate(path);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  /** Scroll suave a una sección. Si no estamos en Home, navega primero */
   const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
     e.preventDefault();
-
     if (location.pathname !== '/') {
       navigate('/');
       setTimeout(() => {
@@ -54,7 +47,7 @@ export default function FooterUsers() {
             <li><a href="/" onClick={(e) => goTo(e, '/')}>Inicio</a></li>
             <li><a href="/login" onClick={(e) => goTo(e, '/login')}>Iniciar Sesión</a></li>
             <li><a href="/registro" onClick={(e) => goTo(e, '/registro')}>Registrarse</a></li>
-            <li><a href="/#catalogo" onClick={(e) => scrollToSection(e, 'catalogo')}>Recursos</a></li>
+            <li><a href="/financiamiento" onClick={(e) => goTo(e, '/financiamiento')}>Catálogo</a></li>
           </ul>
         </div>
 
@@ -71,8 +64,8 @@ export default function FooterUsers() {
         <div className="footer-contact">
           <h4>Contacto</h4>
           <p><MapPin size={18} /> Sede Central, Campus UNE</p>
-          <p><Mail size={18} /> info@UNE-Entrepreneurs.com</p>
-          <p><Phone size={18} /> +506 2222-3333</p>
+          <p><Mail size={18} /> info@une.cr</p>
+          <p><Phone size={18} /> +506 2222-2222</p>
         </div>
       </div>
 

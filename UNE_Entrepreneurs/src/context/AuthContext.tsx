@@ -1,7 +1,5 @@
-// ============================================================
-// Contexto de autenticación simulado
-// ============================================================
 import { createContext, useContext, useState, type ReactNode } from 'react';
+import type { User } from '../types/user';
 import UserServices from '../services/UserServices';
 
 interface AuthUser {
@@ -20,21 +18,67 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
+// Usuarios simulados para pruebas
+const MOCK_USERS: (AuthUser & { password: string })[] = [
+  {
+    id: '1',
+    name: 'Admin UNE',
+    email: 'admin@une.cr',
+    password: 'admin123',
+    isAdmin: true,
+  },
+  {
+    id: '2',
+    name: 'María López',
+    email: 'maria@example.com',
+    password: 'user123',
+    isAdmin: false,
+  },
+];
+
+const MOCK_ADMIN = MOCK_USERS[0];
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(() => {
-    const stored = localStorage.getItem('uneUser');
-    return stored ? (JSON.parse(stored) as AuthUser) : null;
+    const stored = localStorage.getItem('userSession');
+    if (!stored) return null;
+    try {
+      const parsed = JSON.parse(stored);
+      return {
+        id: String(parsed.id),
+        name: parsed.nombre || parsed.name || 'Usuario',
+        email: parsed.email,
+        isAdmin: parsed.isAdmin || parsed.role === 'admin'
+      };
+    } catch {
+      return null;
+    }
   });
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      const users = await UserServices.getUser();
-      if (!users) return false;
+      // 1. Check Hardcoded Admin
+      if (email === MOCK_ADMIN.email && password === MOCK_ADMIN.password) {
+        const adminUser: AuthUser = {
+          id: MOCK_ADMIN.id,
+          name: MOCK_ADMIN.name,
+          email: MOCK_ADMIN.email,
+          isAdmin: true
+        };
+        setUser(adminUser);
+        localStorage.setItem('userSession', JSON.stringify({
+          id: adminUser.id,
+          nombre: adminUser.name,
+          email: adminUser.email,
+          isAdmin: true,
+          loggedAt: new Date().toISOString()
+        }));
+        return true;
+      }
 
-      const found = users.find(
-        (u: any) => u.email === email && u.password === password
-      );
+      // 2. Check DB Users
+      const users: User[] = await UserServices.getUser();
+      const found = users?.find(u => u.email === email && u.password === password);
 
       if (found) {
         const authUser: AuthUser = {
@@ -44,21 +88,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           isAdmin: found.role === 'admin' || found.email === 'admin@une.cr',
         };
         setUser(authUser);
-        localStorage.setItem('uneUser', JSON.stringify(authUser));
-        localStorage.setItem('token', 'mock-jwt-token');
+        localStorage.setItem('userSession', JSON.stringify({
+          id: authUser.id,
+          nombre: authUser.name,
+          email: authUser.email,
+          isAdmin: authUser.isAdmin,
+          loggedAt: new Date().toISOString()
+        }));
+        // Limpiamos tokens viejos si existen
+        localStorage.removeItem('uneUser');
+        localStorage.removeItem('token');
         return true;
       }
-      return false;
     } catch (err) {
-      console.error('Error logging in:', err);
-      return false;
+      console.error('Error in login process:', err);
     }
+    return false;
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('uneUser');
-    localStorage.removeItem('token');
+    localStorage.removeItem('userSession');
   };
 
   return (

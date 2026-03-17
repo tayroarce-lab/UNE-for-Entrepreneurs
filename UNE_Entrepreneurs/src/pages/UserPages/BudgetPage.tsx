@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import FinancingNavbar from '../../components/Financing/FinancingNavbar'
-import FinancingFooter from '../../components/Financing/FinancingFooter'
+import Navbar from '../../components/Shared/Navbar'
+import Footer from '../../components/Shared/Footer'
 import FinanzasPanel from '../../components/IngresosEgresos/FinanzasPanel';
 import InventoryPanel from '../../components/Inventario/InventoryPanel';
 import { Wallet, Package, Info } from 'lucide-react';
@@ -14,7 +14,7 @@ export default function BudgetPage() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f8fafc' }}>
-      <FinancingNavbar />
+      <Navbar />
       
       <main style={{ flex: 1, padding: '2rem 4rem' }}>
         {/* Page Header */}
@@ -69,7 +69,7 @@ export default function BudgetPage() {
         </footer>
       </main>
 
-      <FinancingFooter />
+      <Footer />
 
       <style>{`
         @keyframes fadeIn {

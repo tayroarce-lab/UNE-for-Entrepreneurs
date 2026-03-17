@@ -1,38 +1,61 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// ============================================================
+// Routing principal — UNE Costa Rica
+// ============================================================
+import { createBrowserRouter } from 'react-router-dom';
 import HomeUsers from '../pages/UserPages/HomeUsers';
 import InicioSesion from '../pages/UserPages/InicioSesion';
 import RegistroUser from '../pages/UserPages/RegistroUser';
 import FinancingCatalogPage from '../pages/UserPages/FinancingCatalogPage';
 import FinancingDetailPage from '../pages/UserPages/FinancingDetailPage';
 import AdminFinancingPageWrapper from '../pages/UserPages/AdminFinancingPage';
+import ProtectedRoute from './ProtectedRoute';
 import BudgetPage from '../pages/UserPages/BudgetPage';
-import PrivateRoutes from './PrivateRoutes';
+import IngresosEgresos from '../components/IngresosEgresos/IngresosEgresos';
 import NotFoundPage from '../pages/UserPages/NotFoundPage';
 
-/**
- * Routing: Configuración central de las rutas de la aplicación.
- * Conecta las páginas (Pages) con sus respectivas rutas URL.
- */
-export default function Routing() {
-  return (
-    <Router>
-      <Routes>
-        {/* Rutas Públicas */}
-        <Route path="/" element={<HomeUsers />} />
-        <Route path="/login" element={<InicioSesion />} />
-        <Route path="/registro" element={<RegistroUser />} />
-        <Route path="/financiamiento" element={<FinancingCatalogPage />} />
-        <Route path="/financiamiento/:id" element={<FinancingDetailPage />} />
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <HomeUsers />,
+  },
+  {
+    path: '/finanzas',
+    element: <IngresosEgresos />,
+  },
+  {
+    path: '/presupuesto',
+    element: <ProtectedRoute />, // Solo usuarios logueados
+    children: [
+      { path: '', element: <BudgetPage /> },
+    ]
+  },
+  {
+    path: '/login',
+    element: <InicioSesion />,
+  },
+  {
+    path: '/registro',
+    element: <RegistroUser />,
+  },
+  {
+    path: '/financiamiento',
+    element: <ProtectedRoute />, // Solo usuarios logueados
+    children: [
+      { path: '', element: <FinancingCatalogPage /> },
+      { path: ':id', element: <FinancingDetailPage /> },
+    ]
+  },
+  {
+    path: '/admin',
+    element: <ProtectedRoute adminOnly />, // Solo admins
+    children: [
+      { path: 'financiamiento', element: <AdminFinancingPageWrapper /> },
+    ]
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
+  }
+]);
 
-        {/* Rutas Privadas / Protegidas */}
-        <Route element={<PrivateRoutes />}>
-          <Route path="/admin/financiamiento" element={<AdminFinancingPageWrapper />} />
-          <Route path="/presupuesto" element={<BudgetPage />} />
-        </Route>
-
-        {/* 404 - Not Found */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </Router>
-  );
-}
+export default router;

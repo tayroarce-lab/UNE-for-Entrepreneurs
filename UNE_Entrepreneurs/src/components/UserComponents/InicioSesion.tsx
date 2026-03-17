@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import NavbarUsers from './NavbarUsers'
-import FooterUsers from './FooterUsers'
+import Navbar from '../Shared/Navbar'
+import Footer from '../Shared/Footer'
 import { notifications } from '../../utils/notifications'
 import { ArrowLeft } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
@@ -55,7 +55,7 @@ export default function InicioSesionComponent() {
 
   return (
     <div className="login-page-layout">
-      <NavbarUsers />
+      <Navbar />
 
       <div className="login-container">
         <div className="login-box">
@@ -109,7 +109,7 @@ export default function InicioSesionComponent() {
         </div>
       </div>
 
-      <FooterUsers />
+      <Footer />
     </div>
   )
 }
