@@ -1,7 +1,6 @@
-// ============================================================
-// Contexto de autenticación simulado
-// ============================================================
 import { createContext, useContext, useState, type ReactNode } from 'react';
+import type { User } from '../types/user';
+import UserServices from '../services/UserServices';
 
 interface AuthUser {
   id: string;
@@ -19,57 +18,77 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-// Usuarios simulados
-const MOCK_USERS: (AuthUser & { password: string })[] = [
-  {
-    id: '1',
-    name: 'Admin UNE',
-    email: 'admin@une.cr',
-    password: 'admin123',
-    isAdmin: true,
-  },
-  {
-    id: '2',
-    name: 'María López',
-    email: 'maria@example.com',
-    password: 'user123',
-    isAdmin: false,
-  },
-];
+// Usuarios simulados (fallback opcional o remover si ya se usa db.json)
+const MOCK_ADMIN: AuthUser & { password: string } = {
+  id: 'admin-1',
+  name: 'Admin UNE',
+  email: 'admin@une.cr',
+  password: 'admin123',
+  isAdmin: true,
+};
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(() => {
-    const stored = localStorage.getItem('uneUser');
-    return stored ? (JSON.parse(stored) as AuthUser) : null;
+    const stored = localStorage.getItem('userSession');
+    if (!stored) return null;
+    try {
+      const parsed = JSON.parse(stored);
+      return {
+        id: parsed.id,
+        name: parsed.nombre || parsed.name,
+        email: parsed.email,
+        isAdmin: parsed.isAdmin || parsed.role === 'admin'
+      };
+    } catch {
+      return null;
+    }
   });
 
   const login = async (email: string, password: string): Promise<boolean> => {
-    // Simular delay de red
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    try {
+      // 1. Check Hardcoded Admin
+      if (email === MOCK_ADMIN.email && password === MOCK_ADMIN.password) {
+        setUser(MOCK_ADMIN);
+        localStorage.setItem('userSession', JSON.stringify({
+          id: MOCK_ADMIN.id,
+          nombre: MOCK_ADMIN.name,
+          email: MOCK_ADMIN.email,
+          isAdmin: true,
+          loggedAt: new Date().toISOString()
+        }));
+        return true;
+      }
 
-    const found = MOCK_USERS.find(
-      (u) => u.email === email && u.password === password
-    );
+      // 2. Check DB Users
+      const users: User[] = await UserServices.getUser();
+      const found = users?.find(u => u.email === email && u.password === password);
 
-    if (found) {
-      const authUser: AuthUser = {
-        id: found.id,
-        name: found.name,
-        email: found.email,
-        isAdmin: found.isAdmin,
-      };
-      setUser(authUser);
-      localStorage.setItem('uneUser', JSON.stringify(authUser));
-      localStorage.setItem('token', 'mock-jwt-token');
-      return true;
+      if (found) {
+        const authUser: AuthUser = {
+          id: found.id,
+          name: found.nombre,
+          email: found.email,
+          isAdmin: found.role === 'admin',
+        };
+        setUser(authUser);
+        localStorage.setItem('userSession', JSON.stringify({
+          id: authUser.id,
+          nombre: authUser.name,
+          email: authUser.email,
+          isAdmin: authUser.isAdmin,
+          loggedAt: new Date().toISOString()
+        }));
+        return true;
+      }
+    } catch (err) {
+      console.error('Error in login process:', err);
     }
     return false;
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('uneUser');
-    localStorage.removeItem('token');
+    localStorage.removeItem('userSession');
   };
 
   return (

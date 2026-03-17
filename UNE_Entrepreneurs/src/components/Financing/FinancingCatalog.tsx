@@ -2,15 +2,16 @@
 // Página Usuario — Catálogo de Financiamientos — UNE
 // ============================================================
 import { useState, useEffect, useCallback } from 'react';
-import { Search, Trash2, Pin, Building2 } from 'lucide-react';
+import { Search, Trash2, Pin } from 'lucide-react';
 import type { FinancingProgram, FinancingType, UserProfile } from '../../types/financing';
 import { FINANCING_TYPES, REGIONS } from '../../types/financing';
 import { getFinancingPrograms } from '../../services/FinancingService';
 import { checkEligibility } from '../../utils/financingUtils';
 import FinancingCard from './FinancingCard';
-import FinancingNavbar from './FinancingNavbar';
-import FinancingFooter from './FinancingFooter';
+import Navbar from '../Shared/Navbar';
+import Footer from '../Shared/Footer';
 import EligibilityModal from './EligibilityModal';
+import successImage from '../../assets/success_story_maria.png';
 import '../../styles/financing.css';
 
 export default function UserFinancingCatalog() {
@@ -131,7 +132,7 @@ export default function UserFinancingCatalog() {
 
   return (
     <>
-      <FinancingNavbar />
+      <Navbar />
 
       {/* Hero Section */}
       <section className="financingHero" id="financingHero">
@@ -360,27 +361,17 @@ export default function UserFinancingCatalog() {
       {/* Testimonial Section */}
       <section className="financingTestimonialSection" id="testimonialSection">
         <div className="financingTestimonialImage">
-          <div
+          <img 
+            src={successImage} 
+            alt="María Fernanda Quesada - Caso de Éxito" 
             style={{
               width: '100%',
-              height: '300px',
-              background: 'linear-gradient(135deg, var(--uneRed), var(--uneGold))',
+              height: '350px',
+              objectFit: 'cover',
               borderRadius: 'var(--radiusLg)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-              fontSize: '1rem',
-              fontWeight: 600,
-              padding: '2rem',
-              textAlign: 'center',
+              boxShadow: 'var(--shadow-lg)'
             }}
-          >
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <Building2 size={48} style={{ marginBottom: '1rem' }} />
-              <span>EMPRESARIA<br />COSTARRICENSE</span>
-            </div>
-          </div>
+          />
         </div>
         <div>
           <span className="financingTestimonialLabel">CASO DE ÉXITO</span>
@@ -407,7 +398,7 @@ export default function UserFinancingCatalog() {
         />
       )}
 
-      <FinancingFooter />
+      <Footer />
     </>
   );
 }
