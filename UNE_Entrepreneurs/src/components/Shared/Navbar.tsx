@@ -1,5 +1,5 @@
 import { useNavigate, useLocation, Link, NavLink } from 'react-router-dom'
-import { LogIn, UserPlus, LogOut, LayoutDashboard } from 'lucide-react'
+import { LogIn, UserPlus, LogOut, LayoutDashboard, Package } from 'lucide-react'
 import { notifications } from '../../utils/notifications'
 import { useAuth } from '../../context/AuthContext'
 import uneLogo from '../../assets/logo_une.png'
@@ -67,14 +67,23 @@ export default function Navbar() {
         </div>
         <ul className="navbar-links">
           <li><NavLink to="/" onClick={(e) => { if(location.pathname === '/') scrollToTop(e as unknown as React.MouseEvent); }} end>Inicio</NavLink></li>
-          <li><NavLink to="/financiamiento">Catálogo</NavLink></li>
+          <li><NavLink to="/financiamiento">Créditos</NavLink></li>
+          <li><NavLink to="/finanzas">Finanzas</NavLink></li>
           <li><a href="/#noticias" onClick={(e) => scrollToSection(e, 'noticias')}>Noticias</a></li>
           <li><a href="/#contacto" onClick={(e) => scrollToSection(e, 'contacto')}>Contacto</a></li>
+
+          {user && (
+            <li>
+              <NavLink to="/presupuesto" className="nav-highlight">
+                <LayoutDashboard size={18} /> Mi Panel
+              </NavLink>
+            </li>
+          )}
 
           {isAdmin && (
             <li>
               <NavLink to="/admin/financiamiento" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <LayoutDashboard size={18} /> Admin
+                <Package size={18} /> Admin
               </NavLink>
             </li>
           )}
