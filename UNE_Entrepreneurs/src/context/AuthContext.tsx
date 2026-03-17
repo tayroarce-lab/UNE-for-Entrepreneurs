@@ -26,6 +26,7 @@ const MOCK_USERS: (AuthUser & { password: string })[] = [
     name: 'Admin UNE',
     email: 'admin@une.cr',
     password: 'admin123',
+    
     isAdmin: true,
   },
   {

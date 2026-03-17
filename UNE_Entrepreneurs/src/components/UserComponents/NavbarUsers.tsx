@@ -104,6 +104,7 @@ export default function NavbarUsers() {
           <li><a href="/" onClick={scrollToTop}>Inicio</a></li>
           <li><a href="/#catalogo" onClick={(e) => scrollToSection(e, 'catalogo')}>Catálogo</a></li>
           <li><a href="/#noticias" onClick={(e) => scrollToSection(e, 'noticias')}>Noticias</a></li>
+          <li><a href="/finanzas" onClick={(e) => { e.preventDefault(); navigate('/finanzas'); }}>Finanzas</a></li>
           <li><a href="/#contacto" onClick={(e) => scrollToSection(e, 'contacto')}>Contacto</a></li>
 
           {user ? (

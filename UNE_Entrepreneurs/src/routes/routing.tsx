@@ -8,11 +8,16 @@ import RegistroUser from '../pages/UserPages/RegistroUser';
 import UserFinancingCatalog from '../components/Financing/FinancingCatalog';
 import FinancingDetail from '../components/Financing/FinancingDetail';
 import AdminFinancingPage from '../components/Financing/AdminFinancing';
+import IngresosEgresos from '../components/IngresosEgresos/IngresosEgresos';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <HomeUsers />,
+  },
+  {
+    path: '/finanzas',
+    element: <IngresosEgresos />,
   },
   {
     path: '/login',

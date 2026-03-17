@@ -163,7 +163,7 @@ export default function EstructuraHome() {
                 </p>
                 <button
                   className="btn-cta"
-                  onClick={() => navigate('/registro')}
+                  onClick={() => navigate('/finanzas')}
                 >
                   Comenzar <Check size={20} style={{ marginLeft: '8px' }} />
                 </button>
