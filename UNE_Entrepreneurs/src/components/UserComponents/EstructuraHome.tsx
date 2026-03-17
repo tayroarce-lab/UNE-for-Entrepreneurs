@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import {
-  Target, Users, Lightbulb, Building2, BarChart3,
+  Target, Lightbulb, Building2, BarChart3,
   ClipboardList, BookOpen, TrendingUp, Scale,
   Check, MapPin, Map, ArrowRight
 } from 'lucide-react'
-import NavbarUsers from './NavbarUsers'
-import FooterUsers from './FooterUsers'
+import Navbar from '../Shared/Navbar'
+import Footer from '../Shared/Footer'
+import { useAuth } from '../../context/AuthContext'
+import heroImage from '../../assets/hero_une.jpg'
 
 /**
  * EstructuraHome: Componente que ensambla la página principal.
@@ -16,16 +18,11 @@ export default function EstructuraHome() {
   const navigate = useNavigate();
 
   /** Scroll suave a una sección por su id */
-  const scrollTo = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+  const { user } = useAuth();
 
   return (
     <div className="home-page-layout">
-      <NavbarUsers />
+      <Navbar />
 
       <main className="home-main-content">
 
@@ -47,21 +44,41 @@ export default function EstructuraHome() {
                 <div className="hero-buttons">
                   <button
                     className="btn-primary"
-                    onClick={() => scrollTo('catalogo')}
+                    onClick={() => {
+                      if (user) {
+                        navigate('/financiamiento');
+                      } else {
+                        const el = document.getElementById('catalogo');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
                   >
                     Ver Catálogo <ArrowRight size={18} style={{ marginLeft: '8px' }} />
                   </button>
                   <button
                     className="btn-secondary"
-                    onClick={() => scrollTo('noticias')}
+                    onClick={() => {
+                      const el = document.getElementById('noticias');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }}
                   >
                     Saber más
                   </button>
                 </div>
               </div>
               <div className="hero-image">
-                <div className="hero-image-placeholder">
-                  <Users size={64} color="rgba(255,255,255,0.2)" />
+                <div className="hero-image-placeholder" style={{ background: 'none', border: 'none' }}>
+                  <img 
+                    src={heroImage} 
+                    alt="Aliados Emprendedores UNE" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover', 
+                      borderRadius: 'var(--radius-lg)',
+                      boxShadow: 'var(--shadow-xl)'
+                    }} 
+                  />
                   <div className="hero-stat-card">
                     <div className="stat-number">+15k</div>
                     <div className="stat-text">Emprendedores beneficiados<br/>desde su fundación</div>
@@ -146,10 +163,20 @@ export default function EstructuraHome() {
                 <div className="feature-icon"><Scale size={32} /></div>
                 <h3>Asesoría Legal</h3>
                 <p>Consultas sobre registro y formalización de empresas.</p>
-              </div>
             </div>
           </div>
-        </section>
+            
+          <div style={{ textAlign: 'center', marginTop: '3.5rem' }}>
+            <button
+              className="btn-primary"
+              onClick={() => navigate('/financiamiento')}
+              style={{ padding: '1rem 2.8rem', borderRadius: 'var(--radius-xl)' }}
+            >
+              Explorar Todos los Recursos y Financiamiento <ArrowRight size={20} style={{ marginLeft: '10px' }} />
+            </button>
+          </div>
+        </div>
+      </section>
 
         {/* ── CTA EXCLUSIVO ── */}
         <section id="cta" className="cta-section">
@@ -216,7 +243,7 @@ export default function EstructuraHome() {
 
       </main>
 
-      <FooterUsers />
+      <Footer />
     </div>
   )
 }

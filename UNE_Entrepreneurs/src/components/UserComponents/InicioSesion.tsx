@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import UserServices from '../../services/UserServices'
-import NavbarUsers from './NavbarUsers'
-import FooterUsers from './FooterUsers'
+import Navbar from '../Shared/Navbar'
+import Footer from '../Shared/Footer'
 import { notifications } from '../../utils/notifications'
 import { ArrowLeft } from 'lucide-react'
+import { useAuth } from '../../context/AuthContext'
 
 /**
  * InicioSesionComponent: Página de login con Navbar y Footer integrados.
  */
 export default function InicioSesionComponent() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -30,23 +31,12 @@ export default function InicioSesionComponent() {
     setLoading(true);
 
     try {
-      const usuarios = await UserServices.getUser();
-      const usuarioValido = usuarios?.find(
-        (u: any) => u.email === formData.email && u.password === formData.password
-      );
+      const success = await login(formData.email, formData.password);
 
-      if (usuarioValido) {
-        localStorage.setItem('userSession', JSON.stringify({
-          id: usuarioValido.id,
-          nombre: usuarioValido.nombre,
-          email: usuarioValido.email,
-          loggedAt: new Date().toISOString()
-        }));
-
+      if (success) {
         notifications.success('¡Inicio de sesión exitoso!');
         setTimeout(() => {
           navigate('/');
-          window.location.reload();
         }, 1500);
       } else {
         const msg = 'El correo o la contraseña son incorrectos.';
@@ -65,7 +55,7 @@ export default function InicioSesionComponent() {
 
   return (
     <div className="login-page-layout">
-      <NavbarUsers />
+      <Navbar />
 
       <div className="login-container">
         <div className="login-box">
@@ -119,7 +109,7 @@ export default function InicioSesionComponent() {
         </div>
       </div>
 
-      <FooterUsers />
+      <Footer />
     </div>
   )
 }

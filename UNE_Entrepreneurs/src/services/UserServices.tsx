@@ -1,5 +1,7 @@
+import type { User } from '../types/user';
+
 //PATCH
-async function patchUsuarios(usuario: any, id: string | number) {
+async function patchUsuarios(usuario: Partial<User>, id: string | number): Promise<User | undefined> {
   try {
     const respuesta = await fetch("http://localhost:3001/usuarios/" + id, {
       method: "PATCH",
@@ -17,7 +19,7 @@ async function patchUsuarios(usuario: any, id: string | number) {
 }
 
 //DELETE
-async function deleteUsuarios(id: string | number) {
+async function deleteUsuarios(id: string | number): Promise<any> {
   try {
     const respuesta = await fetch("http://localhost:3001/usuarios/" + id, {
       method: "DELETE",
@@ -30,17 +32,18 @@ async function deleteUsuarios(id: string | number) {
   }
 }
 
-async function getUser() {
+async function getUser(): Promise<User[]> {
   try {
     const respuesta = await fetch("http://localhost:3001/usuarios")
     const datos = await respuesta.json();
-    return datos;
+    return datos || [];
   } catch (error) {
     console.error("Error al obtener los usuarios", error);
+    return [];
   }
 }
 
-async function postUser(usuario: any) {
+async function postUser(usuario: Omit<User, 'id'>): Promise<User | undefined> {
   try {
     const respuesta = await fetch("http://localhost:3001/usuarios", {
       method: "POST",

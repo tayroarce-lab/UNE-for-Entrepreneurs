@@ -5,9 +5,11 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomeUsers from '../pages/UserPages/HomeUsers';
 import InicioSesion from '../pages/UserPages/InicioSesion';
 import RegistroUser from '../pages/UserPages/RegistroUser';
-import UserFinancingCatalog from '../components/Financing/FinancingCatalog';
-import FinancingDetail from '../components/Financing/FinancingDetail';
-import AdminFinancingPage from '../components/Financing/AdminFinancing';
+import UserFinancingCatalogPage from '../pages/FinancingPages/FinancingCatalogPage';
+import FinancingDetailPage from '../pages/FinancingPages/FinancingDetailPage';
+import AdminFinancingPage from '../pages/AdminPages/AdminFinancingPage';
+import ProtectedRoute from './ProtectedRoute';
+import BudgetPage from '../pages/UserPages/BudgetPage';
 import IngresosEgresos from '../components/IngresosEgresos/IngresosEgresos';
 
 const router = createBrowserRouter([
@@ -20,6 +22,13 @@ const router = createBrowserRouter([
     element: <IngresosEgresos />,
   },
   {
+    path: '/presupuesto',
+    element: <ProtectedRoute />, // Solo usuarios logueados
+    children: [
+      { path: '', element: <BudgetPage /> },
+    ]
+  },
+  {
     path: '/login',
     element: <InicioSesion />,
   },
@@ -29,15 +38,18 @@ const router = createBrowserRouter([
   },
   {
     path: '/financiamiento',
-    element: <UserFinancingCatalog />,
+    element: <ProtectedRoute />, // Solo usuarios logueados
+    children: [
+      { path: '', element: <UserFinancingCatalogPage /> },
+      { path: ':id', element: <FinancingDetailPage /> },
+    ]
   },
   {
-    path: '/financiamiento/:id',
-    element: <FinancingDetail />,
-  },
-  {
-    path: '/admin/financiamiento',
-    element: <AdminFinancingPage />,
+    path: '/admin',
+    element: <ProtectedRoute adminOnly />, // Solo admins
+    children: [
+      { path: 'financiamiento', element: <AdminFinancingPage /> },
+    ]
   },
 ]);
 

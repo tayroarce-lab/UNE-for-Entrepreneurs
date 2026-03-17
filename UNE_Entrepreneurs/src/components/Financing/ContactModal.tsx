@@ -2,7 +2,7 @@
 // Modal de Contacto — UNE Costa Rica
 // ============================================================
 import { useState } from 'react';
-import { Mail, CheckCircle2, ChevronRight, Send } from 'lucide-react';
+import { Mail, CheckCircle2, ChevronRight, Send, X, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import type { FinancingProgram } from '../../types/financing';
 import { createApplication } from '../../services/FinancingService';
@@ -75,7 +75,7 @@ export default function ContactModal({ program, onClose }: ContactModalProps) {
             <Mail size={22} color="var(--uneGold)" /> Contactar Asesoría UNE
           </h2>
           <button className="financingModalClose" onClick={onClose} aria-label="Cerrar modal">
-            ✕
+            <X size={20} />
           </button>
         </div>
 
@@ -122,7 +122,7 @@ export default function ContactModal({ program, onClose }: ContactModalProps) {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   />
-                  {errors.name && <span className="financingFormError">⚠ {errors.name}</span>}
+                  {errors.name && <span className="financingFormError"><AlertCircle size={14} /> {errors.name}</span>}
                 </div>
 
                 <div className="financingFormGroup">
@@ -134,7 +134,7 @@ export default function ContactModal({ program, onClose }: ContactModalProps) {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   />
-                  {errors.email && <span className="financingFormError">⚠ {errors.email}</span>}
+                  {errors.email && <span className="financingFormError"><AlertCircle size={14} /> {errors.email}</span>}
                 </div>
               </div>
 
@@ -159,7 +159,7 @@ export default function ContactModal({ program, onClose }: ContactModalProps) {
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   rows={4}
                 />
-                {errors.message && <span className="financingFormError">⚠ {errors.message}</span>}
+                {errors.message && <span className="financingFormError"><AlertCircle size={14} /> {errors.message}</span>}
               </div>
 
               <div className="financingModalFooter" style={{ marginTop: '2rem' }}>

@@ -1,37 +1,25 @@
-import { useNavigate, useLocation } from 'react-router-dom'
-import { notifications } from '../../utils/notifications'
+import { useNavigate, useLocation, Link, NavLink } from 'react-router-dom'
 import { LogIn, UserPlus, LogOut, LayoutDashboard } from 'lucide-react'
+import { notifications } from '../../utils/notifications'
 import { useAuth } from '../../context/AuthContext'
+import uneLogo from '../../assets/logo_une.png'
 
-/**
- * NavbarUsers: Barra de navegación principal.
- * - Utiliza AuthContext para detectar sesión activa.
- * - Los enlaces de sección hacen scroll suave al id correspondiente.
- */
-export default function NavbarUsers() {
-  const { user, logout } = useAuth();
+export default function Navbar() {
+  const { user, isAdmin, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  /**
-   * scrollToSection: Hace scroll suave a una sección por su id.
-   */
   const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
     e.preventDefault();
-
     if (location.pathname !== '/') {
       navigate('/');
       setTimeout(() => {
         const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 300);
     } else {
       const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -57,38 +45,37 @@ export default function NavbarUsers() {
       logout();
       notifications.success('Sesión cerrada correctamente');
       setTimeout(() => {
-        navigate('/');
+        window.location.href = '/';
       }, 1000);
     }
   };
 
   const getInitials = (nombre: string) => {
-    return nombre
-      .split(' ')
-      .map(n => n[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2);
+    return nombre.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
   };
 
   return (
-    <nav className="navbar-users">
+    <nav className="navbar-users" aria-label="Navegación principal">
       <div className="navbar-container">
         <div className="navbar-logo">
-          <a href="/" onClick={scrollToTop}>UNE Entrepreneurs</a>
+          <a href="/" onClick={scrollToTop} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{ background: 'var(--uneRed)', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <img src={uneLogo} alt="Logo UNE" style={{ height: '20px', width: '20px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+            </div>
+            UNE Entrepreneurs
+          </a>
         </div>
         <ul className="navbar-links">
-          <li><a href="/" onClick={scrollToTop}>Inicio</a></li>
-          <li><a href="/#catalogo" onClick={(e) => scrollToSection(e, 'catalogo')}>Catálogo</a></li>
-          <li><a href="/finanzas" onClick={(e) => { e.preventDefault(); navigate('/finanzas'); }}>Finanzas</a></li>
+          <li><NavLink to="/" onClick={(e) => { if(location.pathname === '/') scrollToTop(e as unknown as React.MouseEvent); }} end>Inicio</NavLink></li>
+          <li><NavLink to="/financiamiento">Catálogo</NavLink></li>
           <li><a href="/#noticias" onClick={(e) => scrollToSection(e, 'noticias')}>Noticias</a></li>
           <li><a href="/#contacto" onClick={(e) => scrollToSection(e, 'contacto')}>Contacto</a></li>
-          
-          {user && (
+
+          {isAdmin && (
             <li>
-              <a href="/presupuesto" onClick={(e) => { e.preventDefault(); navigate('/presupuesto'); }} className="nav-highlight">
-                <LayoutDashboard size={18} /> Mi Panel
-              </a>
+              <NavLink to="/admin/financiamiento" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <LayoutDashboard size={18} /> Admin
+              </NavLink>
             </li>
           )}
 
@@ -106,14 +93,14 @@ export default function NavbarUsers() {
           ) : (
             <>
               <li>
-                <a href="/login" onClick={(e) => { e.preventDefault(); navigate('/login'); }}>
-                  <LogIn size={18} /> Ingresar
-                </a>
+                <Link to="/login">
+                  <LogIn size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} /> Ingresar
+                </Link>
               </li>
               <li>
-                <a href="/registro" onClick={(e) => { e.preventDefault(); navigate('/registro'); }} className="btn-register">
-                  <UserPlus size={18} /> Registrarse
-                </a>
+                <Link to="/registro" className="btn-register">
+                  <UserPlus size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} /> Registrarse
+                </Link>
               </li>
             </>
           )}
