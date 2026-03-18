@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-/* Este componente debe estructurar la página de inicio (HomeUsers.tsx)
-/* ASHLEY*/
-=======
 import { useNavigate } from 'react-router-dom'
 import {
   Target, Lightbulb, Building2, BarChart3,
@@ -251,4 +247,3 @@ export default function EstructuraHome() {
     </div>
   )
 }
->>>>>>> 9b413313cf0adcf0f6b7a20a6f14c059d8af51d2

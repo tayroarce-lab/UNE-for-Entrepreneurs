@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-/**
- * Este componente debe de hacer la funciónalidad de iniciar sesión utilizando el servicio de usuarios y db.json "usuarios" 
- */ 
-/* ASHLEY*/
-=======
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../Shared/Navbar'
@@ -119,4 +113,3 @@ export default function InicioSesionComponent() {
     </div>
   )
 }
->>>>>>> 9b413313cf0adcf0f6b7a20a6f14c059d8af51d2

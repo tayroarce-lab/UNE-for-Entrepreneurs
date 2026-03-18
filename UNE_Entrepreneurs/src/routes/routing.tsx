@@ -11,9 +11,9 @@ import CambioCredenciales from '../components/AdminComponents/Configuración/Cam
 import RolesPermisos from '../components/AdminComponents/Configuración/RolesPermisos';
 import Maps from '../components/AdminComponents/Maps';
 
-import HomeUsers from '../pages/UserPages/HomeUsers';
-import InicioSesion from '../pages/UserPages/InicioSesion';
-import RegistroUser from '../pages/UserPages/RegistroUser';
+import HomeUsers from '../components/UserComponents/EstructuraHome';
+import InicioSesion from '../components/UserComponents/InicioSesion';
+import RegistroUser from '../components/UserComponents/RegistroUser';
 import FinancingCatalogPage from '../pages/UserPages/FinancingCatalogPage';
 import FinancingDetailPage from '../pages/UserPages/FinancingDetailPage';
 import AdminFinancingPageWrapper from '../pages/UserPages/AdminFinancingPage';

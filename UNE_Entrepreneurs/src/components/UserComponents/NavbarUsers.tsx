@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-/* Este componente es el navbar que tienen todas las páginas donde tienen acceso los usuarios
-/* ASHLEY*/
-=======
 import { useNavigate, useLocation } from 'react-router-dom'
 import { notifications } from '../../utils/notifications'
 import { LogIn, UserPlus, LogOut, LayoutDashboard } from 'lucide-react'
@@ -126,4 +122,3 @@ export default function NavbarUsers() {
     </nav>
   )
 }
->>>>>>> 9b413313cf0adcf0f6b7a20a6f14c059d8af51d2
