@@ -59,9 +59,15 @@ export default function Navbar() {
       <div className="navbar-container">
         <div className="navbar-logo">
           <a href="/" onClick={scrollToTop} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ background: 'var(--uneRed)', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <img src={uneLogo} alt="Logo UNE" style={{ height: '20px', width: '20px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
-            </div>
+            <img 
+              src={uneLogo} 
+              alt="Logo UNE" 
+              style={{ 
+                height: '32px', 
+                width: 'auto', 
+                objectFit: 'contain'
+              }} 
+            />
             UNE Entrepreneurs
           </a>
         </div>
