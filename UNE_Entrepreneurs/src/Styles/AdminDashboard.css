@@ -3,9 +3,9 @@
 .admin-container {
   display: flex;
   min-height: 100vh;
-  background-color: #f7f9fa;
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-  color: #333;
+  background-color: var(--color-bg-soft);
+  font-family: var(--font-main);
+  color: var(--color-text);
 }
 
 .admin-container > nav {
@@ -80,7 +80,7 @@
 }
 
 .admin-container header {
-  background-color: #ffffff;
+  background-color: var(--color-bg);
   padding: 16px 32px;
   display: flex;
   justify-content: space-between;
@@ -94,7 +94,7 @@
 .admin-container header h1 {
   margin: 0;
   font-size: 1.5rem;
-  color: #111827;
+  color: var(--color-dark);
   font-weight: 700;
 }
 
@@ -141,7 +141,7 @@
 .admin-container h2 {
   font-size: 1.35rem;
   margin-bottom: 0px;
-  color: #1f2937;
+  color: var(--color-dark);
   font-weight: 700;
 }
 
@@ -161,12 +161,12 @@
 
 .admin-container main > section:first-of-type > div,
 .admin-container article {
-  background-color: #ffffff;
+  background-color: var(--color-bg);
   padding: 24px;
   border-radius: 16px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.03);
+  box-shadow: var(--shadow-sm);
   transition: transform 0.2s, box-shadow 0.2s;
-  border: 1px solid rgba(0,0,0,0.04);
+  border: 1px solid var(--color-border);
 }
 
 .admin-container main > section:first-of-type > div:hover,
@@ -186,7 +186,7 @@
 .admin-container main > section:first-of-type > div p {
   font-size: 2.25rem;
   font-weight: 800;
-  color: #111827;
+  color: var(--color-dark);
   margin: 0;
 }
 

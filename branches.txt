@@ -1,8 +1,0 @@
-﻿  CotoBranch
-* dev
-  remotes/origin/Ashleybrach
-  remotes/origin/CotoBranch
-  remotes/origin/HEAD -> origin/main
-  remotes/origin/dev
-  remotes/origin/main
-  remotes/origin/tayroBranch

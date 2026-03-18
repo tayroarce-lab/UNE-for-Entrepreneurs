@@ -3,9 +3,9 @@
 .admin-container {
   display: flex;
   min-height: 100vh;
-  background-color: #f7f9fa;
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-  color: #333;
+  background-color: var(--color-bg-soft);
+  font-family: var(--font-main);
+  color: var(--color-text);
 }
 
 .admin-main-wrap {
@@ -16,7 +16,7 @@
 }
 
 .admin-container header {
-  background-color: #ffffff;
+  background-color: var(--color-bg);
   padding: 16px 32px;
   display: flex;
   justify-content: space-between;
@@ -26,7 +26,7 @@
 
 .admin-container header h1 {
   font-size: 1.5rem;
-  color: #111827;
+  color: var(--color-dark);
 }
 
 .admin-container header button {
@@ -62,25 +62,25 @@
 .admin-container table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #ffffff;
+  background-color: var(--color-bg);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-  border: 1px solid #f3f4f6;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
   margin-top: 16px;
 }
 
 .admin-container th {
-  background-color: #f9fafb;
-  color: #4b5563;
+  background-color: var(--color-bg-soft);
+  color: var(--color-text-light);
   padding: 16px 24px;
   text-align: left;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .admin-container td {
   padding: 16px 24px;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .admin-container td button {
@@ -94,8 +94,9 @@
   max-width: 600px;
   padding: 12px 20px;
   border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  background-color: #f9fafb;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-soft);
+  color: var(--color-text);
   outline: none;
   font-family: inherit;
   margin-bottom: 10px;

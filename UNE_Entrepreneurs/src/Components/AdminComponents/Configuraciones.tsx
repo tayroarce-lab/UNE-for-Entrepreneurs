@@ -8,12 +8,17 @@ import { Settings, ArrowLeft, LogOut, Palette, Sun, Moon, UserCircle, Save, Shie
 type Tema = 'light' | 'dark';
 
 function Configuraciones() {
-    const [tema, setTema] = useState<Tema>('light');
+    const [tema, setTema] = useState<Tema>((localStorage.getItem('theme') as Tema) || 'light');
     const [nombre, setNombre] = useState<string>('Admin Principal');
     const [perfilImg, setPerfilImg] = useState<string | null>(localStorage.getItem('adminProfileImg') || null);
 
+
     const alternarTema = () => {
-        setTema((prevTema: Tema) => prevTema === 'light' ? 'dark' : 'light');
+        const nuevoTema = tema === 'light' ? 'dark' : 'light';
+        setTema(nuevoTema);
+        localStorage.setItem('theme', nuevoTema);
+        document.documentElement.setAttribute('data-theme', nuevoTema);
+        toast.info(`Cambiado a Modo ${nuevoTema === 'light' ? 'Claro' : 'Oscuro'}`);
     };
 
     const handleLogout = () => {
