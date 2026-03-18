@@ -1,25 +1,37 @@
-import { useNavigate, useLocation, Link, NavLink } from 'react-router-dom'
-import { LogIn, UserPlus, LogOut, LayoutDashboard, Package } from 'lucide-react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { notifications } from '../../utils/notifications'
+import { LogIn, UserPlus, LogOut, LayoutDashboard } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
-import uneLogo from '../../assets/logo_une.png'
 
-export default function Navbar() {
-  const { user, isAdmin, logout } = useAuth();
+/**
+ * NavbarUsers: Barra de navegación principal.
+ * - Utiliza AuthContext para detectar sesión activa.
+ * - Los enlaces de sección hacen scroll suave al id correspondiente.
+ */
+export default function NavbarUsers() {
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
+  /**
+   * scrollToSection: Hace scroll suave a una sección por su id.
+   */
   const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
     e.preventDefault();
+
     if (location.pathname !== '/') {
       navigate('/');
       setTimeout(() => {
         const element = document.getElementById(sectionId);
-        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }, 300);
     } else {
       const element = document.getElementById(sectionId);
-      if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
 
@@ -45,52 +57,38 @@ export default function Navbar() {
       logout();
       notifications.success('Sesión cerrada correctamente');
       setTimeout(() => {
-        window.location.href = '/';
+        navigate('/');
       }, 1000);
     }
   };
 
   const getInitials = (nombre: string) => {
-    return nombre.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+    return nombre
+      .split(' ')
+      .map(n => n[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
   };
 
   return (
-    <nav className="navbar-users" aria-label="Navegación principal">
+    <nav className="navbar-users">
       <div className="navbar-container">
         <div className="navbar-logo">
-          <a href="/" onClick={scrollToTop} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <img 
-              src={uneLogo} 
-              alt="Logo UNE" 
-              style={{ 
-                height: '32px', 
-                width: 'auto', 
-                objectFit: 'contain'
-              }} 
-            />
-            UNE Entrepreneurs
-          </a>
+          <a href="/" onClick={scrollToTop}>UNE Entrepreneurs</a>
         </div>
         <ul className="navbar-links">
-          <li><NavLink to="/" onClick={(e) => { if(location.pathname === '/') scrollToTop(e as unknown as React.MouseEvent); }} end>Inicio</NavLink></li>
-          <li><NavLink to="/financiamiento">Créditos</NavLink></li>
-          <li><NavLink to="/finanzas">Finanzas</NavLink></li>
+          <li><a href="/" onClick={scrollToTop}>Inicio</a></li>
+          <li><a href="/financiamiento" onClick={(e) => { e.preventDefault(); navigate('/financiamiento'); }}>Financiamiento</a></li>
+          <li><a href="/finanzas" onClick={(e) => { e.preventDefault(); navigate('/finanzas'); }}>Finanzas</a></li>
           <li><a href="/#noticias" onClick={(e) => scrollToSection(e, 'noticias')}>Noticias</a></li>
           <li><a href="/#contacto" onClick={(e) => scrollToSection(e, 'contacto')}>Contacto</a></li>
-
+          
           {user && (
             <li>
-              <NavLink to="/presupuesto" className="nav-highlight">
+              <a href="/presupuesto" onClick={(e) => { e.preventDefault(); navigate('/presupuesto'); }} className="nav-highlight">
                 <LayoutDashboard size={18} /> Mi Panel
-              </NavLink>
-            </li>
-          )}
-
-          {isAdmin && (
-            <li>
-              <NavLink to="/admin/financiamiento" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <Package size={18} /> Admin
-              </NavLink>
+              </a>
             </li>
           )}
 
@@ -108,14 +106,14 @@ export default function Navbar() {
           ) : (
             <>
               <li>
-                <Link to="/login">
-                  <LogIn size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} /> Ingresar
-                </Link>
+                <a href="/login" onClick={(e) => { e.preventDefault(); navigate('/login'); }}>
+                  <LogIn size={18} /> Ingresar
+                </a>
               </li>
               <li>
-                <Link to="/registro" className="btn-register">
-                  <UserPlus size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} /> Registrarse
-                </Link>
+                <a href="/registro" onClick={(e) => { e.preventDefault(); navigate('/registro'); }} className="btn-register">
+                  <UserPlus size={18} /> Registrarse
+                </a>
               </li>
             </>
           )}

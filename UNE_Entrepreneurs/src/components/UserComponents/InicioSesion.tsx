@@ -10,8 +10,8 @@ import { useAuth } from '../../context/AuthContext'
  * InicioSesionComponent: Página de login con Navbar y Footer integrados.
  */
 export default function InicioSesionComponent() {
-  const navigate = useNavigate();
   const { login } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''

@@ -18,14 +18,25 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-// Usuarios simulados (fallback opcional o remover si ya se usa db.json)
-const MOCK_ADMIN: AuthUser & { password: string } = {
-  id: 'admin-1',
-  name: 'Admin UNE',
-  email: 'admin@une.cr',
-  password: 'admin123',
-  isAdmin: true,
-};
+// Usuarios simulados para pruebas
+const MOCK_USERS: (AuthUser & { password: string })[] = [
+  {
+    id: '1',
+    name: 'Admin UNE',
+    email: 'admin@une.cr',
+    password: 'admin123',
+    isAdmin: true,
+  },
+  {
+    id: '2',
+    name: 'María López',
+    email: 'maria@example.com',
+    password: 'user123',
+    isAdmin: false,
+  },
+];
+
+const MOCK_ADMIN = MOCK_USERS[0];
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(() => {
@@ -34,8 +45,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const parsed = JSON.parse(stored);
       return {
-        id: parsed.id,
-        name: parsed.nombre || parsed.name,
+        id: String(parsed.id),
+        name: parsed.nombre || parsed.name || 'Usuario',
         email: parsed.email,
         isAdmin: parsed.isAdmin || parsed.role === 'admin'
       };
@@ -48,11 +59,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       // 1. Check Hardcoded Admin
       if (email === MOCK_ADMIN.email && password === MOCK_ADMIN.password) {
-        setUser(MOCK_ADMIN);
-        localStorage.setItem('userSession', JSON.stringify({
+        const adminUser: AuthUser = {
           id: MOCK_ADMIN.id,
-          nombre: MOCK_ADMIN.name,
+          name: MOCK_ADMIN.name,
           email: MOCK_ADMIN.email,
+          isAdmin: true
+        };
+        setUser(adminUser);
+        localStorage.setItem('userSession', JSON.stringify({
+          id: adminUser.id,
+          nombre: adminUser.name,
+          email: adminUser.email,
           isAdmin: true,
           loggedAt: new Date().toISOString()
         }));
@@ -65,10 +82,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (found) {
         const authUser: AuthUser = {
-          id: found.id,
-          name: found.nombre,
+          id: String(found.id),
+          name: found.nombre || 'Usuario',
           email: found.email,
-          isAdmin: found.role === 'admin',
+          isAdmin: found.role === 'admin' || found.email === 'admin@une.cr',
         };
         setUser(authUser);
         localStorage.setItem('userSession', JSON.stringify({
@@ -78,6 +95,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           isAdmin: authUser.isAdmin,
           loggedAt: new Date().toISOString()
         }));
+        // Limpiamos tokens viejos si existen
+        localStorage.removeItem('uneUser');
+        localStorage.removeItem('token');
         return true;
       }
     } catch (err) {
