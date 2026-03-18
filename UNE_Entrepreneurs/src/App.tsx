@@ -1,4 +1,5 @@
 import { RouterProvider } from 'react-router-dom';
+import { Toaster } from 'sonner';
 import { AuthProvider } from './context/AuthContext';
 import router from './routes/routing';
 import './App.css';
@@ -9,6 +10,7 @@ import './App.css';
 function App() {
   return (
     <AuthProvider>
+      <Toaster position="top-right" richColors />
       <RouterProvider router={router} />
     </AuthProvider>
   );

@@ -1,0 +1,56 @@
+﻿ D UNE_Entrepreneurs/dist/assets/index-C-wbCq6l.js
+ D UNE_Entrepreneurs/dist/assets/index-Dj2_-1DQ.css
+ M UNE_Entrepreneurs/dist/index.html
+M  UNE_Entrepreneurs/package-lock.json
+M  UNE_Entrepreneurs/package.json
+M  UNE_Entrepreneurs/src/App.tsx
+AM UNE_Entrepreneurs/src/Components/AdminComponents/AdminDashboard.tsx
+AM UNE_Entrepreneurs/src/Components/AdminComponents/Configuraciones.tsx
+AM "UNE_Entrepreneurs/src/Components/AdminComponents/Configuraci\303\263n/CambioCredenciales.tsx"
+AM "UNE_Entrepreneurs/src/Components/AdminComponents/Configuraci\303\263n/Notificaciones.tsx"
+AM "UNE_Entrepreneurs/src/Components/AdminComponents/Configuraci\303\263n/RolesPermisos.tsx"
+AM UNE_Entrepreneurs/src/Components/AdminComponents/FomrInventario.tsx
+AM UNE_Entrepreneurs/src/Components/AdminComponents/GestionTipsNoticias.tsx
+AM UNE_Entrepreneurs/src/Components/AdminComponents/ManejarClientes.tsx
+AM UNE_Entrepreneurs/src/Components/AdminComponents/ManejoFinanciaciones.tsx
+AM UNE_Entrepreneurs/src/Components/AdminComponents/ManejoInventario.tsx
+AM UNE_Entrepreneurs/src/Components/AdminComponents/ManejoPresupuesto.tsx
+A  UNE_Entrepreneurs/src/Components/UserComponents/EstructuraHome.tsx
+A  UNE_Entrepreneurs/src/Components/UserComponents/FooterUsers.tsx
+A  UNE_Entrepreneurs/src/Components/UserComponents/InicioSesion.tsx
+A  UNE_Entrepreneurs/src/Components/UserComponents/NavbarUsers.tsx
+A  UNE_Entrepreneurs/src/Components/UserComponents/RegistroUser.tsx
+AM UNE_Entrepreneurs/src/Pages/AdminPages/AdminDashboard.tsx
+AM UNE_Entrepreneurs/src/Pages/AdminPages/ManejarUsers.tsx
+A  UNE_Entrepreneurs/src/Pages/UserPages/HomeUsers.tsx
+A  UNE_Entrepreneurs/src/Pages/UserPages/InicioSesion.tsx
+A  UNE_Entrepreneurs/src/Pages/UserPages/RegistroUser.tsx
+AM UNE_Entrepreneurs/src/Routes/routing.tsx
+AM UNE_Entrepreneurs/src/Styles/AdminDashboard.css
+AM UNE_Entrepreneurs/src/Styles/Configuraciones.css
+AM UNE_Entrepreneurs/src/Styles/GestionTipsNoticias.css
+AM UNE_Entrepreneurs/src/Styles/ManejarClientes.css
+AM UNE_Entrepreneurs/src/Styles/ManejoFinanciaciones.css
+AM UNE_Entrepreneurs/src/Styles/ManejoInventario.css
+AM UNE_Entrepreneurs/src/Styles/ManejoPresupuesto.css
+AM UNE_Entrepreneurs/src/Styles/Notificaciones.css
+ M UNE_Entrepreneurs/src/components/UserComponents/EstructuraHome.tsx
+ M UNE_Entrepreneurs/src/components/UserComponents/FooterUsers.tsx
+ M UNE_Entrepreneurs/src/components/UserComponents/InicioSesion.tsx
+ M UNE_Entrepreneurs/src/components/UserComponents/NavbarUsers.tsx
+ M UNE_Entrepreneurs/src/components/UserComponents/RegistroUser.tsx
+ M UNE_Entrepreneurs/src/pages/UserPages/HomeUsers.tsx
+ M UNE_Entrepreneurs/src/pages/UserPages/InicioSesion.tsx
+ M UNE_Entrepreneurs/src/pages/UserPages/RegistroUser.tsx
+ M UNE_Entrepreneurs/src/routes/routing.tsx
+M  UNE_Entrepreneurs/src/services/UserServices.tsx
+ M UNE_Entrepreneurs/src/styles/financing.css
+A  package-lock.json
+A  package.json
+?? .gitignore
+?? UNE_Entrepreneurs/src/components/AdminComponents/Maps.tsx
+?? UNE_Entrepreneurs/src/styles/CambioCredenciales.css
+?? UNE_Entrepreneurs/src/styles/Maps.css
+?? UNE_Entrepreneurs/src/styles/RolesPermisos.css
+?? branches.txt
+?? status_short.txt
