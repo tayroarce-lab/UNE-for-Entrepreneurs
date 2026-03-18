@@ -83,7 +83,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (found) {
         const authUser: AuthUser = {
           id: String(found.id),
-          name: found.nombre || found.name || 'Usuario',
+          name: found.nombre || 'Usuario',
           email: found.email,
           isAdmin: found.role === 'admin' || found.email === 'admin@une.cr',
         };

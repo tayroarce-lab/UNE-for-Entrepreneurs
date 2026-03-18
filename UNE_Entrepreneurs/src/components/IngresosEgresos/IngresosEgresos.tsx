@@ -5,7 +5,7 @@ import './IngresosEgresos.css';
 import MetricCard from './MetricCard';
 import FinancialChart from './FinancialChart';
 import TransactionTable from './TransactionTable';
-import type { Transaction } from './TransactionTable';
+import type { Transaction } from '../../types/business';
 import { notifications } from '../../utils/notifications';
 
 const INITIAL_TRANSACTIONS: Transaction[] = [

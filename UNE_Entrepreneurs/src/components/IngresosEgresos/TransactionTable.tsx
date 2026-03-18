@@ -1,15 +1,7 @@
 import React from 'react';
 import { CheckCircle2, Clock, Briefcase, Home, Smartphone, BarChart3, Trash2 } from 'lucide-react';
 
-export interface Transaction {
-  id: string | number;
-  date: string;
-  description: string;
-  subDescription: string;
-  category: 'Negocios' | 'Renta' | 'Software' | 'Inversión';
-  status: 'Completado' | 'Pendiente';
-  amount: number;
-}
+import { type Transaction } from '../../types/business';
 
 interface TransactionTableProps {
   transactions: Transaction[];

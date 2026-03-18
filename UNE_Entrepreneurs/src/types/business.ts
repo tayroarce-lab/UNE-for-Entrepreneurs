@@ -3,17 +3,19 @@
 // ============================================================
 
 export interface Transaction {
-  id: string;
-  userId: string;
-  type: 'income' | 'expense' | 'investment';
+  id: string | number;
+  userId?: string;
+  type?: 'income' | 'expense' | 'investment';
   category: string;
   description: string;
-  amount: number;
+  subDescription?: string;
+  amount: number; // En IngresosEgresos puede ser positivo/negativo, en FinanzasPanel se usa type para clasificar
   date: string;
+  status?: 'Completado' | 'Pendiente';
 }
 
 export interface InventoryItem {
-  id: string;
+  id: string | number;
   userId: string;
   name: string;
   quantity: number;

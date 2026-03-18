@@ -44,7 +44,7 @@ export default function FinanzasPanel() {
   const [amount, setAmount] = useState<number | string>('');
   const [type, setType] = useState<'income' | 'expense' | 'investment'>('income');
   const [category, setCategory] = useState('Venta de Productos');
-  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editingId, setEditingId] = useState<string | number | null>(null);
   const [initialLoadDone, setInitialLoadDone] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -119,7 +119,7 @@ export default function FinanzasPanel() {
     setEditingId(t.id);
     setDescription(t.description);
     setAmount(t.amount);
-    setType(t.type);
+    setType(t.type || 'income');
     setCategory(t.category);
 
     // Redirect to form area orderly
@@ -132,7 +132,7 @@ export default function FinanzasPanel() {
     }
   };
 
-  const removeTransaction = (id: string) => {
+  const removeTransaction = (id: string | number) => {
     Swal.fire({
       title: '¿Está seguro?',
       text: "¿Realmente desea eliminar este registro? Esta acción no se puede deshacer.",

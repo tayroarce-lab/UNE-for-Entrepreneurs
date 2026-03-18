@@ -24,7 +24,7 @@ export default function InventoryPanel() {
   const [sale, setSale] = useState<number | string>('');
   const [category, setCategory] = useState('General');
   const [searchTerm, setSearchTerm] = useState('');
-  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editingId, setEditingId] = useState<string | number | null>(null);
   const [initialLoadDone, setInitialLoadDone] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -118,7 +118,7 @@ export default function InventoryPanel() {
     }
   };
 
-  const deleteItem = (id: string) => {
+  const deleteItem = (id: string | number) => {
     Swal.fire({
       title: '¿Está seguro?',
       text: "¿Desea eliminar este producto? Esta acción no se puede deshacer.",
