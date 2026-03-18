@@ -5,11 +5,21 @@
 
 /* ---------- CSS Variables ---------- */
 :root {
-  --color-primary: #7B2D3B;
-  --color-primary-dark: #5a1f2b;
-  --color-primary-light: #a14455;
-  --color-accent: #E8533F;
-  --color-accent-hover: #d14432;
+  /* Branding Colors */
+  --uneRed: #8B1A1A;
+  --uneRedDark: #6B1414;
+  --uneRedLight: #A52020;
+  --uneGold: #D4A853;
+  --uneGoldLight: #E8C880;
+  --uneCream: #FDF8F0;
+  --uneWarm: #F5EDE0;
+
+  /* UI Colors */
+  --color-primary: var(--uneRed);
+  --color-primary-dark: var(--uneRedDark);
+  --color-primary-light: var(--uneRedLight);
+  --color-accent: var(--uneGold);
+  --color-accent-hover: var(--uneGoldLight);
   --color-dark: #1a1a2e;
   --color-dark-soft: #2d2d44;
   --color-text: #333333;
@@ -32,6 +42,25 @@
   --radius-lg: 16px;
   --radius-xl: 24px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Semantic Aliases for Compatibility */
+  --radiusSm: var(--radius-sm);
+  --radiusMd: var(--radius-md);
+  --radiusLg: var(--radius-lg);
+  --radiusXl: var(--radius-xl);
+  --transitionFast: 0.15s ease;
+  --transitionMedium: 0.25s ease;
+  --transitionSlow: 0.4s ease;
+  --fontFamily: var(--font-main);
+  
+  /* Additional UI Colors */
+  --textPrimary: var(--color-dark);
+  --textSecondary: var(--color-text-light);
+  --textMuted: var(--color-text-muted);
+  --borderColor: var(--color-border);
+  --borderLight: #f0f0f5;
+  --bgWhite: #ffffff;
+  --bgLight: var(--color-bg-soft);
 }
 
 [data-theme='dark'] {
@@ -147,10 +176,6 @@ h1, h2, h3, h4, h5, h6 {
   gap: 0.5rem;
 }
 
-.navbar-logo a::before {
-  content: "🎓";
-  font-size: 1.4rem;
-}
 
 .navbar-logo a:hover {
   color: var(--color-primary-dark);

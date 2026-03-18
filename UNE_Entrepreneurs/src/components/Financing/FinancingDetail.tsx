@@ -15,7 +15,7 @@ import { getFinancingProgramById, addFavorite, addToBudget } from '../../service
 import { formatDate, formatCurrency, sanitizeHtml } from '../../utils/financingUtils';
 import { useAuth } from '../../context/AuthContext';
 import FinancingNavbar from './FinancingNavbar';
-import FinancingFooter from './FinancingFooter';
+import Footer from '../Shared/Footer';
 import EligibilityModal from './EligibilityModal';
 import ContactModal from './ContactModal';
 import ReportModal from './ReportModal';
@@ -471,7 +471,7 @@ export default function FinancingDetail() {
         />
       )}
 
-      <FinancingFooter />
+      <Footer />
     </>
   );
 }

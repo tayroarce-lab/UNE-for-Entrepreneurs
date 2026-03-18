@@ -44,6 +44,21 @@ export default function FinancingNavbar() {
         >
           Créditos
         </NavLink>
+        <NavLink
+          to="/finanzas"
+          className={({ isActive }) => (isActive ? 'active' : '')}
+        >
+          Finanzas
+        </NavLink>
+
+        {user && (
+          <NavLink
+            to="/presupuesto"
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
+            Mi Panel
+          </NavLink>
+        )}
 
         {isAdmin && (
           <NavLink

@@ -16,7 +16,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <Toaster position="top-right" richColors />
+      <Toaster richColors closeButton position="top-right" />
       <RouterProvider router={router} />
     </AuthProvider>
   );

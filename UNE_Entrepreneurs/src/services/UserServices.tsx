@@ -1,17 +1,8 @@
 import { toast } from 'sonner';
-
-interface Usuario {
-  id?: string | number;
-  name?: string;
-  nombre?: string;
-  email: string;
-  role?: string;
-  isAdmin?: boolean;
-  [key: string]: unknown;
-}
+import type { User } from '../types/user';
 
 // PATCH
-async function patchUsuarios(usuario: Partial<Usuario>, id: string | number) {
+async function patchUsuarios(usuario: Partial<User>, id: string | number): Promise<User | undefined> {
   try {
     const respuesta = await fetch('http://localhost:3001/usuarios/' + id, {
       method: 'PATCH',
@@ -34,7 +25,7 @@ async function patchUsuarios(usuario: Partial<Usuario>, id: string | number) {
 }
 
 // DELETE
-async function deleteUsuarios(id: string | number) {
+async function deleteUsuarios(id: string | number): Promise<boolean | undefined> {
   try {
     const respuesta = await fetch('http://localhost:3001/usuarios/' + id, {
       method: 'DELETE',
@@ -52,22 +43,23 @@ async function deleteUsuarios(id: string | number) {
 }
 
 // GET
-async function getUser() {
+async function getUser(): Promise<User[]> {
   try {
     const respuesta = await fetch('http://localhost:3001/usuarios');
     if (!respuesta.ok) {
       throw new Error(`Error ${respuesta.status}`);
     }
     const datos = await respuesta.json();
-    return datos;
+    return datos || [];
   } catch (error) {
     console.error('Error al obtener los usuarios', error);
     toast.error('Error de conexión al obtener usuarios');
+    return [];
   }
 }
 
 // POST
-async function postUser(usuario: Omit<Usuario, 'id'>) {
+async function postUser(usuario: Omit<User, 'id'>): Promise<User | undefined> {
   try {
     const respuesta = await fetch('http://localhost:3001/usuarios', {
       method: 'POST',

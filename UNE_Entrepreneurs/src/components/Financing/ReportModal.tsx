@@ -2,7 +2,7 @@
 // Modal de Reportar Cambio — UNE
 // ============================================================
 import { useState } from 'react';
-import { Flag, CheckCircle2, AlertTriangle, Send } from 'lucide-react';
+import { Flag, CheckCircle2, AlertTriangle, Send, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { createReport } from '../../services/FinancingService';
 import { useAuth } from '../../context/AuthContext';
@@ -59,7 +59,7 @@ export default function ReportModal({ programId, programName, onClose }: ReportM
             <Flag size={20} color="var(--errorRed)" /> Reportar Cambio
           </h2>
           <button className="financingModalClose" onClick={onClose} aria-label="Cerrar">
-            ✕
+            <X size={20} />
           </button>
         </div>
 
