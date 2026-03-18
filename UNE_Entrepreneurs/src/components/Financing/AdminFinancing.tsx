@@ -16,7 +16,7 @@ import {
 import { formatDate } from '../../utils/financingUtils';
 import { useAuth } from '../../context/AuthContext';
 import AdminFinancingForm from './AdminFinancingForm';
-import Navbar from '../Shared/Navbar';
+import FinancingNavbar from './FinancingNavbar';
 import '../../styles/financing.css';
 
 export default function AdminFinancingPage() {
@@ -181,7 +181,7 @@ export default function AdminFinancingPage() {
   if (!isAdmin) {
     return (
       <>
-        <Navbar />
+        <FinancingNavbar />
         <div className="financingAdminContainer">
           <div className="financingAlert financingAlertError" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Lock /> Acceso denegado. Solo los administradores pueden acceder a esta página.
@@ -193,7 +193,7 @@ export default function AdminFinancingPage() {
 
   return (
     <>
-      <Navbar />
+      <FinancingNavbar />
 
       <div className="financingAdminContainer">
 

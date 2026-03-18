@@ -8,6 +8,12 @@ import {
   Trash2,
   Edit2
 } from 'lucide-react';
+import {
+  getTransactions,
+  createTransaction,
+  updateTransaction,
+  deleteTransaction
+} from '../../services/BusinessService';
 import { useAuth } from '../../context/AuthContext';
 import type { Transaction } from '../../types/business';
 import Swal from 'sweetalert2';
@@ -45,26 +51,23 @@ export default function FinanzasPanel() {
   const [type, setType] = useState<'income' | 'expense' | 'investment'>('income');
   const [category, setCategory] = useState('Venta de Productos');
   const [editingId, setEditingId] = useState<string | number | null>(null);
-  const [initialLoadDone, setInitialLoadDone] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
-  // Load from LocalStorage
-  useEffect(() => {
+  // Load from API
+  const fetchTransactions = async () => {
     if (user) {
-      const stored = localStorage.getItem(`une_finances_${user.id}`);
-      if (stored) {
-        setTransactions(JSON.parse(stored));
+      try {
+        const data = await getTransactions(user.id);
+        setTransactions(data);
+      } catch (error) {
+        console.error('Error al cargar transacciones:', error);
       }
-      setInitialLoadDone(true);
     }
-  }, [user]);
+  };
 
-  // Save to LocalStorage
   useEffect(() => {
-    if (user && initialLoadDone) {
-      localStorage.setItem(`une_finances_${user.id}`, JSON.stringify(transactions));
-    }
-  }, [user, transactions, initialLoadDone]);
+    fetchTransactions();
+  }, [user]);
 
   const stats = useMemo(() => {
     const income = transactions.filter(t => t.type === 'income').reduce((acc, t) => acc + t.amount, 0);
@@ -77,42 +80,49 @@ export default function FinanzasPanel() {
     return { income, expense, investment, totalOut, net, margin };
   }, [transactions]);
 
-  const handleAddTransaction = () => {
+  const handleAddTransaction = async () => {
     if (!description || !amount || Number(amount) <= 0) return;
 
-    if (editingId) {
-      setTransactions(transactions.map(t => t.id === editingId ? {
-        ...t,
-        description,
-        amount: Number(amount),
-        type,
-        category,
-      } : t));
-      setEditingId(null);
-      Swal.fire({
-        title: 'Actualizado',
-        text: 'Transacción actualizada correctamente',
-        icon: 'success',
-        timer: 1500,
-        showConfirmButton: false
-      });
-    } else {
-      const newTx: Transaction = {
-        id: crypto.randomUUID(),
-        userId: user?.id || 'guest',
-        description,
-        amount: Number(amount),
-        type,
-        category,
-        date: new Date().toISOString()
-      };
-      setTransactions([newTx, ...transactions]);
-    }
+    try {
+      if (editingId) {
+        const updated = {
+          description,
+          amount: Number(amount),
+          type,
+          category,
+        };
+        await updateTransaction(editingId, updated);
+        setTransactions(transactions.map(t => t.id === editingId ? { ...t, ...updated } : t));
+        
+        setEditingId(null);
+        Swal.fire({
+          title: 'Actualizado',
+          text: 'Transacción actualizada correctamente',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
+      } else {
+        const newTx: Omit<Transaction, 'id'> = {
+          userId: user?.id,
+          description,
+          amount: Number(amount),
+          type,
+          category,
+          date: new Date().toISOString()
+        };
+        const result = await createTransaction(newTx);
+        setTransactions([result, ...transactions]);
+      }
 
-    setDescription('');
-    setAmount('');
-    setType('income');
-    setCategory('Venta de Productos');
+      setDescription('');
+      setAmount('');
+      setType('income');
+      setCategory('Venta de Productos');
+    } catch (error) {
+      console.error('Error saving transaction:', error);
+      Swal.fire('Error', 'No se pudo guardar la transacción', 'error');
+    }
   };
 
   const startEdit = (t: Transaction) => {
@@ -142,16 +152,22 @@ export default function FinanzasPanel() {
       cancelButtonColor: '#64748b',
       confirmButtonText: 'Sí, eliminarlo',
       cancelButtonText: 'Cancelar'
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        setTransactions(transactions.filter(t => t.id !== id));
-        Swal.fire({
-          title: 'Eliminado',
-          text: 'El registro ha sido eliminado correctamente',
-          icon: 'success',
-          timer: 1500,
-          showConfirmButton: false
-        });
+        try {
+          await deleteTransaction(id);
+          setTransactions(transactions.filter(t => t.id !== id));
+          Swal.fire({
+            title: 'Eliminado',
+            text: 'El registro ha sido eliminado correctamente',
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false
+          });
+        } catch (error) {
+          console.error('Error deleting transaction:', error);
+          Swal.fire('Error', 'No se pudo eliminar la transacción', 'error');
+        }
       }
     });
   };

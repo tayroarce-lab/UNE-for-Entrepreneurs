@@ -5,55 +5,20 @@ import './IngresosEgresos.css';
 import MetricCard from './MetricCard';
 import FinancialChart from './FinancialChart';
 import TransactionTable from './TransactionTable';
+import { useAuth } from '../../context/AuthContext';
+import {
+  getTransactions,
+  createTransaction,
+  deleteTransaction
+} from '../../services/BusinessService';
 import type { Transaction } from '../../types/business';
 import { notifications } from '../../utils/notifications';
 
-const INITIAL_TRANSACTIONS: Transaction[] = [
-  {
-    id: 1,
-    date: '12 Oct, 2024',
-    description: 'Venta Servicio Consultoría',
-    subDescription: 'Proyecto Alpha CR',
-    category: 'Negocios',
-    status: 'Completado',
-    amount: 1250000,
-  },
-  {
-    id: 2,
-    date: '10 Oct, 2024',
-    description: 'Pago Alquiler Oficinas',
-    subDescription: 'San José, Escazú',
-    category: 'Renta',
-    status: 'Completado',
-    amount: -650000,
-  },
-  {
-    id: 3,
-    date: '08 Oct, 2024',
-    description: 'Suscripción SaaS UNE Tool',
-    subDescription: 'Mantenimiento mensual',
-    category: 'Software',
-    status: 'Pendiente',
-    amount: -12500,
-  },
-  {
-    id: 4,
-    date: '05 Oct, 2024',
-    description: 'Inversión Capital Semilla',
-    subDescription: 'Aporte Socio Estratégico',
-    category: 'Inversión',
-    status: 'Completado',
-    amount: 2000000,
-  },
-];
-
 const IngresosEgresos: React.FC = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [chartFilter, setChartFilter] = useState<'Ingresos' | 'Egresos' | 'Neto'>('Ingresos');
-  const [transactions, setTransactions] = useState<Transaction[]>(() => {
-    const saved = localStorage.getItem('une_transactions');
-    return saved ? JSON.parse(saved) : INITIAL_TRANSACTIONS;
-  });
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState<'Ingreso' | 'Egreso'>('Ingreso');
@@ -66,9 +31,20 @@ const IngresosEgresos: React.FC = () => {
     category: 'Negocios' as Transaction['category'],
   });
 
+  const fetchTransactions = async () => {
+    if (user) {
+      try {
+        const data = await getTransactions(user.id);
+        setTransactions(data);
+      } catch (error) {
+        console.error('Error al cargar transacciones:', error);
+      }
+    }
+  };
+
   useEffect(() => {
-    localStorage.setItem('une_transactions', JSON.stringify(transactions));
-  }, [transactions]);
+    fetchTransactions();
+  }, [user]);
 
   // Calculate Metrics
   const totalIncome = transactions.reduce((acc: number, t: Transaction) => t.amount > 0 ? acc + t.amount : acc, 0);
@@ -91,7 +67,7 @@ const IngresosEgresos: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.description || !formData.amount) {
@@ -99,19 +75,26 @@ const IngresosEgresos: React.FC = () => {
       return;
     }
 
-    const newTransaction: Transaction = {
-      id: Date.now(),
-      date: new Date().toLocaleDateString('es-CR', { day: '2-digit', month: 'short', year: 'numeric' }),
-      description: formData.description,
-      subDescription: formData.subDescription || 'Transacción manual',
-      category: formData.category,
-      status: 'Completado',
-      amount: modalType === 'Ingreso' ? Number(formData.amount) : -Number(formData.amount),
-    };
+    try {
+      const newTransaction: Omit<Transaction, 'id'> = {
+        userId: user?.id,
+        date: new Date().toISOString(),
+        description: formData.description,
+        subDescription: formData.subDescription || 'Transacción manual',
+        category: formData.category,
+        status: 'Completado',
+        amount: modalType === 'Ingreso' ? Number(formData.amount) : -Number(formData.amount),
+        type: modalType === 'Ingreso' ? 'income' : 'expense'
+      };
 
-    setTransactions([newTransaction, ...transactions]);
-    notifications.success(`${modalType} registrado con éxito`);
-    closeModal();
+      const result = await createTransaction(newTransaction);
+      setTransactions([result, ...transactions]);
+      notifications.success(`${modalType} registrado con éxito`);
+      closeModal();
+    } catch (error) {
+      console.error('Error saving transaction:', error);
+      notifications.error('No se pudo guardar la transacción');
+    }
   };
 
   const handleDelete = async (id: string | number) => {
@@ -124,8 +107,14 @@ const IngresosEgresos: React.FC = () => {
     );
 
     if (confirmed) {
-      setTransactions(transactions.filter((t: Transaction) => t.id !== id));
-      notifications.success('Transacción eliminada');
+      try {
+        await deleteTransaction(id);
+        setTransactions(transactions.filter((t: Transaction) => t.id !== id));
+        notifications.success('Transacción eliminada');
+      } catch (error) {
+        console.error('Error deleting transaction:', error);
+        notifications.error('No se pudo eliminar la transacción');
+      }
     }
   };
 
@@ -247,8 +236,9 @@ const IngresosEgresos: React.FC = () => {
                   'Cancelar'
                 );
                 if (confirmed) {
-                  setTransactions([]);
-                  notifications.success('Historial limpiado');
+                  // This is complex as it requires deleting all one by one or a backend endpoint. 
+                  // For now we'll just show info.
+                  notifications.info('Funcionalidad de limpieza masiva requiere backend especializado.');
                 }
               }}
             >
@@ -273,7 +263,7 @@ const IngresosEgresos: React.FC = () => {
       <div style={{ marginTop: '2rem', background: '#e0f2fe', padding: '1rem', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '1rem', color: '#0369a1' }}>
         <Info size={20} />
         <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>
-          Tus datos se guardan localmente en este navegador para garantizar tu privacidad.
+          Tus datos se sincronizan de forma segura con los servidores de UNE Entrepreneurs.
         </span>
       </div>
 

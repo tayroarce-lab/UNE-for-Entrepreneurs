@@ -14,7 +14,7 @@ import { FINANCING_TYPES, FINANCING_STATUS } from '../../types/financing';
 import { getFinancingProgramById, addFavorite, addToBudget } from '../../services/FinancingService';
 import { formatDate, formatCurrency, sanitizeHtml } from '../../utils/financingUtils';
 import { useAuth } from '../../context/AuthContext';
-import Navbar from '../Shared/Navbar';
+import FinancingNavbar from './FinancingNavbar';
 import Footer from '../Shared/Footer';
 import EligibilityModal from './EligibilityModal';
 import ContactModal from './ContactModal';
@@ -95,7 +95,7 @@ export default function FinancingDetail() {
   if (loading) {
     return (
       <>
-        <Navbar />
+        <FinancingNavbar />
         <div className="financingLoading" style={{ minHeight: '60vh' }}>
           <div className="financingSpinner" />
           <span className="financingLoadingText">Cargando detalle del programa...</span>
@@ -107,7 +107,7 @@ export default function FinancingDetail() {
   if (error || !program) {
     return (
       <>
-        <Navbar />
+        <FinancingNavbar />
         <div className="financingDetailPage">
           <div className="financingAlert financingAlertError" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <XCircle size={18} /> {error || 'Programa no encontrado'}
@@ -129,7 +129,7 @@ export default function FinancingDetail() {
 
   return (
     <>
-      <Navbar />
+      <FinancingNavbar />
 
       <div className="financingDetailPage">
 

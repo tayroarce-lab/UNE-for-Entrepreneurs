@@ -10,6 +10,12 @@ import {
   Search,
   Check
 } from 'lucide-react';
+import {
+  getInventoryItems,
+  createInventoryItem,
+  updateInventoryItem,
+  deleteInventoryItem
+} from '../../services/BusinessService';
 import { useAuth } from '../../context/AuthContext';
 import type { InventoryItem } from '../../types/business';
 import Swal from 'sweetalert2';
@@ -25,26 +31,23 @@ export default function InventoryPanel() {
   const [category, setCategory] = useState('General');
   const [searchTerm, setSearchTerm] = useState('');
   const [editingId, setEditingId] = useState<string | number | null>(null);
-  const [initialLoadDone, setInitialLoadDone] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
-  // Load from LocalStorage
-  useEffect(() => {
+  // Load from API
+  const fetchInventory = async () => {
     if (user) {
-      const stored = localStorage.getItem(`une_inventory_${user.id}`);
-      if (stored) {
-        setItems(JSON.parse(stored));
+      try {
+        const data = await getInventoryItems(user.id);
+        setItems(data);
+      } catch (error) {
+        console.error('Error al cargar inventario:', error);
       }
-      setInitialLoadDone(true);
     }
-  }, [user]);
+  };
 
-  // Save to LocalStorage
   useEffect(() => {
-    if (user && initialLoadDone) {
-      localStorage.setItem(`une_inventory_${user.id}`, JSON.stringify(items));
-    }
-  }, [user, items, initialLoadDone]);
+    fetchInventory();
+  }, [user]);
 
   const stats = useMemo(() => {
     const totalItems = items.reduce((acc, i) => acc + Number(i.quantity), 0);
@@ -55,48 +58,55 @@ export default function InventoryPanel() {
     return { totalItems, lowStock, inventoryValue, potentialProfit };
   }, [items]);
 
-  const handleAddItem = () => {
+  const handleAddItem = async () => {
     if (!name || !qty || Number(qty) < 0) return;
 
-    if (editingId) {
-      setItems(items.map(i => i.id === editingId ? {
-        ...i,
-        name,
-        quantity: Number(qty),
-        minQuantity: Number(minQty) || 5,
-        costPrice: Number(cost) || 0,
-        salePrice: Number(sale) || 0,
-        category,
-      } : i));
-      setEditingId(null);
-      Swal.fire({
-        title: 'Actualizado',
-        text: 'Producto actualizado correctamente',
-        icon: 'success',
-        timer: 1500,
-        showConfirmButton: false
-      });
-    } else {
-      const newItem: InventoryItem = {
-        id: crypto.randomUUID(),
-        userId: user?.id || 'guest',
-        name,
-        quantity: Number(qty),
-        minQuantity: Number(minQty) || 5,
-        costPrice: Number(cost) || 0,
-        salePrice: Number(sale) || 0,
-        category,
-        lastRestock: new Date().toISOString()
-      };
-      setItems([...items, newItem]);
-    }
+    try {
+      if (editingId) {
+        const updated = {
+          name,
+          quantity: Number(qty),
+          minQuantity: Number(minQty) || 5,
+          costPrice: Number(cost) || 0,
+          salePrice: Number(sale) || 0,
+          category,
+        };
+        await updateInventoryItem(editingId, updated);
+        setItems(items.map(i => i.id === editingId ? { ...i, ...updated } : i));
+        
+        setEditingId(null);
+        Swal.fire({
+          title: 'Actualizado',
+          text: 'Producto actualizado correctamente',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
+      } else {
+        const newItem: Omit<InventoryItem, 'id'> = {
+          userId: user?.id || 'guest',
+          name,
+          quantity: Number(qty),
+          minQuantity: Number(minQty) || 5,
+          costPrice: Number(cost) || 0,
+          salePrice: Number(sale) || 0,
+          category,
+          lastRestock: new Date().toISOString()
+        };
+        const result = await createInventoryItem(newItem);
+        setItems([...items, result]);
+      }
 
-    setName('');
-    setQty('');
-    setMinQty('');
-    setCost('');
-    setSale('');
-    setCategory('General');
+      setName('');
+      setQty('');
+      setMinQty('');
+      setCost('');
+      setSale('');
+      setCategory('General');
+    } catch (error) {
+      console.error('Error saving item:', error);
+      Swal.fire('Error', 'No se pudo guardar el producto', 'error');
+    }
   };
 
   const handleEdit = (item: InventoryItem) => {
@@ -128,16 +138,22 @@ export default function InventoryPanel() {
       cancelButtonColor: '#64748b',
       confirmButtonText: 'Sí, eliminarlo',
       cancelButtonText: 'Cancelar'
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        setItems(items.filter(i => i.id !== id));
-        Swal.fire({
-          title: 'Eliminado',
-          text: 'El producto ha sido borrado correctamente',
-          icon: 'success',
-          timer: 1500,
-          showConfirmButton: false
-        });
+        try {
+          await deleteInventoryItem(id);
+          setItems(items.filter(i => i.id !== id));
+          Swal.fire({
+            title: 'Eliminado',
+            text: 'El producto ha sido borrado correctamente',
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false
+          });
+        } catch (error) {
+          console.error('Error deleting item:', error);
+          Swal.fire('Error', 'No se pudo eliminar el producto', 'error');
+        }
       }
     });
   };

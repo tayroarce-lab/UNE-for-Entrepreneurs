@@ -8,7 +8,7 @@ import { FINANCING_TYPES, REGIONS } from '../../types/financing';
 import { getFinancingPrograms } from '../../services/FinancingService';
 import { checkEligibility } from '../../utils/financingUtils';
 import FinancingCard from './FinancingCard';
-import Navbar from '../Shared/Navbar';
+import FinancingNavbar from './FinancingNavbar';
 import Footer from '../Shared/Footer';
 import EligibilityModal from './EligibilityModal';
 import successImage from '../../assets/success_story_maria.png';
@@ -132,7 +132,7 @@ export default function UserFinancingCatalog() {
 
   return (
     <>
-      <Navbar />
+      <FinancingNavbar />
 
       {/* Hero Section */}
       <section className="financingHero" id="financingHero">
