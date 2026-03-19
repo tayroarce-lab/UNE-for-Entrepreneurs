@@ -450,7 +450,7 @@ export default function FinanzasPanel() {
         }
         .tx-icon.income { background: #dcfce7; color: #166534; }
         .tx-icon.expense { background: #fee2e2; color: #991b1b; }
-        .tx-icon.investment { background: #eff6ff; color: #1e40af; }
+        .tx-icon.investment { background: #fdf6f3; color: var(--uneGold); }
         
         .tx-info { flex: 1; display: flex; flex-direction: column; }
         .tx-info .desc { font-weight: 600; font-size: 0.9rem; color: #334155; }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../../styles/AdminDashboard.css'
 import Swal from 'sweetalert2'
 import { toast } from 'sonner'
-import { Newspaper, PenLine, Send, Edit, Trash2, X, Image as ImageIcon, Loader } from 'lucide-react'
+import { Newspaper, PenLine, Send, Edit, Trash2, X, Image as ImageIcon, Loader, Eye, EyeOff } from 'lucide-react'
 import { getNews, createNews, updateNews, deleteNews } from '../../services/NewsService'
 import AdminLayout from './AdminLayout'
 
@@ -159,6 +159,16 @@ function GestionTipsNoticias() {
     });
   };
 
+  const handleToggleActiva = async (noticia: Noticia) => {
+    try {
+      await updateNews(noticia.id, { activa: !noticia.activa });
+      toast.success(noticia.activa ? 'Publicación ocultada' : 'Publicación visible');
+      await cargarNoticias();
+    } catch (error) {
+      toast.error('Error al cambiar estado');
+    }
+  };
+
   return (
     <AdminLayout>
         <header className="admin-top-header">
@@ -168,7 +178,7 @@ function GestionTipsNoticias() {
         <main style={{ padding: 0 }}>
             <div className="grid-card" style={{ marginBottom: '30px' }}>
                 <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    {editandoId ? <Edit size={24} color="#f59e0b" /> : <PenLine size={24} color="#3b82f6" />} 
+                    {editandoId ? <Edit size={24} color="#f59e0b" /> : <PenLine size={24} color="#8B1A1A" />} 
                     {editandoId ? 'Editar Publicación' : 'Crear Nueva Publicación'}
                 </h3>
                 
@@ -255,6 +265,7 @@ function GestionTipsNoticias() {
                                 <th>TÍTULO</th>
                                 <th>AUTOR</th>
                                 <th>FECHA</th>
+                                <th style={{ textAlign: 'center' }}>ESTADO</th>
                                 <th style={{ textAlign: 'center' }}>ACCIONES</th>
                             </tr>
                         </thead>
@@ -274,7 +285,26 @@ function GestionTipsNoticias() {
                                     <td style={{ color: '#64748b', fontSize: '0.85rem' }}>{noticia.autor}</td>
                                     <td style={{ color: '#64748b', fontSize: '0.85rem' }}>{noticia.fecha ? new Date(noticia.fecha).toLocaleDateString() : 'N/A'}</td>
                                     <td style={{ textAlign: 'center' }}>
+                                        <span style={{ 
+                                            padding: '4px 10px', 
+                                            borderRadius: '50px', 
+                                            fontSize: '0.7rem', 
+                                            fontWeight: 700,
+                                            background: noticia.activa ? '#dcfce7' : '#f1f5f9',
+                                            color: noticia.activa ? '#166534' : '#64748b'
+                                        }}>
+                                            {noticia.activa ? 'VISIBLE' : 'OCULTO'}
+                                        </span>
+                                    </td>
+                                    <td style={{ textAlign: 'center' }}>
                                         <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+                                            <button 
+                                                onClick={() => handleToggleActiva(noticia)} 
+                                                title={noticia.activa ? 'Ocultar' : 'Mostrar'}
+                                                style={{ background: noticia.activa ? '#eff6ff' : '#fff7ed', color: noticia.activa ? '#2563eb' : '#ea580c', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}
+                                            >
+                                                {noticia.activa ? <Eye size={16} /> : <EyeOff size={16} />}
+                                            </button>
                                             <button onClick={() => handleEditar(noticia)} style={{ background: '#fef3c7', color: '#d97706', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}><Edit size={16} /></button>
                                             <button onClick={() => handleEliminar(noticia.id)} style={{ background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}><Trash2 size={16} /></button>
                                         </div>

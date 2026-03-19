@@ -143,7 +143,7 @@ function AdminDashboard() {
                      <h4>Gestionar Usuarios</h4>
                   </Link>
                   <Link to="/admin/financiaciones" className="action-card">
-                     <div className="action-icon" style={{ backgroundColor: '#60a5fa' }}><Banknote size={20} /></div>
+                     <div className="action-icon" style={{ backgroundColor: '#D4A853' }}><Banknote size={20} /></div>
                      <h4>Manejar Financiaciones</h4>
                   </Link>
                   <Link to="/admin/noticias" className="action-card">
@@ -186,7 +186,7 @@ function AdminDashboard() {
                               </span>
                            </td>
                            <td style={{ textAlign: 'center' }}>
-                              <Link to={`/admin/financiaciones`} style={{ color: '#3b82f6' }}>Detalles</Link>
+                              <Link to={`/admin/financiaciones`} style={{ color: '#8B1A1A' }}>Detalles</Link>
                            </td>
                         </tr>
                      )) : (

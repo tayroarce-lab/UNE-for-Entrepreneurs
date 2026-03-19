@@ -706,8 +706,8 @@ a:hover {
 }
 
 .financingStatusUpcoming {
-  background: var(--infoBg);
-  color: var(--infoBlue);
+  background: var(--uneCream);
+  color: var(--uneGold);
 }
 
 /* Tags */

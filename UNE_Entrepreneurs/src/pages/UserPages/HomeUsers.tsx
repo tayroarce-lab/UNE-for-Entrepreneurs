@@ -10,6 +10,8 @@ import heroImage from '../../assets/hero_une.jpg'
 import avatarCarlos from '../../assets/carlos_mendez.png'
 import avatarLucia from '../../assets/lucia_mora.png'
 import avatarEsteban from '../../assets/esteban_ruiz.png'
+import NewsCarousel from '../../components/UserComponents/NewsCarousel'
+
 export default function EstructuraHome() {
   const navigate = useNavigate();
 
@@ -18,6 +20,11 @@ export default function EstructuraHome() {
       <Navbar />
 
       <main className="home-main-content">
+        {/* ── NOTICIAS DESTACADAS (FULL WIDTH) ── */}
+        <section className="featured-news" style={{ padding: 0 }}>
+          <NewsCarousel />
+        </section>
+
         {/* ── HERO SECTION ── */}
         <section id="inicio" className="hero-section">
           <div className="container">
@@ -118,7 +125,7 @@ export default function EstructuraHome() {
                 <h2 style={{ fontSize: '2.5rem', fontWeight: 800 }}>Financiamiento a tu Medida</h2>
                 <p style={{ color: '#64748b' }}>Soluciones capitales para cada etapa de su empresa.</p>
                </div>
-               <button onClick={() => navigate('/financiamiento')} style={{ border: 'none', background: 'none', color: '#3b82f6', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+               <button onClick={() => navigate('/financiamiento')} style={{ border: 'none', background: 'none', color: '#8B1A1A', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 Ver todos los créditos <ArrowRight size={18} />
                </button>
             </div>
@@ -142,7 +149,7 @@ export default function EstructuraHome() {
                   <span>✓ Sin Garantía Real</span>
                   <span>✓ Desembolso 48h</span>
                 </div>
-                <button className="btn-plus" style={{ position: 'absolute', bottom: '2rem', right: '2.5rem', width: '40px', height: '40px', borderRadius: '12px', background: '#fff', color: '#3b82f6', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title="Ir a catálogo"><ArrowRight size={20} /></button>
+                <button className="btn-plus" style={{ position: 'absolute', bottom: '2rem', right: '2.5rem', width: '40px', height: '40px', borderRadius: '12px', background: '#fff', color: '#8B1A1A', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title="Ir a catálogo"><ArrowRight size={20} /></button>
               </div>
             </div>
 
@@ -171,18 +178,18 @@ export default function EstructuraHome() {
           <div className="container">
             <div className="business-inner">
                <div className="business-text">
-                  <span style={{ color: '#3b82f6', fontWeight: 800, fontSize: '0.8rem', letterSpacing: '2px' }}>EXCLUSIVO PARA MIEMBROS</span>
+                  <span style={{ color: '#D4A853', fontWeight: 800, fontSize: '0.8rem', letterSpacing: '2px' }}>EXCLUSIVO PARA MIEMBROS</span>
                   <h2 style={{ fontSize: '3rem', fontWeight: 800, color: '#fff', margin: '1rem 0' }}>Tu Negocio <span>Bajo Control</span></h2>
                   <p style={{ color: '#94a3b8', fontSize: '1.1rem', marginBottom: '2.5rem' }}>
                     Presentamos el Sistema UNE de Finanzas e Inventario. Controle sus cuentas, 
                     ventas y stock de forma automática, sin complicaciones.
                   </p>
                   <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', color: '#fff', marginBottom: '3rem' }}>
-                    <li style={{ display: 'flex', alignItems: 'center', gap: '12px' }}><div style={{ background: '#3b82f6', borderRadius: '50%', padding: '4px', display: 'flex' }}><Check size={14} /></div> Gestión inteligente de flujo de caja</li>
-                    <li style={{ display: 'flex', alignItems: 'center', gap: '12px' }}><div style={{ background: '#3b82f6', borderRadius: '50%', padding: '4px', display: 'flex' }}><Check size={14} /></div> Control de inventario con alertas automáticas.</li>
-                    <li style={{ display: 'flex', alignItems: 'center', gap: '12px' }}><div style={{ background: '#3b82f6', borderRadius: '50%', padding: '4px', display: 'flex' }}><Check size={14} /></div> Integrado directamente con su perfil de créditos.</li>
+                    <li style={{ display: 'flex', alignItems: 'center', gap: '12px' }}><div style={{ background: '#8B1A1A', borderRadius: '50%', padding: '4px', display: 'flex' }}><Check size={14} /></div> Gestión inteligente de flujo de caja</li>
+                    <li style={{ display: 'flex', alignItems: 'center', gap: '12px' }}><div style={{ background: '#8B1A1A', borderRadius: '50%', padding: '4px', display: 'flex' }}><Check size={14} /></div> Control de inventario con alertas automáticas.</li>
+                    <li style={{ display: 'flex', alignItems: 'center', gap: '12px' }}><div style={{ background: '#8B1A1A', borderRadius: '50%', padding: '4px', display: 'flex' }}><Check size={14} /></div> Integrado directamente con su perfil de créditos.</li>
                   </ul>
-                  <button className="btn-cta" style={{ background: '#3b82f6' }} onClick={() => navigate('/presupuesto')}>
+                  <button className="btn-cta" style={{ background: '#8B1A1A' }} onClick={() => navigate('/presupuesto')}>
                     Activar Gestión Gratis
                   </button>
                </div>
@@ -195,7 +202,7 @@ export default function EstructuraHome() {
                   <div style={{ background: '#2d2d2d', borderRadius: '12px', padding: '1.5rem' }}>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
                       <div style={{ background: '#3b3b3b', padding: '1rem', borderRadius: '10px' }}>
-                        <div style={{ fontSize: '0.7rem', color: '#3b82f6', fontWeight: 700 }}>VENTAS TOTALES</div>
+                        <div style={{ fontSize: '0.7rem', color: '#D4A853', fontWeight: 700 }}>VENTAS TOTALES</div>
                         <div style={{ fontSize: '1.2rem', fontWeight: 800 }}>₡15.4M</div>
                       </div>
                       <div style={{ background: '#3b3b3b', padding: '1rem', borderRadius: '10px' }}>
@@ -204,11 +211,11 @@ export default function EstructuraHome() {
                       </div>
                     </div>
                     <div style={{ height: '120px', display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
-                       <div style={{ height: '40%', width: '100%', background: '#3b82f6', borderRadius: '4px' }}></div>
-                       <div style={{ height: '60%', width: '100%', background: '#3b82f6', borderRadius: '4px' }}></div>
-                       <div style={{ height: '80%', width: '100%', background: '#3b82f6', borderRadius: '4px' }}></div>
-                       <div style={{ height: '50%', width: '100%', background: '#3b82f6', borderRadius: '4px' }}></div>
-                       <div style={{ height: '90%', width: '100%', background: '#3b82f6', borderRadius: '4px' }}></div>
+                       <div style={{ height: '40%', width: '100%', background: '#D4A853', borderRadius: '4px' }}></div>
+                       <div style={{ height: '60%', width: '100%', background: '#D4A853', borderRadius: '4px' }}></div>
+                       <div style={{ height: '80%', width: '100%', background: '#D4A853', borderRadius: '4px' }}></div>
+                       <div style={{ height: '50%', width: '100%', background: '#D4A853', borderRadius: '4px' }}></div>
+                       <div style={{ height: '90%', width: '100%', background: '#D4A853', borderRadius: '4px' }}></div>
                     </div>
                   </div>
                </div>
@@ -267,7 +274,7 @@ export default function EstructuraHome() {
               <p style={{ fontSize: '1.2rem', opacity: 0.9, marginBottom: '3rem' }}>
                 Únete a los miles de emprendedores que ya están transformando sus negocios con UNE Costa Rica.
               </p>
-              <button className="btn-primary" style={{ background: '#3b82f6', padding: '1.25rem 3rem', fontSize: '1.1rem', borderRadius: '50px', border: 'none' }} onClick={() => navigate('/registro')}>
+              <button className="btn-primary" style={{ background: '#8B1A1A', padding: '1.25rem 3rem', fontSize: '1.1rem', borderRadius: '50px', border: 'none' }} onClick={() => navigate('/registro')}>
                 Comenzar Mi Aplicación
               </button>
            </div>

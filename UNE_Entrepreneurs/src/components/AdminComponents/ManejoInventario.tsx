@@ -84,7 +84,7 @@ function ManejoInventario() {
                                     <span style={{ color: '#64748b' }}>Min. Requerido:</span>
                                     <span style={{ fontWeight: 800 }}>{item.minQuantity || 5}</span>
                                 </div>
-                                <div style={{ marginTop: '15px', color: '#3b82f6', fontWeight: 700, fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer' }}>
+                                <div style={{ marginTop: '15px', color: '#8B1A1A', fontWeight: 700, fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer' }}>
                                     <Activity size={12} /> Ver historial de movimientos
                                 </div>
                             </div>

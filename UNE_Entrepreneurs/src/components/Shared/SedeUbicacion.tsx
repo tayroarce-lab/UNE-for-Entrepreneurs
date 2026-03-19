@@ -40,14 +40,14 @@ export default function SedeUbicacion() {
                     gap: '12px',
                     width: '100%',
                     padding: '1.2rem',
-                    backgroundColor: '#2563eb',
+                    backgroundColor: '#8B1A1A',
                     color: '#fff',
                     border: 'none',
                     borderRadius: '12px',
                     fontSize: '1.1rem',
                     fontWeight: 700,
                     cursor: 'pointer',
-                    boxShadow: '0 10px 15px -3px rgba(37, 99, 235, 0.4)',
+                    boxShadow: '0 10px 15px -3px rgba(139, 26, 26, 0.4)',
                     transition: 'all 0.2s ease'
                 }}
             >

@@ -29,9 +29,9 @@
 }
 
 .notif-tabs button.active {
-  background-color: #59233A;
+  background-color: var(--uneRed);
   color: #fff;
-  border-color: #59233A;
+  border-color: var(--uneRed);
 }
 
 /* ── Badge contador ── */
@@ -76,7 +76,7 @@
 }
 
 .notif-actions-bar select:focus {
-  border-color: #59233A;
+  border-color: var(--uneRed);
 }
 
 .notif-actions-bar button {
@@ -119,13 +119,13 @@
 }
 
 .notif-item.unread {
-  background-color: #fef9fb;
-  border-color: rgba(89, 35, 58, 0.12);
-  box-shadow: 0 2px 8px rgba(89, 35, 58, 0.06);
+  background-color: #fffafb;
+  border-color: rgba(139, 26, 26, 0.12);
+  box-shadow: 0 2px 8px rgba(139, 26, 26, 0.06);
 }
 
 .notif-item.unread::before {
-  background-color: #59233A;
+  background-color: var(--uneRed);
 }
 
 .notif-item:hover {
@@ -146,8 +146,8 @@
 }
 
 .notif-icon.info {
-  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-  color: #2563eb;
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  color: var(--uneGold);
 }
 
 .notif-icon.warning {
@@ -365,7 +365,7 @@
 }
 
 .toggle-switch input:checked + .toggle-slider {
-  background-color: #59233A;
+  background-color: var(--uneRed);
 }
 
 .toggle-switch input:checked + .toggle-slider::before {

@@ -54,11 +54,11 @@
 .address-badge {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    background: linear-gradient(135deg, var(--uneRed) 0%, var(--uneRedDark) 100%);
     color: white;
     font-weight: 600;
     border-radius: 9999px;
-    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 4px 6px -1px rgba(139, 26, 26, 0.2);
 }
 
 .map-wrapper-card {

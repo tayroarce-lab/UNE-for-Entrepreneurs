@@ -160,7 +160,7 @@ function ManejarClientes() {
                                     <td>
                                         <button 
                                             onClick={() => abrirModal(cliente)} 
-                                            style={{ background: 'none', border: 'none', color: '#3b82f6', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
+                                            style={{ background: 'none', border: 'none', color: '#8B1A1A', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
                                         >
                                             <Eye size={16} /> Ver Detalles / Editar
                                         </button>
@@ -179,13 +179,13 @@ function ManejarClientes() {
             <div className="modal-overlay-admin" style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.75)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 }}>
               <div className="grid-card" style={{ width: '90%', maxWidth: '600px', padding: '40px' }}>
                 <div className="grid-card-label">
-                    <h2><UserCircle size={24} style={{ color: '#3b82f6', verticalAlign: 'middle', marginRight: '10px' }} /> Perfil de {clienteSeleccionado.nombre}</h2>
+                    <h2><UserCircle size={24} style={{ color: '#D4A853', verticalAlign: 'middle', marginRight: '10px' }} /> Perfil de {clienteSeleccionado.nombre}</h2>
                     <button onClick={() => setModalAbierto(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24} /></button>
                 </div>
                 
                 <div style={{ display: 'grid', gap: '1.5rem', marginTop: '1.5rem' }}>
                     <div style={{ padding: '20px', background: '#f8fafc', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                        <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1rem' }}><Mail size={16} color="#3b82f6" /> <strong>Email:</strong> {clienteSeleccionado.email}</p>
+                        <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1rem' }}><Mail size={16} color="#8B1A1A" /> <strong>Email:</strong> {clienteSeleccionado.email}</p>
                         <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1rem' }}><Activity size={16} color="#10b981" /> <strong>ID de Usuario:</strong> {clienteSeleccionado.id}</p>
                     </div>
                     
@@ -205,7 +205,7 @@ function ManejarClientes() {
                       <button 
                           onClick={handleUpdateRole} 
                           disabled={isSaving}
-                          style={{ marginTop: '15px', padding: '10px 20px', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '10px', fontWeight: 700, cursor: isSaving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '8px', opacity: isSaving ? 0.7 : 1 }}
+                          style={{ marginTop: '15px', padding: '10px 20px', background: '#D4A853', color: '#fff', border: 'none', borderRadius: '10px', fontWeight: 700, cursor: isSaving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '8px', opacity: isSaving ? 0.7 : 1 }}
                       >
                           <Save size={16} /> Guardar Cambios
                       </button>

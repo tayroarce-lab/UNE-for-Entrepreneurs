@@ -68,7 +68,7 @@ function Configuraciones() {
                     {/* APARIENCIA */}
                     <div className="grid-card">
                         <div className="grid-card-label">
-                            <h3><Palette size={20} color="#3b82f6" style={{ verticalAlign: 'middle', marginRight: '10px' }} /> Apariencia</h3>
+                            <h3><Palette size={20} color="#D4A853" style={{ verticalAlign: 'middle', marginRight: '10px' }} /> Apariencia</h3>
                         </div>
                         <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '20px' }}>Personaliza el aspecto visual del panel administrativo.</p>
                         

@@ -109,7 +109,7 @@ export default function ProfilePage() {
                   width: '100%', 
                   height: '100%', 
                   borderRadius: '50%', 
-                  background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+                  background: 'linear-gradient(135deg, var(--uneRed), var(--uneRedDark))',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -117,7 +117,7 @@ export default function ProfilePage() {
                   fontWeight: 800,
                   color: '#fff',
                   overflow: 'hidden',
-                  boxShadow: '0 8px 16px rgba(37,99,235,0.2)'
+                  boxShadow: '0 8px 16px rgba(139, 26, 26, 0.2)'
                 }}>
                   {formData.avatar ? (
                     <img src={formData.avatar} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -138,7 +138,7 @@ export default function ProfilePage() {
                   justifyContent: 'center',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
                   cursor: 'pointer',
-                  color: '#3b82f6'
+                  color: 'var(--uneGold)'
                 }}>
                   <Camera size={18} />
                   <input type="text" placeholder="URL de avatar" name="avatar" value={formData.avatar} onChange={handleChange} style={{ display: 'none' }} />

@@ -4,7 +4,7 @@
   --admin-sidebar-bg: #40102b;
   --admin-sidebar-hover: rgba(255, 255, 255, 0.08);
   --admin-sidebar-active: rgba(255, 255, 255, 0.15);
-  --admin-accent: #3b82f6;
+  --admin-accent: var(--uneRed);
   --admin-bg: #f8fafc;
   --admin-card-bg: #ffffff;
   --admin-text-primary: #1e293b;
@@ -173,7 +173,7 @@
 .search-bar-v2 input:focus {
   outline: none;
   border-color: var(--admin-accent);
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 4px rgba(139, 26, 26, 0.1);
 }
 
 .search-icon-header {
@@ -267,7 +267,7 @@
 .kpi-icon-wrap {
   width: 50px;
   height: 50px;
-  background-color: rgba(59, 130, 246, 0.1);
+  background-color: rgba(139, 26, 26, 0.1);
   color: var(--admin-accent);
   border-radius: 12px;
   display: flex;

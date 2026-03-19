@@ -428,7 +428,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ---------- Stats Bar ---------- */
 .stats-bar {
-  background: #3b82f6;
+  background: var(--uneRed);
   padding: 3rem 0;
   color: #fff;
 }
@@ -508,7 +508,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .showcase-card.gray { background: #eee; }
-.showcase-card.blue { background: #3b82f6; color: #fff; }
+.showcase-card.blue { background: var(--uneGold); color: #fff; }
 
 /* ---------- Business Control ---------- */
 .business-control {
@@ -526,7 +526,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
 }
 
-.business-control h2 span { color: #3b82f6; }
+.business-control h2 span { color: var(--uneGold); }
 
 .dashboard-preview {
     background: #1f1f1f;

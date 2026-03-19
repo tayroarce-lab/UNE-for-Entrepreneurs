@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation, Link, NavLink } from 'react-router-dom'
-import { LogIn, UserPlus, LogOut, LayoutDashboard, Package, Home, Banknote, Navigation, PhoneCall } from 'lucide-react'
+import { LogIn, UserPlus, LogOut, LayoutDashboard, Package, Home, Banknote, PhoneCall, Newspaper } from 'lucide-react'
 import { notifications } from '../../utils/notifications'
 import { useAuth } from '../../context/AuthContext'
 import uneLogo from '../../assets/logo_une.png'
@@ -90,9 +90,9 @@ export default function Navbar() {
              </NavLink>
           </li>
           <li>
-             <a href="/#noticias" onClick={(e) => scrollToSection(e, 'noticias')} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Navigation size={16} /> Noticias
-             </a>
+             <NavLink to="/noticias" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Newspaper size={16} /> Noticias
+             </NavLink>
           </li>
           <li>
              <a href="/#contacto" onClick={(e) => scrollToSection(e, 'contacto')} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

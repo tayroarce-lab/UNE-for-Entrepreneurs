@@ -20,6 +20,7 @@ import AdminFinancingPageWrapper from '../pages/UserPages/AdminFinancingPage';
 import ProtectedRoute from './ProtectedRoute';
 import BudgetPage from '../pages/UserPages/BudgetPage';
 import ProfilePage from '../pages/UserPages/ProfilePage';
+import NewsPage from '../pages/UserPages/NewsPage';
 import NotFoundPage from '../pages/UserPages/NotFoundPage';
 
 const RootLayout = () => {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <HomeUsers />,
+      },
+      {
+        path: '/noticias',
+        element: <NewsPage />,
       },
       {
         path: '/presupuesto',

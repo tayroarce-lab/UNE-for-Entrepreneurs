@@ -23,7 +23,7 @@ function Maps() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
                     <div>
                         <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '10px' }}>Central UNE Costa Rica</h3>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#1e40af', background: '#e0e7ff', padding: '10px 20px', borderRadius: '12px', fontWeight: 700, fontSize: '0.9rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#8B1A1A', background: '#fff5f5', padding: '10px 20px', borderRadius: '12px', fontWeight: 700, fontSize: '0.9rem' }}>
                             <Home size={18} /> Diagonal la iglesia, San José, Santa Ana
                         </div>
                     </div>
