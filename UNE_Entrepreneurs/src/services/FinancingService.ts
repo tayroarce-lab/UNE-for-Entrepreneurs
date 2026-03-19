@@ -111,6 +111,18 @@ export async function createApplication(
   return handleResponse<Application>(response);
 }
 
+export async function updateApplication(
+  id: string | number,
+  application: Partial<Application>
+): Promise<Application> {
+  const response = await fetch(`${API_BASE}/applications/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(application),
+  });
+  return handleResponse<Application>(response);
+}
+
 // --------------- Reports ---------------
 
 export async function createReport(report: Omit<Report, 'id'>): Promise<Report> {

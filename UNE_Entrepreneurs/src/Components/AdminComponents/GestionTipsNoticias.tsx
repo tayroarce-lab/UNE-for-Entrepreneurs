@@ -1,29 +1,45 @@
-import React, { useState } from 'react'
-import '../../styles/GestionTipsNoticias.css'
+import React, { useState, useEffect } from 'react'
+import '../../styles/AdminDashboard.css'
 import Swal from 'sweetalert2'
 import { toast } from 'sonner'
-import { Newspaper, ArrowLeft, PenLine, Send, Edit, Trash2, List, X, Image as ImageIcon } from 'lucide-react'
+import { Newspaper, PenLine, Send, Edit, Trash2, X, Image as ImageIcon, Loader } from 'lucide-react'
+import { getNews, createNews, updateNews, deleteNews } from '../../services/NewsService'
+import AdminLayout from './AdminLayout'
 
-
-interface Noticia {
+export interface Noticia {
     id: string;
     titulo: string;
     contenido?: string;
     imagen?: string;
     autor: string;
     activa: boolean;
+    fecha?: string;
 }
 
 function GestionTipsNoticias() {
-  const [noticias, setNoticias] = useState<Noticia[]>([
-      { id: '1', titulo: 'Cómo aumentar ventas este mes', contenido: '', imagen: '', autor: 'Admin Principal', activa: true },
-      { id: '2', titulo: 'Nuevo beneficio para emprendedores de UNE', contenido: '', imagen: '', autor: 'Admin Secundario', activa: false }
-  ]);
-
+  const [noticias, setNoticias] = useState<Noticia[]>([]);
+  const [loading, setLoading] = useState(true);
+  
   const [tituloInput, setTituloInput] = useState('');
   const [contenidoInput, setContenidoInput] = useState('');
   const [imagenInput, setImagenInput] = useState('');
   const [editandoId, setEditandoId] = useState<string | null>(null);
+
+  useEffect(() => {
+    cargarNoticias();
+  }, []);
+
+  const cargarNoticias = async () => {
+    setLoading(true);
+    try {
+      const data = await getNews();
+      setNoticias(data || []);
+    } catch (error) {
+      console.error('Error al cargar noticias:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
@@ -44,7 +60,7 @@ function GestionTipsNoticias() {
       if (fileInput) fileInput.value = '';
   };
 
-  const handlePublicar = () => {
+  const handlePublicar = async () => {
     if (!tituloInput.trim()) {
         toast.error('El título es requerido para la publicación');
         return;
@@ -56,16 +72,21 @@ function GestionTipsNoticias() {
         text: "Se actualizará esta publicación",
         icon: 'question',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#8B1A1A',
+        cancelButtonColor: '#64748b',
         confirmButtonText: 'Sí, guardar',
         cancelButtonText: 'Cancelar'
-      }).then((result) => {
+      }).then(async (result) => {
         if (result.isConfirmed) {
-          setNoticias(prev => prev.map(n => n.id === editandoId ? { ...n, titulo: tituloInput, contenido: contenidoInput, imagen: imagenInput } : n));
-          setEditandoId(null);
-          clearInputs();
-          toast.success('Publicación actualizada con éxito');
+          try {
+            await updateNews(editandoId, { titulo: tituloInput, contenido: contenidoInput, imagen: imagenInput });
+            setEditandoId(null);
+            clearInputs();
+            toast.success('Publicación actualizada con éxito');
+            await cargarNoticias();
+          } catch (error) {
+            toast.error('Error al guardar cambios');
+          }
         }
       });
     } else {
@@ -74,23 +95,28 @@ function GestionTipsNoticias() {
         text: "Se publicará este nuevo tip/noticia",
         icon: 'question',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#8B1A1A',
+        cancelButtonColor: '#64748b',
         confirmButtonText: 'Sí, publicar',
         cancelButtonText: 'Cancelar'
-      }).then((result) => {
+      }).then(async (result) => {
         if (result.isConfirmed) {
-          const nuevaNoticia: Noticia = {
-              id: Date.now().toString(),
+          const nuevaNoticia: Omit<Noticia, 'id'> = {
               titulo: tituloInput,
               contenido: contenidoInput,
               imagen: imagenInput,
-              autor: 'Admin Principal',
-              activa: true
+              autor: 'Admin UNE',
+              activa: true,
+              fecha: new Date().toISOString()
           };
-          setNoticias(prev => [...prev, nuevaNoticia]);
-          clearInputs();
-          toast.success('Publicado con éxito');
+          try {
+            await createNews(nuevaNoticia);
+            clearInputs();
+            toast.success('Publicado con éxito en la plataforma');
+            await cargarNoticias();
+          } catch (error) {
+            toast.error('Error al publicar noticia');
+          }
         }
       });
     }
@@ -115,122 +141,152 @@ function GestionTipsNoticias() {
       text: "¡No podrás revertir esto!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
+      confirmButtonColor: '#dc2626',
+      cancelButtonColor: '#64748b',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        setNoticias(prev => prev.filter(n => n.id !== id));
-        if (editandoId === id) {
-            handleCancelarEdicion();
+        try {
+          await deleteNews(id);
+          if (editandoId === id) handleCancelarEdicion();
+          toast.success('Publicación eliminada correctamente');
+          await cargarNoticias();
+        } catch (error) {
+          toast.error('Error al eliminar');
         }
-        toast.success('Publicación eliminada correctamente');
       }
     });
   };
 
   return (
-    <div className="admin-container admin-container-no-nav">
-      <div className="admin-main-wrap">
-        <header>
-            <h1><Newspaper size={24} /> Gestión de Tips y Noticias</h1>
-            <button onClick={() => window.location.href = "/AdminDashboard"}><ArrowLeft size={16} /> Volver a Dashboard</button>
+    <AdminLayout>
+        <header className="admin-top-header">
+            <h1 style={{ fontSize: '2rem', fontWeight: 800 }}><Newspaper size={28} /> Tips y Noticias</h1>
         </header>
-        
-        <section>
-            <h2><PenLine size={20} /> {editandoId ? 'Editar Tip / Noticia' : 'Redactar Nuevo Tip / Noticia'}</h2>
-            <input 
-              type="text" 
-              placeholder="Título de la publicación..." 
-              value={tituloInput}
-              onChange={(e) => setTituloInput(e.target.value)}
-            />
-            <br />
-            <textarea 
-              placeholder="Contenido de la publicación..." 
-              rows={5} 
-              cols={50}
-              value={contenidoInput}
-              onChange={(e) => setContenidoInput(e.target.value)}
-            ></textarea>
-            <br />
-            
-            <div style={{ margin: '15px 0', padding: '15px', backgroundColor: '#f9fafb', borderRadius: '8px', border: '1px dashed #ced4da' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', fontWeight: 'bold', color: '#495057' }}>
-                <ImageIcon size={18} /> Subir Imagen (Opcional)
-              </label>
-              <input 
-                  id="imagen-upload"
-                  type="file" 
-                  accept="image/*" 
-                  onChange={handleImageChange} 
-                  style={{ display: 'block', marginBottom: '10px' }}
-              />
-              {imagenInput && (
-                  <div style={{ position: 'relative', display: 'inline-block', border: '1px solid #ddd', padding: '5px', borderRadius: '8px', backgroundColor: '#fff' }}>
-                      <img src={imagenInput} alt="Vista previa" style={{ maxWidth: '250px', maxHeight: '150px', borderRadius: '4px', display: 'block' }} />
-                      <button 
-                          onClick={() => { setImagenInput(''); const f = document.getElementById('imagen-upload') as HTMLInputElement; if(f) f.value = ''; }}
-                          title="Remover imagen"
-                          style={{ position: 'absolute', top: '-10px', right: '-10px', background: '#dc3545', color: 'white', border: 'none', borderRadius: '50%', width: '26px', height: '26px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}
-                      >
-                          <X size={16} />
-                      </button>
-                  </div>
-              )}
-            </div>
-            
-            <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-              <button onClick={handlePublicar}>
-                {editandoId ? <><Send size={16} /> Guardar Cambios</> : <><Send size={16} /> Publicar Ahora</>}
-              </button>
-              {editandoId && (
-                  <button onClick={handleCancelarEdicion} style={{ backgroundColor: '#6c757d', color: 'white' }}>
-                    <X size={16} /> Cancelar Edición
-                  </button>
-              )}
-            </div>
-        </section>
 
-        <section style={{ overflowX: 'auto' }}>
-            <h2><List size={20} /> Publicaciones Actuales</h2>
-            <table border={1} style={{ width: '100%', minWidth: '600px' }}>
-                <thead>
-                    <tr>
-                        <th style={{ width: '80px', textAlign: 'center' }}>Imagen</th>
-                        <th>Título</th>
-                        <th>Autor</th>
-                        <th>Estado</th>
-                        <th>Acciones CRUD</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {noticias.map((noticia: Noticia) => (
-                        <tr key={noticia.id}>
-                            <td style={{ textAlign: 'center', padding: '10px' }}>
-                                {noticia.imagen ? (
-                                    <img src={noticia.imagen} alt="Miniatura" style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '6px', border: '1px solid #eee' }} />
-                                ) : (
-                                    <div style={{ width: '60px', height: '60px', backgroundColor: '#f1f3f5', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '6px', margin: '0 auto' }}>
-                                        <span style={{ color: '#adb5bd', fontSize: '10px', textAlign: 'center', lineHeight: '1.2' }}>Sin imagen</span>
-                                    </div>
-                                )}
-                            </td>
-                            <td>{noticia.titulo}</td>
-                            <td>{noticia.autor}</td>
-                            <td>{noticia.activa ? 'Pública' : 'Oculta/Borrador'}</td>
-                            <td>
-                                <button onClick={() => handleEditar(noticia)}><Edit size={14} /> Editar</button>
-                                <button onClick={() => handleEliminar(noticia.id)}><Trash2 size={14} /> Eliminar</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </section>
-      </div>
-    </div>
+        <main style={{ padding: 0 }}>
+            <div className="grid-card" style={{ marginBottom: '30px' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    {editandoId ? <Edit size={24} color="#f59e0b" /> : <PenLine size={24} color="#3b82f6" />} 
+                    {editandoId ? 'Editar Publicación' : 'Crear Nueva Publicación'}
+                </h3>
+                
+                <div style={{ display: 'grid', gap: '1.5rem' }}>
+                    <div className="search-bar-v2" style={{ width: '100%', maxWidth: '100%' }}>
+                        <Edit size={18} className="search-icon-header" />
+                        <input 
+                            type="text" 
+                            placeholder="Título impactante para la noticia..." 
+                            value={tituloInput}
+                            onChange={(e) => setTituloInput(e.target.value)}
+                        />
+                    </div>
+                    
+                    <textarea 
+                        placeholder="Contenido detallado de la noticia o tip para emprendedores..." 
+                        rows={6} 
+                        value={contenidoInput}
+                        onChange={(e) => setContenidoInput(e.target.value)}
+                        style={{ width: '100%', padding: '20px', borderRadius: '16px', border: '1px solid #e2e8f0', background: '#f8fafc', fontSize: '1rem', outline: 'none', transition: 'all 0.2s' }}
+                    ></textarea>
+                    
+                    <div style={{ padding: '20px', border: '2px dashed #cbd5e1', borderRadius: '16px', background: '#f1f5f9' }}>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 800, color: '#475569', marginBottom: '15px', cursor: 'pointer' }}>
+                            <ImageIcon size={20} /> Seleccionar Imagen de Portada
+                            <input 
+                                id="imagen-upload"
+                                type="file" 
+                                accept="image/*" 
+                                onChange={handleImageChange} 
+                                style={{ display: 'none' }}
+                            />
+                        </label>
+                        
+                        {imagenInput && (
+                            <div style={{ position: 'relative', width: '200px', height: '120px', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
+                                <img src={imagenInput} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                <button 
+                                    onClick={() => { setImagenInput(''); const f = document.getElementById('imagen-upload') as HTMLInputElement; if(f) f.value = ''; }}
+                                    style={{ position: 'absolute', top: '5px', right: '5px', background: 'rgba(239, 68, 68, 0.9)', color: '#fff', border: 'none', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+                                >
+                                    <X size={14} />
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                    
+                    <div style={{ display: 'flex', gap: '15px' }}>
+                        <button 
+                            className="btn-publish-v2" 
+                            onClick={handlePublicar}
+                            style={{ padding: '15px 35px' }}
+                        >
+                            <Send size={18} />
+                            {editandoId ? 'Actualizar Noticia' : 'Publicar Noticia'}
+                        </button>
+                        {editandoId && (
+                            <button 
+                                onClick={handleCancelarEdicion}
+                                style={{ padding: '12px 25px', background: '#f1f5f9', color: '#64748b', border: 'none', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+                            >
+                                <X size={18} /> Cancelar
+                            </button>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            <div className="grid-card">
+                <div className="grid-card-label">
+                    <h3>Mural de Novedades UNE</h3>
+                </div>
+
+                {loading ? (
+                    <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>
+                        <Loader className="animate-spin" size={32} style={{ marginBottom: '10px' }} />
+                        <p>Sincronizando feed de noticias...</p>
+                    </div>
+                ) : (
+                    <table className="admin-table-v2">
+                        <thead>
+                            <tr>
+                                <th>PORTADA</th>
+                                <th>TÍTULO</th>
+                                <th>AUTOR</th>
+                                <th>FECHA</th>
+                                <th style={{ textAlign: 'center' }}>ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {noticias.map((noticia: Noticia) => (
+                                <tr key={noticia.id}>
+                                    <td>
+                                        {noticia.imagen ? (
+                                            <img src={noticia.imagen} alt="Preview" style={{ width: '60px', height: '40px', borderRadius: '8px', objectFit: 'cover' }} />
+                                        ) : (
+                                            <div style={{ width: '60px', height: '40px', background: '#f1f5f9', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.65rem', color: '#94a3b8', fontWeight: 800 }}>S/I</div>
+                                        )}
+                                    </td>
+                                    <td>
+                                        <div style={{ fontWeight: 800, maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{noticia.titulo}</div>
+                                    </td>
+                                    <td style={{ color: '#64748b', fontSize: '0.85rem' }}>{noticia.autor}</td>
+                                    <td style={{ color: '#64748b', fontSize: '0.85rem' }}>{noticia.fecha ? new Date(noticia.fecha).toLocaleDateString() : 'N/A'}</td>
+                                    <td style={{ textAlign: 'center' }}>
+                                        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+                                            <button onClick={() => handleEditar(noticia)} style={{ background: '#fef3c7', color: '#d97706', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}><Edit size={16} /></button>
+                                            <button onClick={() => handleEliminar(noticia.id)} style={{ background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}><Trash2 size={16} /></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
+            </div>
+        </main>
+    </AdminLayout>
   )
 }
 

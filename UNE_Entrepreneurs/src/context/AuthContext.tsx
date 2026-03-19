@@ -6,6 +6,7 @@ interface AuthUser {
   id: string;
   name: string;
   email: string;
+  avatar?: string;
   isAdmin: boolean;
 }
 
@@ -14,6 +15,7 @@ interface AuthContextType {
   isAdmin: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
+  refreshUser: (updatedData: Partial<AuthUser>) => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -48,6 +50,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         id: String(parsed.id),
         name: parsed.nombre || parsed.name || 'Usuario',
         email: parsed.email,
+        avatar: parsed.avatar,
         isAdmin: parsed.isAdmin || parsed.role === 'admin'
       };
     } catch {
@@ -85,6 +88,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           id: String(found.id),
           name: found.nombre || 'Usuario',
           email: found.email,
+          avatar: found.avatar,
           isAdmin: found.role === 'admin' || found.email === 'admin@une.cr',
         };
         setUser(authUser);
@@ -92,6 +96,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           id: authUser.id,
           nombre: authUser.name,
           email: authUser.email,
+          avatar: authUser.avatar,
           isAdmin: authUser.isAdmin,
           loggedAt: new Date().toISOString()
         }));
@@ -111,8 +116,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem('userSession');
   };
 
+  const refreshUser = (updatedData: Partial<AuthUser>) => {
+    if (!user) return;
+    const newUser = { ...user, ...updatedData };
+    setUser(newUser);
+    
+    // Update localStorage
+    const stored = localStorage.getItem('userSession');
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      localStorage.setItem('userSession', JSON.stringify({
+        ...parsed,
+        nombre: newUser.name,
+        email: newUser.email,
+        avatar: newUser.avatar,
+        isAdmin: newUser.isAdmin
+      }));
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isAdmin: user?.isAdmin ?? false, login, logout }}>
+    <AuthContext.Provider value={{ user, isAdmin: user?.isAdmin ?? false, login, logout, refreshUser }}>
       {children}
     </AuthContext.Provider>
   );
