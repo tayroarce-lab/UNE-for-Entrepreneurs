@@ -16,7 +16,7 @@ export default function BudgetPage() {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f8fafc' }}>
       <Navbar />
       
-      <main style={{ flex: 1, padding: '2rem 4rem' }}>
+      <main style={{ flex: 1, padding: '120px 4rem 2rem' }}>
         {/* Page Header */}
         <header className="page-header" style={{ marginBottom: '2.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <div className="title-area">

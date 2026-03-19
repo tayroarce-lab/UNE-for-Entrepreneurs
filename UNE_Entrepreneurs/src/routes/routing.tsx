@@ -3,7 +3,6 @@ import AdminDashboard from '../components/AdminComponents/AdminDashboard';
 import ManejarClientes from '../components/AdminComponents/ManejarClientes';
 import ManejoPresupuesto from '../components/AdminComponents/ManejoPresupuesto';
 import ManejoInventario from '../components/AdminComponents/ManejoInventario';
-import ManejoFinanciaciones from '../components/AdminComponents/ManejoFinanciaciones';
 import GestionTipsNoticias from '../components/AdminComponents/GestionTipsNoticias';
 import Configuraciones from '../components/AdminComponents/Configuraciones';
 import Notificaciones from '../components/AdminComponents/Configuracion/Notificaciones';
@@ -86,7 +85,6 @@ const router = createBrowserRouter([
           { path: 'clientes', element: <ManejarClientes /> },
           { path: 'presupuesto', element: <ManejoPresupuesto /> },
           { path: 'inventario', element: <ManejoInventario /> },
-          { path: 'financiaciones', element: <ManejoFinanciaciones /> },
           { path: 'noticias', element: <GestionTipsNoticias /> },
           { path: 'configuraciones', element: <Configuraciones /> },
           { path: 'configuraciones/notificaciones', element: <Notificaciones /> },
@@ -103,7 +101,6 @@ const router = createBrowserRouter([
       { path: '/ManejarClientes',             element: <ManejarClientes /> },
       { path: '/ManejoPresupuesto',           element: <ManejoPresupuesto /> },
       { path: '/ManejoInventario',            element: <ManejoInventario /> },
-      { path: '/ManejoFinanciaciones',        element: <ManejoFinanciaciones /> },
       { path: '/GestionTipsNoticias',         element: <GestionTipsNoticias /> },
       { path: '/Configuraciones',             element: <Configuraciones /> },
       { path: '/Configuraciones/Notificaciones',       element: <Notificaciones /> },

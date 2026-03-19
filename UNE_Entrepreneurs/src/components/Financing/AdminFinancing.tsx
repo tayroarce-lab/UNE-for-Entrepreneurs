@@ -140,7 +140,7 @@ export default function AdminFinancingPage() {
   return (
     <AdminLayout>
         <header className="admin-top-header">
-            <h1 style={{ fontSize: '2rem', fontWeight: 800 }}><Landmark size={28} /> Catálogo de Programas</h1>
+            <h1 style={{ fontSize: '2rem', fontWeight: 800 }}><Landmark size={28} /> Catálogo de Financiamientos</h1>
             <button
                 className="btn-publish-v2"
                 onClick={() => {

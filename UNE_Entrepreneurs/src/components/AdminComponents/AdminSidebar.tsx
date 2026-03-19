@@ -2,7 +2,6 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { 
   LayoutDashboard, 
   Users, 
-  Briefcase, 
   Newspaper, 
   Settings, 
   LogOut,
@@ -44,8 +43,7 @@ export default function AdminSidebar() {
   const navItems = [
     { to: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/admin/usuarios', icon: Users, label: 'Usuarios' },
-    { to: '/admin/financiaciones', icon: Briefcase, label: 'Solicitudes' },
-    { to: '/admin/financiamiento', icon: Landmark, label: 'Catálogo Créditos' },
+    { to: '/admin/financiamiento', icon: Landmark, label: 'Catálogo de Financiamientos' },
     { to: '/admin/inventario', icon: Package, label: 'Inventario Global' },
     { to: '/admin/presupuesto', icon: Wallet, label: 'Presupuesto' },
     { to: '/admin/noticias', icon: Newspaper, label: 'Tips y Noticias' },

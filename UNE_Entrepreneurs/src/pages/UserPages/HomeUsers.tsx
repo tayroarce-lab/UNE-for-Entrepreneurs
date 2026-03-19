@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Target, ClipboardList, TrendingUp,
@@ -11,9 +12,28 @@ import avatarCarlos from '../../assets/carlos_mendez.png'
 import avatarLucia from '../../assets/lucia_mora.png'
 import avatarEsteban from '../../assets/esteban_ruiz.png'
 import NewsCarousel from '../../components/UserComponents/NewsCarousel'
+import { getFinancingPrograms } from '../../services/FinancingService'
+import type { FinancingProgram } from '../../types/financing'
 
 export default function EstructuraHome() {
   const navigate = useNavigate();
+  const [featuredFinancing, setFeaturedFinancing] = useState<FinancingProgram[]>([]);
+  const [microFinancing, setMicroFinancing] = useState<FinancingProgram | null>(null);
+
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      try {
+        const result = await getFinancingPrograms({ _limit: 6 });
+        const programs = result.data || [];
+        setFeaturedFinancing(programs.slice(0, 2));
+        const micro = programs.find(p => p.name.toLowerCase().includes('micro') || p.maxAmount <= 5000000) || programs[2];
+        setMicroFinancing(micro || null);
+      } catch (error) {
+        console.error("Error loading home programs", error);
+      }
+    };
+    fetchPrograms();
+  }, []);
 
   return (
     <div className="home-page-layout">
@@ -131,45 +151,54 @@ export default function EstructuraHome() {
             </div>
 
             <div className="showcase-grid">
-              <div className="showcase-card gray">
-                <span style={{ fontSize: '0.7rem', fontWeight: 800, background: '#fff', padding: '4px 12px', borderRadius: '50px', marginBottom: '1rem', display: 'inline-block' }}>BANCO NACIONAL</span>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem' }}>Crédito Pyme</h3>
-                <p style={{ fontSize: '0.9rem', color: '#444', marginBottom: '2rem' }}>Hasta ₡15.000.000 para expansión, maquinaria o locales comerciales.</p>
-                <div style={{ display: 'flex', gap: '1rem', fontSize: '0.8rem', fontWeight: 700 }}>
-                  <span>✓ Tasa Fija</span>
-                  <span>✓ Plazos Flexibles</span>
+              {featuredFinancing.length > 0 ? featuredFinancing.map((item, index) => (
+                <div key={item.id} className={`showcase-card ${index % 2 === 0 ? 'gray' : 'blue'}`}>
+                  <span style={{ fontSize: '0.7rem', fontWeight: 800, background: index % 2 === 0 ? '#fff' : 'rgba(255,255,255,0.2)', padding: '4px 12px', border: index % 2 === 0 ? '1px solid #ddd' : 'none', borderRadius: '50px', marginBottom: '1rem', display: 'inline-block', color: index % 2 === 0 ? '#1a1a1a' : '#fff' }}>
+                    {item.notes ? item.notes.split(',')[0].toUpperCase() : 'UNE ALIADO'}
+                  </span>
+                  <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem' }}>{item.name}</h3>
+                  <p style={{ fontSize: '0.9rem', opacity: index % 2 === 0 ? 0.8 : 0.9, color: index % 2 === 0 ? '#444' : '#fff', marginBottom: '2rem' }}>
+                    {item.howToApply || `Obtén hasta ${item.amountRange} para potenciar tu negocio.`}
+                  </p>
+                  <div style={{ display: 'flex', gap: '1rem', fontSize: '0.8rem', fontWeight: 700 }}>
+                    <span>✓ {item.region}</span>
+                    <span>✓ {item.type === 'loan' ? 'Crédito Directo' : 'Apoyo Financiero'}</span>
+                  </div>
+                  <button 
+                    className="btn-plus" 
+                    style={{ position: 'absolute', bottom: '2rem', right: '2.5rem', width: '40px', height: '40px', borderRadius: '12px', background: index % 2 === 0 ? '#000' : '#fff', color: index % 2 === 0 ? '#fff' : '#8B1A1A', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }} 
+                    onClick={() => navigate(`/financiamiento?id=${item.id}`)}
+                    title="Ver detalles"
+                  >
+                    <ArrowRight size={20} />
+                  </button>
                 </div>
-                <button className="btn-plus" style={{ position: 'absolute', bottom: '2rem', right: '2.5rem', width: '40px', height: '40px', borderRadius: '12px', background: '#000', color: '#fff', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title="Ir a catálogo"><ArrowRight size={20} /></button>
-              </div>
-              <div className="showcase-card blue">
-                <span style={{ fontSize: '0.7rem', fontWeight: 800, background: 'rgba(255,255,255,0.2)', padding: '4px 12px', borderRadius: '50px', marginBottom: '1rem', display: 'inline-block' }}>COOPEMEX</span>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem' }}>Capital de Trabajo</h3>
-                <p style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '2rem' }}>Liquidez inmediata para inventario o pago de planillas en tiempo récord.</p>
-                <div style={{ display: 'flex', gap: '1rem', fontSize: '0.8rem', fontWeight: 700 }}>
-                  <span>✓ Sin Garantía Real</span>
-                  <span>✓ Desembolso 48h</span>
-                </div>
-                <button className="btn-plus" style={{ position: 'absolute', bottom: '2rem', right: '2.5rem', width: '40px', height: '40px', borderRadius: '12px', background: '#fff', color: '#8B1A1A', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title="Ir a catálogo"><ArrowRight size={20} /></button>
-              </div>
+              )) : (
+                 <div style={{ padding: '40px', textAlign: 'center', color: '#64748b', background: '#fff', borderRadius: '24px', gridColumn: 'span 2' }}>
+                    Consultando programas disponibles...
+                 </div>
+              )}
             </div>
 
-            <div style={{ marginTop: '2rem', background: '#fff', padding: '1.5rem 2.5rem', borderRadius: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}>
-               <div>
-                  <h4 style={{ fontWeight: 800 }}>Microcréditos UNE</h4>
-                  <p style={{ fontSize: '0.85rem', color: '#64748b' }}>Pequeños impulsos para emprendedores jóvenes, ideales para emprendimientos individuales o startups locales.</p>
-               </div>
-               <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-                  <div style={{ textAlign: 'center' }}>
-                     <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: 700 }}>MONTO MAX</div>
-                     <div style={{ fontWeight: 800 }}>₡3M</div>
-                  </div>
-                  <div style={{ textAlign: 'center' }}>
-                     <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: 700 }}>INTERÉS</div>
-                     <div style={{ fontWeight: 800 }}>6.5%*</div>
-                  </div>
-                  <button className="btn-primary" onClick={() => navigate('/financiamiento')} style={{ padding: '0.75rem 1.5rem' }}>Solicitar Ahora</button>
-               </div>
-            </div>
+            {microFinancing && (
+              <div style={{ marginTop: '2rem', background: '#fff', padding: '1.5rem 2.5rem', borderRadius: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}>
+                <div>
+                    <h4 style={{ fontWeight: 800 }}>{microFinancing.name}</h4>
+                    <p style={{ fontSize: '0.85rem', color: '#64748b' }}>{microFinancing.howToApply?.slice(0, 150) || 'Pequeños impulsos para emprendedores jóvenes y startups locales.'}...</p>
+                </div>
+                <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+                    <div style={{ textAlign: 'center' }}>
+                      <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: 700 }}>MÁXIMO</div>
+                      <div style={{ fontWeight: 800 }}>{microFinancing.amountRange?.split('-')[1] || '₡3M'}</div>
+                    </div>
+                    <div style={{ textAlign: 'center' }}>
+                      <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: 700 }}>ESTADO</div>
+                      <div style={{ fontWeight: 800, color: 'var(--color-success)' }}>ACTIVO</div>
+                    </div>
+                    <button className="btn-primary" onClick={() => navigate(`/financiamiento?id=${microFinancing.id}`)} style={{ padding: '0.75rem 1.5rem' }}>Solicitar</button>
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
@@ -269,12 +298,35 @@ export default function EstructuraHome() {
 
         {/* ── FINAL CTA ── */}
         <section className="final-cta">
-           <div className="container" style={{ maxWidth: '800px' }}>
-              <h2 style={{ fontSize: '3rem', fontWeight: 900 }}>¿Listo para el siguiente nivel?</h2>
-              <p style={{ fontSize: '1.2rem', opacity: 0.9, marginBottom: '3rem' }}>
+           <div className="container" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+              <h2 style={{ fontSize: '3rem', fontWeight: 900, color: '#fff' }}>¿Listo para el siguiente nivel?</h2>
+              <p style={{ fontSize: '1.2rem', opacity: 0.9, marginBottom: '3rem', color: '#fff' }}>
                 Únete a los miles de emprendedores que ya están transformando sus negocios con UNE Costa Rica.
               </p>
-              <button className="btn-primary" style={{ background: '#8B1A1A', padding: '1.25rem 3rem', fontSize: '1.1rem', borderRadius: '50px', border: 'none' }} onClick={() => navigate('/registro')}>
+              <button 
+                className="btn-primary" 
+                style={{ 
+                  background: 'var(--uneGold)', 
+                  color: '#000', 
+                  padding: '1.25rem 3.5rem', 
+                  fontSize: '1.15rem', 
+                  borderRadius: '50px', 
+                  border: 'none',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+                  transition: 'all 0.3s ease'
+                }} 
+                onClick={() => navigate('/registro')}
+                onMouseOver={(e) => {
+                  (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)';
+                  (e.currentTarget as HTMLElement).style.boxShadow = '0 15px 35px rgba(0,0,0,0.3)';
+                }}
+                onMouseOut={(e) => {
+                  (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+                  (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
+                }}
+              >
                 Comenzar Mi Aplicación
               </button>
            </div>

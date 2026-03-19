@@ -3,20 +3,18 @@ import { useNavigate, Link } from 'react-router-dom'
 import '../../styles/AdminDashboard.css'
 import { 
   Users, 
-  Banknote, 
   Newspaper, 
   Search, 
   Bell,
   TrendingUp,
-  FileText,
   Clock,
-  ExternalLink,
-  Plus
+  Plus,
+  LayoutGrid,
+  FileText
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import AdminLayout from './AdminLayout'
 import UserServices from '../../services/UserServices'
-import { getApplications } from '../../services/FinancingService'
 import { getNews } from '../../services/NewsService'
 import { toast } from 'sonner'
 
@@ -46,31 +44,25 @@ const KPICard = ({ titulo, valor, crecimiento, tendencia, icono: Icon }: KPIProp
 function AdminDashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  
+
   const [totalUsers, setTotalUsers] = useState(0);
-  const [totalApps, setTotalApps] = useState(0);
   const [totalNews, setTotalNews] = useState(0);
-  const [recentLoans, setRecentLoans] = useState<any[]>([]);
+  const [activeNews, setActiveNews] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [usersRes, appsRes, newsRes] = await Promise.all([
+        const [usersRes, newsRes] = await Promise.all([
           UserServices.getUser(),
-          getApplications(),
           getNews()
         ]);
         
         setTotalUsers(usersRes?.length || 0);
-        setTotalApps(appsRes?.length || 0);
         setTotalNews(newsRes?.length || 0);
-
-        // Sorting by newest first if possible, or just taking the last 3 from exactly the list
-        const latestApps = (appsRes || []).slice(-3).reverse();
-        setRecentLoans(latestApps);
+        setActiveNews(newsRes?.filter((n: any) => n.activa).length || 0);
       } catch (error) {
         console.error("Error fetching dashboard data", error);
-        toast.error("Error al cargar algunas métricas reales");
+        toast.error("Error al cargar métricas");
       }
     };
     fetchData();
@@ -116,14 +108,14 @@ function AdminDashboard() {
                 icono={Users} 
             />
             <KPICard 
-                titulo="Solicitudes Crédito" 
-                valor={totalApps} 
-                crecimiento="2.1" 
+                titulo="Noticias Activas" 
+                valor={activeNews} 
+                crecimiento="100" 
                 tendencia="up" 
-                icono={FileText} 
+                icono={Newspaper} 
             />
             <KPICard 
-                titulo="Total Noticias" 
+                titulo="Total Publicaciones" 
                 valor={totalNews} 
                 crecimiento="1.5" 
                 tendencia="up" 
@@ -142,13 +134,13 @@ function AdminDashboard() {
                      <div className="action-icon" style={{ backgroundColor: '#f87171' }}><Users size={20} /></div>
                      <h4>Gestionar Usuarios</h4>
                   </Link>
-                  <Link to="/admin/financiaciones" className="action-card">
-                     <div className="action-icon" style={{ backgroundColor: '#D4A853' }}><Banknote size={20} /></div>
-                     <h4>Manejar Financiaciones</h4>
-                  </Link>
                   <Link to="/admin/noticias" className="action-card">
                      <div className="action-icon" style={{ backgroundColor: '#991b1b' }}><Newspaper size={20} /></div>
                      <h4>Administrar Noticias</h4>
+                  </Link>
+                  <Link to="/admin/financiamiento" className="action-card">
+                     <div className="action-icon" style={{ backgroundColor: '#D4A853' }}><LayoutGrid size={20} /></div>
+                     <h4>Catálogo de Financiamientos</h4>
                   </Link>
                   <Link to="/admin/configuraciones" className="action-card">
                      <div className="action-icon" style={{ backgroundColor: '#1e293b' }}><Clock size={20} /></div>
@@ -159,47 +151,14 @@ function AdminDashboard() {
 
             <div className="grid-card">
                <div className="grid-card-label">
-                  <h3>Solicitudes de Crédito Recientes</h3>
+                  <h3>Estado del Sistema</h3>
                </div>
-               <table className="admin-table-v2">
-                  <thead>
-                     <tr>
-                        <th>CÉDULA APLICANTE</th>
-                        <th>MONTO</th>
-                        <th>ESTADO</th>
-                        <th>ACCIÓN</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     {recentLoans.length > 0 ? recentLoans.map(loan => (
-                        <tr key={loan.id}>
-                           <td>
-                              <div className="row-user">
-                                 <div className="row-avatar">{loan.userId ? loan.userId.substring(0,2).toUpperCase() : 'U'}</div>
-                                 <div style={{ fontWeight: 800 }}>ID: {loan.userId}</div>
-                              </div>
-                           </td>
-                           <td style={{ fontWeight: 700 }}>{loan.amountRequested ? `₡${loan.amountRequested.toLocaleString()}` : 'N/A'}</td>
-                           <td>
-                              <span className={`status-tag ${loan.status === 'pending' ? 'pending' : (loan.status === 'approved' ? 'success' : 'pending')}`}>
-                                 {loan.status || 'pending'}
-                              </span>
-                           </td>
-                           <td style={{ textAlign: 'center' }}>
-                              <Link to={`/admin/financiaciones`} style={{ color: '#8B1A1A' }}>Detalles</Link>
-                           </td>
-                        </tr>
-                     )) : (
-                         <tr>
-                             <td colSpan={4} style={{ textAlign: 'center', color: '#64748b' }}>No hay solicitudes de crédito recientes</td>
-                         </tr>
-                     )}
-                  </tbody>
-               </table>
-               <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                  <Link to="/admin/financiaciones" style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 800, textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                    Ver todas las transacciones <ExternalLink size={14} />
-                  </Link>
+               <div style={{ padding: '20px', textAlign: 'center' }}>
+                  <div style={{ padding: '30px', background: '#f8fafc', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+                     <TrendingUp size={48} color="var(--uneRed)" style={{ marginBottom: '15px' }} />
+                     <h4 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '10px' }}>Sistema Operativo</h4>
+                     <p style={{ color: '#64748b', fontSize: '0.9rem' }}>Todas las bases de datos están sincronizadas y el portal de noticias está activo para los usuarios.</p>
+                  </div>
                </div>
             </div>
           </div>
