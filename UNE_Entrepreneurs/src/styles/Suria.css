@@ -1,0 +1,410 @@
+
+.suria-page {
+  background-color: var(--suria-cream);
+  color: var(--suria-brown);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.suria-hero-content {
+  z-index: 2;
+  animation: fadeInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.suria-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Section Styles */
+.suria-section {
+  padding: 6rem 0;
+}
+
+.suria-section-title {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--suria-plum);
+  margin-bottom: 3.5rem;
+  text-align: center;
+}
+
+/* Button */
+.suria-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--suria-crimson);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(169, 38, 43, 0.25);
+}
+
+.suria-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(125, 31, 48, 0.35);
+  background-color: var(--suria-dark-crimson);
+}
+
+/* HeroSuria */
+.suria-hero {
+  background: linear-gradient(135deg, var(--suria-cream) 0%, var(--suria-ivory) 100%);
+  padding: 8rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.suria-hero::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 400px;
+  height: 400px;
+  background: var(--suria-peach);
+  border-radius: 50%;
+  opacity: 0.2;
+}
+
+.suria-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.suria-hero-badge {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  background: rgba(211, 92, 45, 0.1);
+  color: var(--suria-orange);
+  border-radius: var(--radius-full);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 2rem;
+}
+
+.suria-hero-title {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--suria-plum);
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+
+.suria-hero-description {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  color: var(--color-text-light);
+  margin-bottom: 3rem;
+  line-height: 1.7;
+}
+
+.suria-hero-image-container {
+  position: relative;
+}
+
+.suria-hero-image {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 40px;
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-3deg);
+  border: 10px solid white;
+}
+
+/* AboutSuria */
+.suria-about {
+  background-color: white;
+}
+
+.suria-about-content h2 {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  color: var(--suria-plum);
+  margin-bottom: 2rem;
+}
+
+.suria-about-content p {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--suria-brown);
+  margin-bottom: 1.5rem;
+}
+
+/* ProgramPillars */
+.suria-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.suria-pillar-card {
+  background: var(--suria-ivory);
+  padding: 3.5rem 2.5rem;
+  border-radius: 32px;
+  text-align: center;
+  transition: var(--transition);
+  border: 1px solid rgba(64, 22, 45, 0.03);
+}
+
+.suria-pillar-card:hover {
+  transform: translateY(-12px);
+  background: white;
+  box-shadow: var(--shadow-lg);
+}
+
+.suria-pillar-icon {
+  width: 80px;
+  height: 80px;
+  background: white;
+  color: var(--suria-crimson);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.suria-pillar-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  color: var(--suria-plum);
+  margin-bottom: 1.25rem;
+}
+
+.suria-pillar-card p {
+  font-family: var(--font-body);
+  color: var(--suria-brown);
+  line-height: 1.7;
+}
+
+/* Requirements */
+.suria-requirements {
+  background-color: var(--suria-cream);
+}
+
+.suria-req-item {
+  background: white;
+  padding: 1.75rem 2.5rem;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.suria-req-item:hover {
+  transform: scale(1.02);
+  border-color: var(--suria-peach);
+  box-shadow: var(--shadow-md);
+}
+
+.suria-req-number {
+  background: var(--suria-crimson);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--font-ui);
+  font-weight: 700;
+}
+
+/* Testimonials */
+.suria-test-card {
+  background: white;
+  padding: 3.5rem;
+  border-radius: 32px;
+  border: 1px solid var(--suria-ivory);
+  box-shadow: var(--shadow-sm);
+}
+
+.suria-test-text {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--suria-plum);
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+}
+
+.suria-test-author-info h4 {
+  font-family: var(--font-ui);
+  color: var(--suria-plum);
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.suria-test-author-info p {
+  font-family: var(--font-ui);
+  color: var(--suria-orange);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* CTA Banner */
+.suria-cta-banner {
+  background: var(--suria-plum);
+  color: white;
+  text-align: center;
+  padding: 8rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.suria-cta-banner h2 {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.suria-cta-banner p {
+  font-family: var(--font-body);
+  font-size: 1.35rem;
+  opacity: 0.9;
+  margin-bottom: 4rem;
+}
+
+.suria-cta-banner .suria-btn {
+  background-color: var(--suria-gold);
+  color: var(--suria-plum);
+  padding: 1.25rem 3.5rem;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .suria-container {
+    max-width: 960px;
+  }
+}
+
+@media (max-width: 991px) {
+  .suria-container {
+    max-width: 720px;
+  }
+  
+  .suria-section {
+    padding: 6rem 0;
+  }
+
+  .suria-hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 5rem;
+  }
+
+  .suria-hero-title {
+    font-size: 3.5rem;
+  }
+
+  .suria-hero-image-container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .suria-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .suria-about-grid {
+     grid-template-columns: 1fr;
+     text-align: center;
+  }
+
+  .suria-test-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .suria-section-title {
+    font-size: 2.5rem;
+  }
+  
+  .suria-hero-title {
+    font-size: 2.8rem;
+  }
+
+  .suria-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .suria-test-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .suria-cta-banner h2 {
+    font-size: 2.5rem;
+  }
+
+  .suria-cta-banner p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .suria-hero-title {
+    font-size: 2.4rem;
+  }
+  
+  .suria-section {
+    padding: 4rem 0;
+  }
+
+  .suria-req-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 2rem;
+  }
+
+  .suria-back-btn {
+    margin-bottom: 2rem !important;
+  }
+}

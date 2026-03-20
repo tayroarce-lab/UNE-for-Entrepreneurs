@@ -1,10 +1,11 @@
 import { toast } from 'sonner';
 import type { User } from '../types/user';
+import { API_BASE } from '../config';
 
 // PATCH
 async function patchUsuarios(usuario: Partial<User>, id: string | number): Promise<User | undefined> {
   try {
-    const respuesta = await fetch('http://localhost:3001/usuarios/' + id, {
+    const respuesta = await fetch(`${API_BASE}/usuarios/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -27,7 +28,7 @@ async function patchUsuarios(usuario: Partial<User>, id: string | number): Promi
 // DELETE
 async function deleteUsuarios(id: string | number): Promise<boolean | undefined> {
   try {
-    const respuesta = await fetch('http://localhost:3001/usuarios/' + id, {
+    const respuesta = await fetch(`${API_BASE}/usuarios/${id}`, {
       method: 'DELETE',
     });
 
@@ -45,7 +46,7 @@ async function deleteUsuarios(id: string | number): Promise<boolean | undefined>
 // GET
 async function getUser(): Promise<User[]> {
   try {
-    const respuesta = await fetch('http://localhost:3001/usuarios');
+    const respuesta = await fetch(`${API_BASE}/usuarios`);
     if (!respuesta.ok) {
       throw new Error(`Error ${respuesta.status}`);
     }
@@ -61,7 +62,7 @@ async function getUser(): Promise<User[]> {
 // POST
 async function postUser(usuario: Omit<User, 'id'>): Promise<User | undefined> {
   try {
-    const respuesta = await fetch('http://localhost:3001/usuarios', {
+    const respuesta = await fetch(`${API_BASE}/usuarios`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

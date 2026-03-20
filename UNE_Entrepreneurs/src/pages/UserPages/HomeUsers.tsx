@@ -1,38 +1,20 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Target, ClipboardList, TrendingUp,
-  Check, ArrowRight, BarChart3
+  Check, MoveRight, LayoutDashboard, Wallet, Package, Flower2
 } from 'lucide-react'
-import SedeUbicacion from '../../components/Shared/SedeUbicacion'
 import Navbar from '../../components/Shared/Navbar'
 import Footer from '../../components/Shared/Footer'
 import heroImage from '../../assets/hero_une.jpg'
-import avatarCarlos from '../../assets/carlos_mendez.png'
-import avatarLucia from '../../assets/lucia_mora.png'
-import avatarEsteban from '../../assets/esteban_ruiz.png'
 import NewsCarousel from '../../components/UserComponents/NewsCarousel'
-import { getFinancingPrograms } from '../../services/FinancingService'
-import type { FinancingProgram } from '../../types/financing'
 
 export default function EstructuraHome() {
   const navigate = useNavigate();
-  const [featuredFinancing, setFeaturedFinancing] = useState<FinancingProgram[]>([]);
-  const [microFinancing, setMicroFinancing] = useState<FinancingProgram | null>(null);
 
   useEffect(() => {
-    const fetchPrograms = async () => {
-      try {
-        const result = await getFinancingPrograms({ _limit: 6 });
-        const programs = result.data || [];
-        setFeaturedFinancing(programs.slice(0, 2));
-        const micro = programs.find(p => p.name.toLowerCase().includes('micro') || p.maxAmount <= 5000000) || programs[2];
-        setMicroFinancing(micro || null);
-      } catch (error) {
-        console.error("Error loading home programs", error);
-      }
-    };
-    fetchPrograms();
+    // Analytics or scroll to top
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -40,46 +22,50 @@ export default function EstructuraHome() {
       <Navbar />
 
       <main className="home-main-content">
-        {/* ── NOTICIAS DESTACADAS (FULL WIDTH) ── */}
+        {/* ── NOTICIAS DESTACADAS ── */}
         <section className="featured-news" style={{ padding: 0 }}>
           <NewsCarousel />
         </section>
 
-        {/* ── HERO SECTION ── */}
-        <section id="inicio" className="hero-section">
+        {/* ── HERO SECTION: CONVERSION ORIENTED ── */}
+        <section id="inicio" className="hero-section" style={{ background: 'var(--suria-cream)', padding: '10rem 0' }}>
           <div className="container">
-            <div className="hero-inner">
+            <div className="hero-inner" style={{ alignItems: 'center' }}>
               <div className="hero-text">
-                <span className="hero-badge" style={{ background: 'rgba(139, 26, 26, 0.08)', color: 'var(--uneRed)', border: '1px solid rgba(139,26,26,0.1)' }}>
-                  Aliados Estratégicos UNE Costa Rica
+                <span className="hero-badge" style={{ background: 'var(--suria-crimson)', color: 'white', padding: '0.6rem 1.5rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.75rem', letterSpacing: '2px', marginBottom: '2rem', display: 'inline-block' }}>
+                  CONVOCATORIA ABIERTA: PROGRAMA SÜRIA
                 </span>
-                <h1 style={{ fontWeight: 800 }}>
-                  Empoderando al <span className="highlight">Emprendedor</span> Costarricense
+                <h1 style={{ fontSize: '4.8rem', color: 'var(--suria-plum)', lineHeight: 1.1, marginBottom: '2.5rem' }}>
+                  El impulso que tu <span style={{ color: 'var(--suria-crimson)' }}>negocio</span> el éxito que te <span style={{ color: 'var(--suria-crimson)' }}>mereces</span>.
                 </h1>
-                <p>
-                  Acceda a soluciones financieras diseñadas para el mercado local. 
-                  Desde microcréditos hasta capital de trabajo, impulsamos su crecimiento 
-                  con la agilidad que su negocio merece.
+                <p style={{ fontSize: '1.4rem', color: 'var(--suria-brown)', opacity: 0.9, marginBottom: '3.5rem', lineHeight: 1.6 }}>
+                  Sé parte de <strong>Süria</strong>: el programa de UNE que ha transformado la vida de 1,500 mujeres en Costa Rica.
+                  Financiamiento, formación y una comunidad imparable te esperan.
                 </p>
-                <div className="hero-buttons">
-                  <button className="btn-primary" onClick={() => navigate('/financiamiento')}>
-                    Explorar créditos
+                <div className="hero-buttons" style={{ display: 'flex', gap: '20px' }}>
+                  <button 
+                    className="suria-btn" 
+                    style={{ background: 'var(--suria-crimson)', color: 'white', padding: '1.5rem 3.5rem', fontSize: '1.1rem', borderRadius: '50px', fontWeight: 800, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px', boxShadow: '0 10px 30px rgba(169, 38, 43, 0.3)' }}
+                    onClick={() => navigate('/contacto')}
+                  >
+                    Aplicar al Programa Ahora <MoveRight size={20} />
                   </button>
-                  <button className="btn-secondary" style={{ borderColor: '#ddd', color: '#666' }}>
-                    Saber Más
+                  <button 
+                    className="btn-link" 
+                    style={{ background: 'none', border: 'none', color: 'var(--suria-plum)', fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font-ui)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '1px' }} 
+                    onClick={() => navigate('/suria')}
+                  >
+                    Ver detalles de Süria
                   </button>
                 </div>
               </div>
 
               <div className="hero-image">
-                <div className="hero-image-v2">
-                  <img src={heroImage} alt="Emprendedor UNE" />
-                  <div className="hero-stat-overlay">
-                    <div className="icon"><BarChart3 size={20} /></div>
-                    <div>
-                      <div style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 600 }}>CRECIMIENTO PROMEDIO</div>
-                      <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--color-success)' }}>+24% Anual</div>
-                    </div>
+                <div className="hero-image-v2" style={{ background: 'var(--suria-peach)', transform: 'rotate(2deg)', border: '12px solid white', position: 'relative' }}>
+                  <img src={heroImage} alt="Emprendedora exitosa UNE" style={{ borderRadius: '24px' }} />
+                  <div className="hero-stat-overlay" style={{ background: 'white', borderRadius: '24px', padding: '2rem', position: 'absolute', bottom: '30px', left: '-50px', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
+                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--suria-crimson)', lineHeight: 1 }}>100%</div>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--suria-brown)', textTransform: 'uppercase', letterSpacing: '1px' }}>APOYO FEMENINO</div>
                   </div>
                 </div>
               </div>
@@ -87,254 +73,253 @@ export default function EstructuraHome() {
           </div>
         </section>
 
-        {/* ── STATS BAR ── */}
-        <section className="stats-bar">
+        {/* ── TRUST BAR ── */}
+        <section style={{ background: 'var(--suria-plum)', padding: '4rem 0' }}>
           <div className="container">
-            <div className="stats-grid-v2">
-              <div className="stat-item-v2">
-                <h3>15k+</h3>
-                <p>PYMES EN LA RED</p>
-              </div>
-              <div className="stat-item-v2">
-                <h3>92%</h3>
-                <p>TASA DE ÉXITO</p>
-              </div>
-              <div className="stat-item-v2">
-                <h3>$45M</h3>
-                <p>CAPITAL INVERTIDO</p>
-              </div>
-              <div className="stat-item-v2">
-                <h3>24h</h3>
-                <p>APROBACIÓN RÁPIDA</p>
-              </div>
-            </div>
+             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
+                <span style={{ color: 'rgba(255,255,255,0.6)', fontWeight: 800, fontSize: '0.9rem', letterSpacing: '2px' }}>CON EL RESPALDO DE:</span>
+                <span style={{ color: 'white', fontWeight: 900, fontSize: '1.2rem', opacity: 0.9 }}>Bancos Comunales</span>
+                <span style={{ color: 'white', fontWeight: 900, fontSize: '1.2rem', opacity: 0.9 }}>Red de Mujeres UNE</span>
+                <span style={{ color: 'white', fontWeight: 900, fontSize: '1.2rem', opacity: 0.9 }}>Fondo de MicroEmprendimiento</span>
+             </div>
           </div>
         </section>
 
         {/* ── CÓMO FUNCIONA ── */}
-        <section id="noticias" className="how-works-section">
+        <section id="noticias" className="how-works-section" style={{ background: 'white' }}>
           <div className="container">
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 800 }}>Cómo Funciona</h2>
-            <p style={{ color: '#64748b' }}>Su camino al éxito en tres simples pasos.</p>
+            <h2 style={{ fontSize: '3.5rem', marginBottom: '1.5rem', color: 'var(--suria-plum)' }}>Tu crecimiento en 3 pasos</h2>
+            <p style={{ color: 'var(--suria-brown)', opacity: 0.8, fontSize: '1.3rem', maxWidth: '700px', margin: '0 auto 5rem' }}>
+                Hemos simplificado el acceso al capital y formación para que te enfoques en lo que mejor haces: crear.
+            </p>
             
             <div className="how-works-grid">
-              <div className="work-step">
-                <div className="step-icon"><ClipboardList size={32} /></div>
-                <h3 style={{ marginBottom: '0.5rem' }}>Regístrate</h3>
-                <p style={{ fontSize: '0.9rem', color: '#64748b' }}>Cree su perfil empresarial en menos de 5 minutos con requisitos mínimos.</p>
+              <div className="work-step card" style={{ padding: '4rem 3rem', border: '1px solid #f0f0f0' }}>
+                <div className="step-icon" style={{ background: 'var(--suria-cream)', color: 'var(--suria-crimson)' }}><ClipboardList size={40} /></div>
+                <h3 style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>Aplica</h3>
+                <p style={{ fontSize: '1.1rem', color: 'var(--suria-brown)' }}>Únete a la plataforma y completa tu perfil de emprendedora UNE para el programa Süria.</p>
               </div>
-              <div className="work-step">
-                <div className="step-icon"><Target size={32} /></div>
-                <h3 style={{ marginBottom: '0.5rem' }}>Compara</h3>
-                <p style={{ fontSize: '0.9rem', color: '#64748b' }}>Analice entre decenas de soluciones bancarias y seleccione la que mejor se adapte a su flujo.</p>
+              <div className="work-step card" style={{ padding: '4rem 3rem', border: '1px solid #f0f0f0' }}>
+                <div className="step-icon" style={{ background: 'var(--suria-cream)', color: 'var(--suria-crimson)' }}><Target size={40} /></div>
+                <h3 style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>Capacítate</h3>
+                <p style={{ fontSize: '1.1rem', color: 'var(--suria-brown)' }}>Accede a talleres de gestión y finanzas antes de recibir tu primer microcrédito.</p>
               </div>
-              <div className="work-step">
-                <div className="step-icon"><TrendingUp size={32} /></div>
-                <h3 style={{ marginBottom: '0.5rem' }}>Crece</h3>
-                <p style={{ fontSize: '0.9rem', color: '#64748b' }}>Reciba los fondos y comience a escalar su negocio con el respaldo de la red UNE.</p>
+              <div className="work-step card" style={{ padding: '4rem 3rem', border: '1px solid #f0f0f0' }}>
+                <div className="step-icon" style={{ background: 'var(--suria-cream)', color: 'var(--suria-crimson)' }}><TrendingUp size={40} /></div>
+                <h3 style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>Escala</h3>
+                <p style={{ fontSize: '1.1rem', color: 'var(--suria-brown)' }}>Recibe el respaldo financiero de UNE y crece junto a tu comunidad en bancos comunales.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── FINANCIAMIENTO SHOWCASE ── */}
-        <section id="catalogo" className="financing-showcase">
-          <div className="container">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-               <div>
-                <h2 style={{ fontSize: '2.5rem', fontWeight: 800 }}>Financiamiento a tu Medida</h2>
-                <p style={{ color: '#64748b' }}>Soluciones capitales para cada etapa de su empresa.</p>
-               </div>
-               <button onClick={() => navigate('/financiamiento')} style={{ border: 'none', background: 'none', color: '#8B1A1A', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                Ver todos los créditos <ArrowRight size={18} />
-               </button>
-            </div>
-
-            <div className="showcase-grid">
-              {featuredFinancing.length > 0 ? featuredFinancing.map((item, index) => (
-                <div key={item.id} className={`showcase-card ${index % 2 === 0 ? 'gray' : 'blue'}`}>
-                  <span style={{ fontSize: '0.7rem', fontWeight: 800, background: index % 2 === 0 ? '#fff' : 'rgba(255,255,255,0.2)', padding: '4px 12px', border: index % 2 === 0 ? '1px solid #ddd' : 'none', borderRadius: '50px', marginBottom: '1rem', display: 'inline-block', color: index % 2 === 0 ? '#1a1a1a' : '#fff' }}>
-                    {item.notes ? item.notes.split(',')[0].toUpperCase() : 'UNE ALIADO'}
-                  </span>
-                  <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem' }}>{item.name}</h3>
-                  <p style={{ fontSize: '0.9rem', opacity: index % 2 === 0 ? 0.8 : 0.9, color: index % 2 === 0 ? '#444' : '#fff', marginBottom: '2rem' }}>
-                    {item.howToApply || `Obtén hasta ${item.amountRange} para potenciar tu negocio.`}
-                  </p>
-                  <div style={{ display: 'flex', gap: '1rem', fontSize: '0.8rem', fontWeight: 700 }}>
-                    <span>✓ {item.region}</span>
-                    <span>✓ {item.type === 'loan' ? 'Crédito Directo' : 'Apoyo Financiero'}</span>
-                  </div>
-                  <button 
-                    className="btn-plus" 
-                    style={{ position: 'absolute', bottom: '2rem', right: '2.5rem', width: '40px', height: '40px', borderRadius: '12px', background: index % 2 === 0 ? '#000' : '#fff', color: index % 2 === 0 ? '#fff' : '#8B1A1A', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }} 
-                    onClick={() => navigate(`/financiamiento?id=${item.id}`)}
-                    title="Ver detalles"
-                  >
-                    <ArrowRight size={20} />
-                  </button>
-                </div>
-              )) : (
-                 <div style={{ padding: '40px', textAlign: 'center', color: '#64748b', background: '#fff', borderRadius: '24px', gridColumn: 'span 2' }}>
-                    Consultando programas disponibles...
+        {/* ── CONTROL PANEL CTA: FINANCES & INVENTORY ── */}
+        <section className="dashboard-cta" style={{ background: 'var(--suria-plum)', padding: '10rem 0', position: 'relative', overflow: 'hidden' }}>
+           <div className="container">
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8rem', alignItems: 'center' }}>
+                 <div className="dashboard-preview" style={{ position: 'relative' }}>
+                    <div style={{ background: 'white', padding: '2.5rem', borderRadius: '30px', boxShadow: '0 40px 80px rgba(0,0,0,0.3)' }}>
+                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3rem' }}>
+                          <div style={{ padding: '1.5rem', background: 'var(--suria-cream)', borderRadius: '20px', color: 'var(--suria-crimson)' }}><Wallet size={24} /></div>
+                          <div style={{ padding: '1.5rem', background: 'var(--suria-cream)', borderRadius: '20px', color: 'var(--suria-crimson)' }}><Package size={24} /></div>
+                          <div style={{ padding: '1.5rem', background: 'var(--suria-cream)', borderRadius: '20px', color: 'var(--suria-crimson)' }}><LayoutDashboard size={24} /></div>
+                       </div>
+                       <div style={{ background: '#f8f8f8', height: '15px', width: '100%', borderRadius: '10px', marginBottom: '1.5rem' }}></div>
+                       <div style={{ background: '#f8f8f8', height: '15px', width: '80%', borderRadius: '10px', marginBottom: '1.5rem' }}></div>
+                       <div style={{ background: '#f8f8f8', height: '15px', width: '90%', borderRadius: '10px' }}></div>
+                       <div style={{ marginTop: '3rem', fontSize: '2.5rem', fontWeight: 900, color: 'var(--suria-plum)' }}>+₡450,000</div>
+                       <div style={{ fontSize: '0.8rem', color: 'var(--suria-brown)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px' }}>VENTAS DEL MES</div>
+                    </div>
+                    {/* Floating decoration */}
+                    <div style={{ position: 'absolute', top: '-40px', right: '-40px', background: 'var(--suria-gold)', color: 'var(--suria-plum)', padding: '1.5rem 2.5rem', borderRadius: '20px', fontWeight: 900, boxShadow: '0 15px 30px rgba(212, 168, 83, 0.4)' }}>
+                        Gestión Inteligente
+                    </div>
                  </div>
-              )}
-            </div>
-
-            {microFinancing && (
-              <div style={{ marginTop: '2rem', background: '#fff', padding: '1.5rem 2.5rem', borderRadius: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}>
-                <div>
-                    <h4 style={{ fontWeight: 800 }}>{microFinancing.name}</h4>
-                    <p style={{ fontSize: '0.85rem', color: '#64748b' }}>{microFinancing.howToApply?.slice(0, 150) || 'Pequeños impulsos para emprendedores jóvenes y startups locales.'}...</p>
-                </div>
-                <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: 700 }}>MÁXIMO</div>
-                      <div style={{ fontWeight: 800 }}>{microFinancing.amountRange?.split('-')[1] || '₡3M'}</div>
-                    </div>
-                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: 700 }}>ESTADO</div>
-                      <div style={{ fontWeight: 800, color: 'var(--color-success)' }}>ACTIVO</div>
-                    </div>
-                    <button className="btn-primary" onClick={() => navigate(`/financiamiento?id=${microFinancing.id}`)} style={{ padding: '0.75rem 1.5rem' }}>Solicitar</button>
-                </div>
+                 <div className="dashboard-text">
+                    <span style={{ color: 'var(--suria-gold)', fontWeight: 800, fontSize: '0.8rem', letterSpacing: '3px', textTransform: 'uppercase' }}>TU NEGOCIO EN TUS MANOS</span>
+                    <h2 style={{ fontSize: '4.2rem', color: 'white', marginTop: '2.5rem', marginBottom: '3rem', lineHeight: 1.1 }}>Toma el control total de tus <span style={{ color: 'var(--suria-gold)' }}>finanzas e inventario.</span></h2>
+                    <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '1.35rem', lineHeight: 1.7, marginBottom: '5rem' }}>
+                       Accede a herramientas exclusivas de gestión financiera diseñadas para emprendedoras.
+                       Registra tus ventas, controla tu stock en tiempo real y visualiza tu progreso mes a mes.
+                    </p>
+                    <button 
+                      className="suria-btn" 
+                      style={{ background: 'var(--suria-gold)', color: 'var(--suria-plum)', padding: '1.6rem 4rem', fontSize: '1.15rem' }}
+                      onClick={() => navigate('/presupuesto')}
+                    >
+                      Entrar a mi Panel de Control <MoveRight size={22} style={{ marginLeft: '12px' }} />
+                    </button>
+                 </div>
               </div>
-            )}
-          </div>
+           </div>
+           {/* Decorative elements */}
+           <div style={{ position: 'absolute', top: '-10%', right: '-5%', color: 'white', opacity: 0.03 }}>
+              <Flower2 size={500} strokeWidth={0.5} />
+           </div>
         </section>
 
-        {/* ── BUSINESS CONTROL ── */}
-        <section id="mi-panel" className="business-control">
-          <div className="container">
-            <div className="business-inner">
-               <div className="business-text">
-                  <span style={{ color: '#D4A853', fontWeight: 800, fontSize: '0.8rem', letterSpacing: '2px' }}>EXCLUSIVO PARA MIEMBROS</span>
-                  <h2 style={{ fontSize: '3rem', fontWeight: 800, color: '#fff', margin: '1rem 0' }}>Tu Negocio <span>Bajo Control</span></h2>
-                  <p style={{ color: '#94a3b8', fontSize: '1.1rem', marginBottom: '2.5rem' }}>
-                    Presentamos el Sistema UNE de Finanzas e Inventario. Controle sus cuentas, 
-                    ventas y stock de forma automática, sin complicaciones.
-                  </p>
-                  <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', color: '#fff', marginBottom: '3rem' }}>
-                    <li style={{ display: 'flex', alignItems: 'center', gap: '12px' }}><div style={{ background: '#8B1A1A', borderRadius: '50%', padding: '4px', display: 'flex' }}><Check size={14} /></div> Gestión inteligente de flujo de caja</li>
-                    <li style={{ display: 'flex', alignItems: 'center', gap: '12px' }}><div style={{ background: '#8B1A1A', borderRadius: '50%', padding: '4px', display: 'flex' }}><Check size={14} /></div> Control de inventario con alertas automáticas.</li>
-                    <li style={{ display: 'flex', alignItems: 'center', gap: '12px' }}><div style={{ background: '#8B1A1A', borderRadius: '50%', padding: '4px', display: 'flex' }}><Check size={14} /></div> Integrado directamente con su perfil de créditos.</li>
-                  </ul>
-                  <button className="btn-cta" style={{ background: '#8B1A1A' }} onClick={() => navigate('/presupuesto')}>
-                    Activar Gestión Gratis
-                  </button>
-               </div>
-               <div className="dashboard-preview">
-                  <div style={{ display: 'flex', gap: '8px', marginBottom: '1.5rem' }}>
-                     <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ef4444' }}></div>
-                     <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#fbbf24' }}></div>
-                     <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#22c55e' }}></div>
-                  </div>
-                  <div style={{ background: '#2d2d2d', borderRadius: '12px', padding: '1.5rem' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
-                      <div style={{ background: '#3b3b3b', padding: '1rem', borderRadius: '10px' }}>
-                        <div style={{ fontSize: '0.7rem', color: '#D4A853', fontWeight: 700 }}>VENTAS TOTALES</div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: 800 }}>₡15.4M</div>
-                      </div>
-                      <div style={{ background: '#3b3b3b', padding: '1rem', borderRadius: '10px' }}>
-                        <div style={{ fontSize: '0.7rem', color: '#ef4444', fontWeight: 700 }}>GASTOS</div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: 800 }}>₡8.2M</div>
-                      </div>
+        {/* ── SÜRIA FEATURE SHOWCASE ── */}
+        <section className="suria-feature" style={{ padding: '10rem 0', background: 'var(--suria-ivory)' }}>
+           <div className="container">
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }}>
+                 <div style={{ background: 'white', padding: '1rem', borderRadius: '40px', boxShadow: '0 30px 60px rgba(0,0,0,0.05)' }}>
+                    <div style={{ background: 'var(--suria-plum)', borderRadius: '30px', padding: '4rem', color: 'white' }}>
+                       <h3 style={{ fontSize: '2.5rem', marginBottom: '2rem', color: 'var(--suria-gold)' }}>¿Por qué Süria?</h3>
+                       <ul style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                         <li style={{ display: 'flex', gap: '15px' }}><Check color="var(--suria-gold)" /> <div><strong>Cero trámites imposibles:</strong> Diseñado para la realidad de la mujer costarricense.</div></li>
+                         <li style={{ display: 'flex', gap: '15px' }}><Check color="var(--suria-gold)" /> <div><strong>Garantía Solidaria:</strong> Tu comunidad es tu respaldo, no necesitas propiedades.</div></li>
+                         <li style={{ display: 'flex', gap: '15px' }}><Check color="var(--suria-gold)" /> <div><strong>Crecimiento Real:</strong> El 92% de nuestras emprendedoras han mejorado sus ingresos.</div></li>
+                       </ul>
                     </div>
-                    <div style={{ height: '120px', display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
-                       <div style={{ height: '40%', width: '100%', background: '#D4A853', borderRadius: '4px' }}></div>
-                       <div style={{ height: '60%', width: '100%', background: '#D4A853', borderRadius: '4px' }}></div>
-                       <div style={{ height: '80%', width: '100%', background: '#D4A853', borderRadius: '4px' }}></div>
-                       <div style={{ height: '50%', width: '100%', background: '#D4A853', borderRadius: '4px' }}></div>
-                       <div style={{ height: '90%', width: '100%', background: '#D4A853', borderRadius: '4px' }}></div>
-                    </div>
-                  </div>
-               </div>
-            </div>
-          </div>
+                 </div>
+                 <div>
+                    <span style={{ color: 'var(--suria-crimson)', fontWeight: 800, fontSize: '0.8rem', letterSpacing: '2px', fontFamily: 'var(--font-ui)', textTransform: 'uppercase' }}>APOYO REAL</span>
+                    <h2 style={{ fontSize: '3.5rem', marginTop: '1.5rem', marginBottom: '2.5rem' }}>No es solo un crédito, es una nueva <span style={{ color: 'var(--suria-crimson)' }}>oportunidad</span> de vida.</h2>
+                    <p style={{ fontSize: '1.25rem', color: 'var(--suria-brown)', lineHeight: 1.7, marginBottom: '3.5rem' }}>
+                       En UNE comprendemos que el talento está en todas partes, pero las oportunidades no. 
+                       Por eso creamos Süria, para ser el motor que encienda tu negocio.
+                    </p>
+                    <button 
+                      className="suria-btn" 
+                      style={{ background: 'var(--suria-plum)', color: 'white', padding: '1.25rem 3rem' }}
+                      onClick={() => navigate('/contacto')}
+                    >
+                      Quiero unirme al grupo de mi comunidad
+                    </button>
+                 </div>
+              </div>
+           </div>
         </section>
 
-        {/* ── HISTORIAS DE ÉXITO ── */}
-        <section className="testimonials-section">
+        {/* ── TESTIMONIALS ── */}
+        <section className="testimonials-section" style={{ padding: '8rem 0' }}>
           <div className="container">
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '3rem' }}>Historias de Éxito</h2>
+            <h2 style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>Voces de éxito</h2>
+            <p style={{ color: 'var(--suria-brown)', opacity: 0.7, fontSize: '1.2rem', marginBottom: '5rem' }}>Historias de mujeres que creyeron en sí mismas y en UNE.</p>
             <div className="testimonial-grid-v2">
-              <div className="testimonial-card-v2">
-                <div className="testimonial-user">
-                  <img src={avatarCarlos} alt="Carlos Méndez" className="user-avatar" style={{ objectFit: 'cover' }} />
-                  <div>
-                    <div style={{ fontWeight: 800 }}>Carlos Méndez</div>
-                    <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Comerciante</div>
+              {[
+                { name: 'Marielos', trade: 'Emprendedora Gastronómica', avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400&h=400', text: 'Gracias al programa de UNE, las mujeres de mi comunidad ahora tenemos voz y negocio propio.' },
+                { name: 'Katherine', trade: 'Panadería Artesanal', avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400&h=400', text: 'El acompañamiento de Süria me dio la confianza para administrar mis ventas profesionalmente.' },
+                { name: 'Ginette', trade: 'Artesanías locales', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400&h=400', text: 'UNE confió en mi talento cuando nadie más lo hizo. Hoy mi taller es una realidad.' }
+              ].map((t, i) => (
+                <div key={i} className="testimonial-card-v2 card" style={{ padding: '3.5rem 2.5rem', textAlign: 'center', transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }}>
+                  <div style={{ width: '140px', height: '140px', borderRadius: '50%', overflow: 'hidden', border: '5px solid white', margin: '0 auto 2.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
+                     <img src={t.avatar} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
+                  <div style={{ marginBottom: '2rem' }}>
+                    <div style={{ fontWeight: 900, fontSize: '1.6rem', color: 'var(--suria-plum)', marginBottom: '0.4rem' }}>{t.name}</div>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--suria-crimson)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', fontFamily: 'var(--font-ui)' }}>{t.trade}</div>
+                  </div>
+                  <div style={{ position: 'relative', padding: '0 1rem' }}>
+                    <p className="accent-phrase" style={{ fontSize: '1.25rem', color: 'var(--suria-brown)', lineHeight: 1.6, fontStyle: 'italic', opacity: 0.9 }}>"{t.text}"</p>
                   </div>
                 </div>
-                <p style={{ fontSize: '0.9rem', fontStyle: 'italic', color: '#444' }}>"Gracias al crédito Pyme de UNE, pudimos abrir nuestra tercera sucursal en Cartago y aumentar nuestra exportación en un 40%."</p>
-              </div>
-              <div className="testimonial-card-v2">
-                <div className="testimonial-user">
-                  <img src={avatarLucia} alt="Lucía Mora" className="user-avatar" style={{ objectFit: 'cover' }} />
-                  <div>
-                    <div style={{ fontWeight: 800 }}>Lucía Mora</div>
-                    <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Restaurante</div>
-                  </div>
-                </div>
-                <p style={{ fontSize: '0.9rem', fontStyle: 'italic', color: '#444' }}>"El capital de trabajo fue vital para renovar nuestra cocina."</p>
-              </div>
-              <div className="testimonial-card-v2">
-                <div className="testimonial-user">
-                  <img src={avatarEsteban} alt="Esteban Ruiz" className="user-avatar" style={{ objectFit: 'cover' }} />
-                  <div>
-                    <div style={{ fontWeight: 800 }}>Esteban Ruiz</div>
-                    <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Tecnología</div>
-                  </div>
-                </div>
-                <p style={{ fontSize: '0.9rem', fontStyle: 'italic', color: '#444' }}>"Gestionamos las finanzas con las herramientas de UNE de manera fácil."</p>
-              </div>
+              ))}
             </div>
           </div>
         </section>
-
-        {/* ── SEDES ── */}
-        <div id="contacto">
-            <SedeUbicacion />
-        </div>
 
         {/* ── FINAL CTA ── */}
-        <section className="final-cta">
-           <div className="container" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-              <h2 style={{ fontSize: '3rem', fontWeight: 900, color: '#fff' }}>¿Listo para el siguiente nivel?</h2>
-              <p style={{ fontSize: '1.2rem', opacity: 0.9, marginBottom: '3rem', color: '#fff' }}>
-                Únete a los miles de emprendedores que ya están transformando sus negocios con UNE Costa Rica.
+        <section className="final-cta" style={{ background: 'var(--suria-plum)', margin: '4rem 0', padding: '10rem 4rem', borderRadius: '40px' }}>
+           <div className="container" style={{ maxWidth: '900px' }}>
+              <span style={{ color: 'var(--suria-gold)', fontWeight: 800, fontSize: '0.9rem', letterSpacing: '3px', textTransform: 'uppercase' }}>TÚ ERES LA SIGUIENTE</span>
+              <h2 style={{ fontSize: '4.5rem', color: 'white', marginTop: '2rem', marginBottom: '3rem' }}>¿Lista para transformar tu realidad?</h2>
+              <p style={{ fontSize: '1.5rem', color: 'rgba(255,255,255,0.8)', marginBottom: '5rem', lineHeight: 1.6 }}>
+                El Programa Süria está buscando emprendedoras como tú. Déjanos tus datos y nos pondremos 
+                en contacto para explicarte cómo sumarte a un Banco Comunal de UNE.
               </p>
-              <button 
-                className="btn-primary" 
-                style={{ 
-                  background: 'var(--uneGold)', 
-                  color: '#000', 
-                  padding: '1.25rem 3.5rem', 
-                  fontSize: '1.15rem', 
-                  borderRadius: '50px', 
-                  border: 'none',
-                  fontWeight: 800,
-                  cursor: 'pointer',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
-                  transition: 'all 0.3s ease'
-                }} 
-                onClick={() => navigate('/registro')}
-                onMouseOver={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)';
-                  (e.currentTarget as HTMLElement).style.boxShadow = '0 15px 35px rgba(0,0,0,0.3)';
-                }}
-                onMouseOut={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-                  (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
-                }}
-              >
-                Comenzar Mi Aplicación
-              </button>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+                <button 
+                  className="suria-btn" 
+                  style={{ background: 'var(--suria-gold)', color: 'var(--suria-plum)', padding: '1.5rem 4rem', fontSize: '1.2rem', fontWeight: 900 }} 
+                  onClick={() => navigate('/contacto')}
+                >
+                  Solicitar Información para Aplicar
+                </button>
+              </div>
            </div>
         </section>
 
       </main>
 
       <Footer />
+
+      <style>{`
+        /* RESPONSIVE OVERRIDES FOR HOME PAGE */
+        @media (max-width: 1024px) {
+          .suria-hero-inner, 
+          .dashboard-cta .container > div,
+          .suria-feature .container > div {
+            grid-template-columns: 1fr !important;
+            text-align: center;
+            gap: 4rem !important;
+          }
+
+          .suria-hero-title,
+          .dashboard-cta h2,
+          .final-cta h2 {
+            font-size: 3.2rem !important;
+          }
+
+          .suria-feature h2 {
+            font-size: 2.8rem !important;
+          }
+
+          .suria-hero-image-container {
+             max-width: 450px;
+             margin: 0 auto;
+          }
+
+          .dashboard-preview {
+             max-width: 500px;
+             margin: 0 auto;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .suria-hero-title,
+          .dashboard-cta h2,
+          .final-cta h2 {
+            font-size: 2.5rem !important;
+          }
+
+          .suria-hero-description,
+          .dashboard-cta p,
+          .final-cta p {
+            font-size: 1.1rem !important;
+          }
+
+          .final-cta {
+             padding: 6rem 2rem !important;
+             border-radius: 0 !important;
+             margin: 2rem 0 !important;
+          }
+
+          .suria-feature h2 {
+             font-size: 2.2rem !important;
+          }
+        }
+
+        @media (max-width: 576px) {
+           .suria-hero-title {
+              font-size: 2rem !important;
+           }
+           
+           .suria-btn {
+              width: 100% !important;
+              padding: 1.25rem 2rem !important;
+              font-size: 1rem !important;
+           }
+
+           .suria-feature ul li {
+              text-align: left;
+           }
+
+           .suria-feature .suria-btn {
+              width: 100% !important;
+           }
+        }
+      `}</style>
     </div>
   )
 }

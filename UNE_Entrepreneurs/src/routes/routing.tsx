@@ -20,6 +20,8 @@ import ProtectedRoute from './ProtectedRoute';
 import BudgetPage from '../pages/UserPages/BudgetPage';
 import ProfilePage from '../pages/UserPages/ProfilePage';
 import NewsPage from '../pages/UserPages/NewsPage';
+import SuriaPage from '../pages/UserPages/Suria';
+import ContactSuria from '../pages/UserPages/ContactSuria';
 import NotFoundPage from '../pages/UserPages/NotFoundPage';
 
 const RootLayout = () => {
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
       {
         path: '/noticias',
         element: <NewsPage />,
+      },
+      {
+        path: '/suria',
+        element: <SuriaPage />,
+      },
+      {
+        path: '/contacto',
+        element: <ContactSuria />,
       },
       {
         path: '/presupuesto',

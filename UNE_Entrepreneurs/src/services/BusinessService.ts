@@ -3,7 +3,7 @@
 // ============================================================
 import type { Transaction, InventoryItem } from '../types/business';
 
-const API_BASE = 'http://localhost:3001';
+import { API_BASE } from '../config';
 
 async function handleResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
