@@ -1180,6 +1180,18 @@ h1, h2, h3, h4, h5, h6 {
   .navbar-links {
     flex-wrap: wrap;
     justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .navbar-profile {
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
+    margin-top: 0.5rem;
+    width: 100%;
+    justify-content: center;
+    border-top: 1px solid var(--color-border);
+    padding-top: 0.75rem;
   }
 
   .hero-section {
