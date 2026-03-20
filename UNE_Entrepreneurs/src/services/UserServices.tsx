@@ -1,62 +1,84 @@
+import { toast } from 'sonner';
 import type { User } from '../types/user';
 
-//PATCH
+// PATCH
 async function patchUsuarios(usuario: Partial<User>, id: string | number): Promise<User | undefined> {
   try {
-    const respuesta = await fetch("http://localhost:3001/usuarios/" + id, {
-      method: "PATCH",
+    const respuesta = await fetch('http://localhost:3001/usuarios/' + id, {
+      method: 'PATCH',
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(usuario)
-    })
+      body: JSON.stringify(usuario),
+    });
+
+    if (!respuesta.ok) {
+      throw new Error(`Error ${respuesta.status}`);
+    }
 
     const datosUsuarios = await respuesta.json();
     return datosUsuarios;
   } catch (error) {
-    console.error("Error al actualizar los cambios", error);
+    console.error('Error al actualizar los cambios', error);
+    toast.error('Error al actualizar los cambios del usuario');
   }
 }
 
-//DELETE
-async function deleteUsuarios(id: string | number): Promise<any> {
+// DELETE
+async function deleteUsuarios(id: string | number): Promise<boolean | undefined> {
   try {
-    const respuesta = await fetch("http://localhost:3001/usuarios/" + id, {
-      method: "DELETE",
-    })
+    const respuesta = await fetch('http://localhost:3001/usuarios/' + id, {
+      method: 'DELETE',
+    });
 
-    const datosUsuarios = await respuesta.json();
-    return datosUsuarios;
+    if (!respuesta.ok) {
+      throw new Error(`Error ${respuesta.status}`);
+    }
+
+    return true;
   } catch (error) {
-    console.error("Error al Eliminar el registro", error);
+    console.error('Error al Eliminar el registro', error);
+    toast.error('Error al eliminar el usuario');
   }
 }
 
+// GET
 async function getUser(): Promise<User[]> {
   try {
-    const respuesta = await fetch("http://localhost:3001/usuarios")
+    const respuesta = await fetch('http://localhost:3001/usuarios');
+    if (!respuesta.ok) {
+      throw new Error(`Error ${respuesta.status}`);
+    }
     const datos = await respuesta.json();
     return datos || [];
   } catch (error) {
-    console.error("Error al obtener los usuarios", error);
+    console.error('Error al obtener los usuarios', error);
+    toast.error('Error de conexión al obtener usuarios');
     return [];
   }
 }
 
+// POST
 async function postUser(usuario: Omit<User, 'id'>): Promise<User | undefined> {
   try {
-    const respuesta = await fetch("http://localhost:3001/usuarios", {
-      method: "POST",
+    const respuesta = await fetch('http://localhost:3001/usuarios', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(usuario)
-    })
+      body: JSON.stringify(usuario),
+    });
+
+    if (!respuesta.ok) {
+      throw new Error(`Error ${respuesta.status}`);
+    }
+
     const datos = await respuesta.json();
     return datos;
   } catch (error) {
-    console.error("Error al registrar el usuario", error);
+    console.error('Error al registrar el usuario', error);
+    toast.error('Error al registrar el usuario');
   }
 }
 
-export default { patchUsuarios, deleteUsuarios, getUser, postUser }
+export default { patchUsuarios, deleteUsuarios, getUser, postUser };

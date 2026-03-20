@@ -1,0 +1,105 @@
+/* src/styles/RolesPermisos.css */
+
+.roles-permisos-article {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.roles-permisos-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.roles-permisos-section-icon {
+  color: #4b5563;
+}
+
+.roles-permisos-section-title {
+  margin: 0;
+}
+
+.roles-permisos-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.roles-permisos-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.roles-permisos-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.roles-permisos-select {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 100px;
+  border: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  outline: none;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+  margin-top: 10px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.roles-permisos-select:focus {
+  border-color: #59233A;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(89, 35, 58, 0.1);
+}
+
+.roles-permisos-submit-wrapper {
+  margin-top: 16px;
+}
+
+.roles-permisos-submit-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.roles-permisos-header-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.roles-permisos-header-icon {
+  color: #59233A;
+}
+
+.roles-permisos-header-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+@media (max-width: 640px) {
+  .roles-permisos-article {
+    padding: 0 16px;
+  }
+  
+  .roles-permisos-select {
+    border-radius: 12px;
+    padding: 10px 16px;
+  }
+
+  .roles-permisos-submit-btn {
+    font-size: 0.9rem;
+  }
+}

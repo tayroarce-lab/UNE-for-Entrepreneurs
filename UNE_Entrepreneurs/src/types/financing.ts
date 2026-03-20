@@ -58,7 +58,7 @@ export interface Application {
   phone: string;
   message: string;
   createdAt: string;
-  status: 'new' | 'contacted' | 'resolved';
+  status: 'new' | 'pending' | 'approved' | 'rejected' | 'contacted' | 'resolved';
 }
 
 export interface Report {

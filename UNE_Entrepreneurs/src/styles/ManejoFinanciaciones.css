@@ -1,0 +1,119 @@
+/* src/Styles/ManejoFinanciaciones.css */
+
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f7f9fa;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+.admin-main-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.admin-container header {
+  background-color: #ffffff;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.admin-container header h1 {
+  font-size: 1.5rem;
+  color: #111827;
+}
+
+.admin-container button {
+  background-color: #59233A;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.admin-container header button {
+  background-color: transparent;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+}
+
+.admin-container div > h3 {
+  padding: 0 32px;
+  margin-top: 24px;
+}
+
+.admin-container div > button {
+  margin-left: 32px;
+  background-color: #fff;
+  color: #59233A;
+  border: 1px solid #59233A;
+}
+
+.admin-container div > button:hover {
+  background-color: #fdf2f8;
+}
+
+.admin-container section {
+  padding: 24px 32px;
+}
+
+.admin-container article {
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+  margin-bottom: 20px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.admin-container article h3 {
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .admin-container {
+    flex-direction: column;
+  }
+  
+  .admin-main-wrap {
+    width: 100%;
+  }
+
+  .admin-container header {
+    padding: 12px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .admin-container div > h3, .admin-container div > button {
+    padding: 0 20px;
+    margin-left: 0;
+  }
+  
+  .admin-container div > button {
+    margin: 10px 20px;
+  }
+
+  .admin-container section {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-container header h1 {
+    font-size: 1.2rem;
+  }
+  
+  .admin-container article {
+    padding: 16px;
+  }
+}

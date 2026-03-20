@@ -1,0 +1,12 @@
+node_modules
+dist
+.env
+*.log
+git_status_out.txt
+status.txt
+full_status.txt
+ls_out.txt
+list_output.txt
+out.txt
+tsc-output.txt
+tsc.txt
