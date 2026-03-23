@@ -23,7 +23,10 @@ import ProtectedRoute from './ProtectedRoute';
 import BudgetPage from '../pages/UserPages/BudgetPage';
 import ProfilePage from '../pages/UserPages/ProfilePage';
 import NewsPage from '../pages/UserPages/NewsPage';
+<<<<<<< HEAD
 import NuestraGente from '../pages/UserPages/NuestraGente';
+=======
+>>>>>>> origin/dev
 import SuriaPage from '../pages/UserPages/Suria';
 import ContactSuria from '../pages/UserPages/ContactSuria';
 import NotFoundPage from '../pages/UserPages/NotFoundPage';
@@ -50,10 +53,13 @@ const router = createBrowserRouter([
         element: <NewsPage />,
       },
       {
+<<<<<<< HEAD
         path: '/nuestra-gente',
         element: <NuestraGente />,
       },
       {
+=======
+>>>>>>> origin/dev
         path: '/suria',
         element: <SuriaPage />,
       },

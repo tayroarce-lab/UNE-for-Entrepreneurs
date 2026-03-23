@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation, Link, NavLink } from 'react-router-dom'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { LogIn, UserPlus, LogOut, LayoutDashboard, Package, Home, Banknote, PhoneCall, Newspaper, Users } from 'lucide-react'
+=======
+import { LogIn, UserPlus, LogOut, LayoutDashboard, Package, Home, PhoneCall, Newspaper, Sparkles, Menu, X } from 'lucide-react'
+>>>>>>> origin/dev
 =======
 import { LogIn, UserPlus, LogOut, LayoutDashboard, Package, Home, PhoneCall, Newspaper, Sparkles, Menu, X } from 'lucide-react'
 >>>>>>> origin/dev
@@ -100,12 +104,16 @@ export default function Navbar() {
           </li>
           <li>
 <<<<<<< HEAD
+<<<<<<< HEAD
              <NavLink to="/nuestra-gente" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Users size={16} /> Nuestra Gente
              </NavLink>
           </li>
           <li>
              <a href="/#contacto" onClick={(e) => scrollToSection(e, 'contacto')} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+=======
+             <NavLink to="/contacto" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+>>>>>>> origin/dev
 =======
              <NavLink to="/contacto" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
 >>>>>>> origin/dev

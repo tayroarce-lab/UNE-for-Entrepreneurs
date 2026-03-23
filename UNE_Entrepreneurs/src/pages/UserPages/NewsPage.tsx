@@ -186,7 +186,6 @@ export default function NewsPage() {
             {filteredNews.length} {filteredNews.length === 1 ? 'noticia' : 'noticias'}
           </span>
         </div>
-
         {/* ── RESULTADOS ── */}
         {loading ? (
           <div style={{ textAlign: 'center', padding: '100px 0', color: '#64748b' }}>Cargando mural de novedades...</div>
