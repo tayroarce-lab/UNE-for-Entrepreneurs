@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../../styles/AdminDashboard.css'
 import Swal from 'sweetalert2'
 import { toast } from 'sonner'
-import { Newspaper, PenLine, Send, Edit, Trash2, X, Image as ImageIcon, Loader, Eye, EyeOff } from 'lucide-react'
+import { Newspaper, PenLine, Send, Edit, Trash2, X, Image as ImageIcon, Loader, Eye, EyeOff, Search } from 'lucide-react'
 import { getNews, createNews, updateNews, deleteNews } from '../../services/NewsService'
 import AdminLayout from './AdminLayout'
 
@@ -19,11 +19,17 @@ export interface Noticia {
 function GestionTipsNoticias() {
   const [noticias, setNoticias] = useState<Noticia[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
   
   const [tituloInput, setTituloInput] = useState('');
   const [contenidoInput, setContenidoInput] = useState('');
   const [imagenInput, setImagenInput] = useState('');
   const [editandoId, setEditandoId] = useState<string | null>(null);
+
+  const filteredNoticias = noticias.filter(n =>
+    n.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    n.autor.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   useEffect(() => {
     cargarNoticias();
@@ -248,8 +254,29 @@ function GestionTipsNoticias() {
             </div>
 
             <div className="grid-card">
-                <div className="grid-card-label">
-                    <h3>Mural de Novedades UNE</h3>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
+                    <div className="grid-card-label" style={{ margin: 0 }}>
+                        <h3 style={{ margin: 0 }}>Mural de Novedades UNE</h3>
+                    </div>
+                    {/* Buscador */}
+                    <div style={{ position: 'relative', minWidth: '260px' }}>
+                        <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+                        <input
+                            type="text"
+                            placeholder="Buscar por título o autor..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            style={{ padding: '0.65rem 2.2rem 0.65rem 2.5rem', borderRadius: '10px', border: '1.5px solid #e2e8f0', width: '100%', fontSize: '0.9rem', outline: 'none', background: '#f8fafc' }}
+                        />
+                        {searchTerm && (
+                            <button onClick={() => setSearchTerm('')} style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', display: 'flex' }}>
+                                <X size={14} />
+                            </button>
+                        )}
+                    </div>
+                    <span style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                        {filteredNoticias.length} {filteredNoticias.length === 1 ? 'resultado' : 'resultados'}
+                    </span>
                 </div>
 
                 {loading ? (
@@ -270,7 +297,9 @@ function GestionTipsNoticias() {
                             </tr>
                         </thead>
                         <tbody>
-                            {noticias.map((noticia: Noticia) => (
+                            {filteredNoticias.length === 0 ? (
+                                <tr><td colSpan={6} style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>No se encontraron noticias con ese criterio.</td></tr>
+                            ) : filteredNoticias.map((noticia: Noticia) => (
                                 <tr key={noticia.id}>
                                     <td>
                                         {noticia.imagen ? (

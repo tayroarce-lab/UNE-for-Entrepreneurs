@@ -8,6 +8,7 @@ import Navbar from '../../components/Shared/Navbar'
 import Footer from '../../components/Shared/Footer'
 import heroImage from '../../assets/hero_une.jpg'
 import NewsCarousel from '../../components/UserComponents/NewsCarousel'
+import InteractiveMap from '../../components/Shared/InteractiveMap'
 
 export default function EstructuraHome() {
   const navigate = useNavigate();
@@ -238,6 +239,81 @@ export default function EstructuraHome() {
                 </button>
               </div>
            </div>
+        </section>
+
+        {/* ── UBICACIÓN Y HORARIOS ── */}
+        <section style={{ background: 'var(--suria-ivory)', padding: '8rem 0' }}>
+          <div className="container">
+            <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+              <span style={{ color: 'var(--suria-crimson)', fontWeight: 800, fontSize: '0.8rem', letterSpacing: '2px', fontFamily: 'var(--font-ui)', textTransform: 'uppercase' }}>ENCUÉNTRANOS</span>
+              <h2 style={{ fontSize: '3.5rem', color: 'var(--suria-plum)', marginTop: '1rem', marginBottom: '1rem' }}>Nuestra Sede & Horarios</h2>
+              <p style={{ color: 'var(--suria-brown)', opacity: 0.7, fontSize: '1.1rem' }}>Estamos aquí para acompañarte en cada paso del camino.</p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: '4rem', alignItems: 'start' }}>
+              
+              {/* Horarios */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                
+                <div className="card" style={{ padding: '3rem', borderRadius: '24px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '2.5rem' }}>
+                    <div style={{ background: 'var(--suria-crimson)', color: 'white', width: '52px', height: '52px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <h3 style={{ fontSize: '1.5rem', color: 'var(--suria-plum)', fontWeight: 800, margin: 0 }}>Horario de Atención</h3>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    {[
+                      { dias: 'Lunes – Viernes', horas: '8:00 AM – 5:00 PM', badge: 'Abierto' },
+                      { dias: 'Sábados', horas: '8:00 AM – 12:00 PM', badge: 'Medio día' },
+                      { dias: 'Domingos', horas: 'Cerrado', badge: null },
+                    ].map((h, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.25rem 1.5rem', background: i === 2 ? '#fef2f2' : 'var(--suria-ivory)', borderRadius: '14px', border: `1px solid ${i === 2 ? '#fecaca' : 'transparent'}` }}>
+                        <div>
+                          <div style={{ fontWeight: 700, color: 'var(--suria-plum)', fontSize: '0.95rem' }}>{h.dias}</div>
+                          <div style={{ fontSize: '0.85rem', color: 'var(--suria-brown)', opacity: 0.8, marginTop: '2px' }}>{h.horas}</div>
+                        </div>
+                        {h.badge && (
+                          <span style={{ background: i === 1 ? 'rgba(212,168,83,0.15)' : 'rgba(169,38,43,0.1)', color: i === 1 ? 'var(--suria-brown)' : 'var(--suria-crimson)', padding: '4px 12px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: 800 }}>
+                            {h.badge}
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="card" style={{ padding: '2.5rem 3rem', borderRadius: '24px' }}>
+                  <h3 style={{ fontSize: '1.3rem', color: 'var(--suria-plum)', fontWeight: 800, marginBottom: '1.5rem' }}>📍 Sede UNE Santa Ana</h3>
+                  <p style={{ color: 'var(--suria-brown)', lineHeight: 1.6, marginBottom: '2rem', fontSize: '1rem' }}>
+                    Diagonal a la iglesia católica,<br />San José, Santa Ana, Costa Rica.
+                  </p>
+                  <a
+                    href="https://www.google.com/maps/dir/?api=1&destination=9.9326,-84.1824"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', width: '100%', padding: '1rem', background: 'var(--suria-plum)', color: 'white', borderRadius: '12px', fontWeight: 700, textDecoration: 'none', fontSize: '0.9rem', transition: 'all 0.3s' }}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                    ¿Cómo llegar con Google Maps?
+                  </a>
+                </div>
+              </div>
+
+              {/* Mapa */}
+              <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 30px 60px rgba(0,0,0,0.1)', border: '4px solid white', height: '520px' }}>
+                <InteractiveMap height="520px" />
+              </div>
+            </div>
+          </div>
+
+          <style>{`
+            @media (max-width: 900px) {
+              .home-map-grid {
+                grid-template-columns: 1fr !important;
+              }
+            }
+          `}</style>
         </section>
 
       </main>

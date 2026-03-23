@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, Link } from 'react-router-dom'
 import { 
   LayoutDashboard, 
   Users, 
@@ -9,7 +9,8 @@ import {
   Package,
   Wallet,
   Landmark,
-  MapPin
+  MapPin,
+  Home
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import Swal from 'sweetalert2'
@@ -79,6 +80,29 @@ export default function AdminSidebar() {
       </ul>
 
       <div className="sidebar-footer">
+        <Link 
+          to="/" 
+          className="btn-view-site"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            padding: '0.85rem 1.25rem',
+            borderRadius: '12px',
+            background: 'rgba(255,255,255,0.08)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            color: 'rgba(255,255,255,0.85)',
+            textDecoration: 'none',
+            fontWeight: 700,
+            fontSize: '0.85rem',
+            transition: 'all 0.2s',
+            marginBottom: '0.75rem',
+            width: '100%',
+          }}
+        >
+          <Home size={18} />
+          <span>Ver Sitio Web</span>
+        </Link>
         <button className="btn-logout-sidebar" onClick={handleLogout}>
           <LogOut size={18} />
           <span>Cerrar Sesión</span>

@@ -408,3 +408,37 @@
     margin-bottom: 2rem !important;
   }
 }
+
+/* ── MisionVision & ValoresDiferenciadores responsive ── */
+@media (max-width: 900px) {
+  .suria-mv-grid,
+  .suria-valores-grid,
+  .suria-diff-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* MisionVision cards stack */
+  .suria-mv-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Valores cards: 1 column */
+  .suria-valores-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ValoresDiferenciadores inner padding */
+  .suria-diff-banner {
+    padding: 4rem 2rem !important;
+    border-radius: 24px !important;
+  }
+
+  /* Stats row wrap on mobile */
+  .suria-stats-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem !important;
+  }
+}

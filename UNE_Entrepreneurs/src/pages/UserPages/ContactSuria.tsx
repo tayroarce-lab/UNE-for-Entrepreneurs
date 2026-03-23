@@ -241,6 +241,51 @@ const ContactSuria: React.FC = () => {
         </div>
       </main>
 
+      {/* ── HORARIOS ── */}
+      <section style={{ background: 'var(--suria-ivory)', padding: '6rem 0' }}>
+        <div className="suria-container" style={{ maxWidth: '700px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <span style={{ color: 'var(--suria-crimson)', fontWeight: 800, fontSize: '0.8rem', letterSpacing: '2px', fontFamily: 'var(--font-ui)', textTransform: 'uppercase' }}>CUANDO VISITARNOS</span>
+            <h2 style={{ fontSize: '2.8rem', color: 'var(--suria-plum)', marginTop: '1rem' }}>Horario de Atención</h2>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            {[
+              { dias: 'Lunes – Viernes', horas: '8:00 AM – 5:00 PM', estado: 'Disponible', color: 'rgba(169,38,43,0.1)', textColor: 'var(--suria-crimson)' },
+              { dias: 'Sábados', horas: '8:00 AM – 12:00 PM', estado: 'Medio día', color: 'rgba(212,168,83,0.15)', textColor: 'var(--suria-brown)' },
+              { dias: 'Domingos y Feriados', horas: 'Cerrado', estado: null, color: '#fef2f2', textColor: '' },
+            ].map((h, i) => (
+              <div key={i} className="card" style={{ padding: '1.75rem 2.5rem', borderRadius: '18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ fontWeight: 800, color: 'var(--suria-plum)', fontSize: '1.05rem', marginBottom: '4px' }}>{h.dias}</div>
+                  <div style={{ color: 'var(--suria-brown)', opacity: 0.8, fontSize: '0.95rem' }}>{h.horas}</div>
+                </div>
+                {h.estado && (
+                  <span style={{ background: h.color, color: h.textColor, padding: '5px 14px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: 800, whiteSpace: 'nowrap' }}>
+                    {h.estado}
+                  </span>
+                )}
+              </div>
+            ))}
+
+            <div className="card" style={{ padding: '2rem 2.5rem', borderRadius: '18px', marginTop: '0.5rem' }}>
+              <p style={{ color: 'var(--suria-brown)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+                📍 Diagonal a la iglesia católica, Santa Ana, San José.
+              </p>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=9.9326,-84.1824"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', padding: '1rem', background: 'var(--suria-plum)', color: 'white', borderRadius: '12px', fontWeight: 700, textDecoration: 'none', fontSize: '0.9rem' }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                Ir con Google Maps
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* SUCCESS MODAL REPLACING SWEETALERT */}
       <PremiumModal 
         isOpen={showSuccessModal}
