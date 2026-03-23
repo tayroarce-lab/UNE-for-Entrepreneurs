@@ -84,7 +84,7 @@ function GestionTipsNoticias() {
             clearInputs();
             toast.success('Publicación actualizada con éxito');
             await cargarNoticias();
-          } catch (error) {
+          } catch {
             toast.error('Error al guardar cambios');
           }
         }
@@ -114,7 +114,7 @@ function GestionTipsNoticias() {
             clearInputs();
             toast.success('Publicado con éxito en la plataforma');
             await cargarNoticias();
-          } catch (error) {
+          } catch {
             toast.error('Error al publicar noticia');
           }
         }
@@ -152,7 +152,7 @@ function GestionTipsNoticias() {
           if (editandoId === id) handleCancelarEdicion();
           toast.success('Publicación eliminada correctamente');
           await cargarNoticias();
-        } catch (error) {
+        } catch {
           toast.error('Error al eliminar');
         }
       }
@@ -164,7 +164,7 @@ function GestionTipsNoticias() {
       await updateNews(noticia.id, { activa: !noticia.activa });
       toast.success(noticia.activa ? 'Publicación ocultada' : 'Publicación visible');
       await cargarNoticias();
-    } catch (error) {
+    } catch {
       toast.error('Error al cambiar estado');
     }
   };

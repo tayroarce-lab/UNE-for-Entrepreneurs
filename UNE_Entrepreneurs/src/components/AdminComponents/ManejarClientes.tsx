@@ -10,7 +10,8 @@ import {
   UserCircle,
   ShieldAlert,
   Trash2,
-  Save
+  Save,
+  PlusCircle
 } from 'lucide-react'
 import UserServices from '../../services/UserServices'
 import type { User } from '../../types/user'
@@ -23,10 +24,16 @@ function ManejarClientes() {
   const [loading, setLoading] = useState(true);
   const [busqueda, setBusqueda] = useState<string>('');
   const [modalAbierto, setModalAbierto] = useState<boolean>(false);
+  
+  // Selection
   const [clienteSeleccionado, setClienteSeleccionado] = useState<User | null>(null);
+  const [isCreando, setIsCreando] = useState<boolean>(false);
 
   // Form State
+  const [editNombre, setEditNombre] = useState('');
+  const [editEmail, setEditEmail] = useState('');
   const [editRole, setEditRole] = useState<'user' | 'admin'>('user');
+  const [editPassword, setEditPassword] = useState('');
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
@@ -51,9 +58,23 @@ function ManejarClientes() {
       (cliente.email || '').toLowerCase().includes(busqueda.toLowerCase())
   );
 
-  const abrirModal = (cliente: User) => {
+  const abrirModalEditar = (cliente: User) => {
+      setIsCreando(false);
       setClienteSeleccionado(cliente);
+      setEditNombre(cliente.nombre || '');
+      setEditEmail(cliente.email || '');
       setEditRole(cliente.role || 'user');
+      setEditPassword('');
+      setModalAbierto(true);
+  }
+
+  const abrirModalCrear = () => {
+      setIsCreando(true);
+      setClienteSeleccionado(null);
+      setEditNombre('');
+      setEditEmail('');
+      setEditRole('user');
+      setEditPassword('');
       setModalAbierto(true);
   }
 
@@ -75,27 +96,43 @@ function ManejarClientes() {
                   toast.success('Usuario eliminado exitosamente');
                   setModalAbierto(false);
                   cargarClientes();
-              } catch (error) {
-                  toast.error('Ocurrió un error al eliminar');
-              }
+                } catch {
+                    toast.error('Ocurrió un error al eliminar');
+                }
           }
       });
   };
 
-  const handleUpdateRole = async () => {
-      if (!clienteSeleccionado || !clienteSeleccionado.id) return;
-      if (editRole === clienteSeleccionado.role) {
-          toast.info('No hay cambios en el rol para guardar');
+  const handleUpdateUser = async () => {
+      if (!editNombre.trim() || !editEmail.trim() || (isCreando && !editPassword.trim())) {
+          toast.error('Nombre, Email y Contraseña (en creación) son campos requeridos.');
           return;
       }
       setIsSaving(true);
       try {
-          await UserServices.patchUsuarios({ role: editRole }, clienteSeleccionado.id);
-          toast.success('Rol de usuario actualizado');
+          if (isCreando) {
+              await UserServices.postUser({
+                  nombre: editNombre,
+                  email: editEmail,
+                  password: editPassword,
+                  role: editRole,
+                  createdAt: new Date().toISOString()
+              });
+              toast.success('Usuario creado exitosamente');
+          } else if (clienteSeleccionado?.id) {
+              const updates: Partial<User> = {
+                  nombre: editNombre,
+                  email: editEmail,
+                  role: editRole
+              };
+              if (editPassword) updates.password = editPassword;
+              await UserServices.patchUsuarios(updates, clienteSeleccionado.id);
+              toast.success('Información de usuario actualizada');
+          }
           setModalAbierto(false);
           cargarClientes();
-      } catch (error) {
-          toast.error('Hubo un error actualizando el rol');
+      } catch {
+          toast.error('Hubo un error guardando el usuario');
       } finally {
           setIsSaving(false);
       }
@@ -105,6 +142,12 @@ function ManejarClientes() {
     <AdminLayout>
         <header className="admin-top-header">
             <h1 style={{ fontSize: '2rem', fontWeight: 800 }}><UsersRound size={28} /> Manejo de Clientes</h1>
+            <button 
+                onClick={abrirModalCrear}
+                style={{ padding: '10px 20px', background: '#1e293b', color: '#fff', border: 'none', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+                <PlusCircle size={18} /> Nuevo Usuario
+            </button>
         </header>
 
         <main style={{ padding: 0 }}>
@@ -146,7 +189,7 @@ function ManejarClientes() {
                                     <td>
                                         <div className="row-user">
                                             <div className="row-avatar" style={{ background: '#f1f5f9', color: '#1e293b' }}>
-                                                {cliente.nombre ? cliente.nombre.charAt(0) : 'U'}
+                                                {cliente.nombre ? cliente.nombre.charAt(0).toUpperCase() : 'U'}
                                             </div>
                                             <div style={{ fontWeight: 800 }}>{cliente.nombre || 'Sin nombre'}</div>
                                         </div>
@@ -159,10 +202,10 @@ function ManejarClientes() {
                                     </td>
                                     <td>
                                         <button 
-                                            onClick={() => abrirModal(cliente)} 
+                                            onClick={() => abrirModalEditar(cliente)} 
                                             style={{ background: 'none', border: 'none', color: '#8B1A1A', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
                                         >
-                                            <Eye size={16} /> Ver Detalles / Editar
+                                            <Eye size={16} /> Editar
                                         </button>
                                     </td>
                                 </tr>
@@ -175,52 +218,87 @@ function ManejarClientes() {
             </div>
         </main>
 
-        {modalAbierto && clienteSeleccionado && (
+        {modalAbierto && (
             <div className="modal-overlay-admin" style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.75)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 }}>
-              <div className="grid-card" style={{ width: '90%', maxWidth: '600px', padding: '40px' }}>
+              <div className="grid-card" style={{ width: '90%', maxWidth: '600px', padding: '40px', maxHeight: '90vh', overflowY: 'auto' }}>
                 <div className="grid-card-label">
-                    <h2><UserCircle size={24} style={{ color: '#D4A853', verticalAlign: 'middle', marginRight: '10px' }} /> Perfil de {clienteSeleccionado.nombre}</h2>
+                    <h2>
+                        <UserCircle size={24} style={{ color: '#D4A853', verticalAlign: 'middle', marginRight: '10px' }} /> 
+                        {isCreando ? 'Crear Nuevo Usuario' : `Perfil de ${clienteSeleccionado?.nombre}`}
+                    </h2>
                     <button onClick={() => setModalAbierto(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24} /></button>
                 </div>
                 
                 <div style={{ display: 'grid', gap: '1.5rem', marginTop: '1.5rem' }}>
-                    <div style={{ padding: '20px', background: '#f8fafc', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                        <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1rem' }}><Mail size={16} color="#8B1A1A" /> <strong>Email:</strong> {clienteSeleccionado.email}</p>
-                        <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1rem' }}><Activity size={16} color="#10b981" /> <strong>ID de Usuario:</strong> {clienteSeleccionado.id}</p>
-                    </div>
-                    
-                    <div style={{ padding: '20px', border: '1px solid #e2e8f0', borderRadius: '16px' }}>
-                      <h4 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <ShieldAlert size={18} color="#f59e0b"/> Modificar Permisos
-                      </h4>
-                      <label style={{ fontWeight: 600, color: '#475569', display: 'block', marginBottom: '8px' }}>Rol en Plataforma:</label>
-                      <select 
-                          value={editRole}
-                          onChange={(e) => setEditRole(e.target.value as 'user' | 'admin')}
-                          style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #e2e8f0', outline: 'none', fontWeight: 600, background: '#fff' }}
-                      >
-                          <option value="user">Usuario Regular</option>
-                          <option value="admin">Administrador</option>
-                      </select>
-                      <button 
-                          onClick={handleUpdateRole} 
-                          disabled={isSaving}
-                          style={{ marginTop: '15px', padding: '10px 20px', background: '#D4A853', color: '#fff', border: 'none', borderRadius: '10px', fontWeight: 700, cursor: isSaving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '8px', opacity: isSaving ? 0.7 : 1 }}
-                      >
-                          <Save size={16} /> Guardar Cambios
-                      </button>
+                    <div style={{ padding: '20px', border: '1px solid #e2e8f0', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                        
+                        <div>
+                            <label style={{ fontWeight: 600, color: '#475569', display: 'block', marginBottom: '8px' }}>Nombre:</label>
+                            <input 
+                                type="text"
+                                value={editNombre}
+                                onChange={(e) => setEditNombre(e.target.value)}
+                                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #e2e8f0', outline: 'none' }}
+                                placeholder="Nombre completo"
+                            />
+                        </div>
+
+                        <div>
+                            <label style={{ fontWeight: 600, color: '#475569', display: 'block', marginBottom: '8px' }}>Email:</label>
+                            <input 
+                                type="email"
+                                value={editEmail}
+                                onChange={(e) => setEditEmail(e.target.value)}
+                                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #e2e8f0', outline: 'none' }}
+                                placeholder="correo@ejemplo.com"
+                            />
+                        </div>
+
+                        <div>
+                            <label style={{ fontWeight: 600, color: '#475569', display: 'block', marginBottom: '8px' }}>{isCreando ? 'Contraseña:' : 'Nueva Contraseña (Opcional):'}</label>
+                            <input 
+                                type="password"
+                                value={editPassword}
+                                onChange={(e) => setEditPassword(e.target.value)}
+                                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #e2e8f0', outline: 'none' }}
+                                placeholder={isCreando ? "Contraseña requerida" : "Dejar en blanco para no cambiar"}
+                            />
+                        </div>
+
+                        <div>
+                          <label style={{ fontWeight: 600, color: '#475569', display: 'block', marginBottom: '8px' }}>Rol en Plataforma:</label>
+                          <select 
+                              value={editRole}
+                              onChange={(e) => setEditRole(e.target.value as 'user' | 'admin')}
+                              style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #e2e8f0', outline: 'none', fontWeight: 600, background: '#fff' }}
+                          >
+                              <option value="user">Usuario Regular</option>
+                              <option value="admin">Administrador</option>
+                          </select>
+                        </div>
+
                     </div>
 
-                    <div style={{ padding: '20px', background: '#fef2f2', border: '1px dashed #fca5a5', borderRadius: '16px' }}>
-                        <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#dc2626', marginBottom: '10px' }}>Zona de Peligro</h4>
-                        <p style={{ fontSize: '0.9rem', color: '#991b1b', marginBottom: '15px' }}>Al eliminar a este usuario, no pódra volver a iniciar sesión y perderá el acceso a sus datos.</p>
-                        <button 
-                            onClick={handleDeleteUser}
-                            style={{ padding: '10px 20px', background: '#dc2626', color: '#fff', border: 'none', borderRadius: '10px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
-                        >
-                            <Trash2 size={16} /> Eliminar Usuario Permanentemente
-                        </button>
-                    </div>
+                    <button 
+                        onClick={handleUpdateUser} 
+                        disabled={isSaving}
+                        style={{ padding: '12px 20px', background: '#D4A853', color: '#fff', border: 'none', borderRadius: '10px', fontWeight: 700, cursor: isSaving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', opacity: isSaving ? 0.7 : 1 }}
+                    >
+                        <Save size={18} /> {isCreando ? 'Crear Usuario' : 'Guardar Cambios'}
+                    </button>
+
+                    {!isCreando && (
+                        <div style={{ padding: '20px', background: '#fef2f2', border: '1px dashed #fca5a5', borderRadius: '16px', marginTop: '10px' }}>
+                            <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#dc2626', marginBottom: '10px' }}>Zona de Peligro</h4>
+                            <p style={{ fontSize: '0.9rem', color: '#991b1b', marginBottom: '15px' }}>Al eliminar a este usuario, no pódra volver a iniciar sesión.</p>
+                            <button 
+                                onClick={handleDeleteUser}
+                                style={{ padding: '10px 20px', background: '#dc2626', color: '#fff', border: 'none', borderRadius: '10px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+                            >
+                                <Trash2 size={16} /> Eliminar Permanente
+                            </button>
+                        </div>
+                    )}
                 </div>
               </div>
             </div>

@@ -9,7 +9,9 @@ import {
   Package,
   Wallet,
   Landmark,
-  MapPin
+  MapPin,
+  Star,
+  FileText
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import Swal from 'sweetalert2'
@@ -43,11 +45,13 @@ export default function AdminSidebar() {
   const navItems = [
     { to: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/admin/usuarios', icon: Users, label: 'Usuarios' },
-    { to: '/admin/financiamiento', icon: Landmark, label: 'Catálogo de Financiamientos' },
+    { to: '/admin/financiamiento', icon: Landmark, label: 'Modelo Suria' },
     { to: '/admin/inventario', icon: Package, label: 'Inventario Global' },
     { to: '/admin/presupuesto', icon: Wallet, label: 'Presupuesto' },
     { to: '/admin/noticias', icon: Newspaper, label: 'Tips y Noticias' },
     { to: '/admin/mapa', icon: MapPin, label: 'Mapa de Sede' },
+    { to: '/admin/calificaciones', icon: Star, label: 'Calificaciones' },
+    { to: '/admin/recursos', icon: FileText, label: 'Recursos Emprendedores' },
     { to: '/admin/configuraciones', icon: Settings, label: 'Configuración' },
   ];
 

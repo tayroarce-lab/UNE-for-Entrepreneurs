@@ -9,13 +9,15 @@ import Notificaciones from '../components/AdminComponents/Configuracion/Notifica
 import CambioCredenciales from '../components/AdminComponents/Configuracion/CambioCredenciales';
 import RolesPermisos from '../components/AdminComponents/Configuracion/RolesPermisos';
 import Maps from '../components/AdminComponents/Maps';
+import Calificaciones from '../components/AdminComponents/Calificaciones';
+import GestionRecursos from '../components/AdminComponents/GestionRecursos';
 
 import HomeUsers from '../pages/UserPages/HomeUsers';
 import InicioSesion from '../pages/UserPages/InicioSesion';
 import RegistroUser from '../pages/UserPages/RegistroUser';
-import FinancingCatalogPage from '../pages/UserPages/FinancingCatalogPage';
-import FinancingDetailPage from '../pages/UserPages/FinancingDetailPage';
-import AdminFinancingPageWrapper from '../pages/UserPages/AdminFinancingPage';
+import SuriaCatalogPage from '../pages/UserPages/SuriaCatalogPage';
+import SuriaDetailPage from '../pages/UserPages/SuriaDetailPage';
+import AdminSuriaPageWrapper from '../pages/UserPages/AdminSuriaPage';
 import ProtectedRoute from './ProtectedRoute';
 import BudgetPage from '../pages/UserPages/BudgetPage';
 import ProfilePage from '../pages/UserPages/ProfilePage';
@@ -63,8 +65,8 @@ const router = createBrowserRouter([
         path: '/financiamiento',
         element: <ProtectedRoute />, // Solo usuarios logueados
         children: [
-          { path: '', element: <FinancingCatalogPage /> },
-          { path: ':id', element: <FinancingDetailPage /> },
+          { path: '', element: <SuriaCatalogPage /> },
+          { path: ':id', element: <SuriaDetailPage /> },
           { path: 'perfil', element: <ProfilePage /> },
         ]
       },
@@ -91,22 +93,11 @@ const router = createBrowserRouter([
           { path: 'configuraciones/credenciales', element: <CambioCredenciales /> },
           { path: 'configuraciones/roles', element: <RolesPermisos /> },
           { path: 'mapa', element: <Maps /> },
-          { path: 'financiamiento', element: <AdminFinancingPageWrapper /> },
+          { path: 'financiamiento', element: <AdminSuriaPageWrapper /> },
+          { path: 'calificaciones', element: <Calificaciones /> },
+          { path: 'recursos', element: <GestionRecursos /> },
         ]
       },
-      // Keep the old paths for compatibility but fix the wrapping if needed
-      // ProtectedRoute should only be used as a parent element in the route definition
-      { path: '/AdminDashboard',               element: <AdminDashboard /> },
-      { path: '/ManejarUsuarios',              element: <ManejarClientes /> },
-      { path: '/ManejarClientes',             element: <ManejarClientes /> },
-      { path: '/ManejoPresupuesto',           element: <ManejoPresupuesto /> },
-      { path: '/ManejoInventario',            element: <ManejoInventario /> },
-      { path: '/GestionTipsNoticias',         element: <GestionTipsNoticias /> },
-      { path: '/Configuraciones',             element: <Configuraciones /> },
-      { path: '/Configuraciones/Notificaciones',       element: <Notificaciones /> },
-      { path: '/Configuraciones/CambioCredenciales',   element: <CambioCredenciales /> },
-      { path: '/Configuraciones/RolesPermisos',        element: <RolesPermisos /> },
-      { path: '/MapaSucursales',               element: <Maps /> },
       {
         path: '*',
         element: <NotFoundPage />,
