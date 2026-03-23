@@ -1,0 +1,213 @@
+.recursos-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.recursos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.recursos-header h1 {
+  font-size: 1.8rem;
+  color: var(--admin-text-primary);
+  margin: 0 0 5px 0;
+}
+
+.recursos-header p {
+  color: var(--admin-text-secondary);
+  margin: 0;
+}
+
+.btn-add-recurso {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--uneRed, #e11d48);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-add-recurso:hover {
+  background-color: #be123c;
+}
+
+.recursos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.recurso-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+}
+
+.recurso-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.recurso-type {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.recurso-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.recurso-status.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.recurso-status.inactive {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.recurso-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 10px 0;
+}
+
+.recurso-desc {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0 0 15px 0;
+  flex-grow: 1;
+}
+
+.recurso-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #0284c7;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.recurso-link:hover {
+  text-decoration: underline;
+}
+
+.recurso-actions {
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 15px;
+  margin-top: auto;
+}
+
+.btn-action {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.btn-edit {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.btn-edit:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.btn-delete {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.btn-delete:hover {
+  background: #fecaca;
+  color: #991b1b;
+}
+
+.btn-toggle {
+  background: none;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+}
+
+.btn-toggle:hover {
+  background: #f8fafc;
+  color: #334155;
+}
+
+/* Modal form adjustments */
+.recurso-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group-recurso {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.form-group-recurso label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.form-group-recurso input,
+.form-group-recurso textarea,
+.form-group-recurso select {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #1e293b;
+  font-family: inherit;
+}
+
+.form-group-recurso input:focus,
+.form-group-recurso textarea:focus,
+.form-group-recurso select:focus {
+  outline: none;
+  border-color: var(--uneRed, #e11d48);
+  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.1);
+}

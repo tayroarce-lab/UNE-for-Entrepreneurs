@@ -7,7 +7,7 @@ import type { FinancingProgram, FinancingType, FinancingStatus, LegalStatus } fr
 import { FINANCING_TYPES, REGIONS, SECTORS } from '../../types/financing';
 import { isValidUrl, sanitizeHtml } from '../../utils/financingUtils';
 
-interface AdminFinancingFormProps {
+interface AdminSuriaFormProps {
   program?: FinancingProgram | null;
   onSave: (program: Omit<FinancingProgram, 'id'> & { id?: string }) => void;
   onCancel: () => void;
@@ -44,12 +44,12 @@ const emptyProgram: Omit<FinancingProgram, 'id'> = {
   attachments: [],
 };
 
-export default function AdminFinancingForm({
+export default function AdminSuriaForm({
   program,
   onSave,
   onCancel,
   loading = false,
-}: AdminFinancingFormProps) {
+}: AdminSuriaFormProps) {
   const [formData, setFormData] = useState<Omit<FinancingProgram, 'id'> & { id?: string }>(
     program ? { ...program } : { ...emptyProgram }
   );
@@ -204,7 +204,7 @@ export default function AdminFinancingForm({
       <div className="financingModalHeader">
         <h2 className="financingModalTitle" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           {program ? <Pencil size={22} color="var(--uneGold)" /> : <PlusCircle size={22} color="var(--uneGold)" />}
-          {program ? 'Editar Programa' : 'Nuevo Programa de Financiamiento'}
+          {program ? 'Editar Modelo Suria' : 'Nuevo Modelo Suria'}
         </h2>
         <button className="financingModalClose" onClick={onCancel} aria-label="Cerrar">
           <X size={20} />
@@ -695,7 +695,7 @@ export default function AdminFinancingForm({
             id="saveFinancingBtn"
             style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
           >
-             <Save size={16} /> {loading ? 'Guardando...' : program ? 'Actualizar Programa' : 'Crear Programa'}
+             <Save size={16} /> {loading ? 'Guardando...' : program ? 'Actualizar Modelo' : 'Crear Modelo'}
           </button>
         </div>
       </form>

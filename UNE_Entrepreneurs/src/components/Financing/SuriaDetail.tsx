@@ -21,7 +21,7 @@ import ContactModal from './ContactModal';
 import ReportModal from './ReportModal';
 import '../../styles/financing.css';
 
-export default function FinancingDetail() {
+export default function SuriaDetail() {
   const { id } = useParams<{ id: string }>();
   const { user } = useAuth();
   const [program, setProgram] = useState<FinancingProgram | null>(null);
@@ -46,7 +46,7 @@ export default function FinancingDetail() {
         setProgram(data);
       } catch (err) {
         console.error('Error al cargar programa:', err);
-        setError('No se pudo cargar el programa de financiamiento.');
+        setError('No se pudo cargar el modelo de financiamiento.');
       } finally {
         setLoading(false);
       }
@@ -65,7 +65,7 @@ export default function FinancingDetail() {
         createdAt: new Date().toISOString(),
       });
       setFavorited(true);
-      toast.success('Programa guardado en favoritos');
+      toast.success('Modelo guardado en favoritos');
     } catch (err) {
       console.error('Error:', err);
       toast.error('Error al guardar en favoritos');
@@ -82,10 +82,10 @@ export default function FinancingDetail() {
         estimatedAmount: program.maxAmount,
         type: 'income',
         date: new Date().toISOString().split('T')[0],
-        note: `Ingreso estimado por programa: ${program.name}`,
+        note: `Ingreso estimado por modelo: ${program.name}`,
       });
       setBudgetAdded(true);
-      toast.success('Programa agregado al presupuesto simulado');
+      toast.success('Modelo agregado al presupuesto simulado');
     } catch (err) {
       console.error('Error:', err);
       toast.error('Error al agregar al presupuesto');
@@ -97,7 +97,7 @@ export default function FinancingDetail() {
         <Navbar />
         <div className="financingLoading" style={{ minHeight: '60vh' }}>
           <div className="financingSpinner" />
-          <span className="financingLoadingText">Cargando detalle del programa...</span>
+          <span className="financingLoadingText">Cargando detalle del modelo...</span>
         </div>
       </>
     );
@@ -109,7 +109,7 @@ export default function FinancingDetail() {
         <Navbar />
         <div className="financingDetailPage">
           <div className="financingAlert financingAlertError" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <XCircle size={18} /> {error || 'Programa no encontrado'}
+            <XCircle size={18} /> {error || 'Modelo no encontrado'}
           </div>
           <Link to="/financiamiento" className="financingBtn financingBtnSecondary">
             ← Volver al catálogo
@@ -137,7 +137,7 @@ export default function FinancingDetail() {
         <nav className="financingBreadcrumbs" aria-label="Migas de pan">
           <Link to="/">Inicio</Link>
           <span className="financingBreadcrumbSep">/</span>
-          <Link to="/financiamiento">Créditos para Pymes</Link>
+          <Link to="/financiamiento">Modelo Suria</Link>
           <span className="financingBreadcrumbSep">/</span>
           <span style={{ color: 'var(--textPrimary)', fontWeight: 600 }}>{program.name}</span>
         </nav>
