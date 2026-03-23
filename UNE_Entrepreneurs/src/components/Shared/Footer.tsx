@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { MapPin, Mail, Phone, Facebook, Linkedin, Instagram } from 'lucide-react'
+import '../../styles/Footer.css'
 
 const TiktokIcon = ({ size = 20 }: { size?: number }) => (
   <svg 

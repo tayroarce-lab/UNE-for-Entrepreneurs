@@ -9,6 +9,7 @@ import Footer from '../../components/Shared/Footer'
 import heroImage from '../../assets/hero_une.jpg'
 import NewsCarousel from '../../components/UserComponents/NewsCarousel'
 import InteractiveMap from '../../components/Shared/InteractiveMap'
+import '../../styles/Home.css'
 
 export default function EstructuraHome() {
   const navigate = useNavigate();

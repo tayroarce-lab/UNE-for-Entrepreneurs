@@ -7,6 +7,7 @@ import { notifications } from '../../utils/notifications'
 import { ArrowLeft } from 'lucide-react'
 
 import type { User } from '../../types/user'
+import '../../styles/Auth.css'
 
 /**
  * RegistroUserComponent: Página de registro con Navbar y Footer integrados.

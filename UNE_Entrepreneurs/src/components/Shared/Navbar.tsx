@@ -4,6 +4,7 @@ import { LogIn, UserPlus, LogOut, LayoutDashboard, Package, Home, PhoneCall, New
 import { notifications } from '../../utils/notifications'
 import { useAuth } from '../../context/AuthContext'
 import uneLogo from '../../assets/logo_une.png'
+import '../../styles/Navbar.css'
 
 export default function Navbar() {
   const { user, isAdmin, logout } = useAuth();

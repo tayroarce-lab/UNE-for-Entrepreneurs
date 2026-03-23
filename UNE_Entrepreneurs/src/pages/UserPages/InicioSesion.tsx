@@ -5,6 +5,7 @@ import Footer from '../../components/Shared/Footer'
 import { notifications } from '../../utils/notifications'
 import { ArrowLeft } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
+import '../../styles/Auth.css'
 
 /**
  * InicioSesionComponent: Página de login con Navbar y Footer integrados.
