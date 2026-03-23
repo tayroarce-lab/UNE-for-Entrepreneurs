@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import Navbar from '../../components/Shared/Navbar';
 import Footer from '../../components/Shared/Footer';
 import { Quote } from 'lucide-react';
-import marielosImg from '../../assets/marielos_chef.png';
-import katherineImg from '../../assets/katherine_panadera.png';
-import damarisImg from '../../assets/damaris_artesana.png';
-import ginetteImg from '../../assets/ginette_artesana.png';
+import marielosImg from '../../assets/Marielos.png';
+import katherineImg from '../../assets/katherine.png';
+import damarisImg from '../../assets/Damaris.png';
+import ginetteImg from '../../assets/Ginette.png';
 
 export default function NuestraGente() {
   useEffect(() => {
@@ -15,24 +15,15 @@ export default function NuestraGente() {
   const casosDeExito = [
     {
       id: 1,
-      nombre: "Marielos",
-      profesion: "Cocinera",
-      ubicacion: "Bagaces",
-      cita: "Hoy estamos de fiesta por saber que las mujeres de Bagaces fueron escuchadas por UNE.",
-      imagen: marielosImg,
-      colorTag: "#facc15" 
+      nombre: "Damaris",
+      profesion: "Artesana",
+      ubicacion: "Emprendedora",
+      cita: "Confiaron en mí, en mi capacidad, y lo más bonito es ver cómo se realizan mis sueños, ver mi taller creciendo gracias a las oportunidades que nos han dado.",
+      imagen: damarisImg,
+      colorTag: "#60a5fa"
     },
     {
       id: 2,
-      nombre: "Katherine",
-      profesion: "Panadera",
-      ubicacion: "Emprendedora",
-      cita: "Esta ha sido una experiencia muy bonita, con compañeras muy buenas y una guía que está siempre presente.",
-      imagen: katherineImg,
-      colorTag: "#f472b6"
-    },
-    {
-      id: 3,
       nombre: "Ginette",
       profesion: "Artesana",
       ubicacion: "Emprendedora",
@@ -41,13 +32,22 @@ export default function NuestraGente() {
       colorTag: "#4ade80"
     },
     {
-      id: 4,
-      nombre: "Damaris",
-      profesion: "Artesana",
+      id: 3,
+      nombre: "Katherine",
+      profesion: "Panadera",
       ubicacion: "Emprendedora",
-      cita: "Confiaron en mí, en mi capacidad, y lo más bonito es ver cómo se realizan mis sueños, ver mi taller creciendo gracias a las oportunidades que nos han dado.",
-      imagen: damarisImg,
-      colorTag: "#60a5fa"
+      cita: "Esta ha sido una experiencia muy bonita, con compañeras muy buenas y una guía que está siempre presente.",
+      imagen: katherineImg,
+      colorTag: "#f472b6"
+    },
+    {
+      id: 4,
+      nombre: "Marielos",
+      profesion: "Cocinera",
+      ubicacion: "Bagaces",
+      cita: "Hoy estamos de fiesta por saber que las mujeres de Bagaces fueron escuchadas por UNE.",
+      imagen: marielosImg,
+      colorTag: "#facc15" 
     }
   ];
 

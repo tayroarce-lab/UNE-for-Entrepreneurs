@@ -7,14 +7,14 @@ import type { FinancingProgram, FinancingType, UserProfile } from '../../types/f
 import { FINANCING_TYPES, REGIONS } from '../../types/financing';
 import { getFinancingPrograms } from '../../services/FinancingService';
 import { checkEligibility } from '../../utils/financingUtils';
-import FinancingCard from './FinancingCard';
+import SuriaCard from './SuriaCard';
 import Navbar from '../Shared/Navbar';
 import Footer from '../Shared/Footer';
 import EligibilityModal from './EligibilityModal';
 import successImage from '../../assets/success_story_maria.png';
 import '../../styles/financing.css';
 
-export default function UserFinancingCatalog() {
+export default function SuriaCatalog() {
   // Data
   const [programs, setPrograms] = useState<FinancingProgram[]>([]);
   const [loading, setLoading] = useState(true);
@@ -140,7 +140,7 @@ export default function UserFinancingCatalog() {
           UNIÓN NACIONAL DE EMPRENDEDORES &nbsp;|&nbsp; UNE COSTA RICA
         </span>
         <h1 className="financingHeroTitle">
-          Encuentre el financiamiento ideal para su negocio
+          Encuentre su financiamiento con el Modelo Suria
         </h1>
         <form className="financingSearchBar" onSubmit={handleSearch} role="search">
           <input
@@ -295,7 +295,7 @@ export default function UserFinancingCatalog() {
             <>
               <div className="financingCardsGrid">
                 {programs.map((program) => (
-                  <FinancingCard
+                  <SuriaCard
                     key={program.id}
                     program={program}
                     onCheckEligibility={setEligibilityProgram}
@@ -350,7 +350,7 @@ export default function UserFinancingCatalog() {
               </h2>
               <div className="financingSuggestionsGrid">
                 {suggestions.map((prog) => (
-                  <FinancingCard key={prog.id} program={prog} />
+                  <SuriaCard key={prog.id} program={prog} />
                 ))}
               </div>
             </section>

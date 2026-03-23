@@ -12,11 +12,11 @@ import {
 } from '../../services/FinancingService';
 import { formatDate } from '../../utils/financingUtils';
 import { useAuth } from '../../context/AuthContext';
-import AdminFinancingForm from './AdminFinancingForm';
+import AdminSuriaForm from './AdminSuriaForm';
 import AdminLayout from '../AdminComponents/AdminLayout';
 import '../../styles/AdminDashboard.css';
 
-export default function AdminFinancingPage() {
+export default function AdminSuriaPage() {
   const { isAdmin, user } = useAuth();
 
   // State
@@ -70,20 +70,20 @@ export default function AdminFinancingPage() {
     try {
       if (programData.id) {
         await updateFinancingProgram(programData.id, programData);
-        toast.success(`Programa "${programData.name}" actualizado correctamente`);
+        toast.success(`Modelo "${programData.name}" actualizado correctamente`);
       } else {
         await createFinancingProgram({
           ...programData,
           createdBy: user?.id,
         });
-        toast.success(`Programa "${programData.name}" creado correctamente`);
+        toast.success(`Modelo "${programData.name}" creado correctamente`);
       }
       setShowForm(false);
       setEditingProgram(null);
       fetchPrograms();
     } catch (error) {
       console.error('Error al guardar:', error);
-      toast.error('Error al guardar el programa');
+      toast.error('Error al guardar el modelo');
     } finally {
       setSaving(false);
     }
@@ -92,7 +92,7 @@ export default function AdminFinancingPage() {
   const handleDelete = async (program: FinancingProgram) => {
     const result = await Swal.fire({
       title: '¿Está seguro?',
-      text: `Se eliminará el programa "${program.name}". Esta acción no se puede deshacer.`,
+      text: `Se eliminará el modelo "${program.name}". Esta acción no se puede deshacer.`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#8B1A1A',
@@ -104,11 +104,11 @@ export default function AdminFinancingPage() {
     if (result.isConfirmed) {
       try {
         await deleteFinancingProgram(program.id!);
-        toast.success(`Programa "${program.name}" eliminado`);
+        toast.success(`Modelo "${program.name}" eliminado`);
         fetchPrograms();
       } catch (error) {
         console.error('Error al eliminar:', error);
-        toast.error('Error al eliminar el programa');
+        toast.error('Error al eliminar el modelo');
       }
     }
   };
@@ -140,7 +140,7 @@ export default function AdminFinancingPage() {
   return (
     <AdminLayout>
         <header className="admin-top-header">
-            <h1 style={{ fontSize: '2rem', fontWeight: 800 }}><Landmark size={28} /> Catálogo de Financiamientos</h1>
+            <h1 style={{ fontSize: '2rem', fontWeight: 800 }}><Landmark size={28} /> Modelo de Financiamiento Suria</h1>
             <button
                 className="btn-publish-v2"
                 onClick={() => {
@@ -148,7 +148,7 @@ export default function AdminFinancingPage() {
                    setShowForm(true);
                 }}
             >
-                <Plus size={18} /> Nuevo Programa
+                <Plus size={18} /> Nuevo Modelo
             </button>
         </header>
 
@@ -220,7 +220,7 @@ export default function AdminFinancingPage() {
             {showForm && (
                 <div style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.75)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000, padding: '20px' }}>
                     <div style={{ background: '#fff', borderRadius: '24px', width: '100%', maxWidth: '800px', maxHeight: '90vh', overflowY: 'auto' }}>
-                        <AdminFinancingForm
+                        <AdminSuriaForm
                             program={editingProgram}
                             onSave={handleSave}
                             onCancel={() => {

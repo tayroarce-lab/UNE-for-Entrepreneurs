@@ -6,12 +6,12 @@ import { Landmark } from 'lucide-react';
 import type { FinancingProgram } from '../../types/financing';
 import { FINANCING_TYPES } from '../../types/financing';
 
-interface FinancingCardProps {
+interface SuriaCardProps {
   program: FinancingProgram;
   onCheckEligibility?: (program: FinancingProgram) => void;
 }
 
-export default function FinancingCard({ program, onCheckEligibility }: FinancingCardProps) {
+export default function SuriaCard({ program, onCheckEligibility }: SuriaCardProps) {
   const formatAmount = (num: number) => {
     return new Intl.NumberFormat('es-CR', {
       style: 'currency',

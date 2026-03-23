@@ -2113,3 +2113,102 @@ a:hover {
 .financingCloseReasonInput {
   margin-top: 1rem;
 }
+
+/* ============================================================
+   RESPONSIVE OVERRIDES (MOBILE FIRST APPROACH)
+   ============================================================ */
+@media (max-width: 900px) {
+  /* Catalog View */
+  .financingLayout {
+    flex-direction: column;
+  }
+  
+  .financingSidebar {
+    width: 100%;
+    position: static;
+    border-right: none;
+    border-bottom: 2px solid var(--borderLight);
+    padding: 1.5rem;
+  }
+
+  .financingGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .financingHero {
+    padding: 3rem 1.5rem;
+  }
+
+  .financingHeroTitle {
+    font-size: 2rem;
+  }
+
+  /* Filters */
+  .financingFiltersHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Admin Header */
+  .financingAdminHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .financingAdminActions {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  /* Modal */
+  .financingModalContent {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  /* Detail View */
+  .financingDetailHeaderInner,
+  .financingDetailContainer {
+    grid-template-columns: 1fr;
+  }
+  
+  .financingDetailSidebar {
+    margin-top: 2rem;
+  }
+
+  /* Search & Admin Filter */
+  .financingAdminFilters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .financingAdminSearch {
+    width: 100%;
+  }
+
+  /* Modals */
+  .financingFormRow {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .financingHeroTitle, .financingDetailTitle {
+    font-size: 1.5rem;
+  }
+  
+  .financingHeroSubtitle, .financingDetailDesc {
+    font-size: 0.95rem;
+  }
+
+  .financingCardPadding {
+    padding: 1.25rem;
+  }
+  
+  .financingFeaturesGrid {
+    grid-template-columns: 1fr;
+  }
+}

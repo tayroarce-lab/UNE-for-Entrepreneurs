@@ -1,15 +1,21 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation, Link, NavLink } from 'react-router-dom'
-import { LogIn, UserPlus, LogOut, LayoutDashboard, Package, Home, Banknote, PhoneCall, Newspaper } from 'lucide-react'
+<<<<<<< HEAD
+import { LogIn, UserPlus, LogOut, LayoutDashboard, Package, Home, Banknote, PhoneCall, Newspaper, Users } from 'lucide-react'
+=======
+import { LogIn, UserPlus, LogOut, LayoutDashboard, Package, Home, PhoneCall, Newspaper, Sparkles, Menu, X } from 'lucide-react'
+>>>>>>> origin/dev
 import { notifications } from '../../utils/notifications'
 import { useAuth } from '../../context/AuthContext'
 import uneLogo from '../../assets/logo_une.png'
+import '../../styles/Navbar.css'
 
 export default function Navbar() {
   const { user, isAdmin, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,19 +25,11 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
-    e.preventDefault();
-    if (location.pathname !== '/') {
-      navigate('/');
-      setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 300);
-    } else {
-      const element = document.getElementById(sectionId);
-      if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+  // Close menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location]);
+
 
   const scrollToTop = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -65,7 +63,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`navbar-users ${scrolled ? 'scrolled' : ''}`} aria-label="Navegación principal">
+    <nav className={`navbar-users ${scrolled ? 'scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`} aria-label="Navegación principal">
       <div className="navbar-container">
         <div className="navbar-logo">
           <Link to="/" onClick={scrollToTop} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -73,20 +71,26 @@ export default function Navbar() {
               <img src={uneLogo} alt="Logo UNE" />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-               <span className="logo-text-main" style={{ color: '#fff', fontSize: '1.2rem', fontWeight: 800, lineHeight: 1 }}>UNE</span>
-               <span className="logo-text-accent" style={{ marginLeft: 0, marginTop: '2px', background: 'transparent', padding: 0, color: 'var(--uneGold)', fontSize: '0.75rem', letterSpacing: '1px' }}>COSTA RICA</span>
+               <span className="logo-text-main">UNE</span>
+               <span className="logo-text-accent">COSTA RICA</span>
             </div>
           </Link>
         </div>
-        <ul className="navbar-links" style={{ gap: '1.5rem' }}>
+
+        {/* Hamburger Menu Icon */}
+        <button className="navbar-mobile-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}>
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+
+        <ul className={`navbar-links ${menuOpen ? 'active' : ''}`} style={{ gap: '1.5rem' }}>
           <li>
              <NavLink to="/" onClick={(e) => { if(location.pathname === '/') scrollToTop(e as unknown as React.MouseEvent); }} end style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Home size={16} /> Inicio
              </NavLink>
           </li>
           <li>
-             <NavLink to="/financiamiento" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Banknote size={16} /> Créditos
+             <NavLink to="/suria" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Sparkles size={16} /> Süria
              </NavLink>
           </li>
           <li>
@@ -95,9 +99,18 @@ export default function Navbar() {
              </NavLink>
           </li>
           <li>
+<<<<<<< HEAD
+             <NavLink to="/nuestra-gente" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Users size={16} /> Nuestra Gente
+             </NavLink>
+          </li>
+          <li>
              <a href="/#contacto" onClick={(e) => scrollToSection(e, 'contacto')} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+=======
+             <NavLink to="/contacto" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+>>>>>>> origin/dev
                  <PhoneCall size={16} /> Contacto
-             </a>
+             </NavLink>
           </li>
 
           {user && (
@@ -109,53 +122,40 @@ export default function Navbar() {
           )}
 
           {isAdmin && (
-            <li style={{ marginLeft: '10px' }}>
-              <NavLink to="/admin/dashboard" className="nav-admin-badge" style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(0,0,0,0.2)', padding: '6px 15px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <li className="nav-admin-li">
+              <NavLink to="/admin/dashboard" className="nav-admin-badge" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Package size={16} /> Administrar
               </NavLink>
             </li>
           )}
 
           {user ? (
-            <li className="navbar-profile" style={{ position: 'relative', marginLeft: '25px' }}>
-              <Link to="/perfil" className="profile-trigger" style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(255,255,255,0.08)', padding: '6px 20px 6px 6px', borderRadius: '50px', transition: 'all 0.3s', border: '1px solid rgba(255,255,255,0.1)' }}>
-                <div className="profile-avatar" style={{ 
-                  width: '32px', 
-                  height: '32px', 
-                  borderRadius: '50%', 
-                  overflow: 'hidden', 
-                  background: 'var(--uneGold)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '0.8rem',
-                  fontWeight: 800,
-                  color: 'var(--uneRedDark)',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
-                }}>
+            <li className="navbar-profile">
+              <Link to="/perfil" className="profile-trigger">
+                <div className="profile-avatar">
                   {(user as any).avatar ? (
-                    <img src={(user as any).avatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={(user as any).avatar} alt="Profile" />
                   ) : (
                     getInitials(user.name)
                   )}
                 </div>
-                <div className="profile-info" style={{ display: 'flex', flexDirection: 'column' }}>
-                  <span className="profile-name" style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff' }}>{user.name.split(' ')[0]}</span>
+                <div className="profile-info">
+                  <span className="profile-name">{user.name.split(' ')[0]}</span>
                 </div>
               </Link>
-              <button className="btn-logout" onClick={handleLogout} title="Cerrar Sesión" style={{ marginLeft: '15px', background: 'none', border: 'none', color: '#fca5a5', cursor: 'pointer', transition: 'all 0.2s', padding: '8px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <button className="btn-logout" onClick={handleLogout} title="Cerrar Sesión">
                 <LogOut size={18} />
               </button>
             </li>
           ) : (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginLeft: '30px' }}>
+            <div className="navbar-auth-buttons">
               <li>
-                <Link to="/login" style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.9rem', fontWeight: 700, color: 'rgba(255,255,255,0.9)', padding: '8px 16px' }}>
+                <Link to="/login" className="btn-login-nav">
                   <LogIn size={16} /> Entrar
                 </Link>
               </li>
               <li>
-                <Link to="/registro" className="btn-register" style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.9rem', fontWeight: 800, background: 'var(--uneGold)', color: 'var(--uneRedDark)', padding: '8px 24px', borderRadius: '50px', boxShadow: '0 4px 15px rgba(212, 168, 83, 0.4)', transition: 'transform 0.2s' }}>
+                <Link to="/registro" className="btn-register">
                   <UserPlus size={16} /> Crear Cuenta
                 </Link>
               </li>

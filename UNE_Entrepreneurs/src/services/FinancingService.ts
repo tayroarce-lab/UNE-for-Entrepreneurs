@@ -9,7 +9,7 @@ import type {
   UserBudgetEntry,
 } from '../types/financing';
 
-const API_BASE = 'http://localhost:3001';
+import { API_BASE } from '../config';
 
 // --------------- Helpers ---------------
 

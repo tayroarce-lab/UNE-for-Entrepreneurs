@@ -2,7 +2,8 @@ import { useState } from 'react'
 import '../../styles/AdminDashboard.css'
 import Swal from 'sweetalert2'
 import { toast } from 'sonner'
-import { Settings, Palette, Sun, Moon, UserCircle, Save, Shield, KeyRound, Edit } from 'lucide-react'
+import { Settings, Palette, Sun, Moon, UserCircle, Save, Shield, KeyRound, Edit, History } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import AdminLayout from './AdminLayout'
 
 type Tema = 'light' | 'dark';
@@ -11,6 +12,7 @@ function Configuraciones() {
     const [tema, setTema] = useState<Tema>((localStorage.getItem('theme') as Tema) || 'light');
     const [nombre, setNombre] = useState<string>('Admin Principal');
     const [perfilImg, setPerfilImg] = useState<string | null>(localStorage.getItem('adminProfileImg') || null);
+    const navigate = useNavigate();
 
     const alternarTema = () => {
         const nuevoTema = tema === 'light' ? 'dark' : 'light';
@@ -135,11 +137,44 @@ function Configuraciones() {
                             <h3><Shield size={20} color="#f59e0b" style={{ verticalAlign: 'middle', marginRight: '10px' }} /> Seguridad</h3>
                         </div>
                         <div style={{ display: 'grid', gap: '10px' }}>
-                            <button style={{ padding: '12px', textAlign: 'left', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                <KeyRound size={16} /> Cambiar Contraseña
+                            <button 
+                                onClick={() => navigate('/admin/configuraciones/credenciales')}
+                                style={{ padding: '12px', textAlign: 'left', background: '#f8fafc', color: '#1e293b', border: '1px solid #e2e8f0', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px', transition: 'all 0.2s' }}
+                                onMouseEnter={(e) => e.currentTarget.style.background = '#e2e8f0'}
+                                onMouseLeave={(e) => e.currentTarget.style.background = '#f8fafc'}
+                            >
+                                <KeyRound size={16} color="#1e293b" /> Cambiar Contraseña
                             </button>
-                            <button style={{ padding: '12px', textAlign: 'left', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                <Shield size={16} /> Ver Log de Auditoría
+                            <button 
+                                onClick={() => {
+                                    Swal.fire({
+                                        title: 'Log de Auditoría',
+                                        html: `
+                                        <div style="text-align: left; font-size: 0.9rem; max-height: 250px; overflow-y: auto;">
+                                            <div style="padding: 10px; border-bottom: 1px solid #e2e8f0;">
+                                                <strong>Hoy 10:05 AM:</strong> Sesión iniciada desde IP 192.168.1.45
+                                            </div>
+                                            <div style="padding: 10px; border-bottom: 1px solid #e2e8f0;">
+                                                <strong>Ayer 15:30:</strong> Actualización de recursos emprendedores (Admin)
+                                            </div>
+                                            <div style="padding: 10px; border-bottom: 1px solid #e2e8f0;">
+                                                <strong>Ayer 09:15:</strong> Modificación de tasas Suria (Admin)
+                                            </div>
+                                            <div style="padding: 10px;">
+                                                <strong>20 Mar 11:20:</strong> Cambio de credenciales exitoso
+                                            </div>
+                                        </div>
+                                        `,
+                                        icon: 'info',
+                                        confirmButtonColor: '#8B1A1A',
+                                        confirmButtonText: 'Cerrar'
+                                    });
+                                }}
+                                style={{ padding: '12px', textAlign: 'left', background: '#f8fafc', color: '#1e293b', border: '1px solid #e2e8f0', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px', transition: 'all 0.2s' }}
+                                onMouseEnter={(e) => e.currentTarget.style.background = '#e2e8f0'}
+                                onMouseLeave={(e) => e.currentTarget.style.background = '#f8fafc'}
+                            >
+                                <History size={16} color="#1e293b" /> Ver Log de Auditoría
                             </button>
                         </div>
                     </div>

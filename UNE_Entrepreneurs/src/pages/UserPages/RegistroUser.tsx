@@ -7,6 +7,7 @@ import { notifications } from '../../utils/notifications'
 import { ArrowLeft } from 'lucide-react'
 
 import type { User } from '../../types/user'
+import '../../styles/Auth.css'
 
 /**
  * RegistroUserComponent: Página de registro con Navbar y Footer integrados.
@@ -47,8 +48,9 @@ export default function RegistroUserComponent() {
       return;
     }
 
-    if (formData.password.length < 6) {
-      const msg = 'La contraseña debe tener al menos 6 caracteres.';
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+    if (!passwordRegex.test(formData.password)) {
+      const msg = 'La contraseña debe tener al menos 8 caracteres, e incluir una mayúscula, un número y un carácter especial.';
       setError(msg);
       notifications.error(msg);
       return;
@@ -164,7 +166,7 @@ export default function RegistroUserComponent() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                placeholder="Mínimo 6 caracteres"
+                placeholder="Mínimo 8 caracteres (A, 1, @)"
                 required
                 disabled={loading}
               />

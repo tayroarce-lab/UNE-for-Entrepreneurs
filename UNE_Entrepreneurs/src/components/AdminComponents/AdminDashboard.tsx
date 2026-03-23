@@ -10,7 +10,8 @@ import {
   Clock,
   Plus,
   LayoutGrid,
-  FileText
+  FileText,
+  Star
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import AdminLayout from './AdminLayout'
@@ -23,7 +24,7 @@ type KPIProps = {
   valor: string | number;
   crecimiento: string;
   tendencia: 'up' | 'down';
-  icono: any;
+  icono: React.ComponentType<any>;
 }
 
 const KPICard = ({ titulo, valor, crecimiento, tendencia, icono: Icon }: KPIProps) => (
@@ -59,7 +60,7 @@ function AdminDashboard() {
         
         setTotalUsers(usersRes?.length || 0);
         setTotalNews(newsRes?.length || 0);
-        setActiveNews(newsRes?.filter((n: any) => n.activa).length || 0);
+        setActiveNews(newsRes?.filter((n: { activa?: boolean }) => n.activa).length || 0);
       } catch (error) {
         console.error("Error fetching dashboard data", error);
         toast.error("Error al cargar métricas");
@@ -140,11 +141,15 @@ function AdminDashboard() {
                   </Link>
                   <Link to="/admin/financiamiento" className="action-card">
                      <div className="action-icon" style={{ backgroundColor: '#D4A853' }}><LayoutGrid size={20} /></div>
-                     <h4>Catálogo de Financiamientos</h4>
+                     <h4>Financiamiento Suria</h4>
                   </Link>
                   <Link to="/admin/configuraciones" className="action-card">
                      <div className="action-icon" style={{ backgroundColor: '#1e293b' }}><Clock size={20} /></div>
                      <h4>Ver Auditoría</h4>
+                  </Link>
+                  <Link to="/admin/calificaciones" className="action-card">
+                     <div className="action-icon" style={{ backgroundColor: '#fbbf24' }}><Star size={20} /></div>
+                     <h4>Gestionar Feedback</h4>
                   </Link>
                </div>
             </div>

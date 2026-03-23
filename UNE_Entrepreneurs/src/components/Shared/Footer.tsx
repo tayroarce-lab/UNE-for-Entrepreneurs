@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { MapPin, Mail, Phone, Facebook, Linkedin, Instagram } from 'lucide-react'
+import '../../styles/Footer.css'
 
 const TiktokIcon = ({ size = 20 }: { size?: number }) => (
   <svg 
@@ -69,6 +70,8 @@ export default function Footer() {
             <li><a href="/" onClick={(e) => goTo(e, '/')}>Inicio</a></li>
             <li><a href="/login" onClick={(e) => goTo(e, '/login')}>Iniciar Sesión</a></li>
             <li><a href="/registro" onClick={(e) => goTo(e, '/registro')}>Registrarse</a></li>
+            <li><a href="/noticias" onClick={(e) => goTo(e, '/noticias')}>Noticias</a></li>
+            <li><a href="/nuestra-gente" onClick={(e) => goTo(e, '/nuestra-gente')}>Nuestra Gente</a></li>
             <li><a href="/financiamiento" onClick={(e) => goTo(e, '/financiamiento')}>Catálogo</a></li>
           </ul>
         </div>

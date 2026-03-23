@@ -1,6 +1,5 @@
+import { API_BASE } from '../config';
 import type { Noticia } from '../components/AdminComponents/GestionTipsNoticias';
-
-const API_BASE = 'http://localhost:3001';
 
 async function handleResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
