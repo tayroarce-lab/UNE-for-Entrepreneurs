@@ -9,6 +9,7 @@ import Notificaciones from '../components/AdminComponents/Configuracion/Notifica
 import CambioCredenciales from '../components/AdminComponents/Configuracion/CambioCredenciales';
 import RolesPermisos from '../components/AdminComponents/Configuracion/RolesPermisos';
 import Maps from '../components/AdminComponents/Maps';
+import GestionSolicitudes from '../components/AdminComponents/GestionSolicitudes';
 
 import HomeUsers from '../pages/UserPages/HomeUsers';
 import InicioSesion from '../pages/UserPages/InicioSesion';
@@ -96,6 +97,7 @@ const router = createBrowserRouter([
           { path: 'presupuesto', element: <ManejoPresupuesto /> },
           { path: 'inventario', element: <ManejoInventario /> },
           { path: 'noticias', element: <GestionTipsNoticias /> },
+          { path: 'solicitudes-contacto', element: <GestionSolicitudes /> },
           { path: 'configuraciones', element: <Configuraciones /> },
           { path: 'configuraciones/notificaciones', element: <Notificaciones /> },
           { path: 'configuraciones/credenciales', element: <CambioCredenciales /> },

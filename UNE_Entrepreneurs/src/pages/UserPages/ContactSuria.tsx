@@ -4,6 +4,8 @@ import Footer from '../../components/Shared/Footer';
 import PremiumModal from '../../components/Shared/PremiumModal';
 import { Mail, Phone, MapPin, Send, ArrowLeft, Flower2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { postContacto } from '../../services/ContactService';
+import { toast } from 'sonner';
 import '../../styles/Suria.css';
 
 const ContactSuria: React.FC = () => {
@@ -28,24 +30,44 @@ const ContactSuria: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.nombre || !formData.telefono || !formData.email || !formData.ubicacion || !formData.negocio || !formData.mensaje) {
+      toast.error("Por favor completa todos los campos requeridos.");
+      return;
+    }
+
     setLoading(true);
 
-    // Simulando envío
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      // 1. Save to JSON Server Backend
+      await postContacto(formData);
+
+      // 2. Send email via FormSubmit API (Free, no backend required)
+      fetch('https://formsubmit.co/ajax/tarcebfwd@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: '🔔 Nueva Solicitud de Contacto - Süria',
+          Nombre: formData.nombre,
+          Teléfono: formData.telefono,
+          Email: formData.email,
+          Ubicación: formData.ubicacion,
+          Negocio: formData.negocio,
+          '¿Por qué unirse?': formData.mensaje
+        })
+      }).catch(err => console.error('FormSubmit Error:', err));
+
       setShowSuccessModal(true);
-      
       setFormData({
-        nombre: '',
-        telefono: '',
-        email: '',
-        ubicacion: '',
-        negocio: '',
-        mensaje: ''
+        nombre: '', telefono: '', email: '', ubicacion: '', negocio: '', mensaje: ''
       });
-    }, 1500);
+    } catch (error) {
+      console.error(error);
+      toast.error("Hubo un error procesando tu solicitud.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -217,6 +239,7 @@ const ContactSuria: React.FC = () => {
                     name="mensaje" 
                     value={formData.mensaje}
                     onChange={handleChange}
+                    required
                     rows={4}
                     placeholder="Contanos tus metas..."
                     style={{ width: '100%', padding: '1.25rem', borderRadius: '16px', border: '1px solid #f0f0f0', outline: 'none', background: 'var(--suria-ivory)', fontFamily: 'inherit', resize: 'none' }}

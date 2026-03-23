@@ -10,7 +10,8 @@ import {
   Wallet,
   Landmark,
   MapPin,
-  Home
+  Home,
+  Mailbox
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import Swal from 'sweetalert2'
@@ -48,6 +49,7 @@ export default function AdminSidebar() {
     { to: '/admin/inventario', icon: Package, label: 'Inventario Global' },
     { to: '/admin/presupuesto', icon: Wallet, label: 'Presupuesto' },
     { to: '/admin/noticias', icon: Newspaper, label: 'Tips y Noticias' },
+    { to: '/admin/solicitudes-contacto', icon: Mailbox, label: 'Solicitudes de Contacto' },
     { to: '/admin/mapa', icon: MapPin, label: 'Mapa de Sede' },
     { to: '/admin/configuraciones', icon: Settings, label: 'Configuración' },
   ];
