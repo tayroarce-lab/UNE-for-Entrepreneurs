@@ -163,7 +163,7 @@ export default function InventoryPanel() {
   return (
     <div className="inventory-panel">
       {/* Summary Cards */}
-      <div className="inventory-stats" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.25rem', marginBottom: '2rem' }}>
+      <div className="inventory-stats">
         <div className="stat-card premium-card inventory-main-card">
           <div className="header">
             <Package size={18} /> <span>Total Stock</span>
@@ -193,19 +193,21 @@ export default function InventoryPanel() {
         </div>
       </div>
 
-      <div className="inventory-grid" style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '2rem' }}>
+      <div className="inventory-grid">
         {/* Form Panel */}
         <aside className={`premium-card section-card ${editingId ? 'edit-highlight' : ''}`} ref={formRef}>
           <div className="section-header">
-            <h3>{editingId ? 'Editar Producto' : 'Registrar Producto'}</h3>
-            <p className="dim">{editingId ? 'Modifica los datos del artículo' : 'Gestiona tus existencias'}</p>
+            <div>
+              <h3>{editingId ? 'Editar Producto' : 'Registrar Producto'}</h3>
+              <p className="dim">{editingId ? 'Modifica los datos del artículo' : 'Gestiona tus existencias'}</p>
+            </div>
           </div>
           <div className="inventory-form" style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div className="form-group">
               <label>Nombre del Producto</label>
               <input type="text" placeholder="Ej. Camiseta Algodón S" className="premium-input" value={name} onChange={(e) => setName(e.target.value)} />
             </div>
-            <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+            <div className="form-row">
               <div className="form-group">
                 <label>Stock Inicial</label>
                 <input type="number" placeholder="Cant." className="premium-input" value={qty} onChange={(e) => setQty(e.target.value)} />
@@ -215,7 +217,7 @@ export default function InventoryPanel() {
                 <input type="number" placeholder="Alerta" className="premium-input" value={minQty} onChange={(e) => setMinQty(e.target.value)} />
               </div>
             </div>
-            <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+            <div className="form-row">
               <div className="form-group">
                 <label>Precio Costo</label>
                 <input type="number" placeholder="₡ Costo" className="premium-input" value={cost} onChange={(e) => setCost(e.target.value)} />
@@ -259,7 +261,7 @@ export default function InventoryPanel() {
 
         {/* List Panel */}
         <main className="premium-card section-card main-inv-list">
-          <div className="section-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+          <div className="section-header" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
             <div>
               <h3>Lista de Inventario</h3>
               <p className="dim">Monitoreo de productos activos</p>
@@ -492,6 +494,47 @@ export default function InventoryPanel() {
           0% { box-shadow: 0 0 0 0 rgba(123, 45, 59, 0.4); }
           70% { box-shadow: 0 0 0 10px rgba(123, 45, 59, 0); }
           100% { box-shadow: 0 0 0 0 rgba(123, 45, 59, 0); }
+        }
+
+        .inventory-stats {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.25rem;
+          margin-bottom: 2rem;
+        }
+
+        .inventory-grid {
+          display: grid;
+          grid-template-columns: 320px 1fr;
+          gap: 2rem;
+        }
+
+        .form-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.75rem;
+        }
+
+        @media (max-width: 1024px) {
+          .inventory-stats {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .inventory-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .inventory-stats {
+            grid-template-columns: 1fr;
+          }
+          .inventory-grid {
+            grid-template-columns: 1fr;
+          }
+          .form-row {
+            grid-template-columns: 1fr;
+          }
         }
       `}</style>
     </div>

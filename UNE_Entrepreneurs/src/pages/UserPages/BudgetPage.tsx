@@ -16,9 +16,9 @@ export default function BudgetPage() {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f8fafc' }}>
       <Navbar />
       
-      <main style={{ flex: 1, padding: '120px 4rem 2rem' }}>
+      <main className="budget-main">
         {/* Page Header */}
-        <header className="page-header" style={{ marginBottom: '2.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+        <header className="page-header budget-header">
           <div className="title-area">
             <h1 style={{ fontSize: '2.25rem', fontWeight: 900, color: 'var(--color-dark)', letterSpacing: '-0.025em' }}>
               Panel de Control <span style={{ color: 'var(--color-primary)' }}>UNE</span>
@@ -102,6 +102,47 @@ export default function BudgetPage() {
         .tab-btn:hover:not(.active) {
           color: var(--color-dark);
           background: rgba(255,255,255,0.4);
+        }
+
+        .budget-main {
+          flex: 1;
+          padding: 2rem 4rem;
+        }
+
+        .budget-header {
+          margin-bottom: 2.5rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+          .budget-main {
+            padding: 1.5rem 2rem;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .budget-main {
+            padding: 1rem 1.5rem;
+          }
+          .budget-header {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .tab-nav-premium {
+            width: 100%;
+            overflow-x: auto;
+            justify-content: flex-start;
+          }
+          .tab-btn {
+            white-space: nowrap;
+          }
+          .panel-tip {
+            flex-direction: column;
+            text-align: center;
+          }
         }
       `}</style>
     </div>

@@ -207,7 +207,7 @@ export default function FinanzasPanel() {
   return (
     <div className="finanzas-panel">
       {/* Header Stat Cards */}
-      <div className="stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem', marginBottom: '2rem' }}>
+      <div className="stats-grid">
         <div className="stat-card premium-card">
           <div className="icon-wrap income"><DollarSign size={20} /></div>
           <div className="stat-content">
@@ -241,14 +241,14 @@ export default function FinanzasPanel() {
         </div>
       </div>
 
-      <div className="main-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem' }}>
+      <div className="main-grid">
         {/* Registro y Lista */}
         <section className={`premium-card section-card ${editingId ? 'edit-highlight' : ''}`} ref={formRef}>
           <div className="section-header">
             <h3>{editingId ? 'Editar Transacción' : 'Nueva Transacción'}</h3>
           </div>
           <div className="transaction-form" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
-            <div className="form-group" style={{ flex: 1 }}>
+            <div className="form-group" style={{ flex: '1 1 200px' }}>
               <input 
                 type="text" 
                 placeholder="Descripción (ej. Venta pedido #50)" 
@@ -257,7 +257,7 @@ export default function FinanzasPanel() {
                 className="premium-input"
               />
             </div>
-            <div className="form-group" style={{ width: '120px' }}>
+            <div className="form-group" style={{ flex: '1 1 120px' }}>
               <input 
                 type="number" 
                 placeholder="₡ Monto" 
@@ -266,14 +266,14 @@ export default function FinanzasPanel() {
                 className="premium-input"
               />
             </div>
-            <div className="form-group">
-              <select value={type} onChange={(e) => setType(e.target.value as any)} className="premium-select">
+            <div className="form-group" style={{ flex: '1 1 150px' }}>
+              <select value={type} onChange={(e) => setType((e.target.value as any) || 'income')} className="premium-select">
                 <option value="income">Ingreso (+)</option>
                 <option value="expense">Egreso (-)</option>
                 <option value="investment">Inversión (🚀)</option>
               </select>
             </div>
-            <div className="form-group">
+            <div className="form-group" style={{ flex: '1 1 150px' }}>
               <select value={category} onChange={(e) => setCategory(e.target.value)} className="premium-select">
                 <option value="Venta de Productos">Ganancias Ventas</option>
                 <option value="Costos Operativos">Costos Operativos</option>
@@ -356,6 +356,20 @@ export default function FinanzasPanel() {
         .finanzas-panel {
           padding: 1rem 0;
         }
+
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.5rem;
+          margin-bottom: 2rem;
+        }
+
+        .main-grid {
+          display: grid;
+          grid-template-columns: 2fr 1fr;
+          gap: 2rem;
+        }
+
         .premium-card {
           background: #fff;
           border-radius: 16px;
@@ -485,6 +499,29 @@ export default function FinanzasPanel() {
           0% { box-shadow: 0 0 0 0 rgba(123, 45, 59, 0.4); }
           70% { box-shadow: 0 0 0 10px rgba(123, 45, 59, 0); }
           100% { box-shadow: 0 0 0 0 rgba(123, 45, 59, 0); }
+        }
+
+        @media (max-width: 1024px) {
+          .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .main-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .stats-grid {
+            grid-template-columns: 1fr;
+          }
+          .main-grid {
+            grid-template-columns: 1fr;
+          }
+          .charts-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+          }
         }
       `}</style>
     </div>
