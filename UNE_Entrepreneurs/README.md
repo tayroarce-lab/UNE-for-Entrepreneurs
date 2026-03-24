@@ -10,8 +10,8 @@
 Este proyecto es una aplicación web responsiva diseñada bajo la arquitectura **"Mobile-First"** utilizando **React + TypeScript (Vite)**. Su propósito es digitalizar el proceso de **Incubación de Negocios** de UNE y la gestión del **Modelo Süria**, conectando a mujeres emprendedoras con recursos financieros, herramientas de capacitación y una comunidad de apoyo, todo centralizado en un mismo lugar.
 
 El desarrollo incluye dos perfiles principales:
-1. **Emprendedora (User):** Puede gestionar su perfil, acceder a un catálogo avanzado de financiamientos, crear simulaciones de presupuesto, leer noticias del ecosistema e interactuar con la línea directa del Modelo Süria.
-2. **Administradora (Admin):** Tiene acceso a un *Dashboard* analítico donde realiza las cuatro operaciones **CRUD** básicas: administrar usuarios, gestionar presupuestos simulados de las emprendedoras y mantener el portal al día publicando "Tips" y "Noticias".
+1. **Emprendedor (User):** Puede gestionar su perfil, acceder a un catálogo avanzado de financiamientos, crear simulaciones de presupuesto, leer noticias del ecosistema e interactuar con la línea directa del Modelo Süria.
+2. **Administrador (Admin):** Tiene acceso a un *Dashboard* analítico donde realiza las cuatro operaciones **CRUD** básicas: administrar usuarios, gestionar presupuestos simulados de las emprendedoras y mantener el portal al día publicando "Tips" y "Noticias".
 
 ---
 
