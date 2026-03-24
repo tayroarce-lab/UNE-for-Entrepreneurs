@@ -1,7 +1,7 @@
 import React from 'react';
 import { ShieldCheck, Users, HandCoins } from 'lucide-react';
 import styles from './SuriaFeature.module.css';
-import suriaWoman from '../../../assets/suria_woman.jpg';
+import suriaWoman from '../../../assets/suria_hero.png';
 
 interface Benefit {
   id: number;

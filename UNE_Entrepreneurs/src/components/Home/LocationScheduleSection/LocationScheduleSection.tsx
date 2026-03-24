@@ -1,6 +1,6 @@
 import React from 'react';
 import { Clock, MapPin } from 'lucide-react';
-import InteractiveMap from '../../UserComponents/InteractiveMap';
+import InteractiveMap from '../../UserComponents/InteractiveMap/InteractiveMap';
 import styles from './LocationScheduleSection.module.css';
 
 interface LocationScheduleSectionProps {

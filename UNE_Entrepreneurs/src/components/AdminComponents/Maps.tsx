@@ -1,5 +1,5 @@
 import { Map as MapIcon, Navigation, Home } from 'lucide-react';
-import InteractiveMap from '../Shared/InteractiveMap';
+import InteractiveMap from '../UserComponents/InteractiveMap/InteractiveMap';
 import '../../styles/AdminDashboard.css';
 import AdminLayout from './AdminLayout';
 

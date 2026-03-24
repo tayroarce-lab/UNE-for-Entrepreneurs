@@ -1,5 +1,5 @@
 import { MapPin, Navigation, Map as MapIcon } from 'lucide-react'
-import InteractiveMap from './InteractiveMap'
+import InteractiveMap from '../UserComponents/InteractiveMap/InteractiveMap';
 
 export default function SedeUbicacion() {
   const DESTINATION_COORDS = [9.9326, -84.1824];

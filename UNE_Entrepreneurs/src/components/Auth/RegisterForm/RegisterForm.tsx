@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import UserServices from '../../../services/UserServices';
 import { notifications } from '../../../utils/notifications';
-import { User } from '../../../types/user';
+import type { User } from '../../../types/user';
 import styles from './RegisterForm.module.css';
 
 const RegisterForm: React.FC = () => {

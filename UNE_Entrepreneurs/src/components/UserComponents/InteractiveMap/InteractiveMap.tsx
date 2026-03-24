@@ -22,6 +22,7 @@ interface MapSedeProps {
   center?: [number, number];
   zoom?: number;
   label?: string;
+  height?: string;
 }
 
 const DESTINATION_DEFAULT: [number, number] = [9.9326, -84.1824];
@@ -29,10 +30,11 @@ const DESTINATION_DEFAULT: [number, number] = [9.9326, -84.1824];
 const InteractiveMap: React.FC<MapSedeProps> = ({ 
   center = DESTINATION_DEFAULT, 
   zoom = 15,
-  label = "Sede UNE - Santa Ana Centro"
+  label = "Sede UNE - Santa Ana Centro",
+  height
 }) => {
   return (
-    <div className={styles.mapContainer}>
+    <div className={styles.mapContainer} style={height ? { height } : undefined}>
       <MapContainer 
         center={center} 
         zoom={zoom} 
