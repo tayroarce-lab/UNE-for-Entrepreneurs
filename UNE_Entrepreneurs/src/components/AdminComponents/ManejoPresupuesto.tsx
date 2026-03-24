@@ -156,37 +156,32 @@ function ManejoPresupuesto() {
 
         <main style={{ padding: 0 }}>
             {/* BUDGET SUMMARY CARD */}
-            <div className="grid-card" style={{ 
-                background: 'linear-gradient(135deg, #40102b 0%, #1e293b 100%)', 
-                color: '#fff',
-                marginBottom: '30px',
-                padding: '40px'
-            }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div className="grid-card budget-summary-card">
+                <div className="summary-header">
                     <div>
-                        <span style={{ fontSize: '0.9rem', opacity: 0.8, fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span className="summary-label">
                             <DollarSign size={16} /> BALANCE GENERAL - RED UNE
                         </span>
-                        <h1 style={{ fontSize: '3.5rem', fontWeight: 800, margin: '15px 0', color: '#fff' }}>
+                        <h1 className="summary-total">
                            ₡{balanceTotal.toLocaleString()}
                         </h1>
                     </div>
-                    <div style={{ background: 'rgba(255,255,255,0.1)', padding: '15px', borderRadius: '16px', backdropFilter: 'blur(10px)' }}>
+                    <div className="summary-icon">
                         <Wallet size={32} />
                     </div>
                 </div>
                 
-                <div style={{ display: 'flex', gap: '40px', marginTop: '10px' }}>
-                    <div>
-                        <p style={{ margin: 0, fontSize: '0.85rem', opacity: 0.7, fontWeight: 600 }}>Total Ingresos</p>
-                        <p style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#4ade80', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <div className="summary-stats">
+                    <div className="stat-item">
+                        <p className="stat-label">Total Ingresos</p>
+                        <p className="stat-value income">
                             <TrendingUp size={18} /> +₡{ingresosSuma.toLocaleString()}
                         </p>
                     </div>
-                    <div style={{ height: '50px', width: '1px', background: 'rgba(255,255,255,0.1)' }}></div>
-                    <div>
-                        <p style={{ margin: 0, fontSize: '0.85rem', opacity: 0.7, fontWeight: 600 }}>Total Egresos</p>
-                        <p style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#f87171', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <div className="stat-divider"></div>
+                    <div className="stat-item">
+                        <p className="stat-label">Total Egresos</p>
+                        <p className="stat-value expense">
                             <TrendingDown size={18} /> -₡{egresosSuma.toLocaleString()}
                         </p>
                     </div>
@@ -205,56 +200,37 @@ function ManejoPresupuesto() {
                         <p>Analizando registros financieros...</p>
                     </div>
                 ) : (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                    <div className="transaction-list">
                         {transacciones.length > 0 ? transacciones.map((t) => (
-                            <div key={t.id} style={{ 
-                                display: 'flex', 
-                                justifyContent: 'space-between', 
-                                alignItems: 'center', 
-                                padding: '20px', 
-                                background: '#f8fafc', 
-                                borderRadius: '16px',
-                                border: '1px solid #f1f5f9',
-                                transition: 'all 0.2s'
-                            }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '15px', flex: 1 }}>
-                                    <div style={{ 
-                                        width: '40px', 
-                                        height: '40px', 
-                                        borderRadius: '10px', 
-                                        background: t.type === 'income' ? '#f0fdf4' : '#fef2f2', 
-                                        color: t.type === 'income' ? '#16a34a' : '#dc2626',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center'
-                                    }}>
+                            <div key={t.id} className="transaction-item">
+                                <div className="transaction-main">
+                                    <div className={`transaction-icon-box ${t.type}`}>
                                         {t.type === 'income' ? <TrendingUp size={20} /> : <TrendingDown size={20} />}
                                     </div>
-                                    <div>
-                                        <div style={{ fontWeight: 800, fontSize: '1rem' }}>{t.description} <span style={{fontSize: '0.7rem', color: '#94a3b8', background: '#e2e8f0', padding: '2px 6px', borderRadius: '4px', marginLeft: '8px'}}>{t.category}</span></div>
-                                        <div style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600 }}>{new Date(t.date).toLocaleDateString()}</div>
+                                    <div className="transaction-info">
+                                        <div className="transaction-title">
+                                            {t.description} 
+                                            <span className="transaction-category">{t.category}</span>
+                                        </div>
+                                        <div className="transaction-date">{new Date(t.date).toLocaleDateString()}</div>
                                     </div>
                                 </div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                                    <div style={{ 
-                                        fontSize: '1.15rem', 
-                                        fontWeight: 800, 
-                                        color: t.type === 'income' ? '#16a34a' : '#dc2626' 
-                                    }}>
+                                <div className="transaction-side">
+                                    <div className={`transaction-amount ${t.type}`}>
                                         {t.type === 'income' ? '+' : '-'}₡{Number(t.amount).toLocaleString()}
                                     </div>
                                     
-                                    <div style={{ display: 'flex', gap: '10px', marginLeft: '15px' }}>
+                                    <div className="transaction-actions">
                                         <button 
                                             onClick={() => abrirModalEditar(t)}
-                                            style={{ padding: '8px', background: 'none', border: '1px solid #e2e8f0', borderRadius: '8px', cursor: 'pointer', color: '#D4A853', display: 'flex', alignItems: 'center' }}
+                                            className="action-btn edit"
                                             title="Editar"
                                         >
                                             <Edit size={16} />
                                         </button>
                                         <button 
                                             onClick={() => handleEliminar(t.id)}
-                                            style={{ padding: '8px', background: '#fee2e2', border: 'none', borderRadius: '8px', cursor: 'pointer', color: '#dc2626', display: 'flex', alignItems: 'center' }}
+                                            className="action-btn delete"
                                             title="Eliminar"
                                         >
                                             <Trash2 size={16} />

@@ -1,3 +1,227 @@
+/* ============================================================
+   BUDGET & TRANSACTIONS (New Responsive Classes)
+   ============================================================ */
+.budget-summary-card {
+  background: linear-gradient(135deg, var(--suria-plum) 0%, #1e293b 100%);
+  color: #fff;
+  margin-bottom: 1.5rem;
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius-lg);
+}
+
+@media (min-width: 768px) {
+  .budget-summary-card {
+    padding: 3rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.summary-label {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 1px;
+}
+
+.summary-total {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 10px 0;
+  color: #fff !important;
+}
+
+@media (min-width: 768px) {
+  .summary-total {
+    font-size: 3.5rem;
+    margin: 15px 0;
+  }
+}
+
+.summary-icon {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.summary-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .summary-stats {
+    flex-direction: row;
+    gap: 40px;
+  }
+}
+
+.stat-item {
+  flex: 1;
+}
+
+.stat-label {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  font-weight: 600;
+}
+
+.stat-value {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-value.income { color: #4ade80; }
+.stat-value.expense { color: #f87171; }
+
+.stat-divider {
+  display: none;
+  height: 40px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 768px) {
+  .stat-divider { display: block; }
+}
+
+/* TRANSACTION LIST */
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.transaction-item {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 1.25rem;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+
+@media (min-width: 768px) {
+  .transaction-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+.transaction-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.transaction-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.transaction-icon-box.income { background: #f0fdf4; color: #16a34a; }
+.transaction-icon-box.expense { background: #fef2f2; color: #dc2626; }
+
+.transaction-info {
+  flex: 1;
+}
+
+.transaction-title {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--suria-plum);
+}
+
+.transaction-category {
+  font-size: 0.65rem;
+  color: #64748b;
+  background: #e2e8f0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.transaction-date {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.transaction-side {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 12px;
+}
+
+@media (min-width: 768px) {
+  .transaction-side {
+    border-top: none;
+    padding-top: 0;
+  }
+}
+
+.transaction-amount {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.transaction-amount.income { color: #16a34a; }
+.transaction-amount.expense { color: #dc2626; }
+
+.transaction-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  padding: 8px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.action-btn.edit { color: var(--suria-gold); }
+.action-btn.delete { color: #dc2626; background: #fee2e2; border-color: transparent; }
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
 /* src/styles/AdminDashboard.css - Mobile First Refresh */
 
 :root {

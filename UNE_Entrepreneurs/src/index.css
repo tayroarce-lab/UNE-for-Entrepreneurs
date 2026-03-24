@@ -45,6 +45,15 @@
   --radius-lg: 30px;
   --radius-full: 50px;
   --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  /* Legacy Compat (Pointing to new branding) */
+  --uneRed: var(--suria-crimson);
+  --uneRedDark: var(--suria-dark-crimson);
+  --uneRedLight: #e57373;
+  --uneGold: var(--suria-gold);
+  --uneGoldLight: #fce4b3;
+  --uneCream: var(--suria-cream);
+  --unePlum: var(--suria-plum);
 }
 
 [data-theme='dark'] {

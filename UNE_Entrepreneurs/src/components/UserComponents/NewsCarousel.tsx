@@ -79,7 +79,10 @@ export default function NewsCarousel() {
   const currentItem = news[currentIndex];
 
   return (
-    <div className="news-carousel-container">
+    <div 
+      className="news-carousel-container"
+      onMouseEnter={() => {}} // Could be used to pause if refactored to a ref-based timer
+    >
       <div className="carousel-track">
         <div className="carousel-slide">
           <div className="slide-image">
@@ -96,7 +99,13 @@ export default function NewsCarousel() {
           <div className="slide-content">
             <span className="slide-tag">LO ÚLTIMO</span>
             <h2>{currentItem.titulo}</h2>
-            <p>{currentItem.contenido}</p>
+            <p style={{ 
+              display: '-webkit-box', 
+              WebkitLineClamp: 3, 
+              WebkitBoxOrient: 'vertical', 
+              overflow: 'hidden',
+              textOverflow: 'ellipsis' 
+            }}>{currentItem.contenido}</p>
             <div className="slide-meta">
               <span><User size={14} /> {currentItem.autor}</span>
               <span><Calendar size={14} /> {new Date(currentItem.fecha || '').toLocaleDateString()}</span>

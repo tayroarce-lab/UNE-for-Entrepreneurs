@@ -37,31 +37,29 @@ export default function EstructuraHome() {
         </section>
 
         {/* ── HERO SECTION: CONVERSION ORIENTED ── */}
-        <section id="inicio" className="hero-section" style={{ background: 'var(--suria-cream)', padding: '10rem 0' }}>
+        <section id="inicio" className="hero-section">
           <div className="container">
-            <div className="hero-inner" style={{ alignItems: 'center' }}>
+            <div className="hero-inner">
               <div className="hero-text">
-                <span className="hero-badge" style={{ background: 'var(--suria-crimson)', color: 'white', padding: '0.6rem 1.5rem', borderRadius: '50px', fontWeight: 800, fontSize: '0.75rem', letterSpacing: '2px', marginBottom: '2rem', display: 'inline-block' }}>
+                <span className="hero-badge">
                   CONVOCATORIA ABIERTA: PROGRAMA SÜRIA
                 </span>
-                <h1 style={{ fontSize: '4.8rem', color: 'var(--suria-plum)', lineHeight: 1.1, marginBottom: '2.5rem' }}>
-                  El impulso que tu <span style={{ color: 'var(--suria-crimson)' }}>negocio</span> el éxito que te <span style={{ color: 'var(--suria-crimson)' }}>mereces</span>.
+                <h1 className="hero-title">
+                  El impulso que tu <span className="text-accent">negocio</span> el éxito que te <span className="text-accent">mereces</span>.
                 </h1>
-                <p style={{ fontSize: '1.4rem', color: 'var(--suria-brown)', opacity: 0.9, marginBottom: '3.5rem', lineHeight: 1.6 }}>
+                <p className="hero-description">
                   Sé parte de <strong>Süria</strong>: el programa de UNE que ha transformado la vida de 1,500 mujeres en Costa Rica.
                   Financiamiento, formación y una comunidad imparable te esperan.
                 </p>
-                <div className="hero-buttons" style={{ display: 'flex', gap: '20px' }}>
+                <div className="hero-buttons">
                   <button 
-                    className="suria-btn" 
-                    style={{ background: 'var(--suria-crimson)', color: 'white', padding: '1.5rem 3.5rem', fontSize: '1.1rem', borderRadius: '50px', fontWeight: 800, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px', boxShadow: '0 10px 30px rgba(169, 38, 43, 0.3)' }}
+                    className="suria-btn btn-primary-suria" 
                     onClick={() => navigate('/contacto')}
                   >
                     Aplicar al Programa Ahora <MoveRight size={20} />
                   </button>
                   <button 
-                    className="btn-link" 
-                    style={{ background: 'none', border: 'none', color: 'var(--suria-plum)', fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font-ui)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '1px' }} 
+                    className="btn-link-suria" 
                     onClick={() => navigate('/suria')}
                   >
                     Ver detalles de Süria

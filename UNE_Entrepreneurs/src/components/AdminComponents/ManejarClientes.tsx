@@ -172,46 +172,85 @@ function ManejarClientes() {
                         <p>Cargando lista de emprendedores...</p>
                     </div>
                 ) : (
-                    <table className="admin-table-v2">
-                        <thead>
-                            <tr>
-                                <th>CLIENTE</th>
-                                <th>CORREO ELECTRÓNICO</th>
-                                <th>ROL</th>
-                                <th>ACCIONES</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <>
+                        {/* MOBILE VIEW (CARDS) */}
+                        <div className="mobile-only mobile-card-list">
                             {clientesFiltrados.length > 0 ? clientesFiltrados.map((cliente) => (
-                                <tr key={cliente.id}>
-                                    <td>
-                                        <div className="row-user">
-                                            <div className="row-avatar" style={{ background: '#f1f5f9', color: '#1e293b' }}>
-                                                {cliente.nombre ? cliente.nombre.charAt(0).toUpperCase() : 'U'}
-                                            </div>
-                                            <div style={{ fontWeight: 800 }}>{cliente.nombre || 'Sin nombre'}</div>
+                                <div key={cliente.id} className="mobile-record-card">
+                                    <div className="card-row" style={{ alignItems: 'center', marginBottom: '1rem' }}>
+                                        <div className="row-avatar" style={{ background: 'var(--suria-cream)', color: 'var(--suria-plum)', marginRight: '12px' }}>
+                                            {cliente.nombre ? cliente.nombre.charAt(0).toUpperCase() : 'U'}
                                         </div>
-                                    </td>
-                                    <td style={{ color: '#64748b' }}>{cliente.email}</td>
-                                    <td>
+                                        <span className="card-value" style={{ textAlign: 'left', fontSize: '1rem' }}>{cliente.nombre || 'Sin nombre'}</span>
+                                    </div>
+                                    <div className="card-row">
+                                        <span className="card-label">Email</span>
+                                        <span className="card-value" style={{ wordBreak: 'break-all', maxWidth: '200px' }}>{cliente.email}</span>
+                                    </div>
+                                    <div className="card-row">
+                                        <span className="card-label">Rol</span>
                                         <span className={`status-tag ${cliente.role === 'admin' ? 'success' : 'pending'}`}>
                                             {cliente.role}
                                         </span>
-                                    </td>
-                                    <td>
+                                    </div>
+                                    <div className="card-actions">
                                         <button 
                                             onClick={() => abrirModalEditar(cliente)} 
-                                            style={{ background: 'none', border: 'none', color: '#8B1A1A', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
+                                            style={{ width: '100%', padding: '12px', background: 'var(--suria-ivory)', border: 'none', borderRadius: '8px', color: 'var(--suria-plum)', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
                                         >
-                                            <Eye size={16} /> Editar
+                                            <Eye size={16} /> Ver Detalles / Editar
                                         </button>
-                                    </td>
-                                </tr>
+                                    </div>
+                                </div>
                             )) : (
-                                <tr><td colSpan={4} style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>No se encontraron clientes registrados</td></tr>
+                                <div style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>No se encontraron clientes registrados</div>
                             )}
-                        </tbody>
-                    </table>
+                        </div>
+
+                        {/* DESKTOP VIEW (TABLE) */}
+                        <div className="desktop-only table-responsive">
+                            <table className="admin-table-v2">
+                                <thead>
+                                    <tr>
+                                        <th>CLIENTE</th>
+                                        <th>CORREO ELECTRÓNICO</th>
+                                        <th>ROL</th>
+                                        <th>ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {clientesFiltrados.length > 0 ? clientesFiltrados.map((cliente) => (
+                                        <tr key={cliente.id}>
+                                            <td>
+                                                <div className="row-user">
+                                                    <div className="row-avatar" style={{ background: '#f1f5f9', color: '#1e293b' }}>
+                                                        {cliente.nombre ? cliente.nombre.charAt(0).toUpperCase() : 'U'}
+                                                    </div>
+                                                    <div style={{ fontWeight: 800 }}>{cliente.nombre || 'Sin nombre'}</div>
+                                                </div>
+                                            </td>
+                                            <td style={{ color: '#64748b' }}>{cliente.email}</td>
+                                            <td>
+                                                <span className={`status-tag ${cliente.role === 'admin' ? 'success' : 'pending'}`}>
+                                                    {cliente.role}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <button 
+                                                    onClick={() => abrirModalEditar(cliente)} 
+                                                    style={{ background: 'none', border: 'none', color: '#8B1A1A', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
+                                                >
+                                                    <Eye size={16} /> Editar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    )) : (
+                                        <tr><td colSpan={4} style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>No se encontraron clientes registrados</td></tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </>
                 )}
             </div>
         </main>
