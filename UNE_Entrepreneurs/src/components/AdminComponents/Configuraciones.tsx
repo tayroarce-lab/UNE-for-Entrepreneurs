@@ -2,9 +2,10 @@ import { useState } from 'react'
 import '../../styles/AdminDashboard.css'
 import Swal from 'sweetalert2'
 import { toast } from 'sonner'
-import { Settings, Palette, Sun, Moon, UserCircle, Save, Shield, KeyRound, Edit, History } from 'lucide-react'
+import { Palette, Sun, Moon, UserCircle, Save, Shield, KeyRound, Edit, History } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import AdminLayout from './AdminLayout'
+import AdminHeader from './AdminHeader'
 
 type Tema = 'light' | 'dark';
 
@@ -60,11 +61,13 @@ function Configuraciones() {
 
     return (
         <AdminLayout>
-            <header className="admin-top-header">
-                <h1 style={{ fontSize: '2rem', fontWeight: 800 }}><Settings size={28} /> Configuración del Sistema</h1>
-            </header>
+            <AdminHeader placeholder="Configurar sistema, perfil o seguridad..." />
 
             <main style={{ padding: 0 }}>
+                <div style={{ marginBottom: '30px' }}>
+                    <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#3A0D23', marginBottom: '4px' }}>Configuración del Sistema</h1>
+                    <p style={{ color: '#64748B', fontSize: '1.1rem' }}>Ajusta las preferencias globales, seguridad y apariencia de tu panel.</p>
+                </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
                     
                     {/* APARIENCIA */}

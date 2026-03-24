@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AdminLayout from './AdminLayout';
+import AdminHeader from './AdminHeader';
 import { FileText, Plus, Edit, Trash2, ExternalLink, Loader, X, Save } from 'lucide-react';
 import Swal from 'sweetalert2';
 import { toast } from 'sonner';
@@ -121,13 +122,13 @@ export default function GestionRecursos() {
 
   return (
     <AdminLayout>
-      <header className="admin-top-header">
-        <h1 style={{ fontSize: '2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <FileText size={28} /> Recursos para Emprendedores
-        </h1>
-      </header>
+      <AdminHeader placeholder="Buscar recursos, guías o plantillas..." />
 
       <main style={{ padding: 0 }}>
+        <div style={{ marginBottom: '30px' }}>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#3A0D23', marginBottom: '4px' }}>Recursos para Emprendedores</h1>
+          <p style={{ color: '#64748B', fontSize: '1.1rem' }}>Sube y gestiona documentos, guías y herramientas para la comunidad UNE.</p>
+        </div>
         {/* Formulario de Creación / Edición */}
         <div className="grid-card" style={{ marginBottom: '30px' }}>
           <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--admin-text-primary)' }}>

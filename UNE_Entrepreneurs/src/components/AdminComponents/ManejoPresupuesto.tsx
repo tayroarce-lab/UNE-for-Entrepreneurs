@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../../styles/AdminDashboard.css'
-
+import AdminHeader from './AdminHeader';
 import { 
   Wallet, 
   TrendingUp, 
@@ -144,17 +144,21 @@ function ManejoPresupuesto() {
 
   return (
     <AdminLayout>
-        <header className="admin-top-header" style={{ marginBottom: '30px' }}>
-            <h1 style={{ fontSize: '2rem', fontWeight: 800 }}><Wallet size={28} /> Presupuesto Global</h1>
-            <button 
-                onClick={abrirModalCrear}
-                style={{ padding: '10px 20px', background: '#1e293b', color: '#fff', border: 'none', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
-            >
-                <PlusCircle size={18} /> Nueva Transacción
-            </button>
-        </header>
+      <AdminHeader placeholder="Buscar movimientos financieros..." />
 
-        <main style={{ padding: 0 }}>
+      <main style={{ padding: 0 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem' }}>
+          <div>
+            <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#3A0D23', margin: 0 }}>Presupuesto Global</h1>
+            <p style={{ color: '#64748B', margin: 0, marginTop: '4px', fontSize: '1.1rem' }}>Control y auditoría de los flujos de capital de la red de emprendedores UNE.</p>
+          </div>
+          <button 
+            onClick={abrirModalCrear}
+            style={{ padding: '12px 24px', background: '#E55B4B', color: '#fff', border: 'none', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}
+          >
+            <PlusCircle size={20} /> Nueva Transacción
+          </button>
+        </div>
             {/* BUDGET SUMMARY CARD */}
             <div className="grid-card budget-summary-card">
                 <div className="summary-header">

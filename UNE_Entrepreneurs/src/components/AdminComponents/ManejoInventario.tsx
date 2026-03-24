@@ -3,21 +3,22 @@ import '../../styles/AdminDashboard.css'
 import { toast } from 'sonner'
 import Swal from 'sweetalert2'
 import { 
-  Package, 
-  Download, 
   PlusCircle, 
   PackageSearch, 
+  Package,
   Activity, 
   TrendingDown, 
   TrendingUp,
   Edit,
   Trash2,
   X,
-  Save
+  Save,
+  Download
 } from 'lucide-react'
 import { getInventoryItems, createInventoryItem, updateInventoryItem, deleteInventoryItem } from '../../services/BusinessService'
 import type { InventoryItem } from '../../types/business'
 import AdminLayout from './AdminLayout'
+import AdminHeader from './AdminHeader'
 
 function ManejoInventario() {
   const [inventario, setInventario] = useState<InventoryItem[]>([]);
@@ -147,25 +148,31 @@ function ManejoInventario() {
 
   return (
     <AdminLayout>
-        <header className="admin-top-header">
-            <h1 style={{ fontSize: '2rem', fontWeight: 800 }}><Package size={28} /> Inventario Global</h1>
-            <div style={{ display: 'flex', gap: '15px' }}>
-                <button 
-                  onClick={() => toast.info("Generando reporte Excel...")} 
-                  style={{ padding: '10px 20px', background: '#fff', border: '1px solid #e2e8f0', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
-                >
-                    <Download size={18} /> Exportar
-                </button>
-                <button 
-                  onClick={abrirModalCrear} 
-                  style={{ padding: '10px 20px', background: '#1e293b', color: '#fff', border: 'none', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
-                >
-                    <PlusCircle size={18} /> Nuevo Registro
-                </button>
-            </div>
-        </header>
+      <AdminHeader placeholder="Buscar productos en el inventario..." />
 
-        <main style={{ padding: 0 }}>
+      <main style={{ padding: 0 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem' }}>
+          <div>
+            <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#3A0D23', margin: 0 }}>Inventario Global</h1>
+            <p style={{ color: '#64748B', margin: 0, marginTop: '4px', fontSize: '1.1rem' }}>Vista consolidada de todos los productos y suministros en la red de emprendedores.</p>
+          </div>
+          <div style={{ display: 'flex', gap: '15px' }}>
+            <button 
+              onClick={() => toast.info("Generando reporte Excel...")} 
+              style={{ padding: '12px 20px', background: '#fff', border: '1px solid #E2E8F0', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px', color: '#1E293B' }}
+            >
+              <Download size={18} /> Exportar
+            </button>
+            <button 
+              onClick={abrirModalCrear} 
+              style={{ padding: '12px 20px', background: '#E55B4B', color: '#fff', border: 'none', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}
+            >
+              <PlusCircle size={18} /> Nuevo Registro
+            </button>
+          </div>
+        </div>
+        
+        {/* Monitoreo Card - simplified since it's redundant now */}
             <div className="grid-card" style={{ marginBottom: '30px' }}>
                 <div className="grid-card-label">
                     <h3><PackageSearch size={20} style={{ verticalAlign: 'middle', marginRight: '10px' }} /> Monitoreo de Existencias Real-Time</h3>

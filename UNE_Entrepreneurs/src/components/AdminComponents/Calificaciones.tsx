@@ -10,6 +10,7 @@ import {
   Clock
 } from 'lucide-react';
 import AdminLayout from './AdminLayout';
+import AdminHeader from './AdminHeader';
 import { 
   getTestimonials, 
   getRatings, 
@@ -105,11 +106,13 @@ export default function Calificaciones() {
 
   return (
     <AdminLayout>
-      <div className="calificaciones-container">
-        <header className="calificaciones-header">
-          <h1>Gestión de Feedback</h1>
-          <p>Administre los testimonios y calificaciones de los usuarios de UNE Costa Rica.</p>
-        </header>
+      <AdminHeader placeholder="Buscar calificaciones o testimonios..." />
+      
+      <div className="calificaciones-container" style={{ padding: 0 }}>
+        <div style={{ marginBottom: '30px' }}>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#3A0D23', marginBottom: '4px' }}>Gestión de Feedback</h1>
+          <p style={{ color: '#64748B', fontSize: '1.1rem' }}>Administre los testimonios y calificaciones de los usuarios de UNE Costa Rica.</p>
+        </div>
 
         <section className="stats-grid-small">
           <div className="stat-box-v3">

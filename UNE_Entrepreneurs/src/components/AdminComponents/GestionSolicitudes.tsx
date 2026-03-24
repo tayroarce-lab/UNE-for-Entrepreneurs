@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import '../../styles/AdminDashboard.css';
 import Swal from 'sweetalert2';
 import { toast } from 'sonner';
-import { Mailbox, Search, Trash2, MessageSquare, FileText } from 'lucide-react';
+import { Trash2, MessageSquare, FileText } from 'lucide-react';
 import AdminLayout from './AdminLayout';
+import AdminHeader from './AdminHeader';
 import { getContactos, updateContacto, deleteContacto, type SolicitudContacto } from '../../services/ContactService';
 
 export default function GestionSolicitudes() {
@@ -122,25 +123,21 @@ export default function GestionSolicitudes() {
 
   return (
     <AdminLayout>
-      <header className="admin-top-header">
-        <h1 style={{ fontSize: '2rem', fontWeight: 800 }}><Mailbox size={28} /> Solicitudes de Contacto</h1>
-      </header>
+      <AdminHeader 
+        placeholder="Buscar solicitudes por nombre, email o negocio..." 
+        onSearch={(val) => setSearchTerm(val)}
+      />
 
       <main style={{ padding: 0 }}>
+        <div style={{ marginBottom: '30px' }}>
+          <h1 style={{ fontSize: '2.25rem', fontWeight: 800, color: 'var(--suria-plum)', marginBottom: '10px' }}>Solicitudes de Contacto</h1>
+          <p style={{ color: '#64748b' }}>Gestiona las propuestas y consultas de potenciales emprendedores de UNE Costa Rica.</p>
+        </div>
+
         <div className="grid-card">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
             <div className="grid-card-label" style={{ margin: 0 }}>
-              <h3 style={{ margin: 0 }}>Bandeja de Entrada</h3>
-            </div>
-            <div style={{ position: 'relative', minWidth: '260px' }}>
-              <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
-              <input
-                type="text"
-                placeholder="Buscar por nombre, correo..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ padding: '0.65rem 2.2rem 0.65rem 2.5rem', borderRadius: '10px', border: '1.5px solid #e2e8f0', width: '100%', fontSize: '0.9rem', outline: 'none', background: '#f8fafc' }}
-              />
+              <h3 style={{ margin: 0, color: 'var(--suria-plum)', fontWeight: 800 }}>Bandeja de Entrada</h3>
             </div>
           </div>
 

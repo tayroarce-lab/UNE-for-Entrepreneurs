@@ -1,7 +1,8 @@
-import { Map as MapIcon, Navigation, Home } from 'lucide-react';
+import { Navigation, Home } from 'lucide-react';
 import InteractiveMap from '../UserComponents/InteractiveMap/InteractiveMap';
 import '../../styles/AdminDashboard.css';
 import AdminLayout from './AdminLayout';
+import AdminHeader from './AdminHeader';
 
 // Ubicación objetivo: Diagonal la iglesia, San José, Santa Ana, Costa Rica
 const DESTINATION: [number, number] = [9.9326, -84.1824];
@@ -14,11 +15,13 @@ function Maps() {
 
   return (
     <AdminLayout>
-        <header className="admin-top-header">
-            <h1 style={{ fontSize: '2rem', fontWeight: 800 }}><MapIcon size={28} /> Ubicación de Sede</h1>
-        </header>
+      <AdminHeader placeholder="Buscar sedes o ubicaciones..." />
 
-        <main style={{ padding: 0 }}>
+      <main style={{ padding: 0 }}>
+        <div style={{ marginBottom: '30px' }}>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#3A0D23', marginBottom: '4px' }}>Ubicación de Sede</h1>
+          <p style={{ color: '#64748B', fontSize: '1.1rem' }}>Gestione las coordenadas y puntos de referencia de la red UNE Costa Rica.</p>
+        </div>
             <div className="grid-card" style={{ marginBottom: '30px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
                     <div>

@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import '../../styles/AdminDashboard.css'
 import { 
-  UsersRound, 
-  UserRoundSearch, 
   Eye, 
   X, 
   Activity, 
@@ -16,6 +14,7 @@ import type { User } from '../../types/user'
 import { toast } from 'sonner'
 import Swal from 'sweetalert2'
 import AdminLayout from './AdminLayout'
+import AdminHeader from './AdminHeader'
 
 function ManejarClientes() {
   const [clientes, setClientes] = useState<User[]>([]);
@@ -138,32 +137,28 @@ function ManejarClientes() {
 
   return (
     <AdminLayout>
-        <header className="admin-top-header">
-            <h1 style={{ fontSize: '2rem', fontWeight: 800 }}><UsersRound size={28} /> Manejo de Clientes</h1>
-            <button 
-                onClick={abrirModalCrear}
-                style={{ padding: '10px 20px', background: '#1e293b', color: '#fff', border: 'none', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
-            >
-                <PlusCircle size={18} /> Nuevo Usuario
-            </button>
-        </header>
-
+        <AdminHeader 
+            placeholder="Buscar emprendedores por nombre o email..." 
+            onSearch={(val) => setBusqueda(val)}
+        />
+        
         <main style={{ padding: 0 }}>
-            <div className="grid-card" style={{ marginBottom: '20px' }}>
-                <div className="search-bar-v2" style={{ width: '100%', maxWidth: '100%' }}>
-                    <UserRoundSearch size={18} className="search-icon-header" />
-                    <input 
-                        type="text" 
-                        placeholder="Buscar cliente por nombre o email..." 
-                        value={busqueda}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBusqueda(e.target.value)}
-                    />
-                </div>
-            </div>
+        <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '20px' }}>
+          <div>
+            <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#3A0D23', marginBottom: '4px' }}>Gestión de Usuarios</h1>
+            <p style={{ color: '#64748B', fontSize: '1.1rem' }}>Administra la red de emprendedores y roles de acceso de UNE Costa Rica.</p>
+          </div>
+          <button 
+            onClick={abrirModalCrear}
+            style={{ padding: '12px 24px', background: '#E55B4B', color: '#fff', border: 'none', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+          >
+            <PlusCircle size={20} /> Nuevo Usuario
+          </button>
+        </div>
 
             <div className="grid-card">
                 <div className="grid-card-label">
-                    <h3>Lista de Clientes de la Red UNE</h3>
+                    <h3 style={{ color: '#3A0D23', fontWeight: 800 }}>Lista de Clientes de la Red UNE</h3>
                 </div>
                 
                 {loading ? (

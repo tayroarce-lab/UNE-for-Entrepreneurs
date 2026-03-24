@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import '../../styles/AdminDashboard.css'
 import Swal from 'sweetalert2'
 import { toast } from 'sonner'
-import { Newspaper, PenLine, Send, Edit, Trash2, X, Image as ImageIcon, Loader, Eye, EyeOff, Search } from 'lucide-react'
+import { PenLine, Send, Edit, Trash2, X, Image as ImageIcon, Loader, Eye, EyeOff, Search } from 'lucide-react'
 import { getNews, createNews, updateNews, deleteNews } from '../../services/NewsService'
 import AdminLayout from './AdminLayout'
+import AdminHeader from './AdminHeader'
 
 export interface Noticia {
     id: string;
@@ -177,11 +178,16 @@ function GestionTipsNoticias() {
 
   return (
     <AdminLayout>
-        <header className="admin-top-header">
-            <h1 style={{ fontSize: '2rem', fontWeight: 800 }}><Newspaper size={28} /> Tips y Noticias</h1>
-        </header>
+        <AdminHeader 
+            placeholder="Buscar noticias o consejos por título o autor..." 
+            onSearch={(val) => setSearchTerm(val)}
+        />
 
         <main style={{ padding: 0 }}>
+        <div style={{ marginBottom: '30px' }}>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#3A0D23', marginBottom: '4px' }}>Tips y Noticias</h1>
+          <p style={{ color: '#64748B', fontSize: '1.1rem' }}>Administra el contenido informativo y educativo para la comunidad de UNE Costa Rica.</p>
+        </div>
             <div className="grid-card" style={{ marginBottom: '30px' }}>
                 <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     {editandoId ? <Edit size={24} color="#f59e0b" /> : <PenLine size={24} color="#8B1A1A" />} 
@@ -256,7 +262,7 @@ function GestionTipsNoticias() {
             <div className="grid-card">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
                     <div className="grid-card-label" style={{ margin: 0 }}>
-                        <h3 style={{ margin: 0 }}>Mural de Novedades UNE</h3>
+                        <h3 style={{ margin: 0, color: '#3A0D23', fontWeight: 800 }}>Mural de Novedades UNE</h3>
                     </div>
                     {/* Buscador */}
                     <div style={{ position: 'relative', minWidth: '260px' }}>
