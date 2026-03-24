@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Calendar, User } from 'lucide-react';
 import { getNews } from '../../services/NewsService';
 import type { Noticia } from '../AdminComponents/GestionTipsNoticias';
-import './NewsCarousel.css';
+import styles from './NewsCarousel.module.css';
 import Swal from 'sweetalert2';
 
-export default function NewsCarousel() {
+const NewsCarousel: React.FC = () => {
   const [news, setNews] = useState<Noticia[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -33,7 +33,7 @@ export default function NewsCarousel() {
     if (news.length === 0) return;
     const interval = setInterval(() => {
       handleNext();
-    }, 5000); // 5 seconds auto-scroll
+    }, 8000); // 8 seconds auto-scroll
     return () => clearInterval(interval);
   }, [currentIndex, news]);
 
@@ -64,28 +64,22 @@ export default function NewsCarousel() {
         </div>
       `,
       confirmButtonText: 'Cerrar',
-      confirmButtonColor: 'var(--uneRed)',
+      confirmButtonColor: 'var(--suria-crimson)',
       width: '800px',
-      showCloseButton: true,
-      customClass: {
-        container: 'swal2-news-modal'
-      }
+      showCloseButton: true
     });
   };
 
-  if (loading) return <div className="news-carousel-loading">Cargando noticias...</div>;
+  if (loading) return <div className={styles.loading}>Sincronizando últimas noticias...</div>;
   if (news.length === 0) return null;
 
   const currentItem = news[currentIndex];
 
   return (
-    <div 
-      className="news-carousel-container"
-      onMouseEnter={() => {}} // Could be used to pause if refactored to a ref-based timer
-    >
-      <div className="carousel-track">
-        <div className="carousel-slide">
-          <div className="slide-image">
+    <div className={styles.container}>
+      <div className={styles.track}>
+        <div key={currentItem.id} className={styles.slide}>
+          <div className={styles.imageArea}>
             <img 
               src={currentItem.imagen} 
               alt={currentItem.titulo} 
@@ -94,41 +88,37 @@ export default function NewsCarousel() {
                 target.src = 'https://images.unsplash.com/photo-1504711432869-efd597cdd045?q=80&w=2670&auto=format&fit=crop';
               }}
             />
-            <div className="image-overlay"></div>
+            <div className={styles.overlay}></div>
           </div>
-          <div className="slide-content">
-            <span className="slide-tag">LO ÚLTIMO</span>
-            <h2>{currentItem.titulo}</h2>
-            <p style={{ 
-              display: '-webkit-box', 
-              WebkitLineClamp: 3, 
-              WebkitBoxOrient: 'vertical', 
-              overflow: 'hidden',
-              textOverflow: 'ellipsis' 
-            }}>{currentItem.contenido}</p>
-            <div className="slide-meta">
-              <span><User size={14} /> {currentItem.autor}</span>
-              <span><Calendar size={14} /> {new Date(currentItem.fecha || '').toLocaleDateString()}</span>
+          <div className={styles.content}>
+            <span className={styles.tag}>LO ÚLTIMO</span>
+            <h2 className={styles.title}>{currentItem.titulo}</h2>
+            <p className={styles.description}>{currentItem.contenido}</p>
+            <div className={styles.meta}>
+              <span><User size={16} /> {currentItem.autor}</span>
+              <span><Calendar size={16} /> {currentItem.fecha ? new Date(currentItem.fecha).toLocaleDateString() : 'N/A'}</span>
             </div>
-            <button className="btn-read-more" onClick={() => handleReadMore(currentItem)}>Leer más</button>
+            <button className={styles.readMore} onClick={() => handleReadMore(currentItem)}>Leer historia completa</button>
           </div>
         </div>
       </div>
 
-      <div className="carousel-controls">
-        <button className="control-btn prev" onClick={handlePrev}><ChevronLeft size={24} /></button>
-        <button className="control-btn next" onClick={handleNext}><ChevronRight size={24} /></button>
+      <div className={styles.controls}>
+        <button className={styles.controlBtn} onClick={handlePrev}><ChevronLeft size={24} /></button>
+        <button className={styles.controlBtn} onClick={handleNext}><ChevronRight size={24} /></button>
       </div>
 
-      <div className="carousel-indicators">
-        {news.map((_: any /* eslint-disable-line @typescript-eslint/no-explicit-any */, i: number) => (
+      <div className={styles.indicators}>
+        {news.map((item: Noticia, i: number) => (
           <div 
-            key={i} 
-            className={`indicator ${i === currentIndex ? 'active' : ''}`}
+            key={item.id} 
+            className={`${styles.indicator} ${i === currentIndex ? styles.indicatorActive : ''}`}
             onClick={() => setCurrentIndex(i)}
           />
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default NewsCarousel;

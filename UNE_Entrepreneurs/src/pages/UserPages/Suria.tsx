@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import Navbar from '../../components/Shared/Navbar';
-import Footer from '../../components/Shared/Footer';
+import Navbar from '../../components/Shared/Navbar/Navbar';
+import Footer from '../../components/Shared/Footer/Footer';
 import HeroSuria from '../../components/Suria/HeroSuria';
 import AboutSuria from '../../components/Suria/AboutSuria';
 import MisionVision from '../../components/Suria/MisionVision';

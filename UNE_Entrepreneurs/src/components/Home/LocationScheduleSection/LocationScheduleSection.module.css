@@ -1,0 +1,90 @@
+.locationSection {
+  background: var(--suria-cream);
+  padding: 4rem 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .locationSection {
+    padding: 10rem 0;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) 1fr;
+    gap: 10rem;
+  }
+}
+
+.mapArea {
+  position: relative;
+  min-height: 400px;
+}
+
+.infoArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.badge {
+  color: var(--suria-crimson);
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--suria-plum);
+  margin-bottom: 4rem;
+  line-height: 1.1;
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 3.8rem;
+  }
+}
+
+.infoItem {
+  margin-bottom: 3.5rem;
+}
+
+.itemHeading {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--suria-plum);
+  margin-bottom: 1rem;
+}
+
+.iconBox {
+  color: var(--suria-crimson);
+}
+
+.itemText {
+  font-size: 1.1rem;
+  color: var(--suria-brown);
+  opacity: 0.8;
+  line-height: 1.6;
+  margin-left: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .itemText {
+    font-size: 1.25rem;
+    margin-left: 3.5rem;
+  }
+}

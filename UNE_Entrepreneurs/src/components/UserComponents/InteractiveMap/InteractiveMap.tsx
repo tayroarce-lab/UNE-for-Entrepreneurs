@@ -1,6 +1,8 @@
+import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import styles from './InteractiveMap.module.css';
 
 // Fix for default marker icons in React/Vite/Leaflet
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -17,8 +19,6 @@ const DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 interface MapSedeProps {
-  height?: string;
-  width?: string;
   center?: [number, number];
   zoom?: number;
   label?: string;
@@ -26,20 +26,18 @@ interface MapSedeProps {
 
 const DESTINATION_DEFAULT: [number, number] = [9.9326, -84.1824];
 
-export default function InteractiveMap({ 
-  height = "100%", 
-  width = "100%", 
+const InteractiveMap: React.FC<MapSedeProps> = ({ 
   center = DESTINATION_DEFAULT, 
   zoom = 15,
   label = "Sede UNE - Santa Ana Centro"
-}: MapSedeProps) {
+}) => {
   return (
-    <div style={{ height, width, borderRadius: '12px', overflow: 'hidden' }}>
+    <div className={styles.mapContainer}>
       <MapContainer 
         center={center} 
         zoom={zoom} 
-        scrollWheelZoom={false} // Mantener false para evitar scroll accidental en la Home, pero es interactivo al activarlo
-        style={{ height: '100%', width: '100%' }}
+        scrollWheelZoom={false}
+        className={styles.mapWrapper}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -53,4 +51,6 @@ export default function InteractiveMap({
       </MapContainer>
     </div>
   );
-}
+};
+
+export default InteractiveMap;

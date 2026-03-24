@@ -1,0 +1,144 @@
+.budgetDashboard {
+  flex: 1;
+  padding: 2rem 4rem;
+}
+
+@media (max-width: 1024px) {
+  .budgetDashboard {
+    padding: 1.5rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .budgetDashboard {
+    padding: 1rem 1.5rem;
+  }
+}
+
+.budgetHeader {
+  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .budgetHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.titleArea h1 {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: var(--color-dark);
+  letter-spacing: -0.025em;
+}
+
+.titleAccent {
+  color: var(--color-primary);
+}
+
+.titleDesc {
+  color: #64748b;
+  font-size: 1.1rem;
+  margin-top: 0.25rem;
+}
+
+.tabNavPremium {
+  display: flex;
+  background: #e2e8f0;
+  padding: 4px;
+  border-radius: 12px;
+  gap: 4px;
+}
+
+@media (max-width: 768px) {
+  .tabNavPremium {
+    width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+}
+
+.tabBtn {
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #64748b;
+  background: transparent;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 768px) {
+  .tabBtn {
+    white-space: nowrap;
+  }
+}
+
+.tabBtnActive {
+  background: #fff;
+  color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+
+.tabBtn:hover:not(.tabBtnActive) {
+  color: var(--color-dark);
+  background: rgba(255,255,255,0.4);
+}
+
+.panelContentArea {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.panelTip {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: var(--color-bg-warm);
+  border-radius: 16px;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border: 1px solid rgba(123, 45, 59, 0.1);
+}
+
+@media (max-width: 768px) {
+  .panelTip {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.panelTipIcon {
+  background: var(--color-primary);
+  color: #fff;
+  padding: 8px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.panelTip h4 {
+  color: var(--color-primary);
+  font-weight: 800;
+  margin: 0 0 4px 0;
+}
+
+.panelTip p {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}

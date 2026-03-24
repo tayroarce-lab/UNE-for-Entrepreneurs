@@ -1,7 +1,7 @@
 /* ============================================================
    NAVBAR (Mobile First Refresh)
    ============================================================ */
-.navbar-users {
+.navbarUsers {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,19 +11,19 @@
   backdrop-filter: blur(16px) saturate(160%);
   -webkit-backdrop-filter: blur(16px) saturate(160%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  height: 70px; /* CONSISTENT MOBILE HEIGHT */
+  height: 70px;
   display: flex;
   align-items: center;
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-users.scrolled {
+.scrolled {
   height: 60px;
   background: rgba(64, 22, 45, 0.98);
 }
 
-.navbar-container {
+.navbarContainer {
   width: 100%;
   margin: 0 auto;
   padding: 0 1.25rem;
@@ -33,21 +33,21 @@
 }
 
 @media (min-width: 1024px) {
-  .navbar-container {
+  .navbarContainer {
     max-width: 1300px;
     padding: 0 2rem;
   }
 }
 
 /* ---------- LOGO ---------- */
-.navbar-logo a {
+.navbarLogo a {
   display: flex;
   align-items: center;
   gap: 10px;
   text-decoration: none;
 }
 
-.navbar-logo .logo-box {
+.logoBox {
   background: white;
   border-radius: 50%;
   width: 36px;
@@ -58,27 +58,27 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.navbar-logo .logo-box img {
+.logoBox img {
     height: 24px;
     width: auto;
 }
 
-.logo-text-main {
+.logoTextMain {
   font-family: var(--font-display);
   font-size: 1.2rem !important;
   color: white !important;
   letter-spacing: 1px;
 }
 
-.logo-text-accent {
-  display: none; /* Hide subtitle on very small mobile */
+.logoTextAccent {
+  display: none;
 }
 
 @media (min-width: 480px) {
-  .navbar-logo .logo-box { width: 42px; height: 42px; }
-  .navbar-logo .logo-box img { height: 28px; }
-  .logo-text-main { font-size: 1.4rem !important; }
-  .logo-text-accent { 
+  .logoBox { width: 42px; height: 42px; }
+  .logoBox img { height: 28px; }
+  .logoTextMain { font-size: 1.4rem !important; }
+  .logoTextAccent { 
     display: inline-block;
     background: var(--suria-gold);
     color: var(--suria-plum);
@@ -92,7 +92,7 @@
 }
 
 /* ---------- TOGGLE ---------- */
-.navbar-mobile-toggle {
+.navbarMobileToggle {
   background: none;
   border: none;
   color: white;
@@ -102,11 +102,11 @@
 }
 
 @media (min-width: 1024px) {
-  .navbar-mobile-toggle { display: none; }
+  .navbarMobileToggle { display: none; }
 }
 
 /* ---------- LINKS (DRAWER) ---------- */
-.navbar-links {
+.navbarLinks {
   position: fixed;
   top: 0;
   right: -100%;
@@ -124,15 +124,15 @@
   overflow-y: auto;
 }
 
-.navbar-links.active {
+.menuOpen .navbarLinks {
   right: 0;
 }
 
-.navbar-links li {
+.navbarLinks li {
   width: 100%;
 }
 
-.navbar-links li a {
+.navbarLinks li a {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -146,21 +146,21 @@
   letter-spacing: 0.5px;
 }
 
-.navbar-links li a:hover,
-.navbar-links li a.active {
+.navbarLinks li a:hover,
+.navbarLinks li a:global(.active) {
   background: rgba(255,255,255,0.1);
   color: #fff;
 }
 
 /* ---------- AUTH / PROFILE (MOBILE) ---------- */
-.navbar-auth-buttons {
+.navbarAuthButtons {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin-top: 1.5rem;
 }
 
-.navbar-profile {
+.navbarProfile {
   margin-top: 2rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255,255,255,0.1);
@@ -169,7 +169,7 @@
   gap: 1rem;
 }
 
-.profile-trigger {
+.profileTrigger {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -178,9 +178,52 @@
   border-radius: 12px;
 }
 
-/* ---------- DESKTOP REFACTOR ---------- */
+.profileAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--suria-gold);
+  color: var(--suria-plum);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.8rem;
+  overflow: hidden;
+}
+
+.profileAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileName {
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.btnLogout {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.btnLogout:hover {
+  background: var(--suria-crimson);
+}
+
+/* ---------- DESKTOP ---------- */
 @media (min-width: 1024px) {
-  .navbar-links {
+  .navbarLinks {
     position: static;
     flex-direction: row;
     width: auto;
@@ -194,19 +237,19 @@
     gap: 0.5rem;
   }
 
-  .navbar-links li a {
+  .navbarLinks li a {
     padding: 0.6rem 1.2rem;
     font-size: 0.75rem;
     border-radius: 50px;
   }
 
-  .navbar-auth-buttons {
+  .navbarAuthButtons {
     flex-direction: row;
     margin-top: 0;
     margin-left: 1rem;
   }
 
-  .navbar-profile {
+  .navbarProfile {
     margin-top: 0;
     padding-top: 0;
     border-top: none;
@@ -217,19 +260,23 @@
     align-items: center;
   }
 
-  .profile-trigger {
+  .profileTrigger {
     background: none;
     padding: 0;
   }
 }
 
-/* Special Buttons */
-.btn-register {
+.btnRegister {
   background: var(--suria-gold) !important;
   color: var(--suria-plum) !important;
 }
 
-.nav-highlight {
+.navHighlight {
   background: var(--suria-crimson) !important;
   color: #fff !important;
+}
+
+.navAdminBadge {
+  background: rgba(255,255,255,0.15);
+  border: 1px dashed rgba(255,255,255,0.3);
 }

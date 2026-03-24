@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react'
-import { useNavigate, useLocation, Link, NavLink } from 'react-router-dom'
-import { LogIn, UserPlus, LogOut, LayoutDashboard, Package, Home, PhoneCall, Newspaper, Users, Sparkles, Menu, X } from 'lucide-react'
-import { notifications } from '../../utils/notifications'
-import { useAuth } from '../../context/AuthContext'
-import uneLogo from '../../assets/logo_une.png'
-import '../../styles/Navbar.css'
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation, Link, NavLink } from 'react-router-dom';
+import { LogIn, UserPlus, LogOut, LayoutDashboard, Package, Home, PhoneCall, Newspaper, Users, Sparkles, Menu, X } from 'lucide-react';
+import { notifications } from '../../../utils/notifications';
+import { useAuth } from '../../../context/AuthContext';
+import uneLogo from '../../../assets/logo_une.png';
+import styles from './Navbar.module.css';
 
-export default function Navbar() {
+const Navbar: React.FC = () => {
   const { user, isAdmin, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -21,9 +21,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close menu on route change
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMenuOpen(false);
   }, [location]);
 
@@ -59,48 +57,47 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`navbar-users ${scrolled ? 'scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`} aria-label="Navegación principal">
-      <div className="navbar-container">
-        <div className="navbar-logo">
-          <Link to="/" onClick={scrollToTop} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div className="logo-box">
+    <nav className={`${styles.navbarUsers} ${scrolled ? styles.scrolled : ''} ${menuOpen ? styles.menuOpen : ''}`} aria-label="Navegación principal">
+      <div className={styles.navbarContainer}>
+        <div className={styles.navbarLogo}>
+          <Link to="/" onClick={scrollToTop}>
+            <div className={styles.logoBox}>
               <img src={uneLogo} alt="Logo UNE" />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-               <span className="logo-text-main">UNE</span>
-               <span className="logo-text-accent">COSTA RICA</span>
+               <span className={styles.logoTextMain}>UNE</span>
+               <span className={styles.logoTextAccent}>COSTA RICA</span>
             </div>
           </Link>
         </div>
 
-        {/* Hamburger Menu Icon */}
-        <button className="navbar-mobile-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}>
+        <button className={styles.navbarMobileToggle} onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}>
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
 
-        <ul className={`navbar-links ${menuOpen ? 'active' : ''}`} style={{ gap: '1.5rem' }}>
+        <ul className={styles.navbarLinks}>
           <li>
-             <NavLink to="/" onClick={(e) => { if(location.pathname === '/') scrollToTop(e as unknown as React.MouseEvent); }} end style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+             <NavLink to="/" onClick={(e) => { if(location.pathname === '/') scrollToTop(e as unknown as React.MouseEvent); }} end>
                 <Home size={16} /> Inicio
              </NavLink>
           </li>
           <li>
-             <NavLink to="/suria" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+             <NavLink to="/suria">
                 <Sparkles size={16} /> Süria
              </NavLink>
           </li>
           <li>
-             <NavLink to="/noticias" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+             <NavLink to="/noticias">
                 <Newspaper size={16} /> Noticias
              </NavLink>
           </li>
           <li>
-             <NavLink to="/nuestra-gente" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+             <NavLink to="/nuestra-gente">
                 <Users size={16} /> Nuestra Gente
              </NavLink>
           </li>
           <li>
-             <NavLink to="/contacto" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+             <NavLink to="/contacto">
                  <PhoneCall size={16} /> Contacto
              </NavLink>
           </li>
@@ -108,44 +105,44 @@ export default function Navbar() {
           {user ? (
             <>
               <li>
-                <NavLink to="/presupuesto" className="nav-highlight" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <NavLink to="/presupuesto" className={styles.navHighlight}>
                   <LayoutDashboard size={16} /> Mi Panel
                 </NavLink>
               </li>
               {isAdmin && (
-                <li className="nav-admin-li">
-                  <NavLink to="/admin/dashboard" className="nav-admin-badge" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <li className={styles.navAdminLi}>
+                  <NavLink to="/admin/dashboard" className={styles.navAdminBadge}>
                     <Package size={16} /> Administrar
                   </NavLink>
                 </li>
               )}
-              <li className="navbar-profile">
-                <Link to="/perfil" className="profile-trigger">
-                  <div className="profile-avatar">
+              <li className={styles.navbarProfile}>
+                <Link to="/perfil" className={styles.profileTrigger}>
+                  <div className={styles.profileAvatar}>
                     {(user as { avatar?: string }).avatar ? (
                       <img src={(user as { avatar?: string }).avatar} alt="Profile" />
                     ) : (
                       getInitials(user.name)
                     )}
                   </div>
-                  <div className="profile-info">
-                    <span className="profile-name">{user.name.split(' ')[0]}</span>
+                  <div className={styles.profileInfo}>
+                    <span className={styles.profileName}>{user.name.split(' ')[0]}</span>
                   </div>
                 </Link>
-                <button className="btn-logout" onClick={handleLogout} title="Cerrar Sesión">
+                <button className={styles.btnLogout} onClick={handleLogout} title="Cerrar Sesión">
                   <LogOut size={18} />
                 </button>
               </li>
             </>
           ) : (
-            <div className="navbar-auth-buttons">
+            <div className={styles.navbarAuthButtons}>
               <li>
-                <Link to="/login" className="btn-login-nav">
+                <Link to="/login" className={styles.btnLoginNav}>
                   <LogIn size={16} /> Entrar
                 </Link>
               </li>
               <li>
-                <Link to="/registro" className="btn-register">
+                <Link to="/registro" className={styles.navHighlight}>
                   <UserPlus size={16} /> Crear Cuenta
                 </Link>
               </li>
@@ -154,5 +151,7 @@ export default function Navbar() {
         </ul>
       </div>
     </nav>
-  )
-}
+  );
+};
+
+export default Navbar;
