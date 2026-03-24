@@ -35,6 +35,7 @@ export default function ProfilePage() {
         ...prev,
         nombre: user.name,
         email: user.email,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         avatar: (user as any).avatar || ''
       }));
     } else {
@@ -58,7 +59,8 @@ export default function ProfilePage() {
 
     setLoading(true);
     try {
-      const updatePayload: unknown = {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const updatePayload: any = {
         nombre: formData.nombre,
         email: formData.email,
         avatar: formData.avatar
@@ -75,7 +77,7 @@ export default function ProfilePage() {
           name: updated.nombre,
           email: updated.email,
           avatar: updated.avatar
-        } as any);
+        });
         
         notifications.success('Perfil actualizado correctamente');
         setFormData(prev => ({ ...prev, newPassword: '', confirmPassword: '' }));

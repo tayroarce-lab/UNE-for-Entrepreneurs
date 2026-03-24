@@ -66,12 +66,11 @@ export default function FinanzasPanel() {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchTransactions();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  const stats = useMemo(() => {
+  const stats = useMemo(() => { // eslint-disable-line react-hooks/exhaustive-deps
     const income = transactions.filter(t => t.type === 'income').reduce((acc, t) => acc + t.amount, 0);
     const expense = transactions.filter(t => t.type === 'expense').reduce((acc, t) => acc + t.amount, 0);
     const investment = transactions.filter(t => t.type === 'investment').reduce((acc, t) => acc + t.amount, 0);

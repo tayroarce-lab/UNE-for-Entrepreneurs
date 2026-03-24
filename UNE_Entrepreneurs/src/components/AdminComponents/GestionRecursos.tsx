@@ -25,7 +25,7 @@ export default function GestionRecursos() {
     try {
       const data = await getRecursos();
       setRecursos(data || []);
-    } catch {
+    } catch (error) {
       console.error('Error al cargar recursos:', error);
       toast.error('Error al cargar los recursos');
     } finally {

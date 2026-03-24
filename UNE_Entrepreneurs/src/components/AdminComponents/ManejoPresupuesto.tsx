@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import '../../styles/AdminDashboard.css'
 
 import { 
@@ -44,7 +44,7 @@ function ManejoPresupuesto() {
     try {
       const data = await getTransactions();
       setTransacciones(data || []);
-    } catch {
+    } catch (error) {
       console.error('Error al cargar transacciones:', error);
       toast.error('Error al conectar con la base de datos de presupuesto');
     } finally {

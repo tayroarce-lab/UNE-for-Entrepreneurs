@@ -36,7 +36,7 @@ export default function Calificaciones() {
       ]);
       setTestimonials(tRes);
       setRatings(rRes);
-    } catch {
+    } catch (error) {
       console.error("Error al cargar calificaciones y testimonios", error);
       toast.error("Error al cargar la información");
     } finally { /* empty */ }

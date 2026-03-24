@@ -1,5 +1,5 @@
-import FinancingCatalog from '../../components/Financing/FinancingCatalog';
+import SuriaCatalog from '../../components/Financing/SuriaCatalog';
 
 export default function FinancingCatalogPage() {
-  return <FinancingCatalog />;
+  return <SuriaCatalog />;
 }

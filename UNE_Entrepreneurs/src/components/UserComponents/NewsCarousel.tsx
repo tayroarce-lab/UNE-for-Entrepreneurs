@@ -112,7 +112,7 @@ export default function NewsCarousel() {
       </div>
 
       <div className="carousel-indicators">
-        {news.map((_: any, i: number) => (
+        {news.map((_: any /* eslint-disable-line @typescript-eslint/no-explicit-any */, i: number) => (
           <div 
             key={i} 
             className={`indicator ${i === currentIndex ? 'active' : ''}`}

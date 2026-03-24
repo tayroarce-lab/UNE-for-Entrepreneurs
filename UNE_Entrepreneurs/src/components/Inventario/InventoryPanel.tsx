@@ -46,7 +46,6 @@ export default function InventoryPanel() {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchInventory();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);

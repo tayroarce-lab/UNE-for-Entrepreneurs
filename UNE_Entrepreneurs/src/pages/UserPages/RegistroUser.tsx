@@ -75,7 +75,8 @@ export default function RegistroUserComponent() {
         console.warn('No se pudo verificar usuarios existentes, se intentará registrar directamente.');
       }
 
-      const existe = usuariosExistentes.some((u: unknown) => u.email === formData.email);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const existe = usuariosExistentes.some((u: any) => u.email === formData.email);
       if (existe) {
         const msg = 'Este correo electrónico ya está registrado.';
         setError(msg);

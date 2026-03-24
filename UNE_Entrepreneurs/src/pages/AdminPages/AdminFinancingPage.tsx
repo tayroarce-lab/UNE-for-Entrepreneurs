@@ -1,5 +1,5 @@
-import AdminFinancing from '../../components/Financing/AdminFinancing';
+import AdminSuria from '../../components/Financing/AdminSuria';
 
 export default function AdminFinancingPage() {
-  return <AdminFinancing />;
+  return <AdminSuria />;
 }

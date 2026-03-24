@@ -1,5 +1,5 @@
-import FinancingDetail from '../../components/Financing/FinancingDetail';
+import SuriaDetail from '../../components/Financing/SuriaDetail';
 
 export default function FinancingDetailPage() {
-  return <FinancingDetail />;
+  return <SuriaDetail />;
 }

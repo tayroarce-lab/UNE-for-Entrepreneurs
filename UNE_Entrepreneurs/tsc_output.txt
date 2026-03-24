@@ -1,0 +1,17 @@
+src/components/AdminComponents/Calificaciones.tsx(40,69): error TS2552: Cannot find name 'error'. Did you mean 'Error'?
+src/components/AdminComponents/GestionRecursos.tsx(29,50): error TS2552: Cannot find name 'error'. Did you mean 'Error'?
+src/components/AdminComponents/GestionSolicitudes.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/AdminComponents/ManejoInventario.tsx(49,52): error TS2552: Cannot find name 'error'. Did you mean 'Error'?
+src/components/AdminComponents/ManejoPresupuesto.tsx(48,55): error TS2552: Cannot find name 'error'. Did you mean 'Error'?
+src/components/Shared/Navbar.tsx(3,115): error TS6133: 'Banknote' is declared but its value is never read.
+src/components/Shared/Navbar.tsx(129,21): error TS2352: Conversion of type 'AuthUser' to type 'Record<string, unknown>' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Index signature for type 'string' is missing in type 'AuthUser'.
+src/components/Shared/Navbar.tsx(130,26): error TS2322: Type 'unknown' is not assignable to type 'string | undefined'.
+src/components/Shared/Navbar.tsx(130,32): error TS2352: Conversion of type 'AuthUser' to type 'Record<string, unknown>' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Index signature for type 'string' is missing in type 'AuthUser'.
+src/pages/AdminPages/AdminFinancingPage.tsx(1,28): error TS2307: Cannot find module '../../components/Financing/AdminFinancing' or its corresponding type declarations.
+src/pages/FinancingPages/FinancingCatalogPage.tsx(1,30): error TS2307: Cannot find module '../../components/Financing/FinancingCatalog' or its corresponding type declarations.
+src/pages/FinancingPages/FinancingDetailPage.tsx(1,29): error TS2307: Cannot find module '../../components/Financing/FinancingDetail' or its corresponding type declarations.
+src/pages/UserPages/ProfilePage.tsx(68,9): error TS18046: 'updatePayload' is of type 'unknown'.
+src/pages/UserPages/ProfilePage.tsx(71,56): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'Partial<User>'.
+src/pages/UserPages/RegistroUser.tsx(78,62): error TS18046: 'u' is of type 'unknown'.

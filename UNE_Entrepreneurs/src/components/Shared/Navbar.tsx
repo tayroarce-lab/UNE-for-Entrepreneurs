@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation, Link, NavLink } from 'react-router-dom'
-import { LogIn, UserPlus, LogOut, LayoutDashboard, Package, Home, PhoneCall, Newspaper, Users, Sparkles, Menu, X, Banknote } from 'lucide-react'
+import { LogIn, UserPlus, LogOut, LayoutDashboard, Package, Home, PhoneCall, Newspaper, Users, Sparkles, Menu, X } from 'lucide-react'
 import { notifications } from '../../utils/notifications'
 import { useAuth } from '../../context/AuthContext'
 import uneLogo from '../../assets/logo_une.png'
@@ -26,7 +26,6 @@ export default function Navbar() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMenuOpen(false);
   }, [location]);
-
 
   const scrollToTop = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -106,40 +105,38 @@ export default function Navbar() {
              </NavLink>
           </li>
 
-          {user && (
-            <li>
-              <NavLink to="/presupuesto" className="nav-highlight" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <LayoutDashboard size={16} /> Mi Panel
-              </NavLink>
-            </li>
-          )}
-
-          {isAdmin && (
-            <li className="nav-admin-li">
-              <NavLink to="/admin/dashboard" className="nav-admin-badge" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Package size={16} /> Administrar
-              </NavLink>
-            </li>
-          )}
-
           {user ? (
-            <li className="navbar-profile">
-              <Link to="/perfil" className="profile-trigger">
-                <div className="profile-avatar">
-                  {(user as Record<string, unknown>).avatar ? (
-                    <img src={(user as Record<string, unknown>).avatar} alt="Profile" />
-                  ) : (
-                    getInitials(user.name)
-                  )}
-                </div>
-                <div className="profile-info">
-                  <span className="profile-name">{user.name.split(' ')[0]}</span>
-                </div>
-              </Link>
-              <button className="btn-logout" onClick={handleLogout} title="Cerrar Sesión">
-                <LogOut size={18} />
-              </button>
-            </li>
+            <>
+              <li>
+                <NavLink to="/presupuesto" className="nav-highlight" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <LayoutDashboard size={16} /> Mi Panel
+                </NavLink>
+              </li>
+              {isAdmin && (
+                <li className="nav-admin-li">
+                  <NavLink to="/admin/dashboard" className="nav-admin-badge" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Package size={16} /> Administrar
+                  </NavLink>
+                </li>
+              )}
+              <li className="navbar-profile">
+                <Link to="/perfil" className="profile-trigger">
+                  <div className="profile-avatar">
+                    {(user as { avatar?: string }).avatar ? (
+                      <img src={(user as { avatar?: string }).avatar} alt="Profile" />
+                    ) : (
+                      getInitials(user.name)
+                    )}
+                  </div>
+                  <div className="profile-info">
+                    <span className="profile-name">{user.name.split(' ')[0]}</span>
+                  </div>
+                </Link>
+                <button className="btn-logout" onClick={handleLogout} title="Cerrar Sesión">
+                  <LogOut size={18} />
+                </button>
+              </li>
+            </>
           ) : (
             <div className="navbar-auth-buttons">
               <li>
