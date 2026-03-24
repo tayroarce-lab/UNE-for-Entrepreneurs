@@ -23,6 +23,7 @@ export default function Navbar() {
 
   // Close menu on route change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMenuOpen(false);
   }, [location]);
 
@@ -125,8 +126,8 @@ export default function Navbar() {
             <li className="navbar-profile">
               <Link to="/perfil" className="profile-trigger">
                 <div className="profile-avatar">
-                  {(user as any).avatar ? (
-                    <img src={(user as any).avatar} alt="Profile" />
+                  {(user as Record<string, unknown>).avatar ? (
+                    <img src={(user as Record<string, unknown>).avatar} alt="Profile" />
                   ) : (
                     getInitials(user.name)
                   )}

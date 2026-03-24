@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createBrowserRouter, Outlet, ScrollRestoration } from 'react-router-dom';
 
 // ── Admin Components ──────────────────────────────────────────

@@ -44,7 +44,7 @@ function ManejoPresupuesto() {
     try {
       const data = await getTransactions();
       setTransacciones(data || []);
-    } catch (error) {
+    } catch {
       console.error('Error al cargar transacciones:', error);
       toast.error('Error al conectar con la base de datos de presupuesto');
     } finally {
@@ -112,7 +112,7 @@ function ManejoPresupuesto() {
           }
           setModalAbierto(false);
           cargarTransacciones();
-      } catch (error) {
+      } catch {
           toast.error("Error al guardar la transacción");
       } finally {
           setIsSaving(false);
@@ -135,7 +135,7 @@ function ManejoPresupuesto() {
                   await deleteTransaction(id);
                   toast.success("Transacción eliminada");
                   cargarTransacciones();
-              } catch (error) {
+              } catch {
                   toast.error("Error al eliminar la transacción");
               }
           }

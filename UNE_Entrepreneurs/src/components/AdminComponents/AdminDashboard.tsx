@@ -24,7 +24,7 @@ type KPIProps = {
   valor: string | number;
   crecimiento: string;
   tendencia: 'up' | 'down';
-  icono: React.ComponentType<any>;
+  icono: React.ElementType;
 }
 
 const KPICard = ({ titulo, valor, crecimiento, tendencia, icono: Icon }: KPIProps) => (

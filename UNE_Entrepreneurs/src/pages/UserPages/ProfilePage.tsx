@@ -58,7 +58,7 @@ export default function ProfilePage() {
 
     setLoading(true);
     try {
-      const updatePayload: any = {
+      const updatePayload: unknown = {
         nombre: formData.nombre,
         email: formData.email,
         avatar: formData.avatar

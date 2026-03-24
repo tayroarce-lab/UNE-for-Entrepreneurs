@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Target, ClipboardList, TrendingUp,
-  Check, MoveRight, ArrowRight, LayoutDashboard, Wallet, Package, Flower2, PhoneCall, Newspaper, Sparkles, Menu, X
+  Check, MoveRight, ArrowRight, LayoutDashboard, Wallet, Package, Flower2
 } from 'lucide-react'
 import Navbar from '../../components/Shared/Navbar'
 import Footer from '../../components/Shared/Footer'

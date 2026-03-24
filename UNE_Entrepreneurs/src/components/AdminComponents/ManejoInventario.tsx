@@ -45,7 +45,7 @@ function ManejoInventario() {
     try {
       const data = await getInventoryItems();
       setInventario(data || []);
-    } catch (error) {
+    } catch {
       console.error('Error al cargar inventario:', error);
       toast.error('No se pudo conectar con el catálogo de inventario');
     } finally {
@@ -115,7 +115,7 @@ function ManejoInventario() {
           }
           setModalAbierto(false);
           cargarInventario();
-      } catch (error) {
+      } catch {
           toast.error("Error al guardar el producto");
       } finally {
           setIsSaving(false);

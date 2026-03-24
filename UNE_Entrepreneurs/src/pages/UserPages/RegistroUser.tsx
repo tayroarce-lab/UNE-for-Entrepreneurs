@@ -67,7 +67,7 @@ export default function RegistroUserComponent() {
 
     try {
       // Verificar si el correo ya está registrado
-      let usuariosExistentes: any[] = [];
+      let usuariosExistentes: unknown[] = [];
       try {
         usuariosExistentes = (await UserServices.getUser()) || [];
       } catch {
@@ -75,7 +75,7 @@ export default function RegistroUserComponent() {
         console.warn('No se pudo verificar usuarios existentes, se intentará registrar directamente.');
       }
 
-      const existe = usuariosExistentes.some((u: any) => u.email === formData.email);
+      const existe = usuariosExistentes.some((u: unknown) => u.email === formData.email);
       if (existe) {
         const msg = 'Este correo electrónico ya está registrado.';
         setError(msg);
@@ -106,7 +106,7 @@ export default function RegistroUserComponent() {
         setError(msg);
         notifications.error(msg);
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error en el proceso de registro:', err);
       const msg = 'Error de conexión con el servidor.';
       setError(msg);

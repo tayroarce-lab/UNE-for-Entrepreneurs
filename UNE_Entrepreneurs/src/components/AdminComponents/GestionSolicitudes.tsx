@@ -21,7 +21,7 @@ export default function GestionSolicitudes() {
       const data = await getContactos();
       // Ordenar más recientes primero
       setSolicitudes(data.sort((a, b) => new Date(b.fechaRegistro).getTime() - new Date(a.fechaRegistro).getTime()));
-    } catch (error) {
+    } catch {
       toast.error('Error al cargar solicitudes');
     } finally {
       setLoading(false);
@@ -33,7 +33,7 @@ export default function GestionSolicitudes() {
       await updateContacto(id, { estado: nuevoEstado });
       setSolicitudes(prev => prev.map(s => s.id === id ? { ...s, estado: nuevoEstado } : s));
       toast.success(`Estado actualizado a ${nuevoEstado}`);
-    } catch (error) {
+    } catch {
       toast.error('Error al actualizar estado');
     }
   };
@@ -56,7 +56,7 @@ export default function GestionSolicitudes() {
         await updateContacto(solicitud.id, { notasAdmin: text });
         setSolicitudes(prev => prev.map(s => s.id === solicitud.id ? { ...s, notasAdmin: text } : s));
         toast.success('Notas guardadas');
-      } catch (error) {
+      } catch {
         toast.error('Error al guardar notas');
       }
     }
@@ -78,7 +78,7 @@ export default function GestionSolicitudes() {
           await deleteContacto(id);
           setSolicitudes(prev => prev.filter(s => s.id !== id));
           toast.success('Solicitud eliminada');
-        } catch (error) {
+        } catch {
           toast.error('Error al eliminar');
         }
       }

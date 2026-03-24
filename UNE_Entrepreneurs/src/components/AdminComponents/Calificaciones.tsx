@@ -36,11 +36,10 @@ export default function Calificaciones() {
       ]);
       setTestimonials(tRes);
       setRatings(rRes);
-    } catch (error) {
+    } catch {
       console.error("Error al cargar calificaciones y testimonios", error);
       toast.error("Error al cargar la información");
-    } finally {
-    }
+    } finally { /* empty */ }
   };
 
   useEffect(() => {
@@ -52,7 +51,7 @@ export default function Calificaciones() {
       await updateTestimonial(id, { active: !currentStatus });
       setTestimonials(prev => prev.map(t => t.id === id ? { ...t, active: !currentStatus } : t));
       toast.success(currentStatus ? 'Testimonio ocultado' : 'Testimonio activado');
-    } catch (error) {
+    } catch {
       toast.error('Error al actualizar estado');
     }
   };
@@ -73,7 +72,7 @@ export default function Calificaciones() {
         await deleteTestimonial(id);
         setTestimonials(prev => prev.filter(t => t.id !== id));
         toast.success('Testimonio eliminado');
-      } catch (error) {
+      } catch {
         toast.error('Error al eliminar');
       }
     }
@@ -94,7 +93,7 @@ export default function Calificaciones() {
         await deleteRating(id);
         setRatings(prev => prev.filter(r => r.id !== id));
         toast.success('Calificación eliminada');
-      } catch (error) {
+      } catch {
         toast.error('Error al eliminar');
       }
     }

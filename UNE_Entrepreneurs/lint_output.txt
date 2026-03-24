@@ -1,38 +1,21 @@
 
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\AdminComponents\AdminDashboard.tsx
-  26:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  62:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+> une-entrepreneurs@0.0.0 lint
+> eslint .
 
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\AdminComponents\GestionTipsNoticias.tsx
-   87:20  error  'error' is defined but never used  @typescript-eslint/no-unused-vars
-  117:20  error  'error' is defined but never used  @typescript-eslint/no-unused-vars
-  155:18  error  'error' is defined but never used  @typescript-eslint/no-unused-vars
-  167:14  error  'error' is defined but never used  @typescript-eslint/no-unused-vars
 
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\AdminComponents\ManejarClientes.tsx
-  78:24  error  'error' is defined but never used  @typescript-eslint/no-unused-vars
-  97:16  error  'error' is defined but never used  @typescript-eslint/no-unused-vars
+C:\Users\Pcfwd\OneDrive\Escritorio\Proyectos\UNE_Entrepreneurs\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\AdminComponents\GestionSolicitudes.tsx
+  183:91  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
 
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\Financing\AdminFinancingForm.tsx
-  61:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+C:\Users\Pcfwd\OneDrive\Escritorio\Proyectos\UNE_Entrepreneurs\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\IngresosEgresos\FinanzasPanel.tsx
+   69:5   warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  272:80  error    Unexpected any. Specify a different type                                                            @typescript-eslint/no-explicit-any
 
-Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
-* Update external systems with the latest state from React.
-* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+C:\Users\Pcfwd\OneDrive\Escritorio\Proyectos\UNE_Entrepreneurs\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\Inventario\InventoryPanel.tsx
+  49:5  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
 
-Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
-
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\Financing\AdminFinancingForm.tsx:61:7
-  59 |   useEffect(() => {
-  60 |     if (program) {
-> 61 |       setFormData({ ...program });
-     |       ^^^^^^^^^^^ Avoid calling setState() directly within an effect
-  62 |     }
-  63 |   }, [program]);
-  64 |  react-hooks/set-state-in-effect
-
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\IngresosEgresos\FinanzasPanel.tsx
-   69:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+C:\Users\Pcfwd\OneDrive\Escritorio\Proyectos\UNE_Entrepreneurs\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\Shared\Navbar.tsx
+   3:115  error  'Banknote' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+  26:5    error  Error: Calling setState synchronously within an effect can trigger cascading renders
 
 Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
 * Update external systems with the latest state from React.
@@ -40,63 +23,23 @@ Effects are intended to synchronize state between React and external systems suc
 
 Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
 
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\IngresosEgresos\FinanzasPanel.tsx:69:5
-  67 |
-  68 |   useEffect(() => {
-> 69 |     fetchTransactions();
-     |     ^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
-  70 |   }, [user]);
-  71 |
-  72 |   const stats = useMemo(() => {  react-hooks/set-state-in-effect
-   70:6   warning  React Hook useEffect has a missing dependency: 'fetchTransactions'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 react-hooks/exhaustive-deps
-  270:80  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-explicit-any
+C:\Users\Pcfwd\OneDrive\Escritorio\Proyectos\UNE_Entrepreneurs\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\Shared\Navbar.tsx:26:5
+  24 |   // Close menu on route change
+  25 |   useEffect(() => {
+> 26 |     setMenuOpen(false);
+     |     ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  27 |   }, [location]);
+  28 |
+  29 |  react-hooks/set-state-in-effect
 
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\Inventario\InventoryPanel.tsx
-  49:5  error    Error: Calling setState synchronously within an effect can trigger cascading renders
-
-Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
-* Update external systems with the latest state from React.
-* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
-
-Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
-
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\Inventario\InventoryPanel.tsx:49:5
-  47 |
-  48 |   useEffect(() => {
-> 49 |     fetchInventory();
-     |     ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
-  50 |   }, [user]);
-  51 |
-  52 |   const stats = useMemo(() => {  react-hooks/set-state-in-effect
-  50:6  warning  React Hook useEffect has a missing dependency: 'fetchInventory'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          react-hooks/exhaustive-deps
-
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\Shared\InteractiveMap.tsx
-  9:5  error  'DefaultIcon' is never reassigned. Use 'const' instead  prefer-const
-
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\Shared\Navbar.tsx
-  136:29  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  137:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\UserComponents\NewsCarousel.tsx
+C:\Users\Pcfwd\OneDrive\Escritorio\Proyectos\UNE_Entrepreneurs\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\components\UserComponents\NewsCarousel.tsx
    38:6   warning  React Hook useEffect has a missing dependency: 'handleNext'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
   115:23  error    Unexpected any. Specify a different type                                                                       @typescript-eslint/no-explicit-any
 
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\context\AuthContext.tsx
-  145:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
-
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\pages\UserPages\ProfilePage.tsx
+C:\Users\Pcfwd\OneDrive\Escritorio\Proyectos\UNE_Entrepreneurs\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\pages\UserPages\ProfilePage.tsx
   38:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  61:28  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
   78:14  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
 
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\pages\UserPages\RegistroUser.tsx
-   68:31  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-   76:50  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  107:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-C:\Users\Natalia Villareal\Desktop\ProyectoFF\UNE-for-Entrepreneurs\UNE_Entrepreneurs\src\routes\routing.tsx
-  25:7  error  Fast refresh only works when a file only exports components. Move your component(s) to a separate file  react-refresh/only-export-components
-
-??? 27 problems (24 errors, 3 warnings)
-  1 error and 0 warnings potentially fixable with the `--fix` option.
+✖ 10 problems (7 errors, 3 warnings)
+  0 errors and 2 warnings potentially fixable with the `--fix` option.
 

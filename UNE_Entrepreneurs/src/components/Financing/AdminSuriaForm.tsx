@@ -58,6 +58,7 @@ export default function AdminSuriaForm({
 
   useEffect(() => {
     if (program) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFormData({ ...program });
     }
   }, [program]);

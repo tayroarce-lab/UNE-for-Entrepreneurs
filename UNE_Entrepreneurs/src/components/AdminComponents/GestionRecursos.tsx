@@ -25,7 +25,7 @@ export default function GestionRecursos() {
     try {
       const data = await getRecursos();
       setRecursos(data || []);
-    } catch (error) {
+    } catch {
       console.error('Error al cargar recursos:', error);
       toast.error('Error al cargar los recursos');
     } finally {
@@ -80,7 +80,7 @@ export default function GestionRecursos() {
       }
       clearForm();
       fetchRecursos();
-    } catch (error) {
+    } catch {
       toast.error('Error al guardar el recurso');
     }
   };
@@ -102,7 +102,7 @@ export default function GestionRecursos() {
           toast.success('Recurso eliminado');
           if (editandoId === id) clearForm();
           fetchRecursos();
-        } catch (error) {
+        } catch {
           toast.error('Error al eliminar recurso');
         }
       }
@@ -114,7 +114,7 @@ export default function GestionRecursos() {
       await updateRecurso(recurso.id, { activo: !recurso.activo });
       toast.success(recurso.activo ? 'Recurso desactivado' : 'Recurso activado');
       fetchRecursos();
-    } catch (error) {
+    } catch {
       toast.error('Error al cambiar estado');
     }
   };
