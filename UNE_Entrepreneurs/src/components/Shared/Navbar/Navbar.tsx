@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link, NavLink } from 'react-router-dom';
-import { LogIn, UserPlus, LogOut, LayoutDashboard, Home, PhoneCall, Newspaper, Users, Sparkles, Menu, X } from 'lucide-react';
+import { LogIn, UserPlus, BookOpen, LogOut, LayoutDashboard, Home, PhoneCall, Newspaper, Users, Sparkles, Menu, X } from 'lucide-react';
 import { notifications } from '../../../utils/notifications';
 import { useAuth } from '../../../context/AuthContext';
 import uneLogo from '../../../assets/logo_une.png';
@@ -94,6 +94,11 @@ const Navbar: React.FC = () => {
           <li>
              <NavLink to="/nuestra-gente">
                 <Users size={16} /> Nuestra Gente
+             </NavLink>
+          </li>
+          <li>
+             <NavLink to="/recursos">
+                <BookOpen size={16} /> Recursos
              </NavLink>
           </li>
           <li>

@@ -52,6 +52,7 @@ export default function AdminSidebar() {
     { to: '/admin/presupuesto', icon: Wallet, label: 'Presupuesto' },
     { to: '/admin/noticias', icon: Newspaper, label: 'Tips y Noticias' },
     { to: '/admin/solicitudes-contacto', icon: Mailbox, label: 'Solicitudes' },
+    { to: '/admin/casos-exito', icon: Star, label: 'Casos de Éxito' },
     { to: '/admin/mapa', icon: MapPin, label: 'Sedes y Mapa' },
     { to: '/admin/calificaciones', icon: Star, label: 'Calificaciones' },
     { to: '/admin/recursos', icon: FileText, label: 'Recursos' },

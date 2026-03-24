@@ -15,6 +15,7 @@ import Maps from '../components/AdminComponents/Maps';
 import GestionSolicitudes from '../components/AdminComponents/GestionSolicitudes';
 import Calificaciones from '../components/AdminComponents/Calificaciones';
 import GestionRecursos from '../components/AdminComponents/GestionRecursos';
+import GestionCasosExito from '../components/AdminComponents/GestionCasosExito';
 
 // ── User Pages ────────────────────────────────────────────────
 import HomeUsers from '../pages/UserPages/HomeUsers';
@@ -27,6 +28,7 @@ import BudgetPage from '../pages/UserPages/BudgetPage';
 import ProfilePage from '../pages/UserPages/ProfilePage';
 import NewsPage from '../pages/UserPages/NewsPage';
 import NuestraGente from '../pages/UserPages/NuestraGente';
+import Recursos from '../pages/UserPages/Recursos';
 import SuriaPage from '../pages/UserPages/Suria';
 import ContactSuria from '../pages/UserPages/ContactSuria';
 import NotFoundPage from '../pages/UserPages/NotFoundPage';
@@ -52,6 +54,7 @@ const router = createBrowserRouter([
       { path: '/noticias',      element: <NewsPage /> },
       { path: '/suria',         element: <SuriaPage /> },
       { path: '/nuestra-gente', element: <NuestraGente /> },
+      { path: '/recursos',      element: <Recursos /> },
       { path: '/contacto',      element: <ContactSuria /> },
       { path: '/login',         element: <InicioSesion /> },
       { path: '/registro',      element: <RegistroUser /> },
@@ -97,6 +100,7 @@ const router = createBrowserRouter([
           { path: 'solicitudes-contacto',          element: <GestionSolicitudes /> },
           { path: 'calificaciones',                element: <Calificaciones /> },
           { path: 'recursos',                      element: <GestionRecursos /> },
+          { path: 'casos-exito',                   element: <GestionCasosExito /> },
           { path: 'configuraciones',               element: <Configuraciones /> },
           { path: 'configuraciones/notificaciones',element: <Notificaciones /> },
           { path: 'configuraciones/credenciales',  element: <CambioCredenciales /> },

@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3001/recursos';
+import { API_BASE } from '../config';
 
 export interface Recurso {
   id: string;
@@ -9,6 +9,8 @@ export interface Recurso {
   activo: boolean;
   fecha: string;
 }
+
+const API_URL = `${API_BASE}/recursos`;
 
 export const getRecursos = async (): Promise<Recurso[]> => {
   const response = await fetch(API_URL);
@@ -40,3 +42,4 @@ export const deleteRecurso = async (id: string): Promise<void> => {
   const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
   if (!response.ok) throw new Error('Error al eliminar recurso');
 };
+
