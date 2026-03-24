@@ -7,7 +7,9 @@ const BudgetPage: React.FC = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f8fafc' }}>
       <Navbar />
-      <BudgetDashboard />
+      <div style={{ flex: 1, paddingTop: '80px', paddingBottom: '40px' }}>
+        <BudgetDashboard />
+      </div>
       <Footer />
     </div>
   );

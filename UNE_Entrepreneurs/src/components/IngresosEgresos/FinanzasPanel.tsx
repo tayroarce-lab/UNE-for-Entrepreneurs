@@ -173,18 +173,47 @@ export default function FinanzasPanel() {
     });
   };
 
+  const hasData = transactions.length > 0;
+
+  const monthNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+  const currentMonthIdx = new Date().getMonth();
+  const labels: string[] = [];
+  const incomeData: number[] = [];
+  const expenseData: number[] = [];
+  
+  for (let i = 5; i >= 0; i--) {
+    let m = currentMonthIdx - i;
+    if (m < 0) m += 12;
+    labels.push(monthNames[m]);
+    incomeData.push(0);
+    expenseData.push(0);
+  }
+
+  if (hasData) {
+    transactions.forEach(t => {
+      const d = new Date(t.date);
+      const m = d.getMonth();
+      const diffMonths = (new Date().getFullYear() - d.getFullYear()) * 12 + (currentMonthIdx - m);
+      if (diffMonths >= 0 && diffMonths < 6) {
+        const idx = 5 - diffMonths;
+        if (t.type === 'income') incomeData[idx] += t.amount;
+        else expenseData[idx] += t.amount;
+      }
+    });
+  }
+
   const chartData = {
-    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+    labels,
     datasets: [
       {
         label: 'Ingresos',
-        data: [12000, 19000, 15000, 25000, 18000, stats.income],
+        data: incomeData,
         backgroundColor: 'rgba(34, 197, 94, 0.6)',
         borderRadius: 8,
       },
       {
         label: 'Egresos e Inversión',
-        data: [8000, 12000, 11000, 18000, 14000, stats.totalOut],
+        data: expenseData,
         backgroundColor: 'rgba(239, 68, 68, 0.6)',
         borderRadius: 8,
       }
@@ -195,10 +224,10 @@ export default function FinanzasPanel() {
     labels: ['Operativos', 'Personal', 'Marketing', 'Inversión'],
     datasets: [{
       data: [
-        transactions.filter(t => t.category === 'Costos Operativos').length || 1,
-        transactions.filter(t => t.category === 'Pago de Personal').length || 1,
-        transactions.filter(t => t.category === 'Publicidad').length || 1,
-        stats.investment || 1
+        transactions.filter(t => t.category === 'Costos Operativos').reduce((sum, t) => sum + t.amount, 0),
+        transactions.filter(t => t.category === 'Pago de Personal').reduce((sum, t) => sum + t.amount, 0),
+        transactions.filter(t => t.category === 'Publicidad').reduce((sum, t) => sum + t.amount, 0),
+        stats.investment
       ],
       backgroundColor: ['#7B2D3B', '#E8533F', '#F5EDE0', '#D4A853'],
       borderWidth: 0
@@ -336,21 +365,32 @@ export default function FinanzasPanel() {
         </section>
 
         {/* Gráficos */}
-        <div className="charts-col">
-          <section className="premium-card section-card chart-card">
-            <h3>Flujo Mensual</h3>
-            <div className="chart-container">
-              <Bar data={chartData} options={{ responsive: true, plugins: { legend: { display: false } } }} />
-            </div>
-          </section>
-          
-          <section className="premium-card section-card chart-card" style={{ marginTop: '1.5rem' }}>
-            <h3>Distribución de Gastos</h3>
-            <div className="chart-container-pie" style={{ padding: '1rem' }}>
-              <Pie data={pieData} options={{ plugins: { legend: { position: 'bottom' } } }} />
-            </div>
-          </section>
-        </div>
+        {hasData ? (
+          <div className="charts-col">
+            <section className="premium-card section-card chart-card">
+              <h3>Flujo Mensual</h3>
+              <div className="chart-container">
+                <Bar data={chartData} options={{ responsive: true, plugins: { legend: { display: false } } }} />
+              </div>
+            </section>
+            
+            <section className="premium-card section-card chart-card" style={{ marginTop: '1.5rem' }}>
+              <h3>Distribución de Gastos</h3>
+              <div className="chart-container-pie" style={{ padding: '1rem' }}>
+                <Pie data={pieData} options={{ plugins: { legend: { position: 'bottom' } } }} />
+              </div>
+            </section>
+          </div>
+        ) : (
+          <div className="charts-col">
+            <section className="premium-card section-card chart-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '300px' }}>
+              <div className="empty-state" style={{ color: '#94a3b8', textAlign: 'center' }}>
+                <PieChart size={48} style={{ opacity: 0.5, marginBottom: '1rem' }} />
+                <p>Agregue transacciones para ver sus gráficas</p>
+              </div>
+            </section>
+          </div>
+        )}
       </div>
 
       <style>{`

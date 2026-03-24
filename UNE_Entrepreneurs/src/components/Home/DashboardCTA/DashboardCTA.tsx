@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { Wallet, Package, LayoutDashboard, MoveRight } from 'lucide-react';
 import styles from './DashboardCTA.module.css';
 
+import { useAuth } from '../../../context/AuthContext';
+import { notifications } from '../../../utils/notifications';
+
 interface DashboardCTAProps {
   badge?: string;
   title?: React.ReactNode;
   description?: string;
   buttonText?: string;
-  buttonLink?: string;
   previewLabel?: string;
   previewAmount?: string;
 }
@@ -22,11 +24,20 @@ const DashboardCTA: React.FC<DashboardCTAProps> = ({
   ),
   description = "No solo te damos el capital. Te damos las herramientas para que gestiones tus inventarios, presupuestos y ventas con la tecnología de UNE.",
   buttonText = "CONOCER LAS HERRAMIENTAS",
-  buttonLink = "/panel",
   previewLabel = "BALANCE TOTAL",
   previewAmount = "₡1,250,000"
 }) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const handleCTA = () => {
+    if (!user) {
+      notifications.error('Debe iniciar sesión para probar las herramientas financieras.');
+      navigate('/login');
+    } else {
+      navigate(user.isAdmin ? '/admin/dashboard' : '/presupuesto');
+    }
+  };
 
   return (
     <section className={styles.dashboardCta}>
@@ -56,7 +67,7 @@ const DashboardCTA: React.FC<DashboardCTAProps> = ({
             <p className={styles.ctaDesc}>{description}</p>
             <button 
               className={styles.ctaButton}
-              onClick={() => navigate(buttonLink)}
+              onClick={handleCTA}
             >
               {buttonText} <MoveRight size={22} />
             </button>

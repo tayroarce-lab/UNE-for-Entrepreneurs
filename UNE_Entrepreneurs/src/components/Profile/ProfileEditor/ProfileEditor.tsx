@@ -37,6 +37,22 @@ const ProfileEditor: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        notifications.error('La imagen no debe superar los 2MB');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({ ...prev, avatar: reader.result as string }));
+        notifications.success('Foto cargada. ¡No olvides guardar los cambios!');
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
@@ -87,7 +103,7 @@ const ProfileEditor: React.FC = () => {
               </div>
               <label className={styles.cameraLabel} title="Editar avatar">
                 <Camera size={18} />
-                <input type="text" name="avatar" onChange={handleChange} style={{ display: 'none' }} />
+                <input type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} />
               </label>
             </div>
             <h2 className={styles.sidebarName}>{user.name}</h2>
@@ -126,10 +142,10 @@ const ProfileEditor: React.FC = () => {
               </div>
 
               <div className={styles.inputGroup}>
-                <label>Avatar URL (Opcional)</label>
+                <label>Sube una foto de perfil (Opcional)</label>
                 <div className={styles.inputWrapper}>
                   <Camera size={18} className={styles.inputIcon} />
-                  <input type="text" name="avatar" placeholder="https://ejemplo.com/mi-foto.jpg" value={formData.avatar} onChange={handleChange} className={styles.input} />
+                  <input type="file" accept="image/*" onChange={handleImageUpload} className={styles.input} style={{ padding: '0.5rem 1rem' }} />
                 </div>
               </div>
 
