@@ -92,26 +92,24 @@ export default function AdminSidebar() {
           style={{
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'center',
             gap: '10px',
-            padding: '0.85rem 1.25rem',
-            borderRadius: '12px',
+            padding: '1rem',
+            borderRadius: '16px',
             background: 'rgba(255,255,255,0.08)',
             border: '1px solid rgba(255,255,255,0.12)',
-            color: 'rgba(255,255,255,0.85)',
+            color: '#fff',
             textDecoration: 'none',
-            fontWeight: 700,
-            fontSize: '0.85rem',
-            transition: 'all 0.2s',
-            marginBottom: '0.75rem',
+            fontSize: '0.9rem',
+            fontWeight: 800,
             width: '100%',
+            marginBottom: '0.75rem'
           }}
         >
-          <Home size={18} />
-          <span>Ver Sitio Web</span>
+          <Home size={20} /> Volver a Inicio
         </Link>
-        <button className="btn-logout-sidebar" onClick={handleLogout}>
-          <LogOut size={18} />
-          <span>Cerrar Sesión</span>
+        <button className="btn-logout-sidebar" onClick={handleLogout} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '0.85rem', borderRadius: '12px', background: 'transparent', border: '1px solid rgba(255, 255, 255, 0.2)', color: 'rgba(255,255,255,0.8)', cursor: 'pointer', fontWeight: 700 }}>
+          <LogOut size={18} /> Salir del Panel
         </button>
       </div>
     </nav>

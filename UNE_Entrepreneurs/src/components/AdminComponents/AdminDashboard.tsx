@@ -7,7 +7,6 @@ import {
   Search, 
   Bell,
   TrendingUp,
-  Clock,
   Plus,
   LayoutGrid,
   FileText,
@@ -127,25 +126,24 @@ function AdminDashboard() {
           <div className="dashboard-grid-v2">
             <div className="grid-card">
                <div className="grid-card-label">
-                  <h3>Acciones Rápidas</h3>
-                  <button style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}>•••</button>
+                  <h3 style={{ color: 'var(--suria-plum)', fontWeight: 800 }}>Acciones Rápidas</h3>
                </div>
                <div className="quick-actions-box">
                   <Link to="/admin/usuarios" className="action-card">
-                     <div className="action-icon" style={{ backgroundColor: '#f87171' }}><Users size={20} /></div>
+                     <div className="action-icon" style={{ backgroundColor: 'var(--suria-crimson)' }}><Users size={20} /></div>
                      <h4>Gestionar Usuarios</h4>
                   </Link>
                   <Link to="/admin/noticias" className="action-card">
                      <div className="action-icon" style={{ backgroundColor: '#991b1b' }}><Newspaper size={20} /></div>
                      <h4>Administrar Noticias</h4>
                   </Link>
-                  <Link to="/admin/financiamiento" className="action-card">
-                     <div className="action-icon" style={{ backgroundColor: '#D4A853' }}><LayoutGrid size={20} /></div>
-                     <h4>Financiamiento Suria</h4>
+                  <Link to="/admin/recursos" className="action-card">
+                     <div className="action-icon" style={{ backgroundColor: 'var(--suria-gold)' }}><FileText size={20} /></div>
+                     <h4>Recursos para Emprendedores</h4>
                   </Link>
-                  <Link to="/admin/configuraciones" className="action-card">
-                     <div className="action-icon" style={{ backgroundColor: '#1e293b' }}><Clock size={20} /></div>
-                     <h4>Ver Auditoría</h4>
+                  <Link to="/admin/financiamiento" className="action-card">
+                     <div className="action-icon" style={{ backgroundColor: '#1e293b' }}><LayoutGrid size={20} /></div>
+                     <h4>Financiamiento Suria</h4>
                   </Link>
                   <Link to="/admin/calificaciones" className="action-card">
                      <div className="action-icon" style={{ backgroundColor: '#fbbf24' }}><Star size={20} /></div>
@@ -154,15 +152,19 @@ function AdminDashboard() {
                </div>
             </div>
 
-            <div className="grid-card">
-               <div className="grid-card-label">
-                  <h3>Estado del Sistema</h3>
-               </div>
-               <div style={{ padding: '20px', textAlign: 'center' }}>
-                  <div style={{ padding: '30px', background: '#f8fafc', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
-                     <TrendingUp size={48} color="var(--uneRed)" style={{ marginBottom: '15px' }} />
-                     <h4 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '10px' }}>Sistema Operativo</h4>
-                     <p style={{ color: '#64748b', fontSize: '0.9rem' }}>Todas las bases de datos están sincronizadas y el portal de noticias está activo para los usuarios.</p>
+            <div className="grid-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+               <div className="status-pill-server">
+                  <div className="status-icon-glow">
+                     <TrendingUp size={64} />
+                  </div>
+                  <h3>Sistema Operativo</h3>
+                  <p>
+                    Todas las bases de datos están sincronizadas y el portal de noticias está activo 
+                    para los usuarios de UNE Costa Rica.
+                  </p>
+                  <div style={{ marginTop: '1.5rem', display: 'flex', gap: '8px', alignItems: 'center', color: '#16a34a', fontWeight: 600, fontSize: '0.9rem' }}>
+                    <div style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#16a34a' }}></div>
+                    Servidores Activos
                   </div>
                </div>
             </div>
