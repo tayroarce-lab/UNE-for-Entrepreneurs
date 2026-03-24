@@ -1,6 +1,6 @@
 # 🌟 UNE Costa Rica & Modelo Süria - Plataforma de Incubación Empresarial
 
-**Proyecto Universitario FWD**  
+**Proyecto FWD**  
 *Una plataforma integral de desarrollo y empoderamiento para mujeres emprendedoras en Costa Rica.*
 
 ---
