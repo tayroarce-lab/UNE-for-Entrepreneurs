@@ -2,16 +2,11 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Target, ClipboardList, TrendingUp,
-<<<<<<< HEAD
-  Check, MoveRight, ArrowRight, LayoutDashboard, Wallet, Package, Flower2
-=======
-  Check, MoveRight, LayoutDashboard, Wallet, Package, Flower2
->>>>>>> origin/dev
+  Check, MoveRight, ArrowRight, LayoutDashboard, Wallet, Package, Flower2, PhoneCall, Newspaper, Sparkles, Menu, X
 } from 'lucide-react'
 import Navbar from '../../components/Shared/Navbar'
 import Footer from '../../components/Shared/Footer'
 import heroImage from '../../assets/hero_une.jpg'
-<<<<<<< HEAD
 import avatarCarlos from '../../assets/carlos_mendez.png'
 import avatarLucia from '../../assets/lucia_mora.png'
 import avatarEsteban from '../../assets/esteban_ruiz.png'
@@ -19,8 +14,6 @@ import avatarJaqueline from '../../assets/Jaqueline.png'
 import avatarMaria from '../../assets/success_story_maria.png'
 import avatarDamaris from '../../assets/Damaris.png'
 import avatarGinette from '../../assets/Ginette.png'
-=======
->>>>>>> origin/dev
 import NewsCarousel from '../../components/UserComponents/NewsCarousel'
 import InteractiveMap from '../../components/Shared/InteractiveMap'
 import '../../styles/Home.css'
@@ -120,7 +113,6 @@ export default function EstructuraHome() {
                 <h3 style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>Capacítate</h3>
                 <p style={{ fontSize: '1.1rem', color: 'var(--suria-brown)' }}>Accede a talleres de gestión y finanzas antes de recibir tu primer microcrédito.</p>
               </div>
-<<<<<<< HEAD
               <div className="work-step card" style={{ padding: '4rem 3rem', border: '1px solid #f0f0f0', position: 'relative' }}>
                 <div className="step-icon" style={{ background: 'var(--suria-cream)', color: 'var(--suria-crimson)' }}><TrendingUp size={40} /></div>
                 <h3 style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>Escala</h3>
@@ -128,12 +120,6 @@ export default function EstructuraHome() {
                   <img src={avatarMaria} alt="Paso 3" style={{ width: '50px', height: '50px', borderRadius: '50%', border: '3px solid #fff', position: 'absolute', top: '-25px', right: '-10px', objectFit: 'cover', boxShadow: '0 5px 15px rgba(0,0,0,0.1)' }} />
                   <p style={{ fontSize: '1.1rem', color: 'var(--suria-brown)' }}>Recibe el respaldo financiero de UNE y crece junto a tu comunidad en bancos comunales.</p>
                 </div>
-=======
-              <div className="work-step card" style={{ padding: '4rem 3rem', border: '1px solid #f0f0f0' }}>
-                <div className="step-icon" style={{ background: 'var(--suria-cream)', color: 'var(--suria-crimson)' }}><TrendingUp size={40} /></div>
-                <h3 style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>Escala</h3>
-                <p style={{ fontSize: '1.1rem', color: 'var(--suria-brown)' }}>Recibe el respaldo financiero de UNE y crece junto a tu comunidad en bancos comunales.</p>
->>>>>>> origin/dev
               </div>
             </div>
           </div>
@@ -220,7 +206,6 @@ export default function EstructuraHome() {
         {/* ── TESTIMONIALS ── */}
         <section className="testimonials-section" style={{ padding: '8rem 0' }}>
           <div className="container">
-<<<<<<< HEAD
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '5rem', flexWrap: 'wrap', gap: '2rem' }}>
               <div>
                 <h2 style={{ fontSize: '3.5rem', marginBottom: '1rem', color: 'var(--suria-plum)' }}>Voces de éxito</h2>
@@ -244,10 +229,6 @@ export default function EstructuraHome() {
                 Ver todas las historias <ArrowRight size={18} />
               </button>
             </div>
-=======
-            <h2 style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>Voces de éxito</h2>
-            <p style={{ color: 'var(--suria-brown)', opacity: 0.7, fontSize: '1.2rem', marginBottom: '5rem' }}>Historias de mujeres que creyeron en sí mismas y en UNE.</p>
->>>>>>> origin/dev
             <div className="testimonial-grid-v2">
               {[
                 { name: 'Marielos', trade: 'Emprendedora Gastronómica', avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400&h=400', text: 'Gracias al programa de UNE, las mujeres de mi comunidad ahora tenemos voz y negocio propio.' },
@@ -268,7 +249,6 @@ export default function EstructuraHome() {
                 </div>
               ))}
             </div>
-<<<<<<< HEAD
             <div style={{ marginTop: '5rem', textAlign: 'center' }}>
               <h3 style={{ fontSize: '1.8rem', fontWeight: 700, marginBottom: '2.5rem', color: '#4A1525' }}>Cientos de emprendedores ya son parte</h3>
               <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1.5rem' }}>
@@ -296,8 +276,6 @@ export default function EstructuraHome() {
                 Únase a una comunidad vibrante que crece cada día.
               </p>
             </div>
-=======
->>>>>>> origin/dev
           </div>
         </section>
 
