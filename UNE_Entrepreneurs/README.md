@@ -57,6 +57,28 @@ npm run dev
 
 Abra la URL que le genere la segunda terminal (generalmente `http://localhost:5173/`) en su navegador preferido.
 
+## 🎮 Instrucciones de Uso
+
+Una vez que ambos servidores estén corriendo (JSON Server y Vite), puede explorar la plataforma con los siguientes casos de uso:
+
+### Como Usuario Invitado (Sin Cuenta):
+- Navegar por la página de **Inicio**, conocer las secciones de **Nuestra Gente** y explorar los requisitos del modelo de incubación en **Modelo Süria**.
+- Usar el botón en la navegación o en las tarjetas para dirigirse a `/registro`.
+
+### Como Usuario Emprendedor:
+1. Navegue a **Crear Cuenta** y postule su información.
+2. Inicie Sesión. Se le redirigirá al "Portal del Emprendedor" (Página principal modo usuario).
+3. Busque oportunidades en **Ver Opciones** dentro de la tarjeta del *Modelo Süria* o navegue a la pestaña de financiamientos.
+4. Puede leer *Noticias* enviadas por los administradores.
+
+### Como Usuario Administrador (Panel CRUD):
+1. Inicie sesión utilizando **admin@une.com** (contraseña: `Admin123!`).
+2. Se le redirigirá instantáneamente al `/admin/dashboard`.
+3. Desde la barra lateral, acceda a:
+   - **Manejo de Clientes**: Explore los usuarios registrados en el sistema, elimine o cree de ser necesario.
+   - **Gestión de Recursos**: Formule nuevos Tips o Noticias, las cuales aparecerán inmediatamente en el portal web (aplicación viva del CRUD).
+   - **Manejo de Presupuestos**: Observe los presupuestos simulados creados por las diferentes emprendedoras.
+
 ---
 
 ## 🔒 Accesos de Prueba al Sistema
