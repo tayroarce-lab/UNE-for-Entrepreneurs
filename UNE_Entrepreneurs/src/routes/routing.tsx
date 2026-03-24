@@ -1,4 +1,6 @@
 import { createBrowserRouter, Outlet, ScrollRestoration } from 'react-router-dom';
+
+// ── Admin Components ──────────────────────────────────────────
 import AdminDashboard from '../components/AdminComponents/AdminDashboard';
 import ManejarClientes from '../components/AdminComponents/ManejarClientes';
 import ManejoPresupuesto from '../components/AdminComponents/ManejoPresupuesto';
@@ -13,23 +15,23 @@ import GestionSolicitudes from '../components/AdminComponents/GestionSolicitudes
 import Calificaciones from '../components/AdminComponents/Calificaciones';
 import GestionRecursos from '../components/AdminComponents/GestionRecursos';
 
+// ── User Pages ────────────────────────────────────────────────
 import HomeUsers from '../pages/UserPages/HomeUsers';
 import InicioSesion from '../pages/UserPages/InicioSesion';
 import RegistroUser from '../pages/UserPages/RegistroUser';
 import SuriaCatalogPage from '../pages/UserPages/SuriaCatalogPage';
 import SuriaDetailPage from '../pages/UserPages/SuriaDetailPage';
 import AdminSuriaPageWrapper from '../pages/UserPages/AdminSuriaPage';
-import ProtectedRoute from './ProtectedRoute';
 import BudgetPage from '../pages/UserPages/BudgetPage';
 import ProfilePage from '../pages/UserPages/ProfilePage';
 import NewsPage from '../pages/UserPages/NewsPage';
-<<<<<<< HEAD
 import NuestraGente from '../pages/UserPages/NuestraGente';
-=======
->>>>>>> origin/dev
 import SuriaPage from '../pages/UserPages/Suria';
 import ContactSuria from '../pages/UserPages/ContactSuria';
 import NotFoundPage from '../pages/UserPages/NotFoundPage';
+
+// ── Router Guards ─────────────────────────────────────────────
+import ProtectedRoute from './ProtectedRoute';
 
 const RootLayout = () => {
   return (
@@ -44,89 +46,69 @@ const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
-      {
-        path: '/',
-        element: <HomeUsers />,
-      },
-      {
-        path: '/noticias',
-        element: <NewsPage />,
-      },
-      {
-<<<<<<< HEAD
-        path: '/nuestra-gente',
-        element: <NuestraGente />,
-      },
-      {
-=======
->>>>>>> origin/dev
-        path: '/suria',
-        element: <SuriaPage />,
-      },
-      {
-        path: '/contacto',
-        element: <ContactSuria />,
-      },
+      // ── Public Routes ─────────────────────────────────────
+      { path: '/',              element: <HomeUsers /> },
+      { path: '/noticias',      element: <NewsPage /> },
+      { path: '/suria',         element: <SuriaPage /> },
+      { path: '/nuestra-gente', element: <NuestraGente /> },
+      { path: '/contacto',      element: <ContactSuria /> },
+      { path: '/login',         element: <InicioSesion /> },
+      { path: '/registro',      element: <RegistroUser /> },
+
+      // ── Protected User Routes ─────────────────────────────
       {
         path: '/presupuesto',
-        element: <ProtectedRoute />, // Solo usuarios logueados
+        element: <ProtectedRoute />,
         children: [
-          { path: '', element: <BudgetPage /> },
+          { path: '',       element: <BudgetPage /> },
           { path: 'perfil', element: <ProfilePage /> },
-        ]
-      },
-      {
-        path: '/login',
-        element: <InicioSesion />,
-      },
-      {
-        path: '/registro',
-        element: <RegistroUser />,
+        ],
       },
       {
         path: '/financiamiento',
-        element: <ProtectedRoute />, // Solo usuarios logueados
+        element: <ProtectedRoute />,
         children: [
-          { path: '', element: <SuriaCatalogPage /> },
-          { path: ':id', element: <SuriaDetailPage /> },
+          { path: '',       element: <SuriaCatalogPage /> },
+          { path: ':id',    element: <SuriaDetailPage /> },
           { path: 'perfil', element: <ProfilePage /> },
-        ]
+        ],
       },
       {
         path: '/perfil',
         element: <ProtectedRoute />,
         children: [
           { path: '', element: <ProfilePage /> },
-        ]
+        ],
       },
+
+      // ── Admin Routes ──────────────────────────────────────
       {
         path: '/admin',
-        element: <ProtectedRoute adminOnly />, // Solo admins
+        element: <ProtectedRoute adminOnly />,
         children: [
-          { path: '', element: <AdminDashboard /> },
-          { path: 'dashboard', element: <AdminDashboard /> },
-          { path: 'usuarios', element: <ManejarClientes /> },
-          { path: 'clientes', element: <ManejarClientes /> },
-          { path: 'presupuesto', element: <ManejoPresupuesto /> },
-          { path: 'inventario', element: <ManejoInventario /> },
-          { path: 'noticias', element: <GestionTipsNoticias /> },
-          { path: 'solicitudes-contacto', element: <GestionSolicitudes /> },
-          { path: 'configuraciones', element: <Configuraciones /> },
-          { path: 'configuraciones/notificaciones', element: <Notificaciones /> },
-          { path: 'configuraciones/credenciales', element: <CambioCredenciales /> },
-          { path: 'configuraciones/roles', element: <RolesPermisos /> },
-          { path: 'mapa', element: <Maps /> },
-          { path: 'financiamiento', element: <AdminSuriaPageWrapper /> },
-          { path: 'calificaciones', element: <Calificaciones /> },
-          { path: 'recursos', element: <GestionRecursos /> },
-        ]
+          { path: '',                              element: <AdminDashboard /> },
+          { path: 'dashboard',                     element: <AdminDashboard /> },
+          { path: 'usuarios',                      element: <ManejarClientes /> },
+          { path: 'clientes',                      element: <ManejarClientes /> },
+          { path: 'presupuesto',                   element: <ManejoPresupuesto /> },
+          { path: 'inventario',                    element: <ManejoInventario /> },
+          { path: 'noticias',                      element: <GestionTipsNoticias /> },
+          { path: 'solicitudes-contacto',          element: <GestionSolicitudes /> },
+          { path: 'calificaciones',                element: <Calificaciones /> },
+          { path: 'recursos',                      element: <GestionRecursos /> },
+          { path: 'configuraciones',               element: <Configuraciones /> },
+          { path: 'configuraciones/notificaciones',element: <Notificaciones /> },
+          { path: 'configuraciones/credenciales',  element: <CambioCredenciales /> },
+          { path: 'configuraciones/roles',         element: <RolesPermisos /> },
+          { path: 'mapa',                          element: <Maps /> },
+          { path: 'financiamiento',                element: <AdminSuriaPageWrapper /> },
+        ],
       },
-      {
-        path: '*',
-        element: <NotFoundPage />,
-      }
-    ]
-  }
+
+      // ── 404 ───────────────────────────────────────────────
+      { path: '*', element: <NotFoundPage /> },
+    ],
+  },
 ]);
 
 export default router;

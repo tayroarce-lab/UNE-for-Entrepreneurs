@@ -1,0 +1,230 @@
+/* ============================================================
+   NUESTRA GENTE PAGE
+   ============================================================ */
+.nuestra-gente-page {
+  background: #F8F1EB;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Hero ── */
+.ng-hero {
+  padding: 100px 2rem 80px;
+  text-align: center;
+  background: linear-gradient(135deg, #4A1525 0%, #2D0D16 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.ng-hero-deco-1 {
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 300px;
+  height: 300px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.ng-hero-deco-2 {
+  position: absolute;
+  bottom: -20%;
+  left: -5%;
+  width: 500px;
+  height: 500px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.ng-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.ng-hero h1 {
+  font-size: 4.5rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  letter-spacing: -2px;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.ng-hero h1 span {
+  color: #facc15;
+  font-style: italic;
+}
+
+.ng-hero p {
+  font-size: 1.4rem;
+  color: #fca5a5;
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ── Gallery ── */
+.ng-gallery {
+  padding: 6rem 2rem;
+}
+
+.ng-gallery-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+.caso-card {
+  display: flex;
+  background: #fff;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px -20px rgba(74, 21, 37, 0.12);
+  min-height: 500px;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.caso-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 50px 100px -20px rgba(74, 21, 37, 0.2);
+}
+
+.caso-card.reverse {
+  flex-direction: row-reverse;
+}
+
+.caso-img-side {
+  flex: 1 1 45%;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.1) brightness(0.9);
+  transition: transform 0.6s ease;
+}
+
+.caso-card:hover .avatar-img {
+  transform: scale(1.05);
+}
+
+.img-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  mix-blend-mode: multiply;
+}
+
+.caso-content-side {
+  flex: 1 1 55%;
+  padding: 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  background: #fff;
+}
+
+.caso-quote-icon {
+  opacity: 0.1;
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  pointer-events: none;
+}
+
+.caso-tag {
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.caso-quote-text {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 2.5rem;
+  color: #4A1525;
+  font-style: italic;
+}
+
+.caso-author {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.caso-author-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 24px;
+  background: #4A1525;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 900;
+  box-shadow: 0 10px 20px rgba(74, 21, 37, 0.2);
+}
+
+.caso-author-name {
+  font-weight: 900;
+  font-size: 1.5rem;
+  margin: 0;
+  color: #4A1525;
+}
+
+.caso-author-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 992px) {
+  .caso-card,
+  .caso-card.reverse {
+    flex-direction: column;
+    min-height: auto;
+  }
+  .caso-img-side {
+    flex: none;
+  }
+  .avatar-img {
+    height: 400px;
+  }
+  .caso-card {
+    padding: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .ng-hero h1 {
+    font-size: 3rem;
+  }
+  .avatar-img {
+    height: 300px;
+  }
+  .caso-content-side {
+    padding: 3rem 2rem;
+  }
+}

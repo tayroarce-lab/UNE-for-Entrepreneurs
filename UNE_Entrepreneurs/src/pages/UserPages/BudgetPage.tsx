@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import Navbar from '../../components/Shared/Navbar'
-import Footer from '../../components/Shared/Footer'
+import Navbar from '../../components/Shared/Navbar';
+import Footer from '../../components/Shared/Footer';
 import FinanzasPanel from '../../components/IngresosEgresos/FinanzasPanel';
 import InventoryPanel from '../../components/Inventario/InventoryPanel';
 import { Wallet, Package, Info } from 'lucide-react';
+import '../../styles/BudgetPage.css';
 
 /**
  * BudgetPage: Panel de Control del Emprendedor.
@@ -13,12 +14,12 @@ export default function BudgetPage() {
   const [activeTab, setActiveTab] = useState<'finances' | 'inventory'>('finances');
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f8fafc' }}>
+    <div className="budget-page">
       <Navbar />
-      
+
       <main className="budget-main">
         {/* Page Header */}
-        <header className="page-header budget-header">
+        <header className="budget-header">
           <div className="title-area">
             <h1 style={{ fontSize: '2.25rem', fontWeight: 900, color: 'var(--color-dark)', letterSpacing: '-0.025em' }}>
               Panel de Control <span style={{ color: 'var(--color-primary)' }}>UNE</span>
@@ -27,16 +28,16 @@ export default function BudgetPage() {
               Gestione su presupuesto e inventario en un solo lugar.
             </p>
           </div>
-          
+
           {/* Tab Navigation */}
-          <div className="tab-nav-premium" style={{ display: 'flex', background: '#e2e8f0', padding: '4px', borderRadius: '12px', gap: '4px' }}>
-            <button 
+          <div className="tab-nav-premium">
+            <button
               className={`tab-btn ${activeTab === 'finances' ? 'active' : ''}`}
               onClick={() => setActiveTab('finances')}
             >
-              <Wallet size={18} /> Finanzas & Presupuesto
+              <Wallet size={18} /> Finanzas &amp; Presupuesto
             </button>
-            <button 
+            <button
               className={`tab-btn ${activeTab === 'inventory' ? 'active' : ''}`}
               onClick={() => setActiveTab('inventory')}
             >
@@ -46,105 +47,27 @@ export default function BudgetPage() {
         </header>
 
         {/* Dynamic Content */}
-        <div className="panel-content-area" style={{ animation: 'fadeIn 0.4s ease-out' }}>
-          {activeTab === 'finances' ? (
-            <FinanzasPanel />
-          ) : (
-            <InventoryPanel />
-          )}
+        <div className="panel-content-area">
+          {activeTab === 'finances' ? <FinanzasPanel /> : <InventoryPanel />}
         </div>
 
-        {/* Tip/Info Footer */}
-        <footer className="panel-tip" style={{ marginTop: '3rem', padding: '1.5rem', background: 'var(--color-bg-warm)', borderRadius: '16px', display: 'flex', gap: '1rem', alignItems: 'center', border: '1px solid rgba(123, 45, 59, 0.1)' }}>
-          <div style={{ background: 'var(--color-primary)', color: '#fff', padding: '8px', borderRadius: '10px' }}>
+        {/* Info Tip */}
+        <footer className="panel-tip">
+          <div className="panel-tip-icon">
             <Info size={24} />
           </div>
           <div>
-            <h4 style={{ color: 'var(--color-primary)', fontWeight: 800 }}>Consejo UNE:</h4>
-            <p style={{ color: '#666', fontSize: '0.9rem' }}>
-              Mantener el inventario al día le permite proyectar sus necesidades de inversión de forma más precisa. 
-              Recuerde registrar cada venta para ver reflejado su margen de utilidad real en tiempo real.
+            <h4>Consejo UNE:</h4>
+            <p>
+              Mantener el inventario al día le permite proyectar sus necesidades de inversión
+              de forma más precisa. Recuerde registrar cada venta para ver reflejado su margen
+              de utilidad real en tiempo real.
             </p>
           </div>
         </footer>
       </main>
 
       <Footer />
-
-      <style>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .tab-btn {
-          border: none;
-          padding: 0.75rem 1.5rem;
-          border-radius: 9px;
-          font-weight: 700;
-          font-size: 0.9rem;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          color: #64748b;
-          background: transparent;
-          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .tab-btn.active {
-          background: #fff;
-          color: var(--color-primary);
-          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-          transform: translateY(-1px);
-        }
-        
-        .tab-btn:hover:not(.active) {
-          color: var(--color-dark);
-          background: rgba(255,255,255,0.4);
-        }
-
-        .budget-main {
-          flex: 1;
-          padding: 2rem 4rem;
-        }
-
-        .budget-header {
-          margin-bottom: 2.5rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
-          gap: 1.5rem;
-        }
-
-        @media (max-width: 1024px) {
-          .budget-main {
-            padding: 1.5rem 2rem;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .budget-main {
-            padding: 1rem 1.5rem;
-          }
-          .budget-header {
-            flex-direction: column;
-            align-items: flex-start;
-          }
-          .tab-nav-premium {
-            width: 100%;
-            overflow-x: auto;
-            justify-content: flex-start;
-          }
-          .tab-btn {
-            white-space: nowrap;
-          }
-          .panel-tip {
-            flex-direction: column;
-            text-align: center;
-          }
-        }
-      `}</style>
     </div>
-  )
+  );
 }
