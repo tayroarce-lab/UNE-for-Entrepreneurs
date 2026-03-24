@@ -1,5 +1,5 @@
 /* ============================================================
-   UNE Entrepreneurs - Global Styles
+   UNE Entrepreneurs - Global Styles (Mobile First)
    ============================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600;700;800&family=EB+Garamond:ital,wght@1,400;1,600&family=Nunito:wght@300;400;600&family=Inter:wght@400;500;700&display=swap');
 
@@ -30,22 +30,11 @@
   --color-text-dark: var(--suria-plum);
   --color-text-light: #6b4e4e;
   
-  /* Typography Hierarchy - Official brand manual */
+  /* Typography Hierarchy */
   --font-display: 'Playfair Display', serif;
   --font-ui: 'Montserrat', sans-serif;
   --font-accent: 'EB Garamond', serif;
   --font-body: 'Nunito', 'Inter', sans-serif;
-
-  /* Specific roles */
-  --font-logo-main: 'Montserrat', sans-serif;
-  --font-logo-script: 'EB Garamond', serif;
-
-  /* Legacy Compat (Pointing to new branding) */
-  --uneRed: var(--suria-crimson);
-  --uneRedDark: var(--suria-dark-crimson);
-  --uneGold: var(--suria-gold);
-  --uneCream: var(--suria-cream);
-  --font-main: var(--font-body);
 
   /* Elevation & Shape */
   --shadow-sm: 0 2px 8px rgba(64, 22, 45, 0.05);
@@ -59,20 +48,11 @@
 }
 
 [data-theme='dark'] {
-  --color-dark: #f8f8fa;
-  --color-dark-soft: #e8e8ee;
   --color-text: #e2e8f0;
   --color-text-light: #94a3b8;
-  --color-text-muted: #64748b;
   --color-bg: #0f172a;
   --color-bg-soft: #1e293b;
-  --color-bg-warm: #1e1b4b;
-  --color-border: #334155;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
-  --shadow-lg: 0 10px 30px rgba(0,0,0,0.5);
 }
-
 
 /* ---------- Reset & Base ---------- */
 *, *::before, *::after {
@@ -83,6 +63,13 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 14px; /* Slightly smaller base for mobile */
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
 }
 
 body {
@@ -94,239 +81,100 @@ body {
   display: flex;
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
   width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  text-align: left;
-}
-
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-a:hover {
-  color: var(--color-accent);
 }
 
 img {
   max-width: 100%;
+  height: auto;
   display: block;
-}
-
-ul {
-  list-style: none;
-}
-
-h1, h2, h3 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  color: var(--suria-plum);
-}
-
-h4, h5, h6, .label, .tag, .nav-link, button {
-  font-family: var(--font-ui);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.accent-phrase {
-  font-family: var(--font-accent);
-  font-style: italic;
-  color: var(--suria-crimson);
 }
 
 /* ---------- Container Utility ---------- */
 .container {
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.25rem; /* MOBILE PADDING */
 }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 1024px) {
-  .hero-inner {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .hero-section h1 {
-    font-size: 2.5rem;
-  }
-
-  .hero-section p {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero-buttons {
-    justify-content: center;
-  }
-
-  .hero-image {
-    justify-content: center;
-  }
-
-  .features-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .news-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .cta-inner {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 900px) {
-  .navbar-mobile-toggle {
-    display: flex;
-  }
-
-  .navbar-container {
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 0 1.5rem;
-  }
-
-  .navbar-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: var(--suria-plum);
-    padding: 2rem;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    border-top: 1px solid rgba(255,255,255,0.1);
-    transition: all 0.3s ease;
-  }
-
-  .navbar-links.active {
-    display: flex;
-  }
-
-  .navbar-links li {
-    width: 100%;
-  }
-
-  .navbar-links a {
-    justify-content: flex-start;
-    padding: 10px 0;
-    width: 100%;
-  }
-
-  .nav-highlight, .nav-admin-badge, .btn-login-nav, .btn-register {
-    width: 100%;
-    justify-content: center !important;
-  }
-
-  .navbar-profile {
-    border-left: none;
-    padding-left: 0;
-    margin-left: 0;
-    width: 100%;
-    justify-content: flex-start;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 1.5rem;
-    margin-top: 1rem;
-  }
-
-  .navbar-auth-buttons {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-
-  .hero-section {
-    padding: 8rem 0 4rem;
-  }
-
-  .hero-section h1 {
-    font-size: 2.2rem;
-    line-height: 1.2;
-  }
-  
-  .hero-section p {
-    font-size: 1rem;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-    width: 100%;
-    gap: 1rem;
-  }
-
-  .hero-buttons > * {
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-  }
-
-  .features-grid {
-    grid-template-columns: 1fr;
-    max-width: 100%;
-  }
-
-  .news-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .footer-container {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    text-align: center;
-  }
-
-  .footer-column h4 {
-    margin-bottom: 1rem;
-  }
-
-  .login-box,
-  .register-box {
-    padding: 2.5rem 1.5rem;
-    margin: 1rem;
-    border-radius: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-section h1 {
-    font-size: 1.8rem;
-  }
+@media (min-width: 768px) {
   .container {
-    padding: 0 1.25rem;
+    max-width: 720px;
+    padding: 0 2rem;
   }
-  .navbar-users {
-    height: 70px;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
   }
-  .navbar-logo .logo-box {
-    width: 40px;
-    height: 40px;
+}
+
+/* ---------- Typography ---------- */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--suria-plum);
+  margin-bottom: 1rem;
+}
+
+h1 { font-size: 2rem; line-height: 1.2; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+
+@media (min-width: 768px) {
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2.25rem; }
+  h3 { font-size: 1.75rem; }
+}
+
+/* ---------- Common Components ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  width: 100%; /* Default mobile behavior: full width */
+  text-align: center;
+}
+
+@media (min-width: 480px) {
+  .btn {
+    width: auto;
   }
+}
+
+/* ---------- Global Fixes for Mobile ---------- */
+input, select, textarea {
+  font-size: 16px !important; /* Prevents iOS auto-zoom on focus */
+}
+
+/* Table Responsive Helper */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Grid System - Mobile First */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
 }

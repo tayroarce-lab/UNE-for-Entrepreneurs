@@ -147,84 +147,147 @@ export default function GestionSolicitudes() {
           {loading ? (
             <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>Cargando solicitudes...</div>
           ) : (
-            <div style={{ overflowX: 'auto' }}>
-              <table className="admin-table-v2">
-                <thead>
-                  <tr>
-                    <th>CONTACTO</th>
-                    <th>NEGOCIO</th>
-                    <th>FECHA</th>
-                    <th style={{ textAlign: 'center' }}>ESTADO</th>
-                    <th style={{ textAlign: 'center' }}>ACCIONES</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredSolicitudes.length === 0 ? (
-                    <tr><td colSpan={5} style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>No hay solicitudes de contacto.</td></tr>
-                  ) : filteredSolicitudes.map((sol) => {
-                    const statusColors = getStatusColor(sol.estado);
-                    return (
-                      <tr key={sol.id}>
-                        <td>
-                          <div style={{ fontWeight: 800 }}>{sol.nombre}</div>
-                          <div style={{ fontSize: '0.8rem', color: '#64748b' }}><a href={`mailto:${sol.email}`} style={{ color: 'inherit', textDecoration: 'none' }}>{sol.email}</a></div>
-                          <div style={{ fontSize: '0.8rem', color: '#64748b' }}>{sol.telefono}</div>
-                        </td>
-                        <td>
-                          <div style={{ fontWeight: 600, maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{sol.negocio}</div>
-                          <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>{sol.ubicacion}</div>
-                        </td>
-                        <td style={{ color: '#64748b', fontSize: '0.85rem' }}>
-                          {new Date(sol.fechaRegistro).toLocaleDateString()}
-                        </td>
-                        <td style={{ textAlign: 'center' }}>
-                          <select 
-                            value={sol.estado}
-                            onChange={(e) => handleEstadoChange(sol.id, e.target.value as any)}
-                            style={{ 
-                              padding: '4px 10px', 
-                              borderRadius: '50px', 
-                              fontSize: '0.75rem', 
-                              fontWeight: 700,
-                              background: statusColors.bg,
-                              color: statusColors.text,
-                              border: 'none',
-                              outline: 'none',
-                              cursor: 'pointer',
-                              appearance: 'none',
-                              textAlign: 'center'
-                            }}
-                          >
-                            <option value="Pendiente">Pendiente</option>
-                            <option value="Contactado">Contactado</option>
-                            <option value="Descartado">Descartado</option>
-                          </select>
-                        </td>
-                        <td style={{ textAlign: 'center' }}>
-                          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
-                            <button 
-                              onClick={() => handleVerDetalles(sol)}
-                              title="Ver Mensaje"
-                              style={{ background: '#eff6ff', color: '#2563eb', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}
-                            ><MessageSquare size={16} /></button>
-                            <button 
-                              onClick={() => handleNotasAdmin(sol)}
-                              title="Notas Internas"
-                              style={{ background: sol.notasAdmin ? '#fefce8' : '#f1f5f9', color: sol.notasAdmin ? '#ca8a04' : '#64748b', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}
-                            ><FileText size={16} /></button>
-                            <button 
-                              onClick={() => handleEliminar(sol.id)}
-                              title="Eliminar"
-                              style={{ background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}
-                            ><Trash2 size={16} /></button>
-                          </div>
-                        </td>
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
-            </div>
+            <>
+              {/* MOBILE VIEW (CARDS) */}
+              <div className="mobile-only mobile-card-list">
+                {filteredSolicitudes.length === 0 ? (
+                  <div style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>No hay solicitudes de contacto.</div>
+                ) : filteredSolicitudes.map((sol) => {
+                  const statusColors = getStatusColor(sol.estado);
+                  return (
+                    <div key={sol.id} className="mobile-record-card">
+                      <div className="card-row">
+                        <span className="card-label">Contacto</span>
+                        <span className="card-value">{sol.nombre}</span>
+                      </div>
+                      <div className="card-row">
+                        <span className="card-label">Negocio</span>
+                        <span className="card-value">{sol.negocio}</span>
+                      </div>
+                      <div className="card-row">
+                        <span className="card-label">Fecha</span>
+                        <span className="card-value">{new Date(sol.fechaRegistro).toLocaleDateString()}</span>
+                      </div>
+                      <div className="card-row">
+                        <span className="card-label">Estado</span>
+                        <select 
+                          value={sol.estado}
+                          onChange={(e) => handleEstadoChange(sol.id, e.target.value as any)}
+                          style={{ 
+                            padding: '4px 10px', 
+                            borderRadius: '50px', 
+                            fontSize: '0.75rem', 
+                            fontWeight: 700,
+                            background: statusColors.bg,
+                            color: statusColors.text,
+                            border: 'none',
+                            outline: 'none'
+                          }}
+                        >
+                          <option value="Pendiente">Pendiente</option>
+                          <option value="Contactado">Contactado</option>
+                          <option value="Descartado">Descartado</option>
+                        </select>
+                      </div>
+                      <div className="card-actions">
+                        <button 
+                          onClick={() => handleVerDetalles(sol)}
+                          style={{ flex: 1, padding: '10px', background: '#eff6ff', color: '#2563eb', border: 'none', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        ><MessageSquare size={16} /></button>
+                        <button 
+                          onClick={() => handleNotasAdmin(sol)}
+                          style={{ flex: 1, padding: '10px', background: sol.notasAdmin ? '#fefce8' : '#f1f5f9', color: sol.notasAdmin ? '#ca8a04' : '#64748b', border: 'none', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        ><FileText size={16} /></button>
+                        <button 
+                          onClick={() => handleEliminar(sol.id)}
+                          style={{ flex: 1, padding: '10px', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        ><Trash2 size={16} /></button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* DESKTOP VIEW (TABLE) */}
+              <div className="desktop-only table-responsive">
+                <table className="admin-table-v2">
+                  <thead>
+                    <tr>
+                      <th>CONTACTO</th>
+                      <th>NEGOCIO</th>
+                      <th>FECHA</th>
+                      <th style={{ textAlign: 'center' }}>ESTADO</th>
+                      <th style={{ textAlign: 'center' }}>ACCIONES</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredSolicitudes.length === 0 ? (
+                      <tr><td colSpan={5} style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>No hay solicitudes de contacto.</td></tr>
+                    ) : filteredSolicitudes.map((sol) => {
+                      const statusColors = getStatusColor(sol.estado);
+                      return (
+                        <tr key={sol.id}>
+                          <td>
+                            <div style={{ fontWeight: 800 }}>{sol.nombre}</div>
+                            <div style={{ fontSize: '0.8rem', color: '#64748b' }}><a href={`mailto:${sol.email}`} style={{ color: 'inherit', textDecoration: 'none' }}>{sol.email}</a></div>
+                            <div style={{ fontSize: '0.8rem', color: '#64748b' }}>{sol.telefono}</div>
+                          </td>
+                          <td>
+                            <div style={{ fontWeight: 600, maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{sol.negocio}</div>
+                            <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>{sol.ubicacion}</div>
+                          </td>
+                          <td style={{ color: '#64748b', fontSize: '0.85rem' }}>
+                            {new Date(sol.fechaRegistro).toLocaleDateString()}
+                          </td>
+                          <td style={{ textAlign: 'center' }}>
+                            <select 
+                              value={sol.estado}
+                              onChange={(e) => handleEstadoChange(sol.id, e.target.value as any)}
+                              style={{ 
+                                padding: '4px 10px', 
+                                borderRadius: '50px', 
+                                fontSize: '0.75rem', 
+                                fontWeight: 700,
+                                background: statusColors.bg,
+                                color: statusColors.text,
+                                border: 'none',
+                                outline: 'none',
+                                cursor: 'pointer',
+                                appearance: 'none',
+                                textAlign: 'center'
+                              }}
+                            >
+                              <option value="Pendiente">Pendiente</option>
+                              <option value="Contactado">Contactado</option>
+                              <option value="Descartado">Descartado</option>
+                            </select>
+                          </td>
+                          <td style={{ textAlign: 'center' }}>
+                            <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                              <button 
+                                onClick={() => handleVerDetalles(sol)}
+                                title="Ver Mensaje"
+                                style={{ background: '#eff6ff', color: '#2563eb', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}
+                              ><MessageSquare size={16} /></button>
+                              <button 
+                                onClick={() => handleNotasAdmin(sol)}
+                                title="Notas Internas"
+                                style={{ background: sol.notasAdmin ? '#fefce8' : '#f1f5f9', color: sol.notasAdmin ? '#ca8a04' : '#64748b', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}
+                              ><FileText size={16} /></button>
+                              <button 
+                                onClick={() => handleEliminar(sol.id)}
+                                title="Eliminar"
+                                style={{ background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}
+                              ><Trash2 size={16} /></button>
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </>
           )}
         </div>
       </main>
