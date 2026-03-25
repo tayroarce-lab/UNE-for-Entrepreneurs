@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User as UserIcon, Mail, Lock, Camera, Save, ArrowLeft, ShieldCheck, Calendar } from 'lucide-react';
+import { User as UserIcon, Mail, Lock, Camera, Save, ArrowLeft, ShieldCheck, Calendar, Trash2 } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
 import UserServices from '../../../services/UserServices';
 import { notifications } from '../../../utils/notifications';
+import Swal from 'sweetalert2';
 import styles from './ProfileEditor.module.css';
 
 const ProfileEditor: React.FC = () => {
@@ -37,17 +38,64 @@ const ProfileEditor: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const updateAvatarInstant = async (newAvatarStr: string) => {
+    if (!user) return;
+    try {
+      const payload = { avatar: newAvatarStr };
+      const updated = await UserServices.patchUsuarios(payload, user.id);
+      if (updated) {
+        refreshUser({ avatar: updated.avatar });
+      }
+    } catch (error) {
+      console.error(error);
+      notifications.error('Error al actualizar la foto de perfil');
+    }
+  };
+
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        notifications.error('La imagen no debe superar los 2MB');
+      if (file.size > 2 * 1024 * 1024) { // Límite de 2MB
+        notifications.error('La imagen es muy grande. El tamaño máximo es de 2MB.');
         return;
       }
+      
       const reader = new FileReader();
       reader.onloadend = () => {
-        setFormData(prev => ({ ...prev, avatar: reader.result as string }));
-        notifications.success('Foto cargada. ¡No olvides guardar los cambios!');
+        const img = new Image();
+        img.onload = async () => {
+          const canvas = document.createElement('canvas');
+          const MAX_WIDTH = 400;
+          const MAX_HEIGHT = 400;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height *= MAX_WIDTH / width;
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width *= MAX_HEIGHT / height;
+              height = MAX_HEIGHT;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, width, height);
+            // Comprimir como JPEG al 80% de calidad para tamaño ultra reducido
+            const base64Str = canvas.toDataURL('image/jpeg', 0.8);
+            
+            setFormData(prev => ({ ...prev, avatar: base64Str }));
+            await updateAvatarInstant(base64Str);
+            notifications.success('Foto de perfil actualizada exitosamente.');
+          }
+        };
+        img.src = reader.result as string;
       };
       reader.readAsDataURL(file);
     }
@@ -101,10 +149,37 @@ const ProfileEditor: React.FC = () => {
                   : formData.nombre.charAt(0).toUpperCase()
                 }
               </div>
-              <label className={styles.cameraLabel} title="Editar avatar">
+              <label className={styles.cameraLabel} title="Editar avatar" style={{ cursor: 'pointer' }}>
                 <Camera size={18} />
                 <input type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} />
               </label>
+              {formData.avatar && (
+                <button 
+                  type="button" 
+                  className={styles.trashLabel} 
+                  title="Eliminar foto"
+                  onClick={() => {
+                    Swal.fire({
+                      title: '¿Eliminar foto de perfil?',
+                      text: "Esta acción no se puede deshacer.",
+                      icon: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: 'var(--suria-crimson)',
+                      cancelButtonColor: '#94a3b8',
+                      confirmButtonText: 'Sí, eliminar',
+                      cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        setFormData(prev => ({ ...prev, avatar: '' }));
+                        updateAvatarInstant('');
+                        notifications.success('Foto eliminada correctamente.');
+                      }
+                    });
+                  }}
+                >
+                  <Trash2 size={16} />
+                </button>
+              )}
             </div>
             <h2 className={styles.sidebarName}>{user.name}</h2>
             <p className={styles.sidebarEmail}>{user.email}</p>
@@ -142,10 +217,26 @@ const ProfileEditor: React.FC = () => {
               </div>
 
               <div className={styles.inputGroup}>
-                <label>Sube una foto de perfil (Opcional)</label>
+                <label>Avatar URL (Opcional)</label>
+                <p style={{ fontSize: '0.8rem', color: '#64748b', marginBottom: '8px', lineHeight: 1.4 }}>
+                  Puedes pegar un enlace aquí, o <strong>hacer clic en el ícono de cámara</strong> sobre tu inicial arriba a la izquierda para subir una foto desde tu galería.
+                </p>
                 <div className={styles.inputWrapper}>
                   <Camera size={18} className={styles.inputIcon} />
-                  <input type="file" accept="image/*" onChange={handleImageUpload} className={styles.input} style={{ padding: '0.5rem 1rem' }} />
+                  <input 
+                    type="text" 
+                    name="avatar" 
+                    placeholder="https://ejemplo.com/mi-foto.jpg" 
+                    value={formData.avatar.startsWith('data:image') ? '(Foto seleccionada desde galería)' : formData.avatar} 
+                    onChange={(e) => {
+                      if (formData.avatar.startsWith('data:image')) {
+                        setFormData(prev => ({ ...prev, avatar: '' }));
+                      } else {
+                        handleChange(e);
+                      }
+                    }} 
+                    className={styles.input} 
+                  />
                 </div>
               </div>
 

@@ -125,14 +125,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // Update localStorage
     const stored = localStorage.getItem('userSession');
     if (stored) {
-      const parsed = JSON.parse(stored);
-      localStorage.setItem('userSession', JSON.stringify({
-        ...parsed,
-        nombre: newUser.name,
-        email: newUser.email,
-        avatar: newUser.avatar,
-        isAdmin: newUser.isAdmin
-      }));
+      try {
+        const parsed = JSON.parse(stored);
+        localStorage.setItem('userSession', JSON.stringify({
+          ...parsed,
+          nombre: newUser.name,
+          email: newUser.email,
+          avatar: newUser.avatar,
+          isAdmin: newUser.isAdmin
+        }));
+      } catch (err) {
+        console.warn('Could not save session to localStorage, possibly due to size limit', err);
+      }
     }
   };
 
