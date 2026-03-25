@@ -28,7 +28,7 @@ import BudgetPage from '../pages/UserPages/BudgetPage';
 import ProfilePage from '../pages/UserPages/ProfilePage';
 import NewsPage from '../pages/UserPages/NewsPage';
 import NuestraGente from '../pages/UserPages/NuestraGente';
-import Recursos from '../pages/UserPages/Recursos';
+import RecursosPage from '../pages/UserPages/RecursosPage';
 import SuriaPage from '../pages/UserPages/Suria';
 import ContactSuria from '../pages/UserPages/ContactSuria';
 import NotFoundPage from '../pages/UserPages/NotFoundPage';
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
       { path: '/noticias',      element: <NewsPage /> },
       { path: '/suria',         element: <SuriaPage /> },
       { path: '/nuestra-gente', element: <NuestraGente /> },
-      { path: '/recursos',      element: <Recursos /> },
+      { path: '/recursos',      element: <RecursosPage /> },
       { path: '/contacto',      element: <ContactSuria /> },
       { path: '/login',         element: <InicioSesion /> },
       { path: '/registro',      element: <RegistroUser /> },

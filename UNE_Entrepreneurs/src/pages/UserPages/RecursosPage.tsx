@@ -6,7 +6,7 @@ import type { Recurso } from '../../services/RecursosService';
 import { ExternalLink, FileText, Loader, BookOpen, PenTool, Layout, Video, HelpCircle } from 'lucide-react';
 import '../../styles/Recursos.css';
 
-const Recursos: React.FC = () => {
+const RecursosPage: React.FC = () => {
   const [recursos, setRecursos] = useState<Recurso[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -88,4 +88,4 @@ const Recursos: React.FC = () => {
   );
 };
 
-export default Recursos;
+export default RecursosPage;

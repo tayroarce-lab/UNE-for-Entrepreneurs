@@ -51,6 +51,25 @@ export default function ContactModal({ program, onClose }: ContactModalProps) {
         createdAt: new Date().toISOString(),
         status: 'new',
       });
+
+      // Integración con FormSubmit para notificaciones automáticas
+      fetch('https://formsubmit.co/ajax/tarcebfwd@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `💎 Nueva Solicitud de Asesoría - ${program.name}`,
+          Programa: program.name,
+          Nombre: formData.name,
+          Email: formData.email,
+          Teléfono: formData.phone || 'No proporcionado',
+          Mensaje: formData.message,
+          _template: 'table'
+        })
+      }).catch(err => console.error('FormSubmit Error:', err));
+
       toast.success('Mensaje enviado. Un asesor le contactará pronto.');
       setSubmitted(true);
     } catch (err) {
