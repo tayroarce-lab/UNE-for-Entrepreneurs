@@ -9,8 +9,7 @@ import {
   Download,
   CreditCard,
   ShieldCheck,
-  Lightbulb,
-  Landmark
+  Lightbulb
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
