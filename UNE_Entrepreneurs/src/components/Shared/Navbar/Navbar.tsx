@@ -3,7 +3,7 @@ import { useNavigate, useLocation, Link, NavLink } from 'react-router-dom';
 import { LogIn, UserPlus, BookOpen, LogOut, LayoutDashboard, Home, PhoneCall, Newspaper, Users, Sparkles, Menu, X } from 'lucide-react';
 import { notifications } from '../../../utils/notifications';
 import { useAuth } from '../../../context/AuthContext';
-import uneLogo from '../../../assets/logo_une.png';
+const uneLogo = '/assets/logo_une.png';
 import styles from './Navbar.module.css';
 
 const Navbar: React.FC = () => {

@@ -47,6 +47,7 @@ export interface FinancingProgram {
   createdBy?: string;
   attachments?: Attachment[];
   closedReason?: string;
+  image?: string;
 }
 
 export interface Application {

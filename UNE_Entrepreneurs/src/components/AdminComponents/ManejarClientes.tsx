@@ -143,18 +143,18 @@ function ManejarClientes() {
         />
         
         <main style={{ padding: 0 }}>
-        <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '20px' }}>
-          <div>
-            <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#3A0D23', marginBottom: '4px' }}>Gestión de Usuarios</h1>
-            <p style={{ color: '#64748B', fontSize: '1.1rem' }}>Administra la red de emprendedores y roles de acceso de UNE Costa Rica.</p>
+          <div className="admin-main-header">
+            <div>
+              <h1 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#3A0D23', marginBottom: '4px' }}>Gestión de Usuarios</h1>
+              <p style={{ color: '#64748B', fontSize: '1rem' }}>Administra la red de emprendedores y roles de acceso de UNE Costa Rica.</p>
+            </div>
+            <button 
+              onClick={abrirModalCrear}
+              style={{ padding: '12px 24px', background: '#E55B4B', color: '#fff', border: 'none', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+              <PlusCircle size={20} /> Nuevo Usuario
+            </button>
           </div>
-          <button 
-            onClick={abrirModalCrear}
-            style={{ padding: '12px 24px', background: '#E55B4B', color: '#fff', border: 'none', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
-          >
-            <PlusCircle size={20} /> Nuevo Usuario
-          </button>
-        </div>
 
             <div className="grid-card">
                 <div className="grid-card-label">
@@ -173,10 +173,10 @@ function ManejarClientes() {
                             {clientesFiltrados.length > 0 ? clientesFiltrados.map((cliente) => (
                                 <div key={cliente.id} className="mobile-record-card">
                                     <div className="card-row" style={{ alignItems: 'center', marginBottom: '1rem' }}>
-                                        <div className="row-avatar" style={{ background: 'var(--suria-cream)', color: 'var(--suria-plum)', marginRight: '12px' }}>
+                                        <div className="row-avatar" style={{ background: 'var(--suria-peach)', color: 'var(--suria-plum)', marginRight: '12px' }}>
                                             {cliente.nombre ? cliente.nombre.charAt(0).toUpperCase() : 'U'}
                                         </div>
-                                        <span className="card-value" style={{ textAlign: 'left', fontSize: '1rem' }}>{cliente.nombre || 'Sin nombre'}</span>
+                                        <span className="card-value" style={{ textAlign: 'left', fontSize: '0.95rem' }}>{cliente.nombre || 'Sin nombre'}</span>
                                     </div>
                                     <div className="card-row">
                                         <span className="card-label">Email</span>

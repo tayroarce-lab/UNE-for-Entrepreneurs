@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MoveRight } from 'lucide-react';
 import styles from './HeroSection.module.css';
-import heroImage from '../../../assets/hero_une.jpg';
+const heroImage = '/assets/hero_une.jpg';
 
 interface HeroSectionProps {
   badgeText?: string;

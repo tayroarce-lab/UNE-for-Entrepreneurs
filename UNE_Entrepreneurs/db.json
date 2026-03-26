@@ -4,7 +4,7 @@
       "id": "1",
       "titulo": "UNE lansa nuevo programa de microcréditos 2026",
       "contenido": "Nuestro nuevo programa está enfocado en jóvenes emprendedores de zonas rurales, con tasas preferenciales y acompañamiento técnico especializado.",
-      "imagen": "/news2.png",
+      "imagen": "/news/news2.png",
       "autor": "Admin UNE",
       "activa": true,
       "fecha": "2026-03-10T10:00:00Z"
@@ -13,7 +13,7 @@
       "id": "2",
       "titulo": "Cumbre de Emprendimiento UNE en San José",
       "contenido": "Más de 500 emprendedores se reunieron para compartir estrategias de crecimiento y networking en la capital. Un evento sin precedentes para el país.",
-      "imagen": "/news1.png",
+      "imagen": "/news/news1.png",
       "autor": "Admin UNE",
       "activa": true,
       "fecha": "2026-03-12T15:30:00Z"
@@ -22,7 +22,7 @@
       "id": "3",
       "titulo": "Historias de Éxito: El renacer de 'Sabor del Pueblo'",
       "contenido": "Conozca cómo Carlos Méndez transformó su pequeño puesto de comida en una cadena de locales gracias al apoyo financiero y técnico de la red UNE.",
-      "imagen": "/news3.png",
+      "imagen": "/news/news3.png",
       "autor": "Admin UNE",
       "activa": true,
       "fecha": "2026-03-15T09:00:00Z"
@@ -39,328 +39,82 @@
     {
       "titulo": "Impacto",
       "contenido": "Prueba",
-      "imagen": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD6pooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKOlABRXl3jb4g3EGpiw0DazRttkkI3bm/uivSNMkmm0+2kuk8u4eJWkQfwsRyKzjVjNtLoddfA1cPTjUqac23cs0UUyeaO3heWZ1SNBlmY4AFaHIlfRD6K8q1n4lXMurJa6DBG8W8IHk6yHOOB2FepxFjGpcYYgZHoazhUjNtR6HXicFWwsYyqq3N946iiitDkCiiigAooooAKKKjubiK2haW4kWONRksxwBQNJt2RJRXmniT4j5aS28OwmeRQS05X5VA7gVF8LPEWr6xq11DqF01xAsW/5lA2nPFYfWIOSij03lGIjQlXnol0e/9ep6hRRRW55YUUZooAKKKKACiiigAooooAKKKqahqVnp0JlvbiOFB3dsUN23HGLk7RV2W6bJIkYzI6qPVjivN/EHxPt0DQ6JA1xKflEjjCg+w71n6f4Q17xMv2zxBqEsEb/MsffH07Vg66btBXPUhlcoQ9pipezj57v5HrEciSDMbqw9VOadXjOmx3fg/wCIFnpcF289tOyKyseCG46eoxXswq6dTnvdWaOfG4NYZxcZc0ZK6ewUUUVocQUUUUAFcl8StfOh6A6wNtu7nMURHVeOW/CutrxrX2fxj8RY7CJi1nbt5bY6AKfnP9KxrzcY2W7PTyrDxq1uep8EFd/IvfCvwn5pXWtSQtzm3Rh1P9816uKjt4UggjihULGihVUdgKkYhQSxAA6k1VOmqcbIwxuMnjKrqS+S7IR3WNGdyFVRkk9q8a8d+KJvEVxPYaUxXTbYF5pOgfHX8PT1rT8aeJLnxDfjw94d3OGbbNKvQ+oz6eprF8b2Vv4Z0W00S0fddTkTXUndgOg+mf5Vz16nMmo7I9rK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5bwwbvUPEd7eaoIobu0jFqLeM5ABO7dnvmtPxx/yK9//ALg/mK1Us7dLx7pIlFw6hGcdSB0Bp15bQ3lu8FwgeJxhlPepUHyuJrLExdeNVKyVtPTsOt/+PeP/AHR/Kub8JzRxXuvxySIkgv2faxwcFVwfpxXTgBVAAwBxWVqfh3S9SuPPvLRHmxguCQSPQ4605J6NdCKNSCUozvZ9vX5Emi6tFqv2swKfLgmMIfqHIAyR+dYnjyW4l/s3T7KH7RLNOJHi3bdyJ8xGfeumsrSCxt0gtIkihXoiDAFK1rC10ly0amdFKK56gHqKHFyjZjp1oUq3tIrRbL5aX/M5Twlc3MPiDU7O/tPsclyBdpEG3A9FY5+uK7GoWtYWukuWjUzopVX7gHqKmpwjyqxGIqqtLnStovw0CiiiqMAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z",
+      "imagen": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2670&auto=format&fit=crop",
       "autor": "Admin UNE",
       "activa": true,
       "fecha": "2026-03-19T17:41:39.501Z",
       "id": "4J5aB9G"
+    },
+    {
+      "titulo": "Titullo",
+      "contenido": "XYZ",
+      "imagen": "https://images.unsplash.com/photo-1522071823991-b9671f9d7d17?q=80&w=2670&auto=format&fit=crop",
+      "autor": "Admin UNE",
+      "activa": true,
+      "fecha": "2026-03-24T21:45:54.456Z",
+      "id": "ZjqlK7p"
     }
   ],
   "financingPrograms": [
     {
-      "id": "2",
-      "name": "Pyme Impulso Local",
+      "id": "1",
+      "name": "Suria",
+      "image": "/assets/suria_hero.png",
       "type": "loan",
-      "amountRange": "₡2,000,000 - ₡50,000,000",
-      "minAmount": 2000000,
-      "maxAmount": 50000000,
+      "amountRange": "₡1,000,000 - ₡20,000,000",
+      "minAmount": 1000000,
+      "maxAmount": 20000000,
       "eligibility": {
         "regions": [
-          "Guanacaste",
-          "Puntarenas",
-          "Limón"
+          "Nacional"
         ],
         "sectors": [
           "comercio",
-          "agricultura",
-          "turismo"
+          "servicios",
+          "tecnología"
         ],
         "minRevenue": 500000,
-        "maxEmployees": 100,
-        "legalStatus": "formal"
-      },
-      "requirements": [
-        "RUC vigente",
-        "Plan de inversión",
-        "Garantías reales o fiduciarias"
-      ],
-      "region": "Guanacaste",
-      "applicationLink": "https://www.bcr.fi.cr/pyme-impulso",
-      "howToApply": "Diseñado para la compra de inventario y maquinaria para negocios en crecimiento en zonas rurales. Completar solicitud en línea y agendar cita en sucursal más cercana.",
-      "contact": {
-        "email": "pyme@bcr.fi.cr",
-        "phone": "+50622116161"
-      },
-      "tags": [
-        "agricultura",
-        "turismo",
-        "capitalTrabajo"
-      ],
-      "status": "active",
-      "lastVerified": "2026-03-12",
-      "sourceUrl": "https://www.bcr.fi.cr/pyme-impulso",
-      "notes": "Tasa anual 8.25%, monto máximo ₡50M",
-      "createdBy": "1",
-      "attachments": []
-    },
-    {
-      "id": "3",
-      "name": "Crédito Verde para PyMEs",
-      "type": "loan",
-      "amountRange": "₡5,000,000 - ₡100,000,000",
-      "minAmount": 5000000,
-      "maxAmount": 100000000,
-      "eligibility": {
-        "regions": [
-          "Nacional"
-        ],
-        "sectors": [
-          "tecnología",
-          "manufactura",
-          "servicios",
-          "agricultura"
-        ],
-        "minRevenue": 2000000,
-        "maxEmployees": null,
-        "legalStatus": "formal"
-      },
-      "requirements": [
-        "Estudio de impacto ambiental",
-        "Plan de negocio verde",
-        "Certificación ambiental (si aplica)"
-      ],
-      "region": "Nacional",
-      "applicationLink": "https://www.baccredomatic.com/verde-pyme",
-      "howToApply": "Apoyo financiero para proyectos de eficiencia energética y transición a energías limpias. Presentar proyecto con análisis de impacto ambiental.",
-      "contact": {
-        "email": "verde@bac.fi.cr",
-        "phone": "+50622955959"
-      },
-      "tags": [
-        "sostenibilidad",
-        "tecnología",
-        "verde"
-      ],
-      "status": "active",
-      "lastVerified": "2026-03-12",
-      "sourceUrl": "https://www.baccredomatic.com/verde-pyme",
-      "notes": "Tasa anual 6.75%, plazo máximo 10 años",
-      "createdBy": "1",
-      "attachments": []
-    },
-    {
-      "id": "4",
-      "name": "Microcrédito de Bienestar",
-      "type": "loan",
-      "amountRange": "₡500,000 - ₡15,000,000",
-      "minAmount": 500000,
-      "maxAmount": 15000000,
-      "eligibility": {
-        "regions": [
-          "Nacional"
-        ],
-        "sectors": [],
-        "minRevenue": null,
-        "maxEmployees": 10,
+        "maxEmployees": 50,
         "legalStatus": "any"
       },
       "requirements": [
-        "Cédula de identidad",
-        "Comprobante de actividad económica"
+        "Plan de negocios",
+        "Documento de identidad",
+        "Comprobante de domicilio"
       ],
       "region": "Nacional",
-      "applicationLink": "https://www.popularenlinea.fi.cr/microcredito",
-      "howToApply": "Soluciones ágiles para microempresas familiares y emprendedoras de subsistencia. Proceso simplificado con requisitos mínimos.",
+      "applicationLink": "#",
+      "howToApply": "Programa de financiamiento exclusivo Suria. Contacte a un asesor para iniciar su proceso.",
       "contact": {
-        "email": "micro@bp.fi.cr",
-        "phone": "+50622506060"
-      },
-      "tags": [
-        "microempresa",
-        "joven",
-        "mujer"
-      ],
-      "status": "active",
-      "lastVerified": "2026-03-01",
-      "sourceUrl": "https://www.popularenlinea.fi.cr/microcredito",
-      "notes": "Tasa anual 9.00%, monto máximo ₡15M. Programa FODEMPYME.",
-      "createdBy": "1",
-      "attachments": []
-    },
-    {
-      "id": "5",
-      "name": "Fomento al Emprendimiento",
-      "type": "loan",
-      "amountRange": "₡3,000,000 - ₡80,000,000",
-      "minAmount": 3000000,
-      "maxAmount": 80000000,
-      "eligibility": {
-        "regions": [
-          "Nacional"
-        ],
-        "sectors": [
-          "comercio",
-          "servicios",
-          "tecnología",
-          "manufactura"
-        ],
-        "minRevenue": null,
-        "maxEmployees": null,
-        "legalStatus": "formal"
-      },
-      "requirements": [
-        "Estatus legal vigente",
-        "Estados financieros",
-        "Certificación UNE",
-        "Plan de inversión"
-      ],
-      "region": "Nacional",
-      "applicationLink": "https://www.popularenlinea.fi.cr/fomento-emprendimiento",
-      "howToApply": "Línea de crédito diseñada para apoyar a nuevas empresas en etapas tempranas, facilitando el acceso a capital de trabajo y adquisición de activos con condiciones preferenciales mediante la alianza estratégica con la red UNE.",
-      "contact": {
-        "email": "emprendimiento@bp.fi.cr",
-        "phone": "+50622506161"
+        "email": "contacto@suria.cr",
+        "phone": "+50600000000"
       },
       "tags": [
         "emprendimiento",
-        "capitalTrabajo",
+        "crecimiento",
         "pymes"
       ],
       "status": "active",
-      "lastVerified": "2026-03-12",
-      "sourceUrl": "https://www.popularenlinea.fi.cr/fomento-emprendimiento",
-      "notes": "Tasa: 7.5% - 11% Fija. Plazo máximo: 120 meses. Garantía: Hipotecaria / Fiduciaria. Comisión UNE: 1.0% Preferencial.",
-      "createdBy": "1",
-      "attachments": []
-    },
-    {
-      "id": "6",
-      "name": "Subsidio Emprendedoras Rurales",
-      "type": "subsidy",
-      "amountRange": "₡500,000 - ₡3,000,000",
-      "minAmount": 500000,
-      "maxAmount": 3000000,
-      "eligibility": {
-        "regions": [
-          "Guanacaste",
-          "Puntarenas",
-          "Limón"
-        ],
-        "sectors": [
-          "agricultura",
-          "artesanía",
-          "turismo"
-        ],
-        "minRevenue": null,
-        "maxEmployees": 5,
-        "legalStatus": "any"
-      },
-      "requirements": [
-        "Cédula de identidad",
-        "Carta de recomendación comunal",
-        "Descripción de proyecto",
-        "Tener +18 años"
-      ],
-      "region": "Puntarenas",
-      "applicationLink": "https://www.imas.go.cr/subsidios-rurales",
-      "howToApply": "Subsidio no reembolsable para mujeres emprendedoras en zonas rurales. Presentar proyecto al IMAS local.",
-      "contact": {
-        "email": "subsidios@imas.go.cr",
-        "phone": "+50622023200"
-      },
-      "tags": [
-        "mujer",
-        "agricultura",
-        "artesanía"
-      ],
-      "status": "active",
-      "lastVerified": "2026-03-12",
-      "sourceUrl": "https://www.imas.go.cr/subsidios-rurales",
-      "notes": "Programa de subsidio no retornable",
-      "createdBy": "1",
-      "attachments": []
-    },
-    {
-      "id": "7",
-      "name": "Capital Semilla Jóvenes Innovadores",
-      "type": "grant",
-      "amountRange": "₡1,000,000 - ₡10,000,000",
-      "minAmount": 1000000,
-      "maxAmount": 10000000,
-      "eligibility": {
-        "regions": [
-          "Nacional"
-        ],
-        "sectors": [
-          "tecnología",
-          "servicios"
-        ],
-        "minRevenue": null,
-        "maxEmployees": 15,
-        "legalStatus": "any"
-      },
-      "requirements": [
-        "Tener entre 18 y 35 años",
-        "Prototipo funcional",
-        "Pitch deck (presentación)",
-        "Plan de negocio"
-      ],
-      "region": "Nacional",
-      "applicationLink": "https://www.micitt.go.cr/capital-semilla",
-      "howToApply": "Donación para proyectos innovadores de jóvenes. Aplicar en línea con pitch deck y prototipo.",
-      "contact": {
-        "email": "innovacion@micitt.go.cr",
-        "phone": "+50222561600"
-      },
-      "tags": [
-        "joven",
-        "tecnología",
-        "innovación"
-      ],
-      "status": "upcoming",
-      "lastVerified": "2026-03-11",
-      "sourceUrl": "https://www.micitt.go.cr/capital-semilla",
-      "notes": "Próxima convocatoria: abril 2026",
-      "createdBy": "1",
-      "attachments": []
-    },
-    {
-      "id": "8",
-      "name": "Fondo de Inversión PROCOMER",
-      "type": "equity",
-      "amountRange": "₡10,000,000 - ₡200,000,000",
-      "minAmount": 10000000,
-      "maxAmount": 200000000,
-      "eligibility": {
-        "regions": [
-          "Nacional"
-        ],
-        "sectors": [
-          "manufactura",
-          "tecnología",
-          "agroindustria"
-        ],
-        "minRevenue": 10000000,
-        "maxEmployees": 200,
-        "legalStatus": "formal"
-      },
-      "requirements": [
-        "Empresa con mínimo 2 años",
-        "Capacidad exportadora demostrada",
-        "Plan de expansión internacional"
-      ],
-      "region": "Nacional",
-      "applicationLink": "https://www.procomer.com/fondo-inversion",
-      "howToApply": "Fondo de inversión para empresas con potencial exportador. Aplicar con plan de expansión internacional.",
-      "contact": {
-        "email": "fondos@procomer.com",
-        "phone": "+50622994700"
-      },
-      "tags": [
-        "exportación",
-        "manufactura",
-        "inversión"
-      ],
-      "status": "closed",
-      "lastVerified": "2026-01-15",
-      "sourceUrl": "https://www.procomer.com/fondo-inversion",
-      "notes": "Convocatoria 2025 cerrada. Próxima en julio 2026.",
-      "closedReason": "Fondos agotados para convocatoria 2025",
+      "lastVerified": "2026-03-23",
+      "sourceUrl": "#",
+      "notes": "Tasa fija preferencial para miembros de UNE Costa Rica.",
       "createdBy": "1",
       "attachments": []
     }
   ],
   "applications": [],
+  "recursos": [
+    {
+      "id": "1",
+      "titulo": "Guía para Registro Pyme",
+      "descripcion": "Instrucciones detalladas de cómo registrarse como pyme en MEIC.",
+      "tipo": "Guía",
+      "enlace": "https://www.meic.go.cr/pyme/",
+      "imagen": "/assets/recurso1.png",
+      "activo": true,
+      "fecha": "2026-03-23T10:00:00Z"
+    }
+  ],
   "reports": [],
   "favorites": [],
   "userBudget": [],
@@ -406,6 +160,7 @@
       "email": "maria@correo.com",
       "password": "123456",
       "role": "user",
+      "avatar": "/assets/tayro_arce.png",
       "createdAt": "2026-03-16T17:20:51.644Z",
       "id": "CeBL9TA"
     },
@@ -414,24 +169,155 @@
       "email": "nora@fwd.com",
       "password": "123456",
       "role": "user",
+      "avatar": "/assets/nora_figueroa.png",
       "createdAt": "2026-03-17T20:01:42.151Z",
       "id": "Iyi1MZn"
     },
     {
-      "nombre": "Ashley",
-      "email": "amorerafwd@gmail.com",
-      "password": "Ash1803#",
+      "nombre": "Admin User",
+      "email": "admin@correo.com",
+      "password": "Admin123!",
       "role": "user",
-      "createdAt": "2026-03-23T17:11:02.147Z",
-      "id": "x_K41Jm"
+      "createdAt": "2026-03-26T21:20:23.894Z",
+      "id": "2mwkKXA"
     }
   ],
-  "transactions": [],
-  "inventoryItems": [],
+  "transactions": [
+    {
+      "userId": "CeBL9TA",
+      "description": "Venta de algo ",
+      "amount": 5000,
+      "type": "income",
+      "category": "Venta de Productos",
+      "date": "2026-03-19T20:10:43.341Z",
+      "id": 1
+    }
+  ],
+  "inventoryItems": [
+    {
+      "userId": "CeBL9TA",
+      "name": "Camiseta Negra",
+      "quantity": 10,
+      "minQuantity": 5,
+      "costPrice": 3000,
+      "salePrice": 8000,
+      "category": "Ropa",
+      "lastRestock": "2026-03-19T20:11:32.067Z",
+      "id": 1
+    }
+  ],
   "settings": {
     "uneBenefits": {
       "uneLoanMax": 500000,
       "commission": 0.01
     }
-  }
+  },
+  "testimonials": [
+    {
+      "id": "1",
+      "userName": "Carlos Méndez",
+      "userRole": "Comerciante",
+      "content": "Gracias al crédito Pyme de UNE, pudimos abrir nuestra tercera sucursal en Cartago y aumentar nuestra exportación en un 40%.",
+      "avatar": "/assets/carlos_mendez.png",
+      "active": true,
+      "date": "2026-03-20T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "userName": "Lucía Mora",
+      "userRole": "Restaurante",
+      "content": "El capital de trabajo fue vital para renovar nuestra cocina.",
+      "avatar": "/assets/lucia_mora.png",
+      "active": true,
+      "date": "2026-03-21T12:00:00Z"
+    },
+    {
+      "id": "3",
+      "userName": "Esteban Ruiz",
+      "userRole": "Tecnología",
+      "content": "Gestionamos las finanzas con las herramientas de UNE de manera fácil.",
+      "avatar": "/assets/esteban_ruiz.png",
+      "active": true,
+      "date": "2026-03-22T09:30:00Z"
+    }
+  ],
+  "casosDeExito": [
+    {
+      "id": "1",
+      "nombre": "Damaris",
+      "profesion": "Artesana",
+      "ubicacion": "Emprendedora",
+      "cita": "Confiaron en mí, en mi capacidad, y lo más bonito es ver cómo se realizan mis sueños, ver mi taller creciendo gracias a las oportunidades que nos han dado.",
+      "imagen": "/assets/Damaris.png",
+      "colorTag": "#60a5fa",
+      "activo": true,
+      "fecha": "2026-03-24T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "nombre": "Ginette",
+      "profesion": "Artesana",
+      "ubicacion": "Emprendedora",
+      "cita": "A mí esto me ha abierto mucho los ojos. Ahora entiendo que si quiero que mi negocio crezca tengo que ordenarme.",
+      "imagen": "/assets/Ginette.png",
+      "colorTag": "#4ade80",
+      "activo": true,
+      "fecha": "2026-03-24T10:00:00Z"
+    },
+    {
+      "id": "3",
+      "nombre": "Katherine",
+      "profesion": "Panadera",
+      "ubicacion": "Emprendedora",
+      "cita": "Esta ha sido una experiencia muy bonita, con compañeras muy buenas y una guía que está siempre presente.",
+      "imagen": "/assets/katherine.png",
+      "colorTag": "#f472b6",
+      "activo": true,
+      "fecha": "2026-03-24T10:00:00Z"
+    },
+    {
+      "id": "4",
+      "nombre": "Marielos",
+      "profesion": "Cocinera",
+      "ubicacion": "Bagaces",
+      "cita": "Hoy estamos de fiesta por saber que las mujeres de Bagaces fueron escuchadas por UNE.",
+      "imagen": "/assets/Marielos.png",
+      "colorTag": "#facc15",
+      "activo": true,
+      "fecha": "2026-03-24T10:00:00Z"
+    }
+  ],
+  "ratings": [
+    {
+      "id": "1",
+      "userId": "2",
+      "rating": 5,
+      "comment": "Excelente atención y rapidez.",
+      "date": "2026-03-23T08:00:00Z"
+    }
+  ],
+  "solicitudesContacto": [
+    {
+      "nombre": "Yeruza",
+      "telefono": "82391",
+      "email": "amoreragfwd@gmail.com",
+      "ubicacion": "Puntarenas chacarita",
+      "negocio": "Porque si",
+      "mensaje": "Me gusta la plata también\n",
+      "fechaRegistro": "2026-03-25T14:30:04.389Z",
+      "estado": "Pendiente",
+      "id": 1
+    },
+    {
+      "nombre": "Tayro",
+      "telefono": "85697537",
+      "email": "tarcebfwd@gmail.com",
+      "ubicacion": "Puntarenas chacarita",
+      "negocio": "Porque si",
+      "mensaje": "Ayyiyi",
+      "fechaRegistro": "2026-03-25T14:40:22.892Z",
+      "estado": "Pendiente",
+      "id": 2
+    }
+  ]
 }

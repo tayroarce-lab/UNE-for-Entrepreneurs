@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './NewsHero.module.css';
-import avatarJaqueline from '../../../assets/Jaqueline.png';
-import avatarMaria from '../../../assets/success_story_maria.png';
+const avatarJaqueline = '/assets/Jaqueline.png';
+const avatarMaria = '/assets/success_story_maria.png';
 
 const NewsHero: React.FC = () => {
   return (

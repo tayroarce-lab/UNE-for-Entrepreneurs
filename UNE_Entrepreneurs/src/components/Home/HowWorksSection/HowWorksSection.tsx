@@ -1,7 +1,7 @@
 import React from 'react';
 import { ClipboardList, Target, TrendingUp } from 'lucide-react';
 import styles from './HowWorksSection.module.css';
-import avatarMaria from '../../../assets/success_story_maria.png';
+const avatarMaria = '/assets/success_story_maria.png';
 
 interface Step {
   id: number;

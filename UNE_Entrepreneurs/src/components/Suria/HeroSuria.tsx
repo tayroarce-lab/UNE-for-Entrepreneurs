@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Sparkles, Flower2, ArrowRight, CheckCircle2 } from 'lucide-react';
-import suriaHero from '../../assets/suria_hero.png';
+const suriaHero = '/assets/suria_hero.png';
 import styles from './HeroSuria.module.css';
 
 const HeroSuria: React.FC = () => {

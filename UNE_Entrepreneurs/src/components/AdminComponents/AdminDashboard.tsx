@@ -9,8 +9,7 @@ import {
   Download,
   CreditCard,
   ShieldCheck,
-  Lightbulb,
-  Landmark
+  Lightbulb
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -20,10 +19,10 @@ export default function AdminDashboard() {
         <AdminHeader placeholder="Buscar préstamos, usuarios o noticias..." />
         
         <main style={{ padding: 0 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem' }}>
+          <div className="admin-main-header">
             <div>
-              <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#3A0D23', margin: 0 }}>Dashboard Principal</h1>
-              <p style={{ color: '#64748B', margin: 0, marginTop: '4px', fontSize: '1.1rem' }}>Resumen de actividad para UNE Costa Rica</p>
+              <h1 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#3A0D23', margin: 0 }}>Dashboard Principal</h1>
+              <p style={{ color: '#64748B', margin: 0, marginTop: '4px', fontSize: '1rem' }}>Resumen de actividad para UNE Costa Rica</p>
             </div>
             <button style={{ background: '#fff', border: '1px solid #E2E8F0', padding: '12px 20px', borderRadius: '12px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', color: '#1E293B', cursor: 'pointer' }}>
               <Download size={18} /> Exportar Reporte
@@ -60,7 +59,7 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 400px', gap: '30px', marginBottom: '30px' }}>
+          <div className="dashboard-split-layout">
             {/* Left: Quick Actions */}
             <div className="recent-activity-card">
                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

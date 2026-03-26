@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flower2 } from 'lucide-react';
-import suriaAbout from '../../assets/suria_community.png';
+const suriaAbout = '/assets/suria_community.png';
 
 const AboutSuria: React.FC = () => {
   return (

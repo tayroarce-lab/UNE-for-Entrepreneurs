@@ -22,8 +22,8 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({ placeholder = "Buscar...", on
                 />
             </div>
 
-            <div className="header-user-meta" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                <Link to="/" title="Ir al sitio web" style={{ color: '#64748b', display: 'flex', alignItems: 'center' }}>
+            <div className="header-user-meta">
+                <Link to="/" title="Ir al sitio web" className="header-link">
                     <Home size={22} />
                 </Link>
 
@@ -34,10 +34,10 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({ placeholder = "Buscar...", on
 
                 <button className="profile-button-v2">
                     <div className="user-tag">
-                        <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--suria-plum)', textAlign: 'right' }}>
+                        <div className="user-tag-name">
                             {user?.name || 'Admin UNE'}
                         </div>
-                        <div style={{ fontSize: '0.7rem', color: '#64748b', textAlign: 'right' }}>Gestor Principal</div>
+                        <div className="user-tag-role">Gestor Principal</div>
                     </div>
                     <div className="profile-circle-v2">
                         {user?.name ? user.name.charAt(0).toUpperCase() : 'A'}

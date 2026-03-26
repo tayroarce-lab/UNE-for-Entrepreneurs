@@ -40,12 +40,10 @@ const ProfileEditor: React.FC = () => {
 
   const updateAvatarInstant = async (newAvatarStr: string) => {
     if (!user) return;
+    refreshUser({ avatar: newAvatarStr });
     try {
       const payload = { avatar: newAvatarStr };
-      const updated = await UserServices.patchUsuarios(payload, user.id);
-      if (updated) {
-        refreshUser({ avatar: updated.avatar });
-      }
+      await UserServices.patchUsuarios(payload, user.id);
     } catch (error) {
       console.error(error);
       notifications.error('Error al actualizar la foto de perfil');
@@ -65,8 +63,8 @@ const ProfileEditor: React.FC = () => {
         const img = new Image();
         img.onload = async () => {
           const canvas = document.createElement('canvas');
-          const MAX_WIDTH = 400;
-          const MAX_HEIGHT = 400;
+          const MAX_WIDTH = 250;
+          const MAX_HEIGHT = 250;
           let width = img.width;
           let height = img.height;
 
@@ -87,8 +85,7 @@ const ProfileEditor: React.FC = () => {
           const ctx = canvas.getContext('2d');
           if (ctx) {
             ctx.drawImage(img, 0, 0, width, height);
-            // Comprimir como JPEG al 80% de calidad para tamaño ultra reducido
-            const base64Str = canvas.toDataURL('image/jpeg', 0.8);
+            const base64Str = canvas.toDataURL('image/jpeg', 0.6);
             
             setFormData(prev => ({ ...prev, avatar: base64Str }));
             await updateAvatarInstant(base64Str);
@@ -229,12 +226,19 @@ const ProfileEditor: React.FC = () => {
                     placeholder="https://ejemplo.com/mi-foto.jpg" 
                     value={formData.avatar.startsWith('data:image') ? '(Foto seleccionada desde galería)' : formData.avatar} 
                     onChange={(e) => {
-                      if (formData.avatar.startsWith('data:image')) {
-                        setFormData(prev => ({ ...prev, avatar: '' }));
-                      } else {
+                      if (!formData.avatar.startsWith('data:image')) {
                         handleChange(e);
+                        refreshUser({ avatar: e.target.value });
                       }
                     }} 
+                    onBlur={(e) => {
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      const currentAvatar = (user as any)?.avatar || '';
+                      if (!formData.avatar.startsWith('data:image') && e.target.value !== currentAvatar) {
+                        updateAvatarInstant(e.target.value);
+                      }
+                    }}
+                    readOnly={formData.avatar.startsWith('data:image')}
                     className={styles.input} 
                   />
                 </div>

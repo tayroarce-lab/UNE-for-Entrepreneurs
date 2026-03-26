@@ -11,7 +11,7 @@ import SuriaCard from './SuriaCard';
 import Navbar from '../Shared/Navbar/Navbar';
 import Footer from '../Shared/Footer/Footer';
 import EligibilityModal from './EligibilityModal';
-import successImage from '../../assets/success_story_maria.png';
+const successImage = '/assets/success_story_maria.png';
 import '../../styles/financing.css';
 
 export default function SuriaCatalog() {

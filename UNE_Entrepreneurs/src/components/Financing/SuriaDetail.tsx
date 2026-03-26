@@ -164,8 +164,12 @@ export default function SuriaDetail() {
           <div>
             <div className="financingDetailMain">
               <div className="financingDetailHeader">
-                <div className="financingDetailIcon">
-                  {program.name.charAt(0)}
+                <div className="financingDetailIcon" style={{ overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {program.image ? (
+                    <img src={program.image} alt={program.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  ) : (
+                    program.name.charAt(0)
+                  )}
                 </div>
                 <div style={{ flex: 1 }}>
                   <div className="financingDetailBadges">
