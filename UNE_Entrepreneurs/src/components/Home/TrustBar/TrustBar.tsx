@@ -15,9 +15,11 @@ const TrustBar: React.FC<TrustBarProps> = ({
       <div className="container">
         <div className={styles.trustInner}>
           <span className={styles.trustLabel}>{label}</span>
-          {brands.map((brand, i) => (
-            <span key={i} className={styles.trustBrand}>{brand}</span>
-          ))}
+          <div className={styles.brandList}>
+            {brands.map((brand, i) => (
+              <span key={i} className={styles.trustBrand}>{brand}</span>
+            ))}
+          </div>
         </div>
       </div>
     </section>

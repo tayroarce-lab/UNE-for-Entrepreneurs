@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Calendar, User } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar, User, ArrowRight, Loader2 } from 'lucide-react';
 import { getNews } from '../../services/NewsService';
 import type { Noticia } from '../AdminComponents/GestionTipsNoticias';
 import styles from './NewsCarousel.module.css';
@@ -14,11 +14,10 @@ const NewsCarousel: React.FC = () => {
     const fetchNews = async () => {
       try {
         const data = await getNews();
-        // Filter by active status, then sort by date (descending) and take latest 4
         const sorted = (data || [])
           .filter((n: Noticia) => n.activa)
           .sort((a, b) => new Date(b.fecha || 0).getTime() - new Date(a.fecha || 0).getTime())
-          .slice(0, 4);
+          .slice(0, 5);
         setNews(sorted);
       } catch (error) {
         console.error('Error fetching news:', error);
@@ -33,7 +32,7 @@ const NewsCarousel: React.FC = () => {
     if (news.length === 0) return;
     const interval = setInterval(() => {
       handleNext();
-    }, 8000); // 8 seconds auto-scroll
+    }, 10000); 
     return () => clearInterval(interval);
   }, [currentIndex, news]);
 
@@ -51,26 +50,37 @@ const NewsCarousel: React.FC = () => {
       html: `
         <div style="text-align: left; font-family: 'DM Sans', sans-serif;">
           <img src="${noticia.imagen || 'https://images.unsplash.com/photo-1504711432869-efd597cdd045?q=80&w=2670&auto=format&fit=crop'}" 
-               style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;" 
+               style="width: 100%; height: 350px; object-fit: cover; border-radius: 20px; margin-bottom: 24px;" 
                onerror="this.src='https://images.unsplash.com/photo-1504711432869-efd597cdd045?q=80&w=2670&auto=format&fit=crop'"
           />
-          <div style="display: flex; gap: 15px; font-size: 0.8rem; color: #64748b; margin-bottom: 20px; font-weight: 600;">
-            <span>📅 ${noticia.fecha ? new Date(noticia.fecha).toLocaleDateString() : 'N/A'}</span>
-            <span>👤 ${noticia.autor}</span>
+          <div style="display: flex; gap: 20px; font-size: 0.85rem; color: #64748b; margin-bottom: 24px; font-weight: 700;">
+            <span style="display: flex; align-items: center; gap: 6px;">📅 ${noticia.fecha ? new Date(noticia.fecha).toLocaleDateString() : 'N/A'}</span>
+            <span style="display: flex; align-items: center; gap: 6px;">👤 ${noticia.autor}</span>
           </div>
-          <div style="font-size: 1.1rem; line-height: 1.6; color: #334155;">
+          <div style="font-size: 1.15rem; line-height: 1.8; color: #1e293b; letter-spacing: -0.2px;">
             ${noticia.contenido}
           </div>
         </div>
       `,
-      confirmButtonText: 'Cerrar',
-      confirmButtonColor: 'var(--suria-crimson)',
-      width: '800px',
-      showCloseButton: true
+      confirmButtonText: 'Entendido',
+      confirmButtonColor: '#1a0614',
+      width: '850px',
+      showCloseButton: true,
+      customClass: {
+        popup: 'modern-swal-popup',
+      }
     });
   };
 
-  if (loading) return <div className={styles.loading}>Sincronizando últimas noticias...</div>;
+  if (loading) {
+    return (
+      <div className={styles.loading}>
+        <Loader2 className="animate-spin" size={40} />
+        Sincronizando últimas noticias...
+      </div>
+    );
+  }
+  
   if (news.length === 0) return null;
 
   const currentItem = news[currentIndex];
@@ -91,21 +101,23 @@ const NewsCarousel: React.FC = () => {
             <div className={styles.overlay}></div>
           </div>
           <div className={styles.content}>
-            <span className={styles.tag}>LO ÚLTIMO</span>
+            <span className={styles.tag}>Novedad</span>
             <h2 className={styles.title}>{currentItem.titulo}</h2>
             <p className={styles.description}>{currentItem.contenido}</p>
             <div className={styles.meta}>
-              <span><User size={16} /> {currentItem.autor}</span>
-              <span><Calendar size={16} /> {currentItem.fecha ? new Date(currentItem.fecha).toLocaleDateString() : 'N/A'}</span>
+              <span><User size={18} /> Por {currentItem.autor}</span>
+              <span><Calendar size={18} /> {currentItem.fecha ? new Date(currentItem.fecha).toLocaleDateString('es-CR', { day: 'numeric', month: 'long' }) : 'N/A'}</span>
             </div>
-            <button className={styles.readMore} onClick={() => handleReadMore(currentItem)}>Leer historia completa</button>
+            <button className={styles.readMore} onClick={() => handleReadMore(currentItem)}>
+              Leer historia completa <ArrowRight size={20} />
+            </button>
           </div>
         </div>
       </div>
 
       <div className={styles.controls}>
-        <button className={styles.controlBtn} onClick={handlePrev}><ChevronLeft size={24} /></button>
-        <button className={styles.controlBtn} onClick={handleNext}><ChevronRight size={24} /></button>
+        <button className={styles.controlBtn} onClick={handlePrev} aria-label="Anterior"><ChevronLeft size={28} /></button>
+        <button className={styles.controlBtn} onClick={handleNext} aria-label="Siguiente"><ChevronRight size={28} /></button>
       </div>
 
       <div className={styles.indicators}>
@@ -122,3 +134,4 @@ const NewsCarousel: React.FC = () => {
 };
 
 export default NewsCarousel;
+
