@@ -2,16 +2,15 @@ import React from 'react';
 import Navbar from '../../components/Shared/Navbar/Navbar';
 import Footer from '../../components/Shared/Footer/Footer';
 import BudgetDashboard from '../../components/Budget/BudgetDashboard/BudgetDashboard';
+import BudgetPageContainer from '../../components/UserComponents/Budget/BudgetPageContainer/BudgetPageContainer';
 
 const BudgetPage: React.FC = () => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f8fafc' }}>
+    <BudgetPageContainer>
       <Navbar />
-      <div style={{ flex: 1, paddingTop: '80px', paddingBottom: '40px' }}>
-        <BudgetDashboard />
-      </div>
+      <BudgetDashboard />
       <Footer />
-    </div>
+    </BudgetPageContainer>
   );
 };
 
