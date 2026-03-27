@@ -25,6 +25,7 @@
     font-weight: 500;
     margin-bottom: 2rem;
     line-height: 1;
+    color: var(--suria-ivory);
 }
 
 .recursosHero h1 span {

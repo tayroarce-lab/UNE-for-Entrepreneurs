@@ -54,8 +54,8 @@ const DashboardCTA: React.FC<DashboardCTAProps> = ({
               <div className={`${styles.placeholderBar} ${styles.placeholderBarShort}`}></div>
               <div className={styles.statValue}>{previewAmount}</div>
               <div className={styles.statLabel}>{previewLabel}</div>
+              <div className={styles.floatingTag}>Ventas +24%</div>
             </div>
-            <div className={styles.floatingTag}>Ventas +24%</div>
             <div className={styles.bgDecoration}>
               <LayoutDashboard size={800} />
             </div>
