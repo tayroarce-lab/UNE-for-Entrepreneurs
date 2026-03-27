@@ -11,16 +11,18 @@
 
 .sectionTitle {
   font-family: var(--font-display);
-  font-size: 3rem;
-  margin-bottom: 2rem;
+  font-size: clamp(2.2rem, 10vw, 3rem);
+  margin-bottom: 1.5rem;
   color: var(--suria-plum);
   text-align: center;
   font-weight: 500;
+  line-height: 1.1;
 }
 
 @media (min-width: 1024px) {
   .sectionTitle {
     font-size: 4rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -28,17 +30,25 @@
   font-family: var(--font-body);
   color: var(--suria-brown);
   opacity: 0.9;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   max-width: 800px;
-  margin: 0 auto 5rem;
-  line-height: 1.7;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  .sectionSubtitle {
+    font-size: 1.15rem;
+    margin-bottom: 5rem;
+    line-height: 1.7;
+  }
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 2rem;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -46,6 +56,7 @@
 @media (min-width: 768px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
   }
 }
 
@@ -56,7 +67,7 @@
 }
 
 .card {
-  padding: 4rem 2.5rem;
+  padding: 2.5rem 1.5rem;
   background: white;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
@@ -66,6 +77,12 @@
   align-items: center;
   text-align: center;
   border: 1px solid rgba(169, 38, 43, 0.05);
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding: 4rem 2.5rem;
+  }
 }
 
 .card:hover {

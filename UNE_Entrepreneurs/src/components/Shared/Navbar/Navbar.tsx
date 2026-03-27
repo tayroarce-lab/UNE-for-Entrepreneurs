@@ -58,14 +58,18 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className={`${styles.navbarUsers} ${scrolled ? styles.scrolled : ''} ${menuOpen ? styles.menuOpen : ''}`} aria-label="Navegación principal">
+      {/* Backdrop for closing mobile menu by clicking outside */}
+      {menuOpen && <div className={styles.navbarBackdrop} onClick={() => setMenuOpen(false)} />}
+      
       <div className={styles.navbarContainer}>
         <div className={styles.navbarLogo}>
           <Link to="/" onClick={scrollToTop}>
             <div className={styles.logoBox}>
-              <img src={uneLogo} alt="Logo SÜRIA" />
+              <img src={uneLogo} alt="Logo UNE" />
             </div>
             <div className={styles.logoWordmark}>
-               <span className={styles.suriaWordmark}>SÜRIA</span>
+               <span className={styles.suriaWordmark}>UNE</span>
+               <span className={styles.suriaFullname}>Unión Nacional de Emprendedores</span>
             </div>
           </Link>
         </div>

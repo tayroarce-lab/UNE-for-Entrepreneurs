@@ -57,7 +57,7 @@ const ValoresDiferenciadores: React.FC = () => {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2.5rem', marginBottom: '8rem' }}>
+        <div className="suria-valores-grid" style={{ marginBottom: '8rem' }}>
           {valores.map((v, i) => (
             <div key={i} className="card" style={{ padding: '3.5rem 3rem', borderRadius: '28px', textAlign: 'center', transition: 'all 0.3s' }}>
               <div style={{ width: '72px', height: '72px', borderRadius: '22px', background: v.bg, color: v.color, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2.5rem' }}>
@@ -76,7 +76,7 @@ const ValoresDiferenciadores: React.FC = () => {
             <h2 style={{ fontSize: '3rem', color: 'white', marginTop: '1rem', fontFamily: 'var(--font-display)' }}>Lo que nos hace <span style={{ color: 'var(--suria-gold)' }}>diferentes</span></h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2.5rem', position: 'relative', zIndex: 1 }}>
+          <div className="suria-diff-grid" style={{ position: 'relative', zIndex: 1, display: 'grid', gap: '2.5rem' }}>
             {diferenciadores.map((d, i) => (
               <div key={i} style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '24px', padding: '3rem 2.5rem', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)' }}>
                 <div style={{ color: 'var(--suria-gold)', marginBottom: '2rem' }}>{d.icon}</div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../../styles/AdminDashboard.css'
 import Swal from 'sweetalert2'
 import { toast } from 'sonner'
-import { PenLine, Send, Edit, Trash2, X, Image as ImageIcon, Loader, Eye, EyeOff, Search } from 'lucide-react'
+import { PenLine, Send, Edit, Trash2, X, Image as ImageIcon, Activity, Eye, EyeOff, Search, Save } from 'lucide-react'
 import { getNews, createNews, updateNews, deleteNews } from '../../services/NewsService'
 import AdminLayout from './AdminLayout'
 import AdminHeader from './AdminHeader'
@@ -79,7 +79,7 @@ function GestionTipsNoticias() {
         text: "Se actualizará esta publicación",
         icon: 'question',
         showCancelButton: true,
-        confirmButtonColor: '#8B1A1A',
+        confirmButtonColor: 'var(--suria-crimson)',
         cancelButtonColor: '#64748b',
         confirmButtonText: 'Sí, guardar',
         cancelButtonText: 'Cancelar'
@@ -102,7 +102,7 @@ function GestionTipsNoticias() {
         text: "Se publicará este nuevo tip/noticia",
         icon: 'question',
         showCancelButton: true,
-        confirmButtonColor: '#8B1A1A',
+        confirmButtonColor: 'var(--suria-crimson)',
         cancelButtonColor: '#64748b',
         confirmButtonText: 'Sí, publicar',
         cancelButtonText: 'Cancelar'
@@ -148,7 +148,7 @@ function GestionTipsNoticias() {
       text: "¡No podrás revertir esto!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#dc2626',
+      confirmButtonColor: 'var(--suria-crimson)',
       cancelButtonColor: '#64748b',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
@@ -183,173 +183,170 @@ function GestionTipsNoticias() {
             onSearch={(val) => setSearchTerm(val)}
         />
 
-        <main style={{ padding: 0 }}>
-        <div style={{ marginBottom: '30px' }}>
-          <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#3A0D23', marginBottom: '4px' }}>Tips y Noticias</h1>
-          <p style={{ color: '#64748B', fontSize: '1.1rem' }}>Administra el contenido informativo y educativo para la comunidad de UNE Costa Rica.</p>
-        </div>
-            <div className="grid-card" style={{ marginBottom: '30px' }}>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    {editandoId ? <Edit size={24} color="#f59e0b" /> : <PenLine size={24} color="#8B1A1A" />} 
+        <main className="admin-main">
+          <div className="admin-top-header">
+            <div>
+              <h1 className="admin-page-title">Tips y Noticias</h1>
+              <p className="admin-page-subtitle">Administra el contenido informativo y educativo para la comunidad de UNE Costa Rica.</p>
+            </div>
+          </div>
+
+          <div className="admin-card">
+              <div className="admin-card-header">
+                <h3 className="admin-card-title">
+                    {editandoId ? <Edit size={22} style={{ color: 'var(--suria-gold)' }} /> : <PenLine size={22} style={{ color: 'var(--suria-gold)' }} />} 
                     {editandoId ? 'Editar Publicación' : 'Crear Nueva Publicación'}
                 </h3>
-                
-                <div style={{ display: 'grid', gap: '1.5rem' }}>
-                    <div className="search-bar-v2" style={{ width: '100%', maxWidth: '100%' }}>
-                        <Edit size={18} className="search-icon-header" />
-                        <input 
-                            type="text" 
-                            placeholder="Título impactante para la noticia..." 
-                            value={tituloInput}
-                            onChange={(e) => setTituloInput(e.target.value)}
-                        />
-                    </div>
-                    
-                    <textarea 
-                        placeholder="Contenido detallado de la noticia o tip para emprendedores..." 
-                        rows={6} 
-                        value={contenidoInput}
-                        onChange={(e) => setContenidoInput(e.target.value)}
-                        style={{ width: '100%', padding: '20px', borderRadius: '16px', border: '1px solid #e2e8f0', background: '#f8fafc', fontSize: '1rem', outline: 'none', transition: 'all 0.2s' }}
-                    ></textarea>
-                    
-                    <div style={{ padding: '20px', border: '2px dashed #cbd5e1', borderRadius: '16px', background: '#f1f5f9' }}>
-                        <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 800, color: '#475569', marginBottom: '15px', cursor: 'pointer' }}>
-                            <ImageIcon size={20} /> Seleccionar Imagen de Portada
-                            <input 
-                                id="imagen-upload"
-                                type="file" 
-                                accept="image/*" 
-                                onChange={handleImageChange} 
-                                style={{ display: 'none' }}
-                            />
-                        </label>
-                        
-                        {imagenInput && (
-                            <div style={{ position: 'relative', width: '200px', height: '120px', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
-                                <img src={imagenInput} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                <button 
-                                    onClick={() => { setImagenInput(''); const f = document.getElementById('imagen-upload') as HTMLInputElement; if(f) f.value = ''; }}
-                                    style={{ position: 'absolute', top: '5px', right: '5px', background: 'rgba(239, 68, 68, 0.9)', color: '#fff', border: 'none', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
-                                >
-                                    <X size={14} />
-                                </button>
-                            </div>
-                        )}
-                    </div>
-                    
-                    <div style={{ display: 'flex', gap: '15px' }}>
-                        <button 
-                            className="btn-publish-v2" 
-                            onClick={handlePublicar}
-                            style={{ padding: '15px 35px' }}
-                        >
-                            <Send size={18} />
-                            {editandoId ? 'Actualizar Noticia' : 'Publicar Noticia'}
-                        </button>
-                        {editandoId && (
-                            <button 
-                                onClick={handleCancelarEdicion}
-                                style={{ padding: '12px 25px', background: '#f1f5f9', color: '#64748b', border: 'none', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
-                            >
-                                <X size={18} /> Cancelar
-                            </button>
-                        )}
-                    </div>
-                </div>
-            </div>
+              </div>
+              
+              <div className="admin-form-grid" style={{ gridTemplateColumns: '1fr' }}>
+                  <div className="admin-form-group">
+                      <label className="admin-label">Título de la Publicación:</label>
+                      <input 
+                          type="text" 
+                          className="admin-input"
+                          placeholder="Título impactante para la noticia..." 
+                          value={tituloInput}
+                          onChange={(e) => setTituloInput(e.target.value)}
+                      />
+                  </div>
+                  
+                  <div className="admin-form-group">
+                      <label className="admin-label">Contenido:</label>
+                      <textarea 
+                          placeholder="Contenido detallado de la noticia o tip para emprendedores..." 
+                          rows={6} 
+                          value={contenidoInput}
+                          onChange={(e) => setContenidoInput(e.target.value)}
+                          className="admin-textarea"
+                      ></textarea>
+                  </div>
+                  
+                  <div style={{ padding: '1.5rem', border: '2px dashed var(--admin-border)', borderRadius: '16px', background: '#f8fafc', marginBottom: '1rem' }}>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 800, color: 'var(--admin-text-primary)', marginBottom: '1rem', cursor: 'pointer' }}>
+                          <ImageIcon size={20} /> 
+                          <span>Subir Imagen de Portada</span>
+                          <input 
+                              id="imagen-upload"
+                              type="file" 
+                              accept="image/*" 
+                              onChange={handleImageChange} 
+                              style={{ display: 'none' }}
+                          />
+                      </label>
+                      
+                      {imagenInput && (
+                          <div style={{ position: 'relative', width: '240px', height: '140px', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', border: '1px solid var(--admin-border)' }}>
+                              <img src={imagenInput} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                              <button 
+                                  onClick={() => { setImagenInput(''); const f = document.getElementById('imagen-upload') as HTMLInputElement; if(f) f.value = ''; }}
+                                  style={{ position: 'absolute', top: '0', right: '0', background: 'var(--suria-crimson)', color: '#fff', border: 'none', borderBottomLeftRadius: '10px', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+                              >
+                                  <X size={16} />
+                              </button>
+                          </div>
+                      )}
+                  </div>
+                  
+                  <div style={{ display: 'flex', gap: '15px' }}>
+                      <button 
+                          className="btn-admin btn-admin-secondary" 
+                          onClick={handlePublicar}
+                          style={{ flex: 1 }}
+                      >
+                          {editandoId ? <Save size={18} /> : <Send size={18} />}
+                          {editandoId ? 'Guardar Cambios' : 'Publicar Noticia'}
+                      </button>
+                      {editandoId && (
+                          <button 
+                              onClick={handleCancelarEdicion}
+                              className="btn-admin btn-admin-outline"
+                          >
+                              <X size={18} /> Cancelar
+                          </button>
+                      )}
+                  </div>
+              </div>
+          </div>
 
-            <div className="grid-card">
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
-                    <div className="grid-card-label" style={{ margin: 0 }}>
-                        <h3 style={{ margin: 0, color: '#3A0D23', fontWeight: 800 }}>Mural de Novedades UNE</h3>
-                    </div>
-                    {/* Buscador */}
-                    <div style={{ position: 'relative', minWidth: '260px' }}>
-                        <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
-                        <input
-                            type="text"
-                            placeholder="Buscar por título o autor..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            style={{ padding: '0.65rem 2.2rem 0.65rem 2.5rem', borderRadius: '10px', border: '1.5px solid #e2e8f0', width: '100%', fontSize: '0.9rem', outline: 'none', background: '#f8fafc' }}
-                        />
-                        {searchTerm && (
-                            <button onClick={() => setSearchTerm('')} style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', display: 'flex' }}>
-                                <X size={14} />
-                            </button>
-                        )}
-                    </div>
-                    <span style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600, whiteSpace: 'nowrap' }}>
-                        {filteredNoticias.length} {filteredNoticias.length === 1 ? 'resultado' : 'resultados'}
-                    </span>
-                </div>
+          <div className="admin-card">
+              <div className="admin-card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <h3 className="admin-card-title">Mural de Novedades UNE</h3>
+                  <div style={{ position: 'relative', width: '300px' }}>
+                    <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--admin-text-secondary)' }} />
+                    <input
+                        type="text"
+                        placeholder="Filtrar noticias..."
+                        className="admin-input"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        style={{ paddingLeft: '40px', fontSize: '0.85rem' }}
+                    />
+                  </div>
+              </div>
 
-                {loading ? (
-                    <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>
-                        <Loader className="animate-spin" size={32} style={{ marginBottom: '10px' }} />
+              <div className="admin-table-container">
+                  {loading ? (
+                    <div className="admin-loading">
+                        <Activity className="animate-spin" size={32} />
                         <p>Sincronizando feed de noticias...</p>
                     </div>
-                ) : (
-                    <table className="admin-table-v2">
+                  ) : (
+                    <table className="admin-table">
                         <thead>
                             <tr>
                                 <th>PORTADA</th>
-                                <th>TÍTULO</th>
+                                <th>TÍTULO / INFO</th>
                                 <th>AUTOR</th>
-                                <th>FECHA</th>
-                                <th style={{ textAlign: 'center' }}>ESTADO</th>
+                                <th style={{ textAlign: 'center' }}>VISIBILIDAD</th>
                                 <th style={{ textAlign: 'center' }}>ACCIONES</th>
                             </tr>
                         </thead>
                         <tbody>
                             {filteredNoticias.length === 0 ? (
-                                <tr><td colSpan={6} style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>No se encontraron noticias con ese criterio.</td></tr>
+                                <tr><td colSpan={5} className="admin-empty-state">No se encontraron noticias publicadas.</td></tr>
                             ) : filteredNoticias.map((noticia: Noticia) => (
-                                <tr key={noticia.id}>
+                                <tr key={noticia.id} style={{ opacity: noticia.activa ? 1 : 0.6 }}>
                                     <td>
                                         {noticia.imagen ? (
-                                            <img src={noticia.imagen} alt="Preview" style={{ width: '60px', height: '40px', borderRadius: '8px', objectFit: 'cover' }} />
+                                            <img src={noticia.imagen} alt="Preview" style={{ width: '80px', height: '50px', borderRadius: '8px', objectFit: 'cover' }} />
                                         ) : (
-                                            <div style={{ width: '60px', height: '40px', background: '#f1f5f9', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.65rem', color: '#94a3b8', fontWeight: 800 }}>S/I</div>
+                                            <div style={{ width: '80px', height: '50px', background: '#f1f5f9', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.6rem', color: '#94a3b8', fontWeight: 800 }}>S/I</div>
                                         )}
                                     </td>
                                     <td>
-                                        <div style={{ fontWeight: 800, maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{noticia.titulo}</div>
+                                        <div style={{ fontWeight: 800, color: 'var(--suria-plum)', fontSize: '1rem' }}>{noticia.titulo}</div>
+                                        <div style={{ fontSize: '0.75rem', color: 'var(--admin-text-secondary)' }}>
+                                            {noticia.fecha ? new Date(noticia.fecha).toLocaleDateString('es-CR', { dateStyle: 'long' }) : 'Sin fecha'}
+                                        </div>
                                     </td>
-                                    <td style={{ color: '#64748b', fontSize: '0.85rem' }}>{noticia.autor}</td>
-                                    <td style={{ color: '#64748b', fontSize: '0.85rem' }}>{noticia.fecha ? new Date(noticia.fecha).toLocaleDateString() : 'N/A'}</td>
+                                    <td style={{ color: 'var(--admin-text-secondary)', fontSize: '0.85rem', fontWeight: 600 }}>{noticia.autor}</td>
                                     <td style={{ textAlign: 'center' }}>
-                                        <span style={{ 
-                                            padding: '4px 10px', 
-                                            borderRadius: '50px', 
-                                            fontSize: '0.7rem', 
-                                            fontWeight: 700,
-                                            background: noticia.activa ? '#dcfce7' : '#f1f5f9',
-                                            color: noticia.activa ? '#166534' : '#64748b'
-                                        }}>
+                                        <span className={`status-tag ${noticia.activa ? 'success' : 'pending'}`}>
                                             {noticia.activa ? 'VISIBLE' : 'OCULTO'}
                                         </span>
                                     </td>
                                     <td style={{ textAlign: 'center' }}>
-                                        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+                                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
                                             <button 
                                                 onClick={() => handleToggleActiva(noticia)} 
+                                                className="btn-admin btn-admin-outline"
+                                                style={{ padding: '8px' }}
                                                 title={noticia.activa ? 'Ocultar' : 'Mostrar'}
-                                                style={{ background: noticia.activa ? '#eff6ff' : '#fff7ed', color: noticia.activa ? '#2563eb' : '#ea580c', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}
                                             >
                                                 {noticia.activa ? <Eye size={16} /> : <EyeOff size={16} />}
                                             </button>
-                                            <button onClick={() => handleEditar(noticia)} style={{ background: '#fef3c7', color: '#d97706', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}><Edit size={16} /></button>
-                                            <button onClick={() => handleEliminar(noticia.id)} style={{ background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}><Trash2 size={16} /></button>
+                                            <button onClick={() => handleEditar(noticia)} className="btn-admin btn-admin-outline" style={{ padding: '8px' }}><Edit size={16} /></button>
+                                            <button onClick={() => handleEliminar(noticia.id)} className="btn-admin btn-admin-danger" style={{ padding: '8px' }}><Trash2 size={16} /></button>
                                         </div>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                )}
-            </div>
+                  )}
+              </div>
+          </div>
         </main>
     </AdminLayout>
   )

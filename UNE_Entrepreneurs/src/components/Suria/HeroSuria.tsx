@@ -13,7 +13,7 @@ const HeroSuria: React.FC = () => {
         <div className={styles.inner}>
           <div className={styles.content}>
             <span className={styles.badge}>
-              <CheckCircle2 size={16} /> Financiamiento y Formación
+              <CheckCircle2 size={16} /> Liderazgo y Formación
             </span>
             
             <div className={styles.titleContainer}>
@@ -25,7 +25,7 @@ const HeroSuria: React.FC = () => {
 
             <p className={styles.description}>
               Süria es el programa de UNE que cree en el potencial de la mujer costarricense. 
-              Únete hoy a una comunidad de bienestar, éxito y libertad financiera diseñada exclusivamente para ti.
+              Únete hoy a una comunidad de bienestar, éxito y crecimiento personal diseñada exclusivamente para ti.
             </p>
 
             <div className={styles.buttonGroup}>

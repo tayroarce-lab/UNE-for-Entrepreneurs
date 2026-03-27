@@ -14,18 +14,6 @@ export interface Transaction {
   status?: 'Completado' | 'Pendiente';
 }
 
-export interface InventoryItem {
-  id: string | number;
-  userId: string;
-  name: string;
-  quantity: number;
-  minQuantity: number;
-  costPrice: number;
-  salePrice: number;
-  category: string;
-  lastRestock: string;
-}
-
 export interface BusinessSummary {
   totalIncome: number;
   totalExpenses: number;

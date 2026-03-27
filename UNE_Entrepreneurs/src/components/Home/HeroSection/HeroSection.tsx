@@ -21,7 +21,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       El impulso que tu <span className={styles.titleAccent}>negocio</span> el éxito que te <span className={styles.titleAccent}>mereces</span>.
     </>
   ),
-  descriptionText = 'Sé parte de Süria: el programa de UNE que ha transformado la vida de 1,500 mujeres en Costa Rica. Financiamiento, formación y una comunidad imparable te esperan.',
+  descriptionText = 'Sé parte de Süria: el programa de UNE que ha transformado la vida de 1,500 mujeres en Costa Rica. Mentoría, formación y una comunidad imparable te esperan.',
   primaryButtonText = 'Aplicar al Programa Ahora',
   primaryButtonLink = '/contacto',
   secondaryButtonText = 'Ver detalles de Süria',

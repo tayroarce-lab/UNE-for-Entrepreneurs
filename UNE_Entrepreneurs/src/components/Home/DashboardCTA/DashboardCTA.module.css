@@ -29,35 +29,68 @@
 
 .previewCard {
   background: white;
-  padding: 3rem;
+  padding: 1.5rem;
   border-radius: var(--radius-lg);
   box-shadow: 0 40px 100px rgba(0,0,0,0.3);
   position: relative;
 }
 
+@media (min-width: 576px) {
+  .previewCard {
+    padding: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .previewCard {
+    padding: 3rem;
+  }
+}
+
 .iconBox {
-  padding: 1.5rem;
+  padding: 1.25rem;
   background: var(--suria-cream);
-  border-radius: 20px;
+  border-radius: 16px;
   color: var(--suria-crimson);
   width: fit-content;
 }
 
+@media (min-width: 768px) {
+  .iconBox {
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+}
+
 .statValue {
   font-family: var(--font-display);
-  margin-top: 3rem;
-  font-size: 3rem;
+  margin-top: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: var(--suria-plum);
 }
 
+@media (min-width: 768px) {
+  .statValue {
+    margin-top: 3rem;
+    font-size: 3rem;
+  }
+}
+
 .statLabel {
   font-family: var(--font-ui);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--suria-brown);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
+}
+
+@media (min-width: 768px) {
+  .statLabel {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+  }
 }
 
 .floatingTag {
@@ -72,7 +105,7 @@
   box-shadow: 0 15px 30px rgba(212, 168, 83, 0.4);
   z-index: 2;
   font-family: var(--font-ui);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 0.5px;
 }
 
@@ -89,20 +122,33 @@
   color: var(--suria-gold);
   font-family: var(--font-ui);
   font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 3px;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
   text-transform: uppercase;
   display: block;
 }
 
+@media (min-width: 768px) {
+  .ctaBadge {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+  }
+}
+
 .ctaTitle {
   font-family: var(--font-display);
-  font-size: 3rem;
+  font-size: clamp(2.2rem, 8vw, 2.8rem);
   color: white;
   margin-top: 1.5rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   line-height: 1.15;
   font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .ctaTitle {
+    font-size: 3rem;
+  }
 }
 
 @media (min-width: 1024px) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Wallet, Package, LayoutDashboard, MoveRight } from 'lucide-react';
+import { Wallet, LayoutDashboard, MoveRight } from 'lucide-react';
 import styles from './DashboardCTA.module.css';
 
 import { useAuth } from '../../../context/AuthContext';
@@ -22,7 +22,7 @@ const DashboardCTA: React.FC<DashboardCTAProps> = ({
       Todo el control de tu <br /> <span className={styles.ctaTitleAccent}>empresa</span> desde tu celular.
     </>
   ),
-  description = "No solo te damos el capital. Te damos las herramientas para que gestiones tus inventarios, presupuestos y ventas con la tecnología de UNE.",
+  description = "No solo te damos el capital. Te damos las herramientas para que gestiones tus presupuestos y ventas con la tecnología de UNE.",
   buttonText = "CONOCER LAS HERRAMIENTAS",
   previewLabel = "BALANCE TOTAL",
   previewAmount = "₡1,250,000"
@@ -47,7 +47,6 @@ const DashboardCTA: React.FC<DashboardCTAProps> = ({
             <div className={styles.previewCard}>
               <div className={styles.iconRow}>
                 <div className={styles.iconBox}><Wallet size={24} /></div>
-                <div className={styles.iconBox}><Package size={24} /></div>
                 <div className={styles.iconBox}><LayoutDashboard size={24} /></div>
               </div>
               <div className={`${styles.placeholderBar} ${styles.placeholderBarMid}`}></div>

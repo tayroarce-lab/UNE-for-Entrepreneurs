@@ -1,7 +1,7 @@
 // ============================================================
 // Servicio API para Gestión de Negocios (Finanzas e Inventario)
 // ============================================================
-import type { Transaction, InventoryItem } from '../types/business';
+import type { Transaction } from '../types/business';
 
 import { API_BASE } from '../config';
 
@@ -44,37 +44,4 @@ export async function deleteTransaction(id: string | number): Promise<void> {
     method: 'DELETE',
   });
   if (!response.ok) throw new Error(`Error al eliminar transacción: ${response.status}`);
-}
-
-// --------------- Inventory (Inventario) ---------------
-
-export async function getInventoryItems(userId?: string): Promise<InventoryItem[]> {
-  const url = userId ? `${API_BASE}/inventoryItems?userId=${userId}` : `${API_BASE}/inventoryItems`;
-  const response = await fetch(url);
-  return handleResponse<InventoryItem[]>(response);
-}
-
-export async function createInventoryItem(item: Omit<InventoryItem, 'id'>): Promise<InventoryItem> {
-  const response = await fetch(`${API_BASE}/inventoryItems`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(item),
-  });
-  return handleResponse<InventoryItem>(response);
-}
-
-export async function updateInventoryItem(id: string | number, item: Partial<InventoryItem>): Promise<InventoryItem> {
-  const response = await fetch(`${API_BASE}/inventoryItems/${id}`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(item),
-  });
-  return handleResponse<InventoryItem>(response);
-}
-
-export async function deleteInventoryItem(id: string | number): Promise<void> {
-  const response = await fetch(`${API_BASE}/inventoryItems/${id}`, {
-    method: 'DELETE',
-  });
-  if (!response.ok) throw new Error(`Error al eliminar item de inventario: ${response.status}`);
 }

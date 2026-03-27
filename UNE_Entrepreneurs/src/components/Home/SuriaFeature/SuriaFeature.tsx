@@ -21,8 +21,8 @@ const defaultBenefits: Benefit[] = [
   {
     id: 1,
     icon: <ShieldCheck size={32} />,
-    title: 'Crédito con Propósito',
-    description: 'Bajas tasas de interés colectivas diseñadas para ser pagadas con el crecimiento de tu negocio.'
+    title: 'Liderazgo con Propósito',
+    description: 'Programas de formación diseñados para impulsar el crecimiento real de tu negocio.'
   },
   {
     id: 2,
@@ -42,7 +42,7 @@ const SuriaFeature: React.FC<SuriaFeatureProps> = ({
   badge = 'DESCUBRE SÜRIA',
   title = (
     <>
-      Mucho más que un <br /> <span className={styles.titleAccent}>préstamo</span>: un ecosistema.
+      Mucho más que <br /> <span className={styles.titleAccent}>empoderamiento</span>: un ecosistema.
     </>
   ),
   benefits = defaultBenefits

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import '../../styles/AdminDashboard.css';
 import Swal from 'sweetalert2';
 import { toast } from 'sonner';
-import { Trash2, MessageSquare, FileText } from 'lucide-react';
+import { Trash2, MessageSquare, FileText, Activity, Mail, Phone, MapPin, Briefcase } from 'lucide-react';
 import AdminLayout from './AdminLayout';
 import AdminHeader from './AdminHeader';
 import { getContactos, updateContacto, deleteContacto, type SolicitudContacto } from '../../services/ContactService';
@@ -20,7 +20,6 @@ export default function GestionSolicitudes() {
     setLoading(true);
     try {
       const data = await getContactos();
-      // Ordenar más recientes primero
       setSolicitudes(data.sort((a, b) => new Date(b.fechaRegistro).getTime() - new Date(a.fechaRegistro).getTime()));
     } catch {
       toast.error('Error al cargar solicitudes');
@@ -49,7 +48,7 @@ export default function GestionSolicitudes() {
       showCancelButton: true,
       confirmButtonText: 'Guardar Nota',
       cancelButtonText: 'Cancelar',
-      confirmButtonColor: 'var(--uneRed)',
+      confirmButtonColor: 'var(--suria-plum)',
     });
 
     if (text !== undefined && text !== solicitud.notasAdmin) {
@@ -69,7 +68,7 @@ export default function GestionSolicitudes() {
       text: "¡No podrás revertir esto!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#dc2626',
+      confirmButtonColor: 'var(--suria-crimson)',
       cancelButtonColor: '#64748b',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
@@ -90,19 +89,21 @@ export default function GestionSolicitudes() {
     Swal.fire({
       title: `Solicitud de ${solicitud.nombre}`,
       html: `
-        <div style="text-align: left; font-size: 0.95rem;">
-          <p><strong>Email:</strong> <a href="mailto:${solicitud.email}">${solicitud.email}</a></p>
-          <p><strong>Teléfono:</strong> <a href="tel:${solicitud.telefono}">${solicitud.telefono}</a></p>
-          <p><strong>Ubicación:</strong> ${solicitud.ubicacion}</p>
-          <hr style="margin: 15px 0; border: none; border-top: 1px solid #e2e8f0;"/>
-          <p><strong>Negocio/Idea:</strong></p>
-          <p style="background: #f8fafc; padding: 10px; border-radius: 8px;">${solicitud.negocio}</p>
-          <p><strong>Motivo/Mensaje:</strong></p>
-          <p style="background: #f8fafc; padding: 10px; border-radius: 8px;">${solicitud.mensaje}</p>
+        <div style="text-align: left; font-size: 0.95rem; font-family: 'Outfit', sans-serif;">
+          <div style="margin-bottom: 20px; display: grid; gap: 10px;">
+            <p><strong style="color: var(--suria-plum)">Email:</strong> <br/> <a href="mailto:${solicitud.email}" style="color: #2563eb; text-decoration: none;">${solicitud.email}</a></p>
+            <p><strong style="color: var(--suria-plum)">Teléfono:</strong> <br/> <a href="tel:${solicitud.telefono}" style="color: #2563eb; text-decoration: none;">${solicitud.telefono}</a></p>
+            <p><strong style="color: var(--suria-plum)">Ubicación:</strong> <br/> ${solicitud.ubicacion}</p>
+          </div>
+          <hr style="margin: 20px 0; border: none; border-top: 1px solid #e2e8f0;"/>
+          <p><strong style="color: var(--suria-plum)">Negocio/Idea:</strong></p>
+          <div style="background: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 15px;">${solicitud.negocio}</div>
+          <p><strong style="color: var(--suria-plum)">Motivo/Mensaje:</strong></p>
+          <div style="background: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0;">${solicitud.mensaje}</div>
         </div>
       `,
-      confirmButtonText: 'Cerrar',
-      confirmButtonColor: 'var(--uneRed)',
+      confirmButtonText: 'Entendido',
+      confirmButtonColor: 'var(--suria-plum)',
       width: '600px'
     });
   };
@@ -113,11 +114,11 @@ export default function GestionSolicitudes() {
     s.negocio.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const getStatusColor = (estado: string) => {
+  const getStatusClass = (estado: string) => {
     switch (estado) {
-      case 'Contactado': return { bg: '#dcfce7', text: '#166534' };
-      case 'Descartado': return { bg: '#fee2e2', text: '#991b1b' };
-      default: return { bg: '#fef9c3', text: '#854d0e' }; // Pendiente
+      case 'Contactado': return 'success';
+      case 'Descartado': return 'danger';
+      default: return 'pending'; // Pendiente
     }
   };
 
@@ -128,90 +129,83 @@ export default function GestionSolicitudes() {
         onSearch={(val) => setSearchTerm(val)}
       />
 
-      <main style={{ padding: 0 }}>
-        <div style={{ marginBottom: '30px' }}>
-          <h1 style={{ fontSize: '2.25rem', fontWeight: 800, color: 'var(--suria-plum)', marginBottom: '10px' }}>Solicitudes de Contacto</h1>
-          <p style={{ color: '#64748b' }}>Gestiona las propuestas y consultas de potenciales emprendedores de UNE Costa Rica.</p>
+      <main className="admin-main">
+        <div className="admin-top-header">
+          <div>
+            <h1 className="admin-page-title">Solicitudes de Contacto</h1>
+            <p className="admin-page-subtitle">Gestiona propuestas y consultas de potenciales emprendedores.</p>
+          </div>
         </div>
 
-        <div className="grid-card">
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
-            <div className="grid-card-label" style={{ margin: 0 }}>
-              <h3 style={{ margin: 0, color: 'var(--suria-plum)', fontWeight: 800 }}>Bandeja de Entrada</h3>
-            </div>
+        <div className="admin-card">
+          <div className="admin-card-header">
+            <h3 className="admin-card-title">Bandeja de Entrada UNE</h3>
+             <span style={{ fontSize: '0.85rem', color: 'var(--admin-text-secondary)', fontWeight: 600 }}>
+                {filteredSolicitudes.length} Total
+            </span>
           </div>
 
           {loading ? (
-            <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>Cargando solicitudes...</div>
+            <div className="admin-loading">
+                <Activity className="animate-spin" size={32} />
+                <p>Cargando registros de contacto...</p>
+            </div>
           ) : (
-            <>
+            <div className="admin-table-container">
               {/* MOBILE VIEW (CARDS) */}
-              <div className="mobile-only mobile-card-list">
+              <div className="mobile-only">
                 {filteredSolicitudes.length === 0 ? (
-                  <div style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>No hay solicitudes de contacto.</div>
-                ) : filteredSolicitudes.map((sol) => {
-                  const statusColors = getStatusColor(sol.estado);
-                  return (
-                    <div key={sol.id} className="mobile-record-card">
-                      <div className="card-row">
-                        <span className="card-label">Contacto</span>
-                        <span className="card-value">{sol.nombre}</span>
+                  <div className="admin-empty-state">No hay solicitudes para mostrar.</div>
+                ) : (
+                  <div style={{ display: 'grid', gap: '15px', padding: '10px' }}>
+                    {filteredSolicitudes.map((sol) => (
+                      <div key={sol.id} className="admin-card" style={{ marginBottom: 0, padding: '1.5rem' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', alignItems: 'center' }}>
+                            <div style={{ fontWeight: 800, color: 'var(--suria-plum)', fontSize: '1.1rem' }}>{sol.nombre}</div>
+                            <span className={`status-tag ${getStatusClass(sol.estado)}`}>{sol.estado}</span>
+                        </div>
+                        
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '8px', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+                             <div style={{ display: 'flex', gap: '8px', color: 'var(--admin-text-secondary)' }}>
+                                <Briefcase size={16} /> <span style={{ fontWeight: 600 }}>{sol.negocio}</span>
+                             </div>
+                             <div style={{ display: 'flex', gap: '8px', color: 'var(--admin-text-secondary)' }}>
+                                <MapPin size={16} /> <span>{sol.ubicacion}</span>
+                             </div>
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                          <button onClick={() => handleVerDetalles(sol)} className="btn-admin btn-admin-outline" style={{ flex: 1, padding: '10px' }}><MessageSquare size={18} /></button>
+                          <button onClick={() => handleNotasAdmin(sol)} className="btn-admin btn-admin-outline" style={{ flex: 1, padding: '10px', color: sol.notasAdmin ? 'var(--suria-gold)' : 'inherit' }}><FileText size={18} /></button>
+                          <button onClick={() => handleEliminar(sol.id)} className="btn-admin btn-admin-danger" style={{ flex: 1, padding: '10px' }}><Trash2 size={18} /></button>
+                        </div>
+
+                        <div style={{ marginTop: '1rem' }}>
+                            <label className="admin-label" style={{ fontSize: '0.7rem' }}>Cambiar Estado:</label>
+                            <select 
+                                value={sol.estado}
+                                onChange={(e) => handleEstadoChange(sol.id, e.target.value as any)}
+                                className="admin-select"
+                                style={{ padding: '8px', fontSize: '0.85rem' }}
+                            >
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="Contactado">Contactado</option>
+                                <option value="Descartado">Descartado</option>
+                            </select>
+                        </div>
                       </div>
-                      <div className="card-row">
-                        <span className="card-label">Negocio</span>
-                        <span className="card-value">{sol.negocio}</span>
-                      </div>
-                      <div className="card-row">
-                        <span className="card-label">Fecha</span>
-                        <span className="card-value">{new Date(sol.fechaRegistro).toLocaleDateString()}</span>
-                      </div>
-                      <div className="card-row">
-                        <span className="card-label">Estado</span>
-                        <select 
-                          value={sol.estado}
-                          onChange={(e) => handleEstadoChange(sol.id, e.target.value as any)}
-                          style={{ 
-                            padding: '4px 10px', 
-                            borderRadius: '50px', 
-                            fontSize: '0.75rem', 
-                            fontWeight: 700,
-                            background: statusColors.bg,
-                            color: statusColors.text,
-                            border: 'none',
-                            outline: 'none'
-                          }}
-                        >
-                          <option value="Pendiente">Pendiente</option>
-                          <option value="Contactado">Contactado</option>
-                          <option value="Descartado">Descartado</option>
-                        </select>
-                      </div>
-                      <div className="card-actions">
-                        <button 
-                          onClick={() => handleVerDetalles(sol)}
-                          style={{ flex: 1, padding: '10px', background: '#eff6ff', color: '#2563eb', border: 'none', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                        ><MessageSquare size={16} /></button>
-                        <button 
-                          onClick={() => handleNotasAdmin(sol)}
-                          style={{ flex: 1, padding: '10px', background: sol.notasAdmin ? '#fefce8' : '#f1f5f9', color: sol.notasAdmin ? '#ca8a04' : '#64748b', border: 'none', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                        ><FileText size={16} /></button>
-                        <button 
-                          onClick={() => handleEliminar(sol.id)}
-                          style={{ flex: 1, padding: '10px', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                        ><Trash2 size={16} /></button>
-                      </div>
-                    </div>
-                  );
-                })}
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* DESKTOP VIEW (TABLE) */}
-              <div className="desktop-only table-responsive">
-                <table className="admin-table-v2">
+              <div className="desktop-only">
+                <table className="admin-table">
                   <thead>
                     <tr>
-                      <th>CONTACTO</th>
-                      <th>NEGOCIO</th>
+                      <th>SOLICITANTE</th>
+                      <th>NEGOCIO / UBICACIÓN</th>
                       <th>FECHA</th>
                       <th style={{ textAlign: 'center' }}>ESTADO</th>
                       <th style={{ textAlign: 'center' }}>ACCIONES</th>
@@ -219,72 +213,52 @@ export default function GestionSolicitudes() {
                   </thead>
                   <tbody>
                     {filteredSolicitudes.length === 0 ? (
-                      <tr><td colSpan={5} style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>No hay solicitudes de contacto.</td></tr>
-                    ) : filteredSolicitudes.map((sol) => {
-                      const statusColors = getStatusColor(sol.estado);
-                      return (
-                        <tr key={sol.id}>
-                          <td>
-                            <div style={{ fontWeight: 800 }}>{sol.nombre}</div>
-                            <div style={{ fontSize: '0.8rem', color: '#64748b' }}><a href={`mailto:${sol.email}`} style={{ color: 'inherit', textDecoration: 'none' }}>{sol.email}</a></div>
-                            <div style={{ fontSize: '0.8rem', color: '#64748b' }}>{sol.telefono}</div>
-                          </td>
-                          <td>
-                            <div style={{ fontWeight: 600, maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{sol.negocio}</div>
-                            <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>{sol.ubicacion}</div>
-                          </td>
-                          <td style={{ color: '#64748b', fontSize: '0.85rem' }}>
-                            {new Date(sol.fechaRegistro).toLocaleDateString()}
-                          </td>
-                          <td style={{ textAlign: 'center' }}>
-                            <select 
-                              value={sol.estado}
-                              onChange={(e) => handleEstadoChange(sol.id, e.target.value as any)}
-                              style={{ 
-                                padding: '4px 10px', 
-                                borderRadius: '50px', 
-                                fontSize: '0.75rem', 
-                                fontWeight: 700,
-                                background: statusColors.bg,
-                                color: statusColors.text,
-                                border: 'none',
-                                outline: 'none',
-                                cursor: 'pointer',
-                                appearance: 'none',
-                                textAlign: 'center'
-                              }}
-                            >
-                              <option value="Pendiente">Pendiente</option>
-                              <option value="Contactado">Contactado</option>
-                              <option value="Descartado">Descartado</option>
-                            </select>
-                          </td>
-                          <td style={{ textAlign: 'center' }}>
-                            <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
-                              <button 
-                                onClick={() => handleVerDetalles(sol)}
-                                title="Ver Mensaje"
-                                style={{ background: '#eff6ff', color: '#2563eb', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}
-                              ><MessageSquare size={16} /></button>
-                              <button 
-                                onClick={() => handleNotasAdmin(sol)}
-                                title="Notas Internas"
-                                style={{ background: sol.notasAdmin ? '#fefce8' : '#f1f5f9', color: sol.notasAdmin ? '#ca8a04' : '#64748b', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}
-                              ><FileText size={16} /></button>
-                              <button 
-                                onClick={() => handleEliminar(sol.id)}
-                                title="Eliminar"
-                                style={{ background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}
-                              ><Trash2 size={16} /></button>
-                            </div>
-                          </td>
-                        </tr>
-                      )
-                    })}
+                      <tr><td colSpan={5} className="admin-empty-state">No se encontraron solicitudes.</td></tr>
+                    ) : filteredSolicitudes.map((sol) => (
+                      <tr key={sol.id}>
+                        <td>
+                          <div style={{ fontWeight: 800, color: 'var(--suria-plum)' }}>{sol.nombre}</div>
+                          <div style={{ fontSize: '0.8rem', color: 'var(--admin-text-secondary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                             <Mail size={12} /> {sol.email}
+                          </div>
+                          <div style={{ fontSize: '0.8rem', color: 'var(--admin-text-secondary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                             <Phone size={12} /> {sol.telefono}
+                          </div>
+                        </td>
+                        <td>
+                          <div style={{ fontWeight: 700, color: 'var(--admin-text-primary)' }}>{sol.negocio}</div>
+                          <div style={{ fontSize: '0.8rem', color: 'var(--admin-text-secondary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                             <MapPin size={12} /> {sol.ubicacion}
+                          </div>
+                        </td>
+                        <td style={{ color: 'var(--admin-text-secondary)', fontSize: '0.85rem' }}>
+                          {new Date(sol.fechaRegistro).toLocaleDateString()}
+                        </td>
+                        <td style={{ textAlign: 'center' }}>
+                          <select 
+                            value={sol.estado}
+                            onChange={(e) => handleEstadoChange(sol.id, e.target.value as any)}
+                            className={`status-tag ${getStatusClass(sol.estado)}`}
+                            style={{ border: 'none', cursor: 'pointer', appearance: 'none', textAlign: 'center', width: 'auto' }}
+                          >
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Contactado">Contactado</option>
+                            <option value="Descartado">Descartado</option>
+                          </select>
+                        </td>
+                        <td style={{ textAlign: 'center' }}>
+                          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                            <button onClick={() => handleVerDetalles(sol)} className="btn-admin btn-admin-outline" style={{ padding: '8px' }} title="Detalles"><MessageSquare size={16} /></button>
+                            <button onClick={() => handleNotasAdmin(sol)} className="btn-admin btn-admin-outline" style={{ padding: '8px', color: sol.notasAdmin ? 'var(--suria-gold)' : 'inherit' }} title="Notas"><FileText size={16} /></button>
+                            <button onClick={() => handleEliminar(sol.id)} className="btn-admin btn-admin-danger" style={{ padding: '8px' }} title="Remover"><Trash2 size={16} /></button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
-            </>
+            </div>
           )}
         </div>
       </main>

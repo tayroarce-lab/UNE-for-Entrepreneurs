@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
       <div className={styles.footerContainer}>
         {/* INFO Section */}
         <div className={styles.footerInfo}>
-          <h3 className={styles.footerLogo}>SÜRIA</h3>
+          <h3 className={styles.footerLogo}>UNE</h3>
           <p>Uniendo personas, fortaleciendo emprendimientos y construyendo una comunidad próspera y humana en Costa Rica.</p>
           <div className={styles.footerSocial}>
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">

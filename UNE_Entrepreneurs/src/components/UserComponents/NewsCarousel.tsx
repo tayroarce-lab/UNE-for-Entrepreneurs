@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Calendar, User, ArrowRight, Loader2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar, User, ArrowRight } from 'lucide-react';
 import { getNews } from '../../services/NewsService';
 import type { Noticia } from '../AdminComponents/GestionTipsNoticias';
 import styles from './NewsCarousel.module.css';
@@ -74,9 +74,18 @@ const NewsCarousel: React.FC = () => {
 
   if (loading) {
     return (
-      <div className={styles.loading}>
-        <Loader2 className="animate-spin" size={40} />
-        Sincronizando últimas noticias...
+      <div className={styles.skeletonWrap}>
+        <div className={styles.skeletonImg} />
+        <div className={styles.skeletonContent}>
+          <div className={styles.skeletonTag} />
+          <div className={styles.skeletonTitle} />
+          <div className={styles.skeletonTitleShort} />
+          <div className={styles.skeletonLine} />
+          <div className={styles.skeletonLine} />
+          <div className={styles.skeletonLineShort} />
+          <div className={styles.skeletonMeta} />
+          <div className={styles.skeletonBtn} />
+        </div>
       </div>
     );
   }

@@ -1,12 +1,12 @@
 .wrapper {
   background: white;
   border-radius: 20px;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 3rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
   box-shadow: 0 4px 20px rgba(0,0,0,0.04);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
@@ -17,6 +17,7 @@
     justify-content: space-between;
     padding: 1.5rem 2rem;
     gap: 1.5rem;
+    margin-bottom: 3rem;
   }
 }
 
@@ -159,7 +160,13 @@
 }
 
 .cardBody {
-  padding: 1.75rem;
+  padding: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .cardBody {
+    padding: 1.75rem;
+  }
 }
 
 .cardMeta {
@@ -178,22 +185,35 @@
 }
 
 .cardTitle {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 800;
   color: #1a1a1a;
   margin-bottom: 0.75rem;
   line-height: 1.3;
 }
 
+@media (min-width: 768px) {
+  .cardTitle {
+    font-size: 1.2rem;
+  }
+}
+
 .cardExcerpt {
   color: #64748b;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   line-height: 1.6;
   margin-bottom: 1.5rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .cardExcerpt {
+    font-size: 0.95rem;
+  }
 }
 
 .readMoreBtn {

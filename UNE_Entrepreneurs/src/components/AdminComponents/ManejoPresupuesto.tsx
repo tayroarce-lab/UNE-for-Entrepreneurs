@@ -32,7 +32,7 @@ function ManejoPresupuesto() {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState<number | string>('');
   const [type, setType] = useState<'income' | 'expense'>('income');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('General');
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
@@ -123,12 +123,16 @@ function ManejoPresupuesto() {
       if (!id) return;
       Swal.fire({
           title: '¿Eliminar transacción?',
-          text: "El balance general será afectado",
+          text: "El balance general será afectado permanentemente",
           icon: 'warning',
           showCancelButton: true,
-          confirmButtonColor: '#dc2626',
+          confirmButtonColor: 'var(--suria-crimson)',
           cancelButtonColor: '#64748b',
-          confirmButtonText: 'Sí, eliminar'
+          confirmButtonText: 'Sí, eliminar',
+          customClass: {
+            confirmButton: 'btn-admin btn-admin-danger',
+            cancelButton: 'btn-admin btn-admin-outline'
+          }
       }).then(async (result) => {
           if (result.isConfirmed) {
               try {
@@ -146,193 +150,210 @@ function ManejoPresupuesto() {
     <AdminLayout>
       <AdminHeader placeholder="Buscar movimientos financieros..." />
 
-      <main style={{ padding: 0 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem' }}>
+      <main className="admin-main">
+        <div className="admin-top-header">
           <div>
-            <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#3A0D23', margin: 0 }}>Presupuesto Global</h1>
-            <p style={{ color: '#64748B', margin: 0, marginTop: '4px', fontSize: '1.1rem' }}>Control y auditoría de los flujos de capital de la red de emprendedores UNE.</p>
+            <h1 className="admin-page-title">Presupuesto Global</h1>
+            <p className="admin-page-subtitle">Control y auditoría de los flujos de capital de la red UNE.</p>
           </div>
           <button 
             onClick={abrirModalCrear}
-            style={{ padding: '12px 24px', background: '#E55B4B', color: '#fff', border: 'none', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}
+            className="btn-admin btn-admin-secondary"
+            style={{ padding: '12px 24px', fontSize: '1rem' }}
           >
             <PlusCircle size={20} /> Nueva Transacción
           </button>
         </div>
-            {/* BUDGET SUMMARY CARD */}
-            <div className="grid-card budget-summary-card">
-                <div className="summary-header">
-                    <div>
-                        <span className="summary-label">
-                            <DollarSign size={16} /> BALANCE GENERAL - RED UNE
-                        </span>
-                        <h1 className="summary-total">
-                           ₡{balanceTotal.toLocaleString()}
-                        </h1>
-                    </div>
-                    <div className="summary-icon">
-                        <Wallet size={32} />
-                    </div>
+
+        {/* BUDGET SUMMARY CARD */}
+        <div className="admin-card" style={{ background: 'var(--suria-plum)', color: 'white', marginBottom: '30px' }}>
+            <div className="admin-card-header" style={{ borderBottomColor: 'rgba(255,255,255,0.1)' }}>
+                <h3 className="admin-card-title" style={{ color: 'white' }}>
+                    <Wallet size={22} style={{ color: 'var(--suria-gold)' }} /> 
+                    Balance General de la Red
+                </h3>
+            </div>
+            
+            <div style={{ padding: '1.5rem 0' }}>
+               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>
+                  <DollarSign size={16} /> TOTAL DISPONIBLE
+               </div>
+               <div style={{ fontSize: '3rem', fontWeight: 900, color: 'white', letterSpacing: '-1px' }}>
+                  ₡{balanceTotal.toLocaleString()}
+               </div>
+            </div>
+            
+            <div className="admin-grid-layout" style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1.5rem' }}>
+                <div className="stat-admin-card" style={{ background: 'rgba(255,255,255,0.05)', border: 'none' }}>
+                    <span className="stat-label" style={{ color: 'rgba(255,255,255,0.6)' }}>Ingresos Totales</span>
+                    <span className="stat-value" style={{ color: '#4ADE80', fontSize: '1.25rem' }}>
+                        <TrendingUp size={18} /> +₡{ingresosSuma.toLocaleString()}
+                    </span>
                 </div>
-                
-                <div className="summary-stats">
-                    <div className="stat-item">
-                        <p className="stat-label">Total Ingresos</p>
-                        <p className="stat-value income">
-                            <TrendingUp size={18} /> +₡{ingresosSuma.toLocaleString()}
-                        </p>
-                    </div>
-                    <div className="stat-divider"></div>
-                    <div className="stat-item">
-                        <p className="stat-label">Total Egresos</p>
-                        <p className="stat-value expense">
-                            <TrendingDown size={18} /> -₡{egresosSuma.toLocaleString()}
-                        </p>
-                    </div>
+                <div className="stat-admin-card" style={{ background: 'rgba(255,255,255,0.05)', border: 'none' }}>
+                    <span className="stat-label" style={{ color: 'rgba(255,255,255,0.6)' }}>Egresos Totales</span>
+                    <span className="stat-value" style={{ color: '#F87171', fontSize: '1.25rem' }}>
+                        <TrendingDown size={18} /> -₡{egresosSuma.toLocaleString()}
+                    </span>
                 </div>
             </div>
+        </div>
 
-            {/* AUDIT LIST */}
-            <div className="grid-card">
-                <div className="grid-card-label">
-                    <h3><History size={20} style={{ verticalAlign: 'middle', marginRight: '10px' }} /> Auditoría de Movimientos</h3>
-                </div>
+        {/* AUDIT LIST */}
+        <div className="admin-card">
+            <div className="admin-card-header">
+                <h3 className="admin-card-title">
+                   <History size={20} style={{ color: 'var(--suria-gold)' }} /> 
+                   Auditoría de Movimientos Recientes
+                </h3>
+            </div>
 
+            <div className="admin-table-container">
                 {loading ? (
-                    <div style={{ padding: '60px', textAlign: 'center', color: '#64748b' }}>
-                        <Activity className="animate-spin" size={32} style={{ marginBottom: '15px' }} />
+                    <div className="admin-loading">
+                        <Activity className="animate-spin" size={32} />
                         <p>Analizando registros financieros...</p>
                     </div>
                 ) : (
-                    <div className="transaction-list">
-                        {transacciones.length > 0 ? transacciones.map((t) => (
-                            <div key={t.id} className="transaction-item">
-                                <div className="transaction-main">
-                                    <div className={`transaction-icon-box ${t.type}`}>
-                                        {t.type === 'income' ? <TrendingUp size={20} /> : <TrendingDown size={20} />}
-                                    </div>
-                                    <div className="transaction-info">
-                                        <div className="transaction-title">
-                                            {t.description} 
-                                            <span className="transaction-category">{t.category}</span>
+                    <table className="admin-table">
+                        <thead>
+                            <tr>
+                                <th>MOVIMIENTO / CATEGORÍA</th>
+                                <th>FECHA</th>
+                                <th style={{ textAlign: 'right' }}>MONTO</th>
+                                <th style={{ textAlign: 'center' }}>ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {transacciones.length > 0 ? transacciones.slice().reverse().map((t) => (
+                                <tr key={t.id}>
+                                    <td>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                            <div style={{ 
+                                                width: '36px', 
+                                                height: '36px', 
+                                                borderRadius: '10px', 
+                                                display: 'flex', 
+                                                alignItems: 'center', 
+                                                justifyContent: 'center',
+                                                background: t.type === 'income' ? '#DCFCE7' : '#FEE2E2',
+                                                color: t.type === 'income' ? '#166534' : '#991B1B'
+                                            }}>
+                                                {t.type === 'income' ? <TrendingUp size={18} /> : <TrendingDown size={18} />}
+                                            </div>
+                                            <div>
+                                                <div style={{ fontWeight: 700, color: 'var(--suria-plum)', fontSize: '0.95rem' }}>{t.description}</div>
+                                                <span className="status-tag" style={{ fontSize: '0.65rem', background: '#f1f5f9', color: '#64748b', padding: '2px 6px' }}>{t.category}</span>
+                                            </div>
                                         </div>
-                                        <div className="transaction-date">{new Date(t.date).toLocaleDateString()}</div>
-                                    </div>
-                                </div>
-                                <div className="transaction-side">
-                                    <div className={`transaction-amount ${t.type}`}>
-                                        {t.type === 'income' ? '+' : '-'}₡{Number(t.amount).toLocaleString()}
-                                    </div>
-                                    
-                                    <div className="transaction-actions">
-                                        <button 
-                                            onClick={() => abrirModalEditar(t)}
-                                            className="action-btn edit"
-                                            title="Editar"
-                                        >
-                                            <Edit size={16} />
-                                        </button>
-                                        <button 
-                                            onClick={() => handleEliminar(t.id)}
-                                            className="action-btn delete"
-                                            title="Eliminar"
-                                        >
-                                            <Trash2 size={16} />
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        )) : (
-                            <div style={{ padding: '60px', textAlign: 'center', color: '#94a3b8' }}>
-                                <p>No hay movimientos financieros registrados.</p>
-                            </div>
-                        )}
-                    </div>
+                                    </td>
+                                    <td style={{ color: 'var(--admin-text-secondary)', fontSize: '0.85rem' }}>
+                                        {new Date(t.date).toLocaleDateString('es-CR', { dateStyle: 'medium' })}
+                                    </td>
+                                    <td style={{ textAlign: 'right' }}>
+                                        <div style={{ 
+                                            fontWeight: 800, 
+                                            fontSize: '1.1rem',
+                                            color: t.type === 'income' ? '#166534' : '#991B1B'
+                                        }}>
+                                            {t.type === 'income' ? '+' : '-'}₡{Number(t.amount).toLocaleString()}
+                                        </div>
+                                    </td>
+                                    <td style={{ textAlign: 'center' }}>
+                                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                                            <button onClick={() => abrirModalEditar(t)} className="btn-admin btn-admin-outline" style={{ padding: '8px' }}><Edit size={16} /></button>
+                                            <button onClick={() => handleEliminar(t.id)} className="btn-admin btn-admin-danger" style={{ padding: '8px' }}><Trash2 size={16} /></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            )) : (
+                                <tr>
+                                    <td colSpan={4} className="admin-empty-state">
+                                        <Wallet size={48} style={{ color: '#cbd5e1' }} />
+                                        <p>No hay movimientos financieros registrados.</p>
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
                 )}
             </div>
-        </main>
+        </div>
 
         {modalAbierto && (
-            <div className="modal-overlay-admin" style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.75)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 }}>
-                <div className="grid-card" style={{ width: '90%', maxWidth: '500px', padding: '30px', maxHeight: '90vh', overflowY: 'auto' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                        <h2 style={{ fontSize: '1.5rem', margin: 0 }}>
-                            <Wallet size={24} style={{ color: '#D4A853', verticalAlign: 'middle', marginRight: '10px' }} /> 
+            <div className="admin-modal-overlay">
+                <div className="admin-modal-content" style={{ maxWidth: '500px' }}>
+                    <div className="admin-modal-header">
+                        <h2 className="admin-modal-title">
+                            <Wallet size={24} style={{ color: 'var(--suria-gold)' }} /> 
                             {isCreando ? 'Registrar Transacción' : 'Editar Transacción'}
                         </h2>
-                        <button onClick={() => setModalAbierto(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24} /></button>
+                        <button onClick={() => setModalAbierto(false)} className="btn-admin btn-admin-outline" style={{ padding: '6px' }}><X size={20} /></button>
                     </div>
 
-                    <div style={{ display: 'grid', gap: '15px' }}>
-                        <div>
-                            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 600, color: '#475569' }}>Descripción:</label>
+                    <div className="admin-form-grid" style={{ gridTemplateColumns: '1fr' }}>
+                        <div className="admin-form-group">
+                            <label className="admin-label">Descripción del Movimiento:</label>
                             <input 
                                 type="text"
+                                className="admin-input"
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
-                                placeholder="Ej. Pago de Alquiler"
-                                style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', outline: 'none' }}
-                            />
-                        </div>
-
-                        <div>
-                            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 600, color: '#475569' }}>Monto (₡):</label>
-                            <input 
-                                type="number"
-                                value={amount}
-                                onChange={(e) => setAmount(e.target.value)}
-                                placeholder="0"
-                                style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', outline: 'none' }}
+                                placeholder="Ej. Pago de Proveedores"
                             />
                         </div>
 
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-                            <div>
-                                <label style={{ display: 'block', marginBottom: '5px', fontWeight: 600, color: '#475569' }}>Tipo:</label>
+                            <div className="admin-form-group">
+                                <label className="admin-label">Monto (₡):</label>
+                                <input 
+                                    type="number"
+                                    className="admin-input"
+                                    value={amount}
+                                    onChange={(e) => setAmount(e.target.value)}
+                                    placeholder="0"
+                                />
+                            </div>
+                            <div className="admin-form-group">
+                                <label className="admin-label">Tipo de Movimiento:</label>
                                 <select 
+                                    className="admin-select"
                                     value={type}
                                     onChange={(e) => setType(e.target.value as 'income' | 'expense')}
-                                    style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', background: '#fff', outline: 'none' }}
                                 >
                                     <option value="income">Ingreso (+)</option>
                                     <option value="expense">Egreso (-)</option>
                                 </select>
                             </div>
-                            <div>
-                                <label style={{ display: 'block', marginBottom: '5px', fontWeight: 600, color: '#475569' }}>Categoría:</label>
-                                <input 
-                                    type="text"
-                                    value={category}
-                                    onChange={(e) => setCategory(e.target.value)}
-                                    placeholder="Ej. Operación"
-                                    style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e2e8f0', outline: 'none' }}
-                                />
-                            </div>
+                        </div>
+
+                        <div className="admin-form-group">
+                            <label className="admin-label">Categoría:</label>
+                            <select className="admin-select" value={category} onChange={(e) => setCategory(e.target.value)}>
+                                <option value="General">General</option>
+                                <option value="Ventas">Ventas</option>
+                                <option value="Suministros">Suministros</option>
+                                <option value="Servicios">Servicios Públicos</option>
+                                <option value="Personal">Personal / Salarios</option>
+                                <option value="Marketing">Marketing / Publicidad</option>
+                                <option value="Otros">Otros</option>
+                            </select>
                         </div>
 
                         <button 
                             onClick={handleGuardar}
                             disabled={isSaving}
-                            style={{ 
-                                padding: '12px', 
-                                background: '#1e293b', 
-                                color: '#fff', 
-                                border: 'none', 
-                                borderRadius: '8px', 
-                                fontWeight: 700, 
-                                cursor: isSaving ? 'not-allowed' : 'pointer',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                gap: '8px',
-                                marginTop: '10px'
-                            }}
+                            className="btn-admin btn-admin-secondary"
+                            style={{ marginTop: '10px', width: '100%', justifyContent: 'center' }}
                         >
-                            <Save size={18} /> {isCreando ? 'Guardar Registro' : 'Actualizar Registro'}
+                            {isSaving ? <Activity className="animate-spin" size={18} /> : <Save size={18} />}
+                            {isCreando ? 'Registrar en Auditoría' : 'Actualizar Registro'}
                         </button>
                     </div>
                 </div>
             </div>
         )}
+      </main>
     </AdminLayout>
   )
 }

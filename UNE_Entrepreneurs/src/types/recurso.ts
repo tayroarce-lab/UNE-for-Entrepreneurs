@@ -4,6 +4,7 @@ export interface Recurso {
   descripcion: string;
   tipo: string;
   enlace: string;
+  imagen?: string;
   activo: boolean;
   fecha: string;
 }

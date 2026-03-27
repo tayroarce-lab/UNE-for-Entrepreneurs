@@ -6,13 +6,12 @@ import {
   Settings, 
   LogOut,
   Wallet,
-  Landmark,
-  Package,
   Mailbox,
   MapPin,
-  Star,
   FileText,
-  Home
+  Home,
+  Star,
+  Landmark
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import Swal from 'sweetalert2'
@@ -47,14 +46,11 @@ export default function AdminSidebar() {
     { to: '/', icon: Home, label: 'Volver a Inicio' },
     { to: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/admin/usuarios', icon: Users, label: 'Gestión de Usuarios' },
-    { to: '/admin/financiamiento', icon: Landmark, label: 'Financiaciones' },
-    { to: '/admin/inventario', icon: Package, label: 'Inventario Global' },
     { to: '/admin/presupuesto', icon: Wallet, label: 'Presupuesto' },
     { to: '/admin/noticias', icon: Newspaper, label: 'Tips y Noticias' },
     { to: '/admin/solicitudes-contacto', icon: Mailbox, label: 'Solicitudes' },
     { to: '/admin/casos-exito', icon: Star, label: 'Casos de Éxito' },
     { to: '/admin/mapa', icon: MapPin, label: 'Sedes y Mapa' },
-    { to: '/admin/calificaciones', icon: Star, label: 'Calificaciones' },
     { to: '/admin/recursos', icon: FileText, label: 'Recursos' },
     { to: '/admin/configuraciones', icon: Settings, label: 'Configuración' },
   ];

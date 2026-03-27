@@ -142,28 +142,28 @@ function ManejarClientes() {
             onSearch={(val) => setBusqueda(val)}
         />
         
-        <main style={{ padding: 0 }}>
-          <div className="admin-main-header">
+        <main className="admin-main">
+          <div className="admin-top-header">
             <div>
-              <h1 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#3A0D23', marginBottom: '4px' }}>Gestión de Usuarios</h1>
-              <p style={{ color: '#64748B', fontSize: '1rem' }}>Administra la red de emprendedores y roles de acceso de UNE Costa Rica.</p>
+              <h1 className="admin-page-title">Gestión de Usuarios</h1>
+              <p className="admin-page-subtitle">Administra la red de emprendedores y roles de acceso de UNE Costa Rica.</p>
             </div>
             <button 
               onClick={abrirModalCrear}
-              style={{ padding: '12px 24px', background: '#E55B4B', color: '#fff', border: 'none', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+              className="btn-admin btn-admin-primary"
             >
               <PlusCircle size={20} /> Nuevo Usuario
             </button>
           </div>
 
-            <div className="grid-card">
-                <div className="grid-card-label">
-                    <h3 style={{ color: '#3A0D23', fontWeight: 800 }}>Lista de Clientes de la Red UNE</h3>
+            <div className="admin-card">
+                <div className="admin-card-header">
+                    <h3 className="admin-card-title">Lista de Clientes de la Red UNE</h3>
                 </div>
                 
                 {loading ? (
-                    <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>
-                        <Activity className="animate-spin" size={32} style={{ marginBottom: '10px' }} />
+                    <div className="admin-loading">
+                        <Activity className="animate-spin" size={32} />
                         <p>Cargando lista de emprendedores...</p>
                     </div>
                 ) : (
@@ -176,11 +176,11 @@ function ManejarClientes() {
                                         <div className="row-avatar" style={{ background: 'var(--suria-peach)', color: 'var(--suria-plum)', marginRight: '12px' }}>
                                             {cliente.nombre ? cliente.nombre.charAt(0).toUpperCase() : 'U'}
                                         </div>
-                                        <span className="card-value" style={{ textAlign: 'left', fontSize: '0.95rem' }}>{cliente.nombre || 'Sin nombre'}</span>
+                                        <span className="card-value" style={{ textAlign: 'left', fontSize: '1rem' }}>{cliente.nombre || 'Sin nombre'}</span>
                                     </div>
                                     <div className="card-row">
                                         <span className="card-label">Email</span>
-                                        <span className="card-value" style={{ wordBreak: 'break-all', maxWidth: '200px' }}>{cliente.email}</span>
+                                        <span className="card-value" style={{ wordBreak: 'break-all' }}>{cliente.email}</span>
                                     </div>
                                     <div className="card-row">
                                         <span className="card-label">Rol</span>
@@ -191,20 +191,21 @@ function ManejarClientes() {
                                     <div className="card-actions">
                                         <button 
                                             onClick={() => abrirModalEditar(cliente)} 
-                                            style={{ width: '100%', padding: '12px', background: 'var(--suria-ivory)', border: 'none', borderRadius: '8px', color: 'var(--suria-plum)', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                                            className="btn-admin btn-admin-outline"
+                                            style={{ width: '100%' }}
                                         >
                                             <Eye size={16} /> Ver Detalles / Editar
                                         </button>
                                     </div>
                                 </div>
                             )) : (
-                                <div style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>No se encontraron clientes registrados</div>
+                                <div className="admin-empty-state">No se encontraron clientes registrados</div>
                             )}
                         </div>
 
                         {/* DESKTOP VIEW (TABLE) */}
-                        <div className="desktop-only table-responsive">
-                            <table className="admin-table-v2">
+                        <div className="desktop-only admin-table-container">
+                            <table className="admin-table">
                                 <thead>
                                     <tr>
                                         <th>CLIENTE</th>
@@ -224,7 +225,7 @@ function ManejarClientes() {
                                                     <div style={{ fontWeight: 800 }}>{cliente.nombre || 'Sin nombre'}</div>
                                                 </div>
                                             </td>
-                                            <td style={{ color: '#64748b' }}>{cliente.email}</td>
+                                            <td style={{ color: 'var(--admin-text-secondary)' }}>{cliente.email}</td>
                                             <td>
                                                 <span className={`status-tag ${cliente.role === 'admin' ? 'success' : 'pending'}`}>
                                                     {cliente.role}
@@ -233,14 +234,15 @@ function ManejarClientes() {
                                             <td>
                                                 <button 
                                                     onClick={() => abrirModalEditar(cliente)} 
-                                                    style={{ background: 'none', border: 'none', color: '#8B1A1A', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
+                                                    className="btn-admin btn-admin-outline"
+                                                    style={{ padding: '6px 12px', fontSize: '0.8rem' }}
                                                 >
-                                                    <Eye size={16} /> Editar
+                                                    <Eye size={14} /> Editar
                                                 </button>
                                             </td>
                                         </tr>
                                     )) : (
-                                        <tr><td colSpan={4} style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>No se encontraron clientes registrados</td></tr>
+                                        <tr><td colSpan={4} className="admin-empty-state">No se encontraron clientes registrados</td></tr>
                                     )}
                                 </tbody>
                             </table>
@@ -251,81 +253,81 @@ function ManejarClientes() {
         </main>
 
         {modalAbierto && (
-            <div className="modal-overlay-admin" style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.75)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 }}>
-              <div className="grid-card" style={{ width: '90%', maxWidth: '600px', padding: '40px', maxHeight: '90vh', overflowY: 'auto' }}>
-                <div className="grid-card-label">
-                    <h2>
-                        <UserCircle size={24} style={{ color: '#D4A853', verticalAlign: 'middle', marginRight: '10px' }} /> 
+            <div className="modal-overlay-admin">
+              <div className="admin-card modal-content-admin" style={{ maxWidth: '600px', padding: '2.5rem' }}>
+                <div className="admin-card-header">
+                    <h2 className="admin-card-title">
+                        <UserCircle size={24} style={{ color: 'var(--suria-gold)' }} /> 
                         {isCreando ? 'Crear Nuevo Usuario' : `Perfil de ${clienteSeleccionado?.nombre}`}
                     </h2>
-                    <button onClick={() => setModalAbierto(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24} /></button>
+                    <button onClick={() => setModalAbierto(false)} className="btn-close-modal"><X size={24} /></button>
                 </div>
                 
-                <div style={{ display: 'grid', gap: '1.5rem', marginTop: '1.5rem' }}>
-                    <div style={{ padding: '20px', border: '1px solid #e2e8f0', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                        
-                        <div>
-                            <label style={{ fontWeight: 600, color: '#475569', display: 'block', marginBottom: '8px' }}>Nombre:</label>
+                <div className="admin-form-grid">
+                    <div className="admin-form-section">
+                        <div className="admin-form-group">
+                            <label className="admin-label">Nombre:</label>
                             <input 
                                 type="text"
+                                className="admin-input"
                                 value={editNombre}
                                 onChange={(e) => setEditNombre(e.target.value)}
-                                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #e2e8f0', outline: 'none' }}
                                 placeholder="Nombre completo"
                             />
                         </div>
 
-                        <div>
-                            <label style={{ fontWeight: 600, color: '#475569', display: 'block', marginBottom: '8px' }}>Email:</label>
+                        <div className="admin-form-group">
+                            <label className="admin-label">Email:</label>
                             <input 
                                 type="email"
+                                className="admin-input"
                                 value={editEmail}
                                 onChange={(e) => setEditEmail(e.target.value)}
-                                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #e2e8f0', outline: 'none' }}
                                 placeholder="correo@ejemplo.com"
                             />
                         </div>
 
-                        <div>
-                            <label style={{ fontWeight: 600, color: '#475569', display: 'block', marginBottom: '8px' }}>{isCreando ? 'Contraseña:' : 'Nueva Contraseña (Opcional):'}</label>
+                        <div className="admin-form-group">
+                            <label className="admin-label">{isCreando ? 'Contraseña:' : 'Nueva Contraseña (Opcional):'}</label>
                             <input 
                                 type="password"
+                                className="admin-input"
                                 value={editPassword}
                                 onChange={(e) => setEditPassword(e.target.value)}
-                                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #e2e8f0', outline: 'none' }}
                                 placeholder={isCreando ? "Contraseña requerida" : "Dejar en blanco para no cambiar"}
                             />
                         </div>
 
-                        <div>
-                          <label style={{ fontWeight: 600, color: '#475569', display: 'block', marginBottom: '8px' }}>Rol en Plataforma:</label>
+                        <div className="admin-form-group">
+                          <label className="admin-label">Rol en Plataforma:</label>
                           <select 
+                              className="admin-select"
                               value={editRole}
                               onChange={(e) => setEditRole(e.target.value as 'user' | 'admin')}
-                              style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #e2e8f0', outline: 'none', fontWeight: 600, background: '#fff' }}
                           >
                               <option value="user">Usuario Regular</option>
                               <option value="admin">Administrador</option>
                           </select>
                         </div>
-
                     </div>
 
                     <button 
                         onClick={handleUpdateUser} 
                         disabled={isSaving}
-                        style={{ padding: '12px 20px', background: '#D4A853', color: '#fff', border: 'none', borderRadius: '10px', fontWeight: 700, cursor: isSaving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', opacity: isSaving ? 0.7 : 1 }}
+                        className="btn-admin btn-admin-secondary"
+                        style={{ width: '100%', opacity: isSaving ? 0.7 : 1 }}
                     >
                         <Save size={18} /> {isCreando ? 'Crear Usuario' : 'Guardar Cambios'}
                     </button>
 
                     {!isCreando && (
-                        <div style={{ padding: '20px', background: '#fef2f2', border: '1px dashed #fca5a5', borderRadius: '16px', marginTop: '10px' }}>
-                            <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#dc2626', marginBottom: '10px' }}>Zona de Peligro</h4>
-                            <p style={{ fontSize: '0.9rem', color: '#991b1b', marginBottom: '15px' }}>Al eliminar a este usuario, no pódra volver a iniciar sesión.</p>
+                        <div className="danger-zone-v2">
+                            <h4 className="danger-zone-title">Zona de Peligro</h4>
+                            <p className="danger-zone-text">Al eliminar a este usuario, no podrá volver a iniciar sesión.</p>
                             <button 
                                 onClick={handleDeleteUser}
-                                style={{ padding: '10px 20px', background: '#dc2626', color: '#fff', border: 'none', borderRadius: '10px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+                                className="btn-admin btn-admin-danger"
+                                style={{ width: '100%' }}
                             >
                                 <Trash2 size={16} /> Eliminar Permanente
                             </button>

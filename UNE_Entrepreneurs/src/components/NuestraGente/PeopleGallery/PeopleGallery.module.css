@@ -1,5 +1,5 @@
 .ngHero {
-  padding: 160px 20px 100px;
+  padding: 120px 20px 60px;
   background: var(--suria-plum);
   color: white;
   text-align: center;
@@ -18,26 +18,50 @@
   filter: blur(50px);
 }
 
-.ngHeroInner h1 {
-  font-family: var(--font-display);
-  font-size: 4rem;
-  margin-bottom: 2rem;
-  font-weight: 500;
+@media (min-width: 768px) {
+  .ngHero {
+    padding: 160px 20px 100px;
+  }
 }
 
-.ngHeroInner h1 span {
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  margin-bottom: 2rem;
+  font-weight: 500;
+  color: white;
+  line-height: 1.1;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .heroTitle {
+    font-size: 5rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.titleAccent {
   color: var(--suria-gold);
   font-family: var(--font-accent);
   font-style: italic;
+  font-size: 1.1em;
 }
 
 .ngHeroInner p {
   font-family: var(--font-body);
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   max-width: 800px;
   margin: 0 auto;
   opacity: 0.9;
-  line-height: 1.7;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .ngHeroInner p {
+    font-size: 1.25rem;
+    line-height: 1.7;
+  }
 }
 
 .ngGallery {
@@ -80,7 +104,13 @@
 
 .imgSide {
   position: relative;
-  height: 450px;
+  height: 350px;
+}
+
+@media (min-width: 768px) {
+  .imgSide {
+    height: 450px;
+  }
 }
 
 .avatarImg {
@@ -96,18 +126,37 @@
 }
 
 .contentSide {
-  padding: 4rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
 }
 
+@media (min-width: 768px) {
+  .contentSide {
+    padding: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contentSide {
+    padding: 4rem;
+  }
+}
+
 .casoQuoteIcon {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: 1.5rem;
+  right: 1.5rem;
   opacity: 0.05;
+}
+
+@media (min-width: 768px) {
+  .casoQuoteIcon {
+    top: 2rem;
+    right: 2rem;
+  }
 }
 
 .casoTag {
@@ -115,49 +164,85 @@
   padding: 6px 16px;
   border-radius: var(--radius-full);
   font-family: var(--font-ui);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 2.5rem;
+  letter-spacing: 1.5px;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .casoTag {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    margin-bottom: 2.5rem;
+  }
 }
 
 .casoQuoteText {
   font-family: var(--font-accent);
   font-style: italic;
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 6vw, 1.8rem);
   color: var(--suria-plum);
-  margin-bottom: 3.5rem;
+  margin-bottom: 2.5rem;
   line-height: 1.4;
   font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .casoQuoteText {
+    font-size: 2rem;
+    margin-bottom: 3.5rem;
+  }
 }
 
 .author {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .author {
+    gap: 1.5rem;
+  }
 }
 
 .authorAvatar {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: var(--suria-cream);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   box-shadow: var(--shadow-sm);
 }
 
+@media (min-width: 768px) {
+  .authorAvatar {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+}
+
 .authorName {
   font-family: var(--font-ui);
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--suria-plum);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
+}
+
+@media (min-width: 768px) {
+  .authorName {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+  }
 }
 
 .authorMeta {

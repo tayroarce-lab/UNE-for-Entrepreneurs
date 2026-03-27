@@ -418,33 +418,55 @@
   }
 }
 
-/* ── MisionVision & ValoresDiferenciadores responsive ── */
+/* ── MisionVision & ValoresDiferenciadores ── */
+.suria-mv-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
 @media (max-width: 900px) {
   .suria-mv-grid,
   .suria-valores-grid,
-  .suria-diff-grid {
+  .suria-diff-grid,
+  .suria-stats-row {
     grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
+
+.suria-mv-card {
+  padding: 2.5rem !important;
+}
+
+@media (min-width: 768px) {
+  .suria-mv-card {
+    padding: 4rem !important;
+  }
+}
+
+.suria-insignia-banner {
+  padding: 3rem 1.5rem !important;
+}
+
+@media (min-width: 768px) {
+  .suria-insignia-banner {
+    padding: 5rem !important;
   }
 }
 
 @media (max-width: 768px) {
-  /* MisionVision cards stack */
-  .suria-mv-grid {
-    grid-template-columns: 1fr !important;
+  .suria-mv-card h3 {
+    font-size: 1.7rem !important;
   }
 
-  /* Valores cards: 1 column */
-  .suria-valores-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* ValoresDiferenciadores inner padding */
   .suria-diff-banner {
-    padding: 4rem 2rem !important;
+    padding: 3rem 1.5rem !important;
     border-radius: 24px !important;
   }
 
-  /* Stats row wrap on mobile */
   .suria-stats-row {
     flex-direction: column;
     align-items: center;

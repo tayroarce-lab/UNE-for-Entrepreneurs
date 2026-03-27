@@ -2,7 +2,7 @@ import { useState } from 'react'
 import '../../styles/AdminDashboard.css'
 import Swal from 'sweetalert2'
 import { toast } from 'sonner'
-import { Palette, Sun, Moon, UserCircle, Save, Shield, KeyRound, Edit, History } from 'lucide-react'
+import { Palette, Sun, Moon, UserCircle, Save, Shield, KeyRound, Edit, History, X } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import AdminLayout from './AdminLayout'
 import AdminHeader from './AdminHeader'
@@ -11,7 +11,7 @@ type Tema = 'light' | 'dark';
 
 function Configuraciones() {
     const [tema, setTema] = useState<Tema>((localStorage.getItem('theme') as Tema) || 'light');
-    const [nombre, setNombre] = useState<string>('Admin Principal');
+    const [nombre, setNombre] = useState<string>('Administrador UNE');
     const [perfilImg, setPerfilImg] = useState<string | null>(localStorage.getItem('adminProfileImg') || null);
     const navigate = useNavigate();
 
@@ -31,16 +31,16 @@ function Configuraciones() {
 
         Swal.fire({
             title: 'Guardar cambios',
-            text: "¿Estás seguro de que deseas actualizar el nombre a " + nombre + "?",
+            text: "¿Confirmas el cambio de nombre de administrador?",
             icon: 'question',
             showCancelButton: true,
-            confirmButtonColor: '#8B1A1A',
+            confirmButtonColor: 'var(--suria-plum)',
             cancelButtonColor: '#64748b',
-            confirmButtonText: 'Guardar',
+            confirmButtonText: 'Sí, actualizar',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                toast.success('Nombre actualizado correctamente');
+                toast.success('Perfil actualizado correctamente');
             }
         });
     }
@@ -53,7 +53,7 @@ function Configuraciones() {
                 const base64String = reader.result as string;
                 setPerfilImg(base64String);
                 localStorage.setItem('adminProfileImg', base64String);
-                toast.success('Foto de perfil actualizada correctamente');
+                toast.success('Foto de perfil actualizada');
             };
             reader.readAsDataURL(file);
         }
@@ -63,121 +63,144 @@ function Configuraciones() {
         <AdminLayout>
             <AdminHeader placeholder="Configurar sistema, perfil o seguridad..." />
 
-            <main style={{ padding: 0 }}>
-                <div style={{ marginBottom: '30px' }}>
-                    <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#3A0D23', marginBottom: '4px' }}>Configuración del Sistema</h1>
-                    <p style={{ color: '#64748B', fontSize: '1.1rem' }}>Ajusta las preferencias globales, seguridad y apariencia de tu panel.</p>
+            <main className="admin-main">
+                <div className="admin-top-header">
+                    <div>
+                        <h1 className="admin-page-title">Configuración Global</h1>
+                        <p className="admin-page-subtitle">Personaliza tu entorno de trabajo, seguridad y perfil administrativo.</p>
+                    </div>
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+
+                <div className="admin-grid-layout">
                     
                     {/* APARIENCIA */}
-                    <div className="grid-card">
-                        <div className="grid-card-label">
-                            <h3><Palette size={20} color="#D4A853" style={{ verticalAlign: 'middle', marginRight: '10px' }} /> Apariencia</h3>
+                    <div className="admin-card" style={{ marginBottom: 0 }}>
+                        <div className="admin-card-header">
+                            <h3 className="admin-card-title">
+                                <Palette size={22} style={{ color: 'var(--suria-gold)' }} /> 
+                                Personalización
+                            </h3>
                         </div>
-                        <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '20px' }}>Personaliza el aspecto visual del panel administrativo.</p>
+                        <p style={{ color: 'var(--admin-text-secondary)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>Ajusta el tema visual para una mejor experiencia de uso.</p>
                         
-                        <div style={{ padding: '20px', background: '#f8fafc', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <span style={{ fontWeight: 700 }}>Tema del Sistema</span>
+                        <div style={{ padding: '1.5rem', background: '#F8FAF6', borderRadius: '16px', border: '1px solid var(--admin-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                <div style={{ background: 'white', padding: '10px', borderRadius: '10px', color: 'var(--suria-plum)', border: '1px solid var(--admin-border)' }}>
+                                    {tema === 'light' ? <Sun size={20} /> : <Moon size={20} />}
+                                </div>
+                                <span style={{ fontWeight: 700, color: 'var(--suria-plum)' }}>Tema del Panel</span>
+                            </div>
                             <button 
                                 onClick={alternarTema}
-                                style={{ 
-                                    padding: '8px 16px', 
-                                    background: tema === 'light' ? '#1e293b' : '#fff', 
-                                    color: tema === 'light' ? '#fff' : '#1e293b',
-                                    border: 'none',
-                                    borderRadius: '8px',
-                                    fontWeight: 800,
-                                    cursor: 'pointer',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '8px'
-                                }}
+                                className={`btn-admin ${tema === 'light' ? 'btn-admin-primary' : 'btn-admin-outline'}`}
+                                style={{ padding: '8px 16px', fontSize: '0.85rem' }}
                             >
-                                {tema === 'light' ? <Moon size={16} /> : <Sun size={16} />}
-                                Modo {tema === 'light' ? 'Oscuro' : 'Claro'}
+                                {tema === 'light' ? 'Activar Oscuro' : 'Activar Claro'}
                             </button>
                         </div>
                     </div>
 
-                    {/* PERFIL RÁPIDO */}
-                    <div className="grid-card">
-                        <div className="grid-card-label">
-                            <h3><UserCircle size={20} color="#10b981" style={{ verticalAlign: 'middle', marginRight: '10px' }} /> Perfil Rápido</h3>
+                    {/* PERFIL */}
+                    <div className="admin-card" style={{ marginBottom: 0 }}>
+                        <div className="admin-card-header">
+                            <h3 className="admin-card-title">
+                                <UserCircle size={22} style={{ color: '#10B981' }} /> 
+                                Perfil Administrador
+                            </h3>
                         </div>
                         
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '25px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '1.5rem', background: '#F8FAF6', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--admin-border)' }}>
                             <div style={{ position: 'relative' }}>
                                 {perfilImg ? (
-                                    <img src={perfilImg} alt="Admin" style={{ width: '70px', height: '70px', borderRadius: '50%', objectFit: 'cover', border: '3px solid #f1f5f9' }} />
+                                    <img src={perfilImg} alt="Admin" style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', border: '4px solid white', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }} />
                                 ) : (
-                                    <div style={{ width: '70px', height: '70px', background: '#f1f5f9', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8' }}>
-                                        <UserCircle size={40} />
+                                    <div style={{ width: '80px', height: '80px', background: '#E2E8F0', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94A3B8', border: '4px solid white' }}>
+                                        <UserCircle size={44} />
                                     </div>
                                 )}
-                                <label style={{ position: 'absolute', bottom: 0, right: 0, background: '#fff', padding: '5px', borderRadius: '50%', cursor: 'pointer', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}>
+                                <label style={{ position: 'absolute', bottom: 0, right: 0, background: 'var(--suria-gold)', color: 'white', padding: '6px', borderRadius: '50%', cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.2)', border: '2px solid white' }}>
                                     <Edit size={12} />
                                     <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
                                 </label>
                             </div>
                             <div style={{ flex: 1 }}>
-                                <input 
-                                    type="text" 
-                                    value={nombre} 
-                                    onChange={(e) => setNombre(e.target.value)} 
-                                    style={{ width: '100%', padding: '10px 15px', borderRadius: '10px', border: '1px solid #e2e8f0', marginBottom: '8px', fontSize: '0.9rem', fontWeight: 700 }}
-                                />
-                                <button onClick={guardarNombre} style={{ width: '100%', padding: '8px', background: '#f1f5f9', color: '#1e293b', border: 'none', borderRadius: '8px', fontWeight: 700, cursor: 'pointer', fontSize: '0.8rem' }}>
-                                    <Save size={14} style={{ marginRight: '5px' }} /> Guardar Nombre
-                                </button>
+                                <div className="admin-form-group">
+                                    <input 
+                                        type="text" 
+                                        className="admin-input"
+                                        placeholder="Nombre del Administrador"
+                                        value={nombre} 
+                                        onChange={(e) => setNombre(e.target.value)} 
+                                        style={{ fontSize: '0.95rem', fontWeight: 800, padding: '10px 14px' }}
+                                    />
+                                </div>
                             </div>
                         </div>
+                        <button onClick={guardarNombre} className="btn-admin btn-admin-secondary" style={{ width: '100%', padding: '12px' }}>
+                            <Save size={18} /> Aplicar Cambios al Perfil
+                        </button>
                     </div>
 
                     {/* SEGURIDAD */}
-                    <div className="grid-card">
-                        <div className="grid-card-label">
-                            <h3><Shield size={20} color="#f59e0b" style={{ verticalAlign: 'middle', marginRight: '10px' }} /> Seguridad</h3>
+                    <div className="admin-card" style={{ marginBottom: 0 }}>
+                        <div className="admin-card-header">
+                            <h3 className="admin-card-title">
+                                <Shield size={22} style={{ color: 'var(--suria-crimson)' }} /> 
+                                Seguridad y Auditoría
+                            </h3>
                         </div>
-                        <div style={{ display: 'grid', gap: '10px' }}>
+                        <div style={{ display: 'grid', gap: '12px' }}>
                             <button 
                                 onClick={() => navigate('/admin/configuraciones/credenciales')}
-                                style={{ padding: '12px', textAlign: 'left', background: '#f8fafc', color: '#1e293b', border: '1px solid #e2e8f0', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px', transition: 'all 0.2s' }}
-                                onMouseEnter={(e) => e.currentTarget.style.background = '#e2e8f0'}
-                                onMouseLeave={(e) => e.currentTarget.style.background = '#f8fafc'}
+                                className="btn-admin btn-admin-outline"
+                                style={{ width: '100%', justifyContent: 'flex-start', padding: '16px' }}
                             >
-                                <KeyRound size={16} color="#1e293b" /> Cambiar Contraseña
+                                <div style={{ background: '#F1F5F9', padding: '8px', borderRadius: '8px' }}>
+                                     <KeyRound size={18} />
+                                </div>
+                                <span>Cambiar Credenciales de Acceso</span>
                             </button>
                             <button 
                                 onClick={() => {
                                     Swal.fire({
-                                        title: 'Log de Auditoría',
+                                        title: 'Historial de Auditoría',
                                         html: `
-                                        <div style="text-align: left; font-size: 0.9rem; max-height: 250px; overflow-y: auto;">
-                                            <div style="padding: 10px; border-bottom: 1px solid #e2e8f0;">
-                                                <strong>Hoy 10:05 AM:</strong> Sesión iniciada desde IP 192.168.1.45
+                                        <div style="text-align: left; font-size: 0.9rem; max-height: 300px; overflow-y: auto; font-family: 'Outfit', sans-serif;">
+                                            <div style="padding: 12px; border-bottom: 1px solid #f1f5f9; display: flex; gap: 10px;">
+                                                <div style="background: var(--suria-plum); width: 8px; height: 8px; border-radius: 50%; margin-top: 6px;"></div>
+                                                <div>
+                                                    <strong style="display: block;">Sesión iniciada</strong>
+                                                    <span style="color: #64748b; font-size: 0.8rem;">Hoy 10:05 AM desde IP 192.168.1.45</span>
+                                                </div>
                                             </div>
-                                            <div style="padding: 10px; border-bottom: 1px solid #e2e8f0;">
-                                                <strong>Ayer 15:30:</strong> Actualización de recursos emprendedores (Admin)
+                                            <div style="padding: 12px; border-bottom: 1px solid #f1f5f9; display: flex; gap: 10px;">
+                                                <div style="background: var(--suria-gold); width: 8px; height: 8px; border-radius: 50%; margin-top: 6px;"></div>
+                                                <div>
+                                                    <strong style="display: block;">Actualización de recursos</strong>
+                                                    <span style="color: #64748b; font-size: 0.8rem;">Ayer 15:30 por Admin Principal</span>
+                                                </div>
                                             </div>
-                                            <div style="padding: 10px; border-bottom: 1px solid #e2e8f0;">
-                                                <strong>Ayer 09:15:</strong> Modificación de tasas Suria (Admin)
-                                            </div>
-                                            <div style="padding: 10px;">
-                                                <strong>20 Mar 11:20:</strong> Cambio de credenciales exitoso
+                                            <div style="padding: 12px; border-bottom: 1px solid #f1f5f9; display: flex; gap: 10px;">
+                                                <div style="background: var(--suria-crimson); width: 8px; height: 8px; border-radius: 50%; margin-top: 6px;"></div>
+                                                <div>
+                                                    <strong style="display: block;">Cambio de contraseña</strong>
+                                                    <span style="color: #64748b; font-size: 0.8rem;">20 Mar 11:20 - Operación exitosa</span>
+                                                </div>
                                             </div>
                                         </div>
                                         `,
-                                        icon: 'info',
-                                        confirmButtonColor: '#8B1A1A',
-                                        confirmButtonText: 'Cerrar'
+                                        confirmButtonText: 'Entendido',
+                                        confirmButtonColor: 'var(--suria-plum)',
+                                        width: '500px'
                                     });
                                 }}
-                                style={{ padding: '12px', textAlign: 'left', background: '#f8fafc', color: '#1e293b', border: '1px solid #e2e8f0', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px', transition: 'all 0.2s' }}
-                                onMouseEnter={(e) => e.currentTarget.style.background = '#e2e8f0'}
-                                onMouseLeave={(e) => e.currentTarget.style.background = '#f8fafc'}
+                                className="btn-admin btn-admin-outline"
+                                style={{ width: '100%', justifyContent: 'flex-start', padding: '16px' }}
                             >
-                                <History size={16} color="#1e293b" /> Ver Log de Auditoría
+                                <div style={{ background: '#F1F5F9', padding: '8px', borderRadius: '8px' }}>
+                                     <History size={18} />
+                                </div>
+                                <span>Ver Registro de Actividad</span>
                             </button>
                         </div>
                     </div>

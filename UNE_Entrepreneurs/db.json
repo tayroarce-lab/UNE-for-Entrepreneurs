@@ -46,54 +46,6 @@
       "id": "4J5aB9G"
     }
   ],
-  "financingPrograms": [
-    {
-      "id": "1",
-      "name": "Suria",
-      "image": "/assets/suria_hero.png",
-      "type": "loan",
-      "amountRange": "₡1,000,000 - ₡20,000,000",
-      "minAmount": 1000000,
-      "maxAmount": 20000000,
-      "eligibility": {
-        "regions": [
-          "Nacional"
-        ],
-        "sectors": [
-          "comercio",
-          "servicios",
-          "tecnología"
-        ],
-        "minRevenue": 500000,
-        "maxEmployees": 50,
-        "legalStatus": "any"
-      },
-      "requirements": [
-        "Plan de negocios",
-        "Documento de identidad",
-        "Comprobante de domicilio"
-      ],
-      "region": "Nacional",
-      "applicationLink": "#",
-      "howToApply": "Programa de financiamiento exclusivo Suria. Contacte a un asesor para iniciar su proceso.",
-      "contact": {
-        "email": "contacto@suria.cr",
-        "phone": "+50600000000"
-      },
-      "tags": [
-        "emprendimiento",
-        "crecimiento",
-        "pymes"
-      ],
-      "status": "active",
-      "lastVerified": "2026-03-23",
-      "sourceUrl": "#",
-      "notes": "Tasa fija preferencial para miembros de UNE Costa Rica.",
-      "createdBy": "1",
-      "attachments": []
-    }
-  ],
-  "applications": [],
   "recursos": [
     {
       "id": "1",
@@ -184,54 +136,12 @@
       "id": 1
     }
   ],
-  "inventoryItems": [
-    {
-      "userId": "CeBL9TA",
-      "name": "Camiseta Negra",
-      "quantity": 10,
-      "minQuantity": 5,
-      "costPrice": 3000,
-      "salePrice": 8000,
-      "category": "Ropa",
-      "lastRestock": "2026-03-19T20:11:32.067Z",
-      "id": 1
-    }
-  ],
   "settings": {
     "uneBenefits": {
       "uneLoanMax": 500000,
       "commission": 0.01
     }
   },
-  "testimonials": [
-    {
-      "id": "1",
-      "userName": "Carlos Méndez",
-      "userRole": "Comerciante",
-      "content": "Gracias al crédito Pyme de UNE, pudimos abrir nuestra tercera sucursal en Cartago y aumentar nuestra exportación en un 40%.",
-      "avatar": "/assets/carlos_mendez.png",
-      "active": true,
-      "date": "2026-03-20T10:00:00Z"
-    },
-    {
-      "id": "2",
-      "userName": "Lucía Mora",
-      "userRole": "Restaurante",
-      "content": "El capital de trabajo fue vital para renovar nuestra cocina.",
-      "avatar": "/assets/lucia_mora.png",
-      "active": true,
-      "date": "2026-03-21T12:00:00Z"
-    },
-    {
-      "id": "3",
-      "userName": "Esteban Ruiz",
-      "userRole": "Tecnología",
-      "content": "Gestionamos las finanzas con las herramientas de UNE de manera fácil.",
-      "avatar": "/assets/esteban_ruiz.png",
-      "active": true,
-      "date": "2026-03-22T09:30:00Z"
-    }
-  ],
   "casosDeExito": [
     {
       "id": "1",
@@ -276,15 +186,6 @@
       "colorTag": "#facc15",
       "activo": true,
       "fecha": "2026-03-24T10:00:00Z"
-    }
-  ],
-  "ratings": [
-    {
-      "id": "1",
-      "userId": "2",
-      "rating": 5,
-      "comment": "Excelente atención y rapidez.",
-      "date": "2026-03-23T08:00:00Z"
     }
   ],
   "solicitudesContacto": [
