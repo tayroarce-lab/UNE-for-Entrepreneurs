@@ -1,0 +1,19 @@
+.recursosContainer {
+    max-width: 1200px;
+    margin: -40px auto 80px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.recursosGridUser {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .recursosGridUser {
+        grid-template-columns: 1fr;
+    }
+}

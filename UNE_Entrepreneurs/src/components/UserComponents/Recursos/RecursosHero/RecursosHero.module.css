@@ -1,0 +1,89 @@
+.recursosHero {
+    padding: 180px 20px 140px;
+    background: linear-gradient(135deg, rgba(58, 13, 35, 0.96) 0%, rgba(139, 26, 26, 0.85) 100%),
+                url('/assets/suria_hero.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.recursosHero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(218, 165, 32, 0.15) 0%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+}
+
+.recursosHero::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    right: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.recursosHero h1 {
+    font-family: var(--font-ui);
+    font-size: 5rem;
+    font-weight: 900;
+    margin-bottom: 2rem;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.recursosHero h1 span {
+    font-family: var(--font-display);
+    color: #facc15;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    display: block;
+    font-size: 6rem;
+    margin-top: -5px;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.recursosHero p {
+    font-size: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .recursosHero {
+        padding: 120px 20px 80px;
+    }
+    .recursosHero h1 {
+        font-size: 3rem;
+    }
+    .recursosHero h1 span {
+        font-size: 3.5rem;
+    }
+    .recursosHero p {
+        font-size: 1.2rem;
+    }
+}

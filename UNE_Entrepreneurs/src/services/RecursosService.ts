@@ -1,14 +1,5 @@
 import { API_BASE } from '../config';
-
-export interface Recurso {
-  id: string;
-  titulo: string;
-  descripcion: string;
-  tipo: string;
-  enlace: string;
-  activo: boolean;
-  fecha: string;
-}
+import type { Recurso } from '../types/recurso';
 
 const API_URL = `${API_BASE}/recursos`;
 
