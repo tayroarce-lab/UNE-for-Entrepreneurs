@@ -1,5 +1,5 @@
 .newsCarouselSection {
-  background: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2670&auto=format&fit=crop') no-repeat center center / cover;
+  background: var(--suria-ivory);
   padding: 100px 0 120px;
   position: relative;
   overflow: hidden;
@@ -9,7 +9,8 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%);
+  background: radial-gradient(circle at top right, var(--suria-peach) 0%, transparent 40%);
+  opacity: 0.4;
   z-index: 0;
 }
 
@@ -26,52 +27,44 @@
 .titleWrapper {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
+  align-items: center;
+  text-align: center;
 }
 
 .sectionBadge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(139, 26, 26, 0.08);
-  color: #8B1A1A;
-  padding: 6px 16px;
-  border-radius: 100px;
-  font-size: 0.85rem;
-  font-weight: 800;
+  background: rgba(169, 38, 43, 0.1);
+  color: var(--suria-crimson);
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   width: fit-content;
+  font-family: var(--font-ui);
 }
 
 .sectionTitle {
-  font-size: 3rem;
-  color: #1a0614;
-  font-weight: 900;
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  color: var(--suria-plum);
+  font-weight: 500;
   margin: 0;
   line-height: 1.1;
-  letter-spacing: -1px;
 }
 
 @media (min-width: 1024px) {
   .sectionTitle {
-    font-size: 4rem;
+    font-size: 4.5rem;
   }
 }
 
 .titleAccent {
-  color: #8B1A1A;
-  position: relative;
-  display: inline-block;
-}
-
-.titleAccent::after {
-  content: '';
-  position: absolute;
-  bottom: 8px;
-  left: 0;
-  width: 100%;
-  height: 8px;
-  background: rgba(139, 26, 26, 0.1);
-  z-index: -1;
+  color: var(--suria-crimson);
+  font-style: italic;
+  font-family: var(--font-display);
 }

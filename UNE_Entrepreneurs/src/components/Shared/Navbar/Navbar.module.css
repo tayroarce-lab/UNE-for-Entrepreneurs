@@ -9,29 +9,29 @@
   width: 95%;
   max-width: 1300px;
   z-index: 1100;
-  background: rgba(30, 9, 21, 0.85);
+  background: rgba(64, 22, 45, 0.9); /* var(--suria-plum) */
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 24px;
-  height: 75px;
+  border-radius: var(--radius-lg);
+  height: 80px;
   display: flex;
   align-items: center;
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  transition: var(--transition);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
 .scrolled {
   top: 10px;
-  height: 65px;
-  background: rgba(15, 2, 8, 0.95);
-  width: 90%;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  height: 70px;
+  background: var(--suria-plum);
+  width: 92%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
 .navbarContainer {
   width: 100%;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -67,27 +67,37 @@
   width: auto;
 }
 
-.logoTextMain {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1.5rem !important;
+.logoWordmark {
+  display: flex;
+  flex-direction: column;
+}
+
+.suriaWordmark {
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  font-size: 1.8rem !important;
   font-weight: 800;
   color: white !important;
-  letter-spacing: -0.5px;
+  letter-spacing: 2px;
   line-height: 1;
 }
 
-.logoTextAccent {
-  display: inline-block;
-  background: linear-gradient(135deg, #FFD700, #DAA520);
-  color: #1a0614;
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-size: 0.65rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  margin-top: 2px;
-  width: fit-content;
-  box-shadow: 0 2px 8px rgba(218, 165, 32, 0.3);
+.logoBox {
+  background: white;
+  border-radius: 50%; /* Brand feel is soft and rounded */
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  position: relative;
+  border: 2px solid white;
+}
+
+.logoBox img {
+  height: 30px;
+  width: auto;
 }
 
 /* ---------- TOGGLE ---------- */
@@ -154,12 +164,13 @@
   align-items: center;
   gap: 8px;
   padding: 0.6rem 1.25rem;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 600;
-  border-radius: 50px;
-  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-ui);
+  font-weight: 500;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
   text-decoration: none;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   letter-spacing: 0.2px;
 }
 
@@ -171,13 +182,13 @@
 .navbarLinks li a:hover,
 .navbarLinks li a:global(.active) {
   color: #fff;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
 .navbarLinks li a:hover svg,
 .navbarLinks li a:global(.active) svg {
   opacity: 1;
-  transform: translateY(-1px);
 }
 
 /* Auth Buttons */
@@ -193,17 +204,19 @@
 }
 
 .navHighlight {
-  background: linear-gradient(135deg, #8B1A1A, #A62424) !important;
+  background: var(--suria-crimson) !important;
   color: #fff !important;
-  box-shadow: 0 4px 15px rgba(139, 26, 26, 0.4);
-  font-weight: 800 !important;
+  box-shadow: 0 4px 15px rgba(169, 38, 43, 0.3);
+  font-weight: 700 !important;
+  border-radius: var(--radius-full) !important;
 }
 
 .navHighlight:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(139, 26, 26, 0.5);
-  background: linear-gradient(135deg, #A62424, #C03030) !important;
+  box-shadow: 0 6px 20px rgba(169, 38, 43, 0.4);
+  background: var(--suria-dark-red) !important;
 }
+
 
 /* User Profile */
 .navbarProfile {
@@ -286,14 +299,14 @@
 }
 
 .navAdminBadge {
-  background: rgba(212, 168, 83, 0.15) !important;
-  border: 1px solid rgba(212, 168, 83, 0.4) !important;
-  color: #fff !important;
+  background: var(--suria-gold) !important;
+  color: var(--suria-plum) !important;
   font-weight: 800 !important;
+  border-radius: var(--radius-full) !important;
 }
 
 .navAdminBadge:hover {
-  background: rgba(212, 168, 83, 0.3) !important;
+  background: #f0c570 !important;
   transform: translateY(-2px);
 }
 

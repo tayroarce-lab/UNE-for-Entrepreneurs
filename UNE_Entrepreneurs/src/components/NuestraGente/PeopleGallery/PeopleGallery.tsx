@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Quote, Loader } from 'lucide-react';
+import { Quote, Loader2 } from 'lucide-react';
 import { getCasosExito } from '../../../services/CasosExitoService';
 import type { CasoExito } from '../../../services/CasosExitoService';
-import '../../../styles/NuestraGente.css';
+import styles from './PeopleGallery.module.css';
 
 const PeopleGallery: React.FC = () => {
   const [casosDeExito, setCasosDeExito] = useState<CasoExito[]>([]);
@@ -16,7 +16,6 @@ const PeopleGallery: React.FC = () => {
   const fetchCasos = async () => {
     try {
       const data = await getCasosExito();
-      // Solo mostrar los activos
       setCasosDeExito(data.filter(c => c.activo) || []);
     } catch (error) {
       console.error('Error al cargar casos de éxito:', error);
@@ -26,45 +25,43 @@ const PeopleGallery: React.FC = () => {
   };
 
   return (
-    <main style={{ flex: 1, paddingTop: '80px' }}>
-      <section className="ng-hero">
-        <div className="ng-hero-deco-1" />
-        <div className="ng-hero-deco-2" />
-        <div className="ng-hero-inner">
+    <main style={{ flex: 1 }}>
+      <section className={styles.ngHero}>
+        <div className={styles.ngHeroInner}>
           <h1>Nuestra <span>Gente</span></h1>
           <p>Historias reales de personas extraordinarias que están transformando su futuro con el apoyo y la guía de UNE.</p>
         </div>
       </section>
 
-      <section className="ng-gallery">
-        <div className="ng-gallery-inner">
+      <section className={styles.ngGallery}>
+        <div className={styles.ngGalleryInner}>
           {loading ? (
-            <div style={{ textAlign: 'center', padding: '100px', color: '#8B1A1A' }}>
-              <Loader className="animate-spin" size={48} />
-              <p style={{ marginTop: '20px', fontWeight: 600 }}>Cargando historias inspiradoras...</p>
+            <div style={{ textAlign: 'center', padding: '100px', color: 'var(--suria-crimson)' }}>
+              <Loader2 className="animate-spin" size={48} />
+              <p style={{ marginTop: '20px', fontWeight: 600, fontFamily: 'var(--font-ui)' }}>Cargando historias inspiradoras...</p>
             </div>
           ) : casosDeExito.length > 0 ? (
             casosDeExito.map((caso, index) => (
-              <article key={caso.id} className={`caso-card ${index % 2 !== 0 ? 'reverse' : ''}`}>
-                <div className="caso-img-side">
-                  <img src={caso.imagen} alt={caso.nombre} className="avatar-img" />
-                  <div className="img-gradient" style={{ background: `linear-gradient(to top, ${caso.colorTag}66, transparent)` }} />
+              <article key={caso.id} className={`${styles.casoCard} ${index % 2 !== 0 ? styles.reverse : ''}`}>
+                <div className={styles.imgSide}>
+                  <img src={caso.imagen} alt={caso.nombre} className={styles.avatarImg} />
+                  <div className={styles.imgGradient} style={{ background: `linear-gradient(to top, ${caso.colorTag || '#d4a853'}33, transparent)` }} />
                 </div>
-                <div className="caso-content-side" style={{ borderTop: `8px solid ${caso.colorTag}` }}>
-                  <Quote size={120} color={caso.colorTag} className="caso-quote-icon" />
+                <div className={styles.contentSide} style={{ borderTop: `6px solid ${caso.colorTag || 'var(--suria-gold)'}` }}>
+                  <Quote size={180} color={caso.colorTag || 'var(--suria-plum)'} className={styles.casoQuoteIcon} />
                   <div style={{ position: 'relative', zIndex: 1 }}>
-                    <span className="caso-tag" style={{ backgroundColor: `${caso.colorTag}22`, color: caso.colorTag }}>
+                    <span className={styles.casoTag} style={{ backgroundColor: `${caso.colorTag || '#d4a853'}22`, color: caso.colorTag || 'var(--suria-plum)' }}>
                       Caso de Éxito
                     </span>
-                    <h3 className="caso-quote-text">"{caso.cita}"</h3>
-                    <div className="caso-author">
-                      <div className="caso-author-avatar" style={{ color: caso.colorTag }}>{caso.nombre.charAt(0)}</div>
+                    <h3 className={styles.casoQuoteText}>"{caso.cita}"</h3>
+                    <div className={styles.author}>
+                      <div className={styles.authorAvatar} style={{ color: caso.colorTag || 'var(--suria-plum)' }}>{caso.nombre.charAt(0)}</div>
                       <div>
-                        <p className="caso-author-name">{caso.nombre}</p>
-                        <div className="caso-author-meta">
-                          <span style={{ color: caso.colorTag, fontSize: '1.1rem', fontWeight: 600 }}>{caso.profesion}</span>
-                          <span style={{ color: '#9333ea', opacity: 0.3 }}>•</span>
-                          <span style={{ color: '#6b7280', fontSize: '1rem', fontWeight: 500 }}>{caso.ubicacion}</span>
+                        <p className={styles.authorName}>{caso.nombre}</p>
+                        <div className={styles.authorMeta}>
+                          <span style={{ color: caso.colorTag || 'var(--suria-plum)', fontWeight: 700 }}>{caso.profesion}</span>
+                          <span style={{ opacity: 0.3 }}>•</span>
+                          <span style={{ color: 'var(--suria-brown)', opacity: 0.6 }}>{caso.ubicacion}</span>
                         </div>
                       </div>
                     </div>
@@ -73,7 +70,7 @@ const PeopleGallery: React.FC = () => {
               </article>
             ))
           ) : (
-            <div style={{ textAlign: 'center', padding: '100px', color: '#64748b' }}>
+            <div style={{ textAlign: 'center', padding: '100px', color: 'var(--suria-brown)', opacity: 0.6 }}>
               <p>Próximamente más historias de éxito.</p>
             </div>
           )}

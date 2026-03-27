@@ -1,102 +1,91 @@
 .testimonialsSection {
   background: var(--suria-cream);
-  padding: 4rem 1.25rem;
-}
-
-@media (min-width: 1024px) {
-  .testimonialsSection {
-    padding: 10rem 0;
-  }
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
 }
 
 .sectionTitle {
-  font-size: 2.2rem;
-  margin-bottom: 3rem;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  margin-bottom: 4rem;
   color: var(--suria-plum);
   text-align: center;
+  font-weight: 500;
 }
 
 @media (min-width: 1024px) {
   .sectionTitle {
-    font-size: 3.5rem;
-    margin-bottom: 5rem;
+    font-size: 4rem;
+    margin-bottom: 6rem;
   }
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1200px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
+/* Base Card Styles */
 .card {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 30px;
+  background: var(--suria-peach);
+  padding: 3rem;
+  border-radius: var(--radius-lg);
   position: relative;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
 }
 
 .quoteIcon {
-  color: var(--suria-peach);
+  color: var(--suria-plum);
   margin-bottom: 2rem;
-  opacity: 0.5;
+  opacity: 0.15;
 }
 
 .quoteText {
-  font-size: 1.15rem;
-  color: var(--suria-plum);
-  font-weight: 700;
-  line-height: 1.5;
-  margin-bottom: 3rem;
+  font-family: var(--font-accent);
   font-style: italic;
+  font-size: 1.4rem;
+  color: var(--suria-plum);
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 3.5rem;
+  flex: 1;
 }
 
 .authorArea {
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid rgba(64, 22, 45, 0.1);
   padding-top: 2rem;
 }
 
 .authorImage {
-  width: 55px;
-  height: 55px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid var(--suria-peach);
+  border: 4px solid white;
+  box-shadow: var(--shadow-sm);
 }
 
 .authorName {
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-family: var(--font-ui);
+  font-size: 1.15rem;
+  font-weight: 700;
   color: var(--suria-plum);
   margin-bottom: 0.2rem;
 }
 
 .authorMeta {
-  font-size: 0.8rem;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
   color: var(--suria-brown);
-  opacity: 0.7;
+  opacity: 0.6;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }

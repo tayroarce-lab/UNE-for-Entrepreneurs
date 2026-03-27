@@ -1,0 +1,171 @@
+.ngHero {
+  padding: 160px 20px 100px;
+  background: var(--suria-plum);
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ngHero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(212, 168, 83, 0.1) 0%, transparent 70%);
+  filter: blur(50px);
+}
+
+.ngHeroInner h1 {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.ngHeroInner h1 span {
+  color: var(--suria-gold);
+  font-family: var(--font-accent);
+  font-style: italic;
+}
+
+.ngHeroInner p {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0.9;
+  line-height: 1.7;
+}
+
+.ngGallery {
+  background: var(--suria-ivory);
+  padding: 120px 20px;
+}
+
+.ngGalleryInner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+.casoCard {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  border: 1px solid rgba(169, 38, 43, 0.05);
+}
+
+@media (min-width: 1024px) {
+  .casoCard {
+    grid-template-columns: 1fr 1.2fr;
+  }
+  
+  .casoCard.reverse {
+    direction: rtl;
+  }
+  
+  .casoCard.reverse > * {
+    direction: ltr;
+  }
+}
+
+.imgSide {
+  position: relative;
+  height: 450px;
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imgGradient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.contentSide {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.casoQuoteIcon {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  opacity: 0.05;
+}
+
+.casoTag {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 2.5rem;
+}
+
+.casoQuoteText {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--suria-plum);
+  margin-bottom: 3.5rem;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.authorAvatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--suria-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+.authorName {
+  font-family: var(--font-ui);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--suria-plum);
+  margin-bottom: 0.3rem;
+}
+
+.authorMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}

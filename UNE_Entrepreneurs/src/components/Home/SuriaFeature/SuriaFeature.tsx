@@ -1,5 +1,6 @@
 import React from 'react';
-import { ShieldCheck, Users, HandCoins } from 'lucide-react';
+import { ShieldCheck, HandCoins } from 'lucide-react';
+import BrandAsset from '../../Shared/BrandAsset/BrandAsset';
 import styles from './SuriaFeature.module.css';
 const suriaWoman = '/assets/suria_hero.png';
 
@@ -25,7 +26,7 @@ const defaultBenefits: Benefit[] = [
   },
   {
     id: 2,
-    icon: <Users size={32} />,
+    icon: <BrandAsset type="people" size={32} />,
     title: 'Bancos Comunales',
     description: 'No estás sola. Creces junto a un grupo de mujeres que se respaldan mutuamente.'
   },

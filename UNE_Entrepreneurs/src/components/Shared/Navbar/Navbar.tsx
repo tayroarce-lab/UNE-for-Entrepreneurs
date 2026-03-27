@@ -62,11 +62,10 @@ const Navbar: React.FC = () => {
         <div className={styles.navbarLogo}>
           <Link to="/" onClick={scrollToTop}>
             <div className={styles.logoBox}>
-              <img src={uneLogo} alt="Logo UNE" />
+              <img src={uneLogo} alt="Logo SÜRIA" />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-               <span className={styles.logoTextMain}>UNE</span>
-               <span className={styles.logoTextAccent}>COSTA RICA</span>
+            <div className={styles.logoWordmark}>
+               <span className={styles.suriaWordmark}>SÜRIA</span>
             </div>
           </Link>
         </div>
@@ -77,7 +76,7 @@ const Navbar: React.FC = () => {
 
         <ul className={styles.navbarLinks}>
           <li>
-             <NavLink to="/" onClick={(e) => { if(location.pathname === '/') scrollToTop(e as unknown as React.MouseEvent); }} end>
+             <NavLink to="/" onClick={(e: React.MouseEvent) => { if(location.pathname === '/') scrollToTop(e); }} end>
                 <Home size={16} /> Inicio
              </NavLink>
           </li>

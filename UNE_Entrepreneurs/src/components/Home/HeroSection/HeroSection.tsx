@@ -34,6 +34,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="container">
         <div className={styles.heroInner}>
           <div className={styles.heroText}>
+            <div className={styles.scriptLogo}>süria</div>
             <span className={styles.heroBadge}>{badgeText}</span>
             <h1 className={styles.heroTitle}>
               {titleContent}

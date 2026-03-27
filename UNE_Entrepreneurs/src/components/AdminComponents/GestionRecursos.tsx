@@ -5,7 +5,7 @@ import { FileText, Plus, Edit, Trash2, ExternalLink, Loader, X, Save } from 'luc
 import Swal from 'sweetalert2';
 import { toast } from 'sonner';
 import { getRecursos, createRecurso, updateRecurso, deleteRecurso } from '../../services/RecursosService';
-import type { Recurso } from '../../services/RecursosService';
+import type { Recurso } from '../../types/recurso';
 import '../../styles/GestionRecursos.css';
 import '../../styles/AdminDashboard.css';
 

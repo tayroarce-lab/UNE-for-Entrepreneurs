@@ -48,22 +48,22 @@ const NewsCarousel: React.FC = () => {
     Swal.fire({
       title: noticia.titulo,
       html: `
-        <div style="text-align: left; font-family: 'DM Sans', sans-serif;">
+        <div style="text-align: left; font-family: 'Nunito', sans-serif;">
           <img src="${noticia.imagen || 'https://images.unsplash.com/photo-1504711432869-efd597cdd045?q=80&w=2670&auto=format&fit=crop'}" 
                style="width: 100%; height: 350px; object-fit: cover; border-radius: 20px; margin-bottom: 24px;" 
                onerror="this.src='https://images.unsplash.com/photo-1504711432869-efd597cdd045?q=80&w=2670&auto=format&fit=crop'"
           />
-          <div style="display: flex; gap: 20px; font-size: 0.85rem; color: #64748b; margin-bottom: 24px; font-weight: 700;">
+          <div style="display: flex; gap: 20px; font-size: 0.85rem; color: #58331d; opacity: 0.7; margin-bottom: 24px; font-weight: 700; font-family: 'Montserrat', sans-serif;">
             <span style="display: flex; align-items: center; gap: 6px;">📅 ${noticia.fecha ? new Date(noticia.fecha).toLocaleDateString() : 'N/A'}</span>
             <span style="display: flex; align-items: center; gap: 6px;">👤 ${noticia.autor}</span>
           </div>
-          <div style="font-size: 1.15rem; line-height: 1.8; color: #1e293b; letter-spacing: -0.2px;">
+          <div style="font-size: 1.1rem; line-height: 1.8; color: #58331d; letter-spacing: -0.2px;">
             ${noticia.contenido}
           </div>
         </div>
       `,
       confirmButtonText: 'Entendido',
-      confirmButtonColor: '#1a0614',
+      confirmButtonColor: '#a9262b',
       width: '850px',
       showCloseButton: true,
       customClass: {
