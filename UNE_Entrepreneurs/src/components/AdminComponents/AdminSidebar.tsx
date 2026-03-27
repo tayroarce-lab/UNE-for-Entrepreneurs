@@ -76,7 +76,7 @@ export default function AdminSidebar() {
           <li key={item.label}>
             <NavLink 
               to={item.to} 
-              className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
+              className={({ isActive }: { isActive: boolean }) => isActive ? 'nav-item active' : 'nav-item'}
             >
               <item.icon size={20} className="nav-icon" />
               <span>{item.label}</span>
