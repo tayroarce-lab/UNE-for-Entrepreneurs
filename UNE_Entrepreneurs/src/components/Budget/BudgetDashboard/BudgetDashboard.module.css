@@ -21,12 +21,40 @@
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.inventoryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.75rem 1.25rem;
+  background: var(--suria-plum);
+  color: #fff;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.25s;
+  box-shadow: 0 4px 12px rgba(64, 22, 45, 0.2);
+  flex-shrink: 0;
+  min-height: 44px;
+}
+
+.inventoryBtn:hover {
+  background: var(--suria-crimson);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(169, 38, 43, 0.3);
 }
 
 @media (max-width: 768px) {
   .budgetHeader {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .inventoryBtn {
+    width: 100%;
+    justify-content: center;
   }
 }
 

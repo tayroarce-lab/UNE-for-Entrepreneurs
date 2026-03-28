@@ -93,14 +93,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           isAdmin: found.role === 'admin' || found.email === 'admin@une.cr',
         };
         setUser(authUser);
-        localStorage.setItem('userSession', JSON.stringify({
-          id: authUser.id,
-          nombre: authUser.name,
-          email: authUser.email,
-          avatar: authUser.avatar,
-          isAdmin: authUser.isAdmin,
-          loggedAt: new Date().toISOString()
-        }));
+        // Save session — avatar may be base64 so try/catch for localStorage size
+        try {
+          localStorage.setItem('userSession', JSON.stringify({
+            id: authUser.id,
+            nombre: authUser.name,
+            email: authUser.email,
+            avatar: authUser.avatar,
+            isAdmin: authUser.isAdmin,
+            loggedAt: new Date().toISOString()
+          }));
+        } catch {
+          // Avatar too large for localStorage — save without avatar, it will be loaded from DB
+          localStorage.setItem('userSession', JSON.stringify({
+            id: authUser.id,
+            nombre: authUser.name,
+            email: authUser.email,
+            isAdmin: authUser.isAdmin,
+            loggedAt: new Date().toISOString()
+          }));
+        }
         // Limpiamos tokens viejos si existen
         localStorage.removeItem('uneUser');
         localStorage.removeItem('token');
@@ -122,20 +134,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const newUser = { ...user, ...updatedData };
     setUser(newUser);
     
-    // Update localStorage
+    // Update localStorage with try/catch for large avatars
     const stored = localStorage.getItem('userSession');
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        localStorage.setItem('userSession', JSON.stringify({
-          ...parsed,
-          nombre: newUser.name,
-          email: newUser.email,
-          avatar: newUser.avatar,
-          isAdmin: newUser.isAdmin
-        }));
+        try {
+          localStorage.setItem('userSession', JSON.stringify({
+            ...parsed,
+            nombre: newUser.name,
+            email: newUser.email,
+            avatar: newUser.avatar,
+            isAdmin: newUser.isAdmin
+          }));
+        } catch {
+          // Avatar too large — save without it
+          localStorage.setItem('userSession', JSON.stringify({
+            ...parsed,
+            nombre: newUser.name,
+            email: newUser.email,
+            isAdmin: newUser.isAdmin
+          }));
+        }
       } catch (err) {
-        console.warn('Could not save session to localStorage, possibly due to size limit', err);
+        console.warn('Could not parse session from localStorage', err);
       }
     }
   };

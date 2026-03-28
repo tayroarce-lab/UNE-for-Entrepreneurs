@@ -272,3 +272,82 @@
   opacity: 0.65;
   cursor: not-allowed;
 }
+
+/* Disabled input */
+.inputDisabled {
+  background: #f1f5f9 !important;
+  color: #94a3b8 !important;
+  cursor: not-allowed !important;
+}
+
+/* Eye toggle button */
+.eyeBtn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.eyeBtn:hover {
+  color: var(--suria-plum);
+}
+
+/* Password strength indicators */
+.passwordStrength {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #f8fafc;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.reqOk {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.reqFail {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #dc2626;
+}
+
+/* Field hint */
+.fieldHint {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 4px;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .wrapper {
+    padding-top: 90px;
+    padding-bottom: 40px;
+  }
+
+  .submitBtn {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  .input {
+    min-height: 48px;
+    font-size: 0.95rem;
+  }
+}

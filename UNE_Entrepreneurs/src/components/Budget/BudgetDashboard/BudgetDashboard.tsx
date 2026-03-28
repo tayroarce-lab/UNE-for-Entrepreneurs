@@ -1,9 +1,12 @@
 import React from 'react';
-import { Info } from 'lucide-react';
+import { Info, Package } from 'lucide-react';
 import FinanzasPanel from '../../IngresosEgresos/FinanzasPanel';
 import styles from './BudgetDashboard.module.css';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext';
 
 const BudgetDashboard: React.FC = () => {
+  const { isAdmin } = useAuth();
   return (
     <main className={styles.budgetDashboard}>
       <header className={styles.budgetHeader}>
@@ -15,6 +18,15 @@ const BudgetDashboard: React.FC = () => {
             Gestione su presupuesto y finanzas en un solo lugar.
           </p>
         </div>
+        {/* Quick access to Inventory Management */}
+        <Link
+          to={isAdmin ? '/admin/presupuesto' : '#'}
+          className={styles.inventoryBtn}
+          title="Ir a Gestión de Inventarios"
+        >
+          <Package size={20} />
+          <span>Gestión de Inventarios</span>
+        </Link>
       </header>
 
       <div className={styles.panelContentArea}>

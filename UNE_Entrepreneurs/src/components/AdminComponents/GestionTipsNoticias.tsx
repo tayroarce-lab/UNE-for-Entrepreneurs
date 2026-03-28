@@ -184,7 +184,7 @@ function GestionTipsNoticias() {
         />
 
         <main className="admin-main">
-          <div className="admin-top-header">
+          <div className="admin-page-header">
             <div>
               <h1 className="admin-page-title">Tips y Noticias</h1>
               <p className="admin-page-subtitle">Administra el contenido informativo y educativo para la comunidad de UNE Costa Rica.</p>

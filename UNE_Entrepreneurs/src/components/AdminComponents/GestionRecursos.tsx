@@ -127,7 +127,7 @@ const GestionRecursos: React.FC = () => {
       />
 
       <main className="admin-main">
-        <div className="admin-top-header">
+        <div className="admin-page-header">
           <div>
             <h1 className="admin-page-title">Recursos para Emprendedores</h1>
             <p className="admin-page-subtitle">Gestiona las guías y herramientas disponibles para la comunidad.</p>

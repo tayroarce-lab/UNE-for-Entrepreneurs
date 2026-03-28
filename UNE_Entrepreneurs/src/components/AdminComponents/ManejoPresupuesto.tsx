@@ -151,7 +151,7 @@ function ManejoPresupuesto() {
       <AdminHeader placeholder="Buscar movimientos financieros..." />
 
       <main className="admin-main">
-        <div className="admin-top-header">
+        <div className="admin-page-header">
           <div>
             <h1 className="admin-page-title">Presupuesto Global</h1>
             <p className="admin-page-subtitle">Control y auditoría de los flujos de capital de la red UNE.</p>

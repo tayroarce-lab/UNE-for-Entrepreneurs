@@ -64,7 +64,7 @@ function Configuraciones() {
             <AdminHeader placeholder="Configurar sistema, perfil o seguridad..." />
 
             <main className="admin-main">
-                <div className="admin-top-header">
+                <div className="admin-page-header">
                     <div>
                         <h1 className="admin-page-title">Configuración Global</h1>
                         <p className="admin-page-subtitle">Personaliza tu entorno de trabajo, seguridad y perfil administrativo.</p>

@@ -189,7 +189,7 @@ function GestionCasosExito() {
         />
 
         <main className="admin-main">
-          <div className="admin-top-header">
+          <div className="admin-page-header">
             <div>
               <h1 className="admin-page-title">Casos de Éxito</h1>
               <p className="admin-page-subtitle">Gestiona las historias inspiradoras que se muestran en "Nuestra Gente".</p>

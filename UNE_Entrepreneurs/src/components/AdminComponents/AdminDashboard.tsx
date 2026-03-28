@@ -16,7 +16,7 @@ export default function AdminDashboard() {
         <AdminHeader placeholder="Buscar usuarios, noticias o recursos..." />
         
         <main className="admin-main">
-          <div className="admin-top-header">
+          <div className="admin-page-header">
             <div>
               <h1 className="admin-page-title">Dashboard Principal</h1>
               <p className="admin-page-subtitle">Resumen de actividad para UNE Costa Rica</p>
