@@ -1,6 +1,8 @@
 /* ============================================================
-   NAVBAR (Mobile First Refresh)
+   NAVBAR – Mobile-first rewrite (clean, no broken overflows)
    ============================================================ */
+
+/* ── Base bar ─────────────────────────────────────── */
 .navbarUsers {
   position: fixed;
   top: 10px;
@@ -9,82 +11,74 @@
   width: 92%;
   max-width: 1400px;
   z-index: 1100;
-  background: rgba(64, 22, 45, 0.9);
+  background: rgba(64, 22, 45, 0.92);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-lg);
-  height: 64px;
+  height: 62px;
   display: flex;
   align-items: center;
-  overflow: hidden; /* Prevent buttons from escaping */
-  transition: var(--transition);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  /* NO overflow:hidden – the drawer must escape this element */
+  transition: height 0.3s ease, background 0.3s ease, top 0.3s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.22);
 }
 
 @media (min-width: 1150px) {
   .navbarUsers {
     top: 15px;
-    height: 72px;
-    width: 96%;
-    max-width: 1400px;
-  }
-}
-
-.scrolled {
-  top: 10px;
-  height: 60px;
-  background: var(--suria-plum);
-  width: 92%;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-}
-
-@media (min-width: 1150px) {
-  .scrolled {
     height: 70px;
+    width: 96%;
+    overflow: hidden; /* safe on desktop – no drawer */
   }
 }
 
+/* ── Scrolled state ────────────────────────────────── */
+.scrolled {
+  background: rgba(40, 10, 28, 0.98);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
 
+/* ── Inner container ───────────────────────────────── */
 .navbarContainer {
   width: 100%;
-  padding: 0 1.25rem;
+  padding: 0 1.1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  overflow: hidden;
   min-width: 0;
 }
 
 @media (min-width: 1150px) {
   .navbarContainer {
     padding: 0 1.5rem;
+    overflow: hidden;
   }
 }
 
-/* ---------- LOGO ---------- */
+/* ── Logo ──────────────────────────────────────────── */
 .navbarLogo a {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
   transition: transform 0.3s ease;
+  flex-shrink: 0;
 }
 
-.navbarLogo a:hover {
-  transform: scale(1.02);
-}
+.navbarLogo a:hover { transform: scale(1.02); }
 
 .logoBox {
   background: white;
-  border-radius: 12px;
+  border-radius: 50%;
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  position: relative;
+  border: 2px solid rgba(255,255,255,0.4);
+  flex-shrink: 0;
 }
 
 .logoBox img {
@@ -100,77 +94,70 @@
 .suriaWordmark {
   font-family: var(--font-ui);
   text-transform: uppercase;
-  font-size: 1.6rem !important;
+  font-size: 1.5rem;
   font-weight: 800;
-  color: white !important;
+  color: white;
   letter-spacing: 2.5px;
   line-height: 1;
 }
 
 .suriaFullname {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.55rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.52rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 2px;
-  display: none;
   white-space: nowrap;
+  display: none;
 }
 
-@media (min-width: 1250px) {
-  .suriaFullname {
-    display: block;
-  }
+@media (min-width: 1280px) {
+  .suriaFullname { display: block; }
+  .suriaWordmark { font-size: 1.75rem; }
 }
 
-@media (min-width: 1150px) {
-  .suriaWordmark {
-    font-size: 1.8rem !important;
-  }
-}
-
-.logoBox {
-  background: white;
-  border-radius: 50%; /* Brand feel is soft and rounded */
-  width: 42px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  position: relative;
-  border: 2px solid white;
-}
-
-.logoBox img {
-  height: 30px;
-  width: auto;
-}
-
-/* ---------- TOGGLE ---------- */
+/* ── Hamburger toggle ──────────────────────────────── */
 .navbarMobileToggle {
   background: rgba(255, 255, 255, 0.1);
   border: none;
   color: white;
   cursor: pointer;
-  padding: 10px;
-  border-radius: 12px;
+  padding: 9px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background 0.25s, transform 0.25s;
+  flex-shrink: 0;
+  /* Must sit above the backdrop */
+  position: relative;
+  z-index: 1200;
 }
 
-.navbarMobileToggle:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
+.navbarMobileToggle:hover { background: rgba(255, 255, 255, 0.18); }
 
 @media (min-width: 1150px) {
   .navbarMobileToggle { display: none; }
 }
 
-/* ---------- LINKS (DRAWER & DESKTOP) ---------- */
+/* ── Backdrop ──────────────────────────────────────── */
+.navbarBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1110;
+  animation: bdFadeIn 0.25s ease-out;
+}
+
+@keyframes bdFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Nav links list ────────────────────────────────── */
 .navbarLinks {
   list-style: none;
   margin: 0;
@@ -179,47 +166,100 @@
   align-items: center;
 }
 
-/* Mobile Drawer */
+/* ── Mobile drawer ─────────────────────────────────── */
 @media (max-width: 1149px) {
   .navbarLinks {
+    /* live OUTSIDE the <nav> overflow context via fixed positioning */
     position: fixed;
     top: 0;
-    right: -100%;
-    width: 85%;
-    max-width: 320px;
-    height: 100vh;
+    right: 0;
+    /* start off-screen to the right */
+    transform: translateX(100%);
+    width: min(85vw, 300px);
+    height: 100dvh;           /* dynamic viewport height for iOS */
     background: #1a0614;
     flex-direction: column;
-    padding: 100px 1.5rem 2rem;
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: -20px 0 60px rgba(0,0,0,0.6);
-    z-index: 1050;
-    gap: 0.5rem;
+    align-items: stretch;
+    padding: 90px 1.25rem 2rem;
+    transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -12px 0 50px rgba(0, 0, 0, 0.55);
+    z-index: 1150;            /* above backdrop (1110) */
+    gap: 0.25rem;
     overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
-  .menuOpen .navbarLinks {
-    right: 0;
+  /* Open state toggled by class on the <nav> root */
+  .menuIsOpen .navbarLinks {
+    transform: translateX(0);
   }
 
-  .navbarBackdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 1040;
-    animation: fadeIn 0.3s ease-out;
+  /* Make every link full-width inside drawer */
+  .navbarLinks li {
+    width: 100%;
+  }
+
+  .navbarLinks li a {
+    width: 100%;
+    padding: 0.85rem 1rem !important;
+    font-size: 1rem !important;
+    border-radius: 12px !important;
+    gap: 12px !important;
+    white-space: normal;
+  }
+
+  /* Auth section tweaks inside drawer */
+  .navbarAuthButtons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .navbarAuthButtons li {
+    width: 100%;
+  }
+
+  .navbarAuthButtons li a {
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Profile section inside drawer */
+  .navbarProfile {
+    flex-direction: column;
+    align-items: flex-start !important;
+    border-left: none !important;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    padding-top: 1rem;
+    gap: 0.75rem !important;
+    width: 100%;
+  }
+
+  .profileTrigger {
+    width: 100%;
+  }
+
+  .btnLogout {
+    width: 100%;
+    border-radius: 12px !important;
+    height: 44px !important;
+    gap: 8px;
+    font-size: 0.9rem;
+    justify-content: center;
+    background: rgba(220, 38, 38, 0.15) !important;
+    color: #fca5a5 !important;
+  }
+
+  .btnLogout::after {
+    content: 'Salir';
+    font-weight: 700;
+    font-size: 0.9rem;
   }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
+/* ── Shared link styles ────────────────────────────── */
 .navbarLinks li {
   position: relative;
 }
@@ -227,37 +267,37 @@
 .navbarLinks li a {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 0.45rem 0.6rem;
+  gap: 6px;
+  padding: 0.5rem 0.7rem;
   color: rgba(255, 255, 255, 0.85);
   font-family: var(--font-ui);
   font-weight: 500;
   border-radius: var(--radius-full);
-  transition: var(--transition);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
   text-decoration: none;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   letter-spacing: 0.1px;
   white-space: nowrap;
 }
 
 @media (min-width: 1280px) {
   .navbarLinks li a {
-    padding: 0.55rem 0.85rem;
-    font-size: 0.82rem;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.83rem;
     gap: 7px;
   }
 }
 
 .navbarLinks li a svg {
-  opacity: 0.6;
-  transition: all 0.3s ease;
+  opacity: 0.65;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
 }
 
 .navbarLinks li a:hover,
 .navbarLinks li a:global(.active) {
   color: #fff;
   background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
 }
 
 .navbarLinks li a:hover svg,
@@ -265,11 +305,14 @@
   opacity: 1;
 }
 
-/* Auth Buttons */
+/* ── Auth buttons ──────────────────────────────────── */
 .navbarAuthButtons {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .btnLoginNav {
@@ -277,6 +320,7 @@
   font-weight: 700 !important;
 }
 
+/* ── Highlight pill (Mi Panel / Crear Cuenta) ──────── */
 .navHighlight {
   background: var(--suria-crimson) !important;
   color: #fff !important;
@@ -288,113 +332,10 @@
 .navHighlight:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(169, 38, 43, 0.4);
-  background: var(--suria-dark-red) !important;
+  background: #991b1b !important;
 }
 
-
-/* User Profile */
-.navbarProfile {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding-left: 8px;
-  border-left: 1px solid rgba(255, 255, 255, 0.15);
-  margin-left: 4px;
-  flex-shrink: 0;
-}
-
-@media (min-width: 1280px) {
-  .navbarProfile {
-    gap: 10px;
-    padding-left: 12px;
-    margin-left: 10px;
-  }
-}
-
-.profileTrigger {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 6px 12px 6px 6px;
-  border-radius: 100px;
-  transition: all 0.3s;
-}
-
-.profileTrigger:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.profileAvatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--suria-gold), #DAA520);
-  color: #1a0614;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  font-size: 0.85rem;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  border: 2px solid rgba(255,255,255,0.2);
-}
-
-.profileAvatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.profileName {
-  color: white;
-  font-weight: 700;
-  font-size: 0.75rem;
-  max-width: 60px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-@media (min-width: 1280px) {
-  .profileName {
-    font-size: 0.82rem;
-    max-width: 100px;
-  }
-}
-
-.btnLogout {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: white;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.btnLogout:hover {
-  background: #dc2626;
-  transform: rotate(15deg);
-  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
-}
-
-/* Desktop Logic */
-@media (min-width: 1150px) {
-  .navbarLinks {
-    gap: 0.1rem;
-    flex-wrap: nowrap;
-    overflow: hidden;
-    min-width: 0;
-  }
-}
-
+/* ── Admin badge ───────────────────────────────────── */
 .navAdminBadge {
   background: var(--suria-gold) !important;
   color: var(--suria-plum) !important;
@@ -407,4 +348,106 @@
   transform: translateY(-2px);
 }
 
+/* ── Profile pill ──────────────────────────────────── */
+.navbarProfile {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 8px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  margin-left: 4px;
+  flex-shrink: 0;
+}
 
+@media (min-width: 1280px) {
+  .navbarProfile {
+    gap: 8px;
+    padding-left: 12px;
+    margin-left: 8px;
+  }
+}
+
+.profileTrigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 5px 10px 5px 5px;
+  border-radius: 100px;
+  transition: background 0.25s;
+  flex-shrink: 0;
+}
+
+.profileTrigger:hover { background: rgba(255, 255, 255, 0.12); }
+
+.profileAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--suria-gold), #DAA520);
+  color: #1a0614;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.8rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  border: 2px solid rgba(255,255,255,0.2);
+  flex-shrink: 0;
+}
+
+.profileAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileName {
+  color: white;
+  font-weight: 700;
+  font-size: 0.73rem;
+  max-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-width: 1280px) {
+  .profileName {
+    font-size: 0.8rem;
+    max-width: 90px;
+  }
+}
+
+/* ── Logout button ─────────────────────────────────── */
+.btnLogout {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: white;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s, transform 0.25s;
+  flex-shrink: 0;
+}
+
+.btnLogout:hover {
+  background: #dc2626;
+  transform: rotate(15deg);
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+}
+
+/* ── Desktop: links in a row ───────────────────────── */
+@media (min-width: 1150px) {
+  .navbarLinks {
+    gap: 0.1rem;
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+}

@@ -21,6 +21,7 @@ import InicioSesion from '../pages/UserPages/InicioSesion';
 import RegistroUser from '../pages/UserPages/RegistroUser';
 import BudgetPage from '../pages/UserPages/BudgetPage';
 import ProfilePage from '../pages/UserPages/ProfilePage';
+import InventarioPage from '../pages/UserPages/InventarioPage';
 import NewsPage from '../pages/UserPages/NewsPage';
 import NuestraGente from '../pages/UserPages/NuestraGente';
 import RecursosPage from '../pages/UserPages/RecursosPage';
@@ -61,6 +62,7 @@ const router = createBrowserRouter([
         children: [
           { path: '',       element: <BudgetPage /> },
           { path: 'perfil', element: <ProfilePage /> },
+          { path: 'inventario', element: <InventarioPage /> },
         ],
       },
       {

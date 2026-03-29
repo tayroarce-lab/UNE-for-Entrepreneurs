@@ -123,6 +123,14 @@
       "role": "user",
       "createdAt": "2026-03-26T21:20:23.894Z",
       "id": "2mwkKXA"
+    },
+    {
+      "nombre": "Test User",
+      "email": "test@test.com",
+      "password": "User123!",
+      "role": "user",
+      "createdAt": "2026-03-29T14:02:10.731Z",
+      "id": "854F0OV"
     }
   ],
   "transactions": [
@@ -210,6 +218,20 @@
       "fechaRegistro": "2026-03-25T14:40:22.892Z",
       "estado": "Pendiente",
       "id": 2
+    }
+  ],
+  "inventario": [
+    {
+      "userId": "854F0OV",
+      "nombre": "Cajas de Carton",
+      "categoria": "Materiales",
+      "precio": 500,
+      "stock": 50,
+      "stockMinimo": 10,
+      "unidad": "Unidades",
+      "createdAt": "2026-03-29T14:03:20.657Z",
+      "updatedAt": "2026-03-29T14:03:20.657Z",
+      "id": 1
     }
   ]
 }
