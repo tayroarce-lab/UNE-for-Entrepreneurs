@@ -21,7 +21,7 @@ const ProgramPillars: React.FC = () => {
   ];
 
   return (
-    <section className="suria-section" style={{ background: 'white' }}>
+    <section id="beneficios-section" className="suria-section" style={{ background: 'white' }}>
       <div className="suria-container">
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <span style={{ color: 'var(--suria-crimson)', fontWeight: 800, fontSize: '0.8rem', letterSpacing: '2px', fontFamily: 'var(--font-ui)', textTransform: 'uppercase' }}>COMO TE IMPULSAMOS</span>

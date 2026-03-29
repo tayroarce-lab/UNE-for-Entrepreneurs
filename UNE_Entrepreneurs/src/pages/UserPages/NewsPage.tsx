@@ -11,7 +11,7 @@ const NewsPage: React.FC = () => {
   return (
     <div style={{ background: '#f8fafc', minHeight: '100vh' }}>
       <Navbar />
-      <main className="container" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
+      <main className="container" style={{ paddingTop: 'min(120px, 15vh)', paddingBottom: '80px' }}>
         <div style={{ marginBottom: '3rem' }}>
           <button
             onClick={() => navigate('/')}

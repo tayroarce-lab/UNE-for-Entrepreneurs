@@ -37,7 +37,12 @@ const HeroSuria: React.FC = () => {
               </button>
               <button 
                 className={styles.secondaryBtn}
-                onClick={() => navigate('/suria/servicios')}
+                onClick={() => {
+                  const section = document.getElementById('beneficios-section');
+                  if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
               >
                 Explorar beneficios
               </button>

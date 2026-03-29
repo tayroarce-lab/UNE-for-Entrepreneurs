@@ -74,6 +74,14 @@
   opacity: 0.8;
 }
 
+@media (max-width: 768px) {
+  .accent {
+    font-size: 1.8rem;
+    top: -1.8rem;
+    left: 0;
+  }
+}
+
 .title {
   font-family: var(--font-display);
   font-size: 3.5rem;
@@ -126,6 +134,17 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .buttonGroup {
+    flex-direction: column;
+  }
+  .primaryBtn, .secondaryBtn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 .primaryBtn {
@@ -221,6 +240,23 @@
 @keyframes cardFloat {
     0%, 100% { transform: translateY(0) translateX(0); }
     50% { transform: translateY(-10px) translateX(5px); }
+}
+
+@media (max-width: 768px) {
+  .statCard {
+    bottom: -15px;
+    left: 10px;
+    right: 10px;
+    padding: 0.8rem 1.2rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    animation: none;
+    border-radius: 16px;
+  }
+  .statValue {
+    font-size: 1.2rem;
+  }
 }
 
 .stars {

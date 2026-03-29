@@ -44,6 +44,51 @@
       "activa": true,
       "fecha": "2026-03-19T17:41:39.501Z",
       "id": "4J5aB9G"
+    },
+    {
+      "id": "5",
+      "titulo": "Süria lanza programa de formación digital avanzada",
+      "contenido": "Las emprendedoras podrán capacitarse en marketing digital y e-commerce durante este semestre.",
+      "imagen": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2670&auto=format&fit=crop",
+      "autor": "Equipo SÜRIA",
+      "activa": true,
+      "fecha": "2026-04-01T10:00:00Z"
+    },
+    {
+      "id": "6",
+      "titulo": "Nuevas alianzas comerciales para exportación",
+      "contenido": "UNE confirma alianza con mercados internacionales para facilitar la exportación de productos locales.",
+      "imagen": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2670&auto=format&fit=crop",
+      "autor": "Admin UNE",
+      "activa": true,
+      "fecha": "2026-04-05T09:00:00Z"
+    },
+    {
+      "id": "7",
+      "titulo": "Feria Nacional de Pymes 2026: Inscripciones Abiertas",
+      "contenido": "Reserva tu espacio para la feria más grande del año. Habrá más de 200 stands disponibles.",
+      "imagen": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2670&auto=format&fit=crop",
+      "autor": "Admin UNE",
+      "activa": true,
+      "fecha": "2026-04-10T14:00:00Z"
+    },
+    {
+      "id": "8",
+      "titulo": "Cómo administrar tus inventarios eficientemente",
+      "contenido": "Descubre las mejores prácticas y herramientas para mantener tu inventario al día sin perder rentabilidad.",
+      "imagen": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2670&auto=format&fit=crop",
+      "autor": "Equipo Técnico",
+      "activa": true,
+      "fecha": "2026-04-12T11:30:00Z"
+    },
+    {
+      "id": "9",
+      "titulo": "Testimonios que inspiran: El valor de SÜRIA",
+      "contenido": "Las emprendedoras de Guanacaste comparten cómo el programa ha transformado sus negocios familiares.",
+      "imagen": "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2669&auto=format&fit=crop",
+      "autor": "Equipo SÜRIA",
+      "activa": true,
+      "fecha": "2026-04-15T16:20:00Z"
     }
   ],
   "recursos": [
@@ -56,6 +101,56 @@
       "imagen": "/assets/recurso1.png",
       "activo": true,
       "fecha": "2026-03-23T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "titulo": "Plantilla de Control de Gastos",
+      "descripcion": "Excel automatizado para llevar el control diario de tus ingresos y egresos.",
+      "tipo": "Plantilla",
+      "enlace": "#",
+      "imagen": "/assets/recurso2.png",
+      "activo": true,
+      "fecha": "2026-03-25T10:00:00Z"
+    },
+    {
+      "id": "3",
+      "titulo": "Manual de Identidad Visual",
+      "descripcion": "Aprende los conceptos básicos para crear logos y paletas de color impactantes.",
+      "tipo": "Documento",
+      "enlace": "#",
+      "imagen": "/assets/recurso3.png",
+      "activo": true,
+      "fecha": "2026-03-26T10:00:00Z"
+    },
+    {
+      "id": "4",
+      "titulo": "Curso de Redes Sociales para Pymes",
+      "descripcion": "Video tutorial de 2 horas sobre las mejores estrategias para Instagram y Facebook.",
+      "tipo": "Video",
+      "enlace": "#",
+      "imagen": "/assets/recurso4.png",
+      "activo": true,
+      "fecha": "2026-03-27T10:00:00Z"
+    },
+    {
+      "id": "5",
+      "titulo": "Taller de Finanzas Personales",
+      "descripcion": "Separa tu dinero personal del dinero del negocio con esta metodología aprobada.",
+      "tipo": "Taller",
+      "enlace": "#",
+      "imagen": "/assets/recurso1.png",
+      "activo": true,
+      "fecha": "2026-03-28T10:00:00Z"
+    },
+    {
+      "id": "6",
+      "titulo": "Checklist para Ferias y Eventos",
+      "descripcion": "No olvides nada al momento de participar en una feria comercial externa.",
+      "tipo": "Herramienta",
+      "enlace": "#",
+      "imagen": "/assets/recurso3.png",
+      "activo": true,
+      "fecha": "2026-03-29T10:00:00Z"
     }
   ],
   "reports": [],
@@ -194,6 +289,61 @@
       "colorTag": "#facc15",
       "activo": true,
       "fecha": "2026-03-24T10:00:00Z"
+    },
+    {
+      "id": "5",
+      "nombre": "Carolina",
+      "profesion": "Agricultora Sustentable",
+      "ubicacion": "Liberia",
+      "cita": "Gracias al crédito y la capacitación, mi granja hidropónica ahora provee a tres supermercados de la zona.",
+      "imagen": "/assets/Damaris.png",
+      "colorTag": "#2dd4bf",
+      "activo": true,
+      "fecha": "2026-03-25T10:00:00Z"
+    },
+    {
+      "id": "6",
+      "nombre": "Sofia",
+      "profesion": "Diseñadora de Modas",
+      "ubicacion": "San José",
+      "cita": "Aprender sobre estructuración de costos cambió por completo mi modelo de negocio.",
+      "imagen": "/assets/Ginette.png",
+      "colorTag": "#a78bfa",
+      "activo": true,
+      "fecha": "2026-03-26T10:00:00Z"
+    },
+    {
+      "id": "7",
+      "nombre": "Brenda",
+      "profesion": "Dueña de Cafetería",
+      "ubicacion": "Heredia",
+      "cita": "Encontrar a otras emprendedoras con los mismos desafíos me dio la fuerza para seguir adelante y mejorar.",
+      "imagen": "/assets/katherine.png",
+      "colorTag": "#fbbf24",
+      "activo": true,
+      "fecha": "2026-03-27T10:00:00Z"
+    },
+    {
+      "id": "8",
+      "nombre": "Valeria",
+      "profesion": "Artesana Digital",
+      "ubicacion": "Cartago",
+      "cita": "Logré lanzar mi tienda en línea en 3 meses siguiendo los pasos de la mentoría de SÜRIA.",
+      "imagen": "/assets/Marielos.png",
+      "colorTag": "#38bdf8",
+      "activo": true,
+      "fecha": "2026-03-28T10:00:00Z"
+    },
+    {
+      "id": "9",
+      "nombre": "Carmen",
+      "profesion": "Repostera Artesanal",
+      "ubicacion": "Alajuela",
+      "cita": "La disciplina de llevar mi inventario organizado y mis finanzas claras me salvó de la quiebra.",
+      "imagen": "/assets/Damaris.png",
+      "colorTag": "#f87171",
+      "activo": true,
+      "fecha": "2026-03-29T10:00:00Z"
     }
   ],
   "solicitudesContacto": [
@@ -232,6 +382,18 @@
       "createdAt": "2026-03-29T14:03:20.657Z",
       "updatedAt": "2026-03-29T14:03:20.657Z",
       "id": 1
+    },
+    {
+      "userId": "CeBL9TA",
+      "nombre": "Empaque",
+      "categoria": "Materia prima",
+      "precio": 5000,
+      "stock": 50,
+      "stockMinimo": 10,
+      "unidad": "Unidades",
+      "createdAt": "2026-03-29T15:08:07.110Z",
+      "updatedAt": "2026-03-29T15:08:07.110Z",
+      "id": 2
     }
   ]
 }

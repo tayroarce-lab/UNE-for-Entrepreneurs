@@ -99,31 +99,31 @@ const Navbar: React.FC = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/suria"><Sparkles size={16} /> Süria</NavLink>
+            <NavLink to="/suria" onClick={() => setMenuOpen(false)}><Sparkles size={16} /> Süria</NavLink>
           </li>
           <li>
-            <NavLink to="/noticias"><Newspaper size={16} /> Noticias</NavLink>
+            <NavLink to="/noticias" onClick={() => setMenuOpen(false)}><Newspaper size={16} /> Noticias</NavLink>
           </li>
           <li>
-            <NavLink to="/nuestra-gente"><Users size={16} /> Nuestra Gente</NavLink>
+            <NavLink to="/nuestra-gente" onClick={() => setMenuOpen(false)}><Users size={16} /> Nuestra Gente</NavLink>
           </li>
           <li>
-            <NavLink to="/recursos"><BookOpen size={16} /> Recursos</NavLink>
+            <NavLink to="/recursos" onClick={() => setMenuOpen(false)}><BookOpen size={16} /> Recursos</NavLink>
           </li>
           <li>
-            <NavLink to="/contacto"><PhoneCall size={16} /> Contacto</NavLink>
+            <NavLink to="/contacto" onClick={() => setMenuOpen(false)}><PhoneCall size={16} /> Contacto</NavLink>
           </li>
 
           {user ? (
             <>
               <li>
-                <NavLink to="/presupuesto" className={styles.navHighlight}>
+                <NavLink to="/presupuesto" className={styles.navHighlight} onClick={() => setMenuOpen(false)}>
                   <LayoutDashboard size={16} /> Mi Panel
                 </NavLink>
               </li>
               {isAdmin && (
                 <li>
-                  <NavLink to="/admin/dashboard" className={styles.navAdminBadge}>
+                  <NavLink to="/admin/dashboard" className={styles.navAdminBadge} onClick={() => setMenuOpen(false)}>
                     <Sparkles size={16} /> Administrar
                   </NavLink>
                 </li>
@@ -147,12 +147,12 @@ const Navbar: React.FC = () => {
           ) : (
             <>
               <li>
-                <Link to="/login" className={styles.btnLoginNav}>
+                <Link to="/login" className={styles.btnLoginNav} onClick={() => setMenuOpen(false)}>
                   <LogIn size={16} /> Entrar
                 </Link>
               </li>
               <li>
-                <Link to="/registro" className={styles.navHighlight}>
+                <Link to="/registro" className={styles.navHighlight} onClick={() => setMenuOpen(false)}>
                   <UserPlus size={16} /> Crear Cuenta
                 </Link>
               </li>

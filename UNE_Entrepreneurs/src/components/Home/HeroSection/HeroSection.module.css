@@ -39,6 +39,13 @@
   opacity: 0.9;
 }
 
+@media (max-width: 768px) {
+  .scriptLogo {
+    font-size: 1.8rem;
+    margin-bottom: 0.2rem;
+  }
+}
+
 .heroBadge {
   background: var(--suria-gold);
   color: var(--suria-plum);
@@ -146,6 +153,14 @@
   letter-spacing: 1px;
   border-radius: var(--radius-full);
   transition: var(--transition);
+}
+
+@media (max-width: 576px) {
+  .applyButton, .detailsButton {
+    width: 100%;
+    justify-content: center;
+    border-radius: 12px;
+  }
 }
 
 @media (min-width: 768px) {
