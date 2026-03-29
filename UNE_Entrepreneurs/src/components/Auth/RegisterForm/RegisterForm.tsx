@@ -51,14 +51,14 @@ const RegisterForm: React.FC = () => {
     setLoading(true);
 
     try {
-      let usuariosExistentes: unknown[] = [];
+      let usuariosExistentes: User[] = [];
       try {
         usuariosExistentes = (await UserServices.getUser()) || [];
       } catch {
         console.warn('Conexión directa intentada por fallo en verificación previa.');
       }
 
-      const existe = (usuariosExistentes as User[]).some((u: User) => u.email === formData.email);
+      const existe = usuariosExistentes.some((u: User) => u.email === formData.email);
       if (existe) {
         notifications.error('Este correo electrónico ya está registrado.');
         setLoading(false);
@@ -68,7 +68,7 @@ const RegisterForm: React.FC = () => {
       const nuevoUsuario: Omit<User, 'id'> = {
         nombre: formData.nombre.trim(),
         email: formData.email.trim(),
-        password: formData.password as string,
+        password: formData.password,
         role: 'user',
         createdAt: new Date().toISOString()
       };

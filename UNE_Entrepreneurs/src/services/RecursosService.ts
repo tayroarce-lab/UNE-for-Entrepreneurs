@@ -1,4 +1,4 @@
-import { API_BASE } from '../config';
+import { API_BASE } from '@/constants/config';
 import type { Recurso } from '../types/recurso';
 
 const API_URL = `${API_BASE}/recursos`;

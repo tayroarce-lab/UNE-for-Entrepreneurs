@@ -1,4 +1,4 @@
-import { API_BASE } from '../config';
+import { API_BASE } from '@/constants/config';
 import type { Noticia } from '../components/AdminComponents/GestionTipsNoticias';
 
 async function handleResponse<T>(response: Response): Promise<T> {

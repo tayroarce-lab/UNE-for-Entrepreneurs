@@ -184,7 +184,7 @@ export default function GestionSolicitudes() {
                             <label className="admin-label" style={{ fontSize: '0.7rem' }}>Cambiar Estado:</label>
                             <select 
                                 value={sol.estado}
-                                onChange={(e) => handleEstadoChange(sol.id, e.target.value as any)}
+                                onChange={(e) => handleEstadoChange(sol.id, e.target.value as SolicitudContacto['estado'])}
                                 className="admin-select"
                                 style={{ padding: '8px', fontSize: '0.85rem' }}
                             >
@@ -237,7 +237,7 @@ export default function GestionSolicitudes() {
                         <td style={{ textAlign: 'center' }}>
                           <select 
                             value={sol.estado}
-                            onChange={(e) => handleEstadoChange(sol.id, e.target.value as any)}
+                            onChange={(e) => handleEstadoChange(sol.id, e.target.value as SolicitudContacto['estado'])}
                             className={`status-tag ${getStatusClass(sol.estado)}`}
                             style={{ border: 'none', cursor: 'pointer', appearance: 'none', textAlign: 'center', width: 'auto' }}
                           >

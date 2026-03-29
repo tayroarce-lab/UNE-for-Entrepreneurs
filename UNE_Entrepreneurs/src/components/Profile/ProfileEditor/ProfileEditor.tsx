@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { User as UserIcon, Mail, Lock, Camera, Save, ArrowLeft, ShieldCheck, Calendar, Trash2, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
 import UserServices from '../../../services/UserServices';
+import type { User } from '../../../types/user';
 import { notifications } from '../../../utils/notifications';
 import Swal from 'sweetalert2';
 import styles from './ProfileEditor.module.css';
@@ -29,8 +30,7 @@ const ProfileEditor: React.FC = () => {
         ...prev,
         nombre: user.name,
         email: user.email,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        avatar: (user as any).avatar || ''
+        avatar: user.avatar || ''
       }));
     } else {
       navigate('/login');
@@ -168,9 +168,7 @@ const ProfileEditor: React.FC = () => {
 
     setLoading(true);
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const payload: any = { nombre: formData.nombre, avatar: formData.avatar };
-      // Only admins can change email — normal users' email field is disabled
+      const payload: Partial<User> = { nombre: formData.nombre, avatar: formData.avatar };
       if (user.isAdmin) payload.email = formData.email;
       if (passwordChanging) payload.password = formData.newPassword;
 

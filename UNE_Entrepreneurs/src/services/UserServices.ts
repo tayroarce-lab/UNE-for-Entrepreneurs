@@ -1,6 +1,6 @@
 import { toast } from 'sonner';
 import type { User } from '../types/user';
-import { API_BASE } from '../config';
+import { API_BASE } from '@/constants/config';
 
 // PATCH
 async function patchUsuarios(usuario: Partial<User>, id: string | number): Promise<User | undefined> {

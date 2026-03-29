@@ -3,7 +3,7 @@
 // ============================================================
 import type { Transaction } from '../types/business';
 
-import { API_BASE } from '../config';
+import { API_BASE } from '@/constants/config';
 
 async function handleResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
