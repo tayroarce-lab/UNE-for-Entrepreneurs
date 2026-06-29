@@ -141,8 +141,7 @@ src/
 
 ---
 
-## Author
-
-**Tayro Arce**  
-Full Stack Developer · AI Automation Engineer  
-[tayroarce@gmail.com](mailto:tayroarce@gmail.com)
+## Authors
+- **Steven Coto**
+- **Ashley Morera**
+- **Tayro Arce**  
