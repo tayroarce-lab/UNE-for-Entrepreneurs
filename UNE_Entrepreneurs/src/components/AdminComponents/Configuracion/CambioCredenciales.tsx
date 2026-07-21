@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { toast } from 'sonner'
 import { KeyRound, ArrowLeft, LayoutDashboard, User, Lock, Save } from 'lucide-react'
@@ -6,6 +7,7 @@ import '../../../styles/Configuraciones.css'
 import '../../../styles/CambioCredenciales.css'
 
 function CambioCredenciales() {
+  const navigate = useNavigate();
   const [password, setPassword] = useState('');
 
   const getPasswordStrength = (pass: string) => {
@@ -46,8 +48,8 @@ function CambioCredenciales() {
                 <h1>Cambio de Credenciales</h1>
             </div>
             <div className="cambio-credenciales-header-buttons">
-                <button onClick={() => window.location.href = "/Configuraciones"}><ArrowLeft size={16} /> Volver</button>
-                <button onClick={() => window.location.href = "/AdminDashboard"}><LayoutDashboard size={16} /> Dashboard</button>
+                <button onClick={() => navigate('/admin/configuraciones')}><ArrowLeft size={16} /> Volver</button>
+                <button onClick={() => navigate('/admin/dashboard')}><LayoutDashboard size={16} /> Dashboard</button>
             </div>
         </header>
 
@@ -74,7 +76,7 @@ function CambioCredenciales() {
                         if (result.isConfirmed) {
                             toast.success('Credenciales actualizadas correctamente');
                             setTimeout(() => {
-                                window.location.href = '/login';
+                                navigate('/login');
                             }, 1500);
                         }
                     });

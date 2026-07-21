@@ -80,5 +80,31 @@ export class UserController {
       return res.status(500).json({ mensaje: 'Error al obtener los usuarios.' });
     }
   }
+
+  public static async update(req: AuthenticatedRequest, res: Response) {
+    try {
+      const id = Number(req.params.id);
+      const updatedUser = await UserService.update(id, req.body);
+      if (!updatedUser) {
+        return res.status(404).json({ mensaje: 'Usuario no encontrado.' });
+      }
+      return res.status(200).json({ mensaje: 'Usuario actualizado con éxito.', datos: updatedUser });
+    } catch (error: any) {
+      return res.status(400).json({ mensaje: error.message || 'Error al actualizar usuario.' });
+    }
+  }
+
+  public static async delete(req: AuthenticatedRequest, res: Response) {
+    try {
+      const id = Number(req.params.id);
+      const success = await UserService.delete(id);
+      if (!success) {
+        return res.status(404).json({ mensaje: 'Usuario no encontrado.' });
+      }
+      return res.status(200).json({ mensaje: 'Usuario eliminado con éxito.' });
+    } catch (error: any) {
+      return res.status(400).json({ mensaje: error.message || 'Error al eliminar usuario.' });
+    }
+  }
 }
 export default UserController;

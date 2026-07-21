@@ -2,21 +2,35 @@ import { Request, Response } from 'express';
 import { CasoExito } from '../models/casoExito.model';
 
 export class CasoExitoController {
+  private static mapToClient(item: any) {
+    const data = item.toJSON ? item.toJSON() : item;
+    return {
+      ...data,
+      colorTag: data.color_tag !== undefined ? data.color_tag : data.colorTag,
+    };
+  }
+
+  private static mapToDB(body: any) {
+    const dbData: any = { ...body };
+    if (body.colorTag !== undefined) {
+      dbData.color_tag = body.colorTag;
+      delete dbData.colorTag;
+    }
+    return dbData;
+  }
+
   public static async getAll(req: Request, res: Response) {
     try {
-      const { _sort, _order, userId } = req.query;
+      const { _sort, _order } = req.query;
       const order: any[] = [];
       if (_sort) {
-        order.push([_sort as string, _order === 'desc' ? 'DESC' : 'ASC']);
-      }
-      
-      const where: any = {};
-      if (userId) {
-        where['id_usuario'] = userId;
+        let sortField = _sort as string;
+        if (sortField === 'colorTag') sortField = 'color_tag';
+        order.push([sortField, _order === 'desc' ? 'DESC' : 'ASC']);
       }
 
-      const items = await CasoExito.findAll({ order, where });
-      return res.status(200).json(items);
+      const items = await CasoExito.findAll({ order });
+      return res.status(200).json(items.map(item => CasoExitoController.mapToClient(item)));
     } catch (error: any) {
       return res.status(500).json({ error: error.message });
     }
@@ -26,7 +40,7 @@ export class CasoExitoController {
     try {
       const item = await CasoExito.findByPk(req.params.id);
       if (!item) return res.status(404).json({ error: 'No encontrado' });
-      return res.status(200).json(item);
+      return res.status(200).json(CasoExitoController.mapToClient(item));
     } catch (error: any) {
       return res.status(500).json({ error: error.message });
     }
@@ -34,8 +48,8 @@ export class CasoExitoController {
 
   public static async create(req: Request, res: Response) {
     try {
-      const item = await CasoExito.create(req.body);
-      return res.status(201).json(item);
+      const item = await CasoExito.create(CasoExitoController.mapToDB(req.body));
+      return res.status(201).json(CasoExitoController.mapToClient(item));
     } catch (error: any) {
       return res.status(400).json({ error: error.message });
     }
@@ -45,8 +59,8 @@ export class CasoExitoController {
     try {
       const item = await CasoExito.findByPk(req.params.id);
       if (!item) return res.status(404).json({ error: 'No encontrado' });
-      await item.update(req.body);
-      return res.status(200).json(item);
+      await item.update(CasoExitoController.mapToDB(req.body));
+      return res.status(200).json(CasoExitoController.mapToClient(item));
     } catch (error: any) {
       return res.status(400).json({ error: error.message });
     }

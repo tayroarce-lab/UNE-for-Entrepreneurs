@@ -58,5 +58,22 @@ export class UserService {
       attributes: { exclude: ['password'] }
     });
   }
+
+  public static async update(id: number, data: Partial<UserAttributes>): Promise<User | null> {
+    const user = await User.findByPk(id);
+    if (!user) return null;
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, 10);
+    }
+    await user.update(data as any);
+    return user;
+  }
+
+  public static async delete(id: number): Promise<boolean> {
+    const user = await User.findByPk(id);
+    if (!user) return false;
+    await user.destroy();
+    return true;
+  }
 }
 export default UserService;

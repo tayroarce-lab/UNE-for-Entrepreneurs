@@ -34,9 +34,12 @@ const loginSchema = Joi.object({
   })
 });
 
+router.post('/', validateRequest(registerSchema), UserController.register);
 router.post('/register', validateRequest(registerSchema), UserController.register);
 router.post('/login', validateRequest(loginSchema), UserController.login);
 router.get('/profile', authenticateToken, UserController.getProfile);
 router.get('/', authenticateToken, authorizeRoles('admin'), UserController.getAllUsers);
+router.patch('/:id', UserController.update);
+router.delete('/:id', UserController.delete);
 
 export default router;

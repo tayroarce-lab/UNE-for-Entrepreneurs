@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { toast } from 'sonner';
 import { Shield, ArrowLeft, LayoutDashboard, UserPlus, Users } from 'lucide-react';
@@ -5,6 +6,7 @@ import '../../../styles/Configuraciones.css';
 import '../../../styles/RolesPermisos.css';
 
 function RolesPermisos() {
+  const navigate = useNavigate();
   return (
     <div className="admin-container admin-container-no-nav">
       <div className="admin-main-wrap">
@@ -14,8 +16,8 @@ function RolesPermisos() {
             <h1>Roles y Permisos</h1>
           </div>
           <div className="roles-permisos-header-buttons">
-            <button onClick={() => window.location.href = '/Configuraciones'}><ArrowLeft size={16} /> Volver</button>
-            <button onClick={() => window.location.href = '/AdminDashboard'}><LayoutDashboard size={16} /> Dashboard</button>
+            <button onClick={() => navigate('/admin/configuraciones')}><ArrowLeft size={16} /> Volver</button>
+            <button onClick={() => navigate('/admin/dashboard')}><LayoutDashboard size={16} /> Dashboard</button>
           </div>
         </header>
 

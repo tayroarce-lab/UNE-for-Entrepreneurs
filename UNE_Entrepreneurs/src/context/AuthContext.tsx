@@ -1,6 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, type ReactNode } from 'react';
-import type { User } from '../types/user';
 import UserServices from '../services/UserServices';
 
 interface AuthUser {
@@ -119,7 +118,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
         // Limpiamos tokens viejos si existen
         localStorage.removeItem('uneUser');
-        localStorage.removeItem('token');
         return true;
       }
     } catch (err) {

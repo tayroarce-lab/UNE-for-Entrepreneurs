@@ -19,13 +19,18 @@ export class NoticiaController {
     };
   }
 
-  private static mapToDB(body: any) {
+  private static mapToDB(body: any, req?: Request) {
     const dbData: any = {};
     if (body.titulo !== undefined) dbData.titulo = body.titulo;
     if (body.contenido !== undefined) dbData.contenido = body.contenido;
     if (body.imagen !== undefined) dbData.imagen = body.imagen;
-    if (body.autor !== undefined && !isNaN(Number(body.autor))) dbData.id_autor = Number(body.autor);
-    if (body.id_autor !== undefined) dbData.id_autor = body.id_autor;
+    if (body.id_autor !== undefined) {
+      dbData.id_autor = body.id_autor;
+    } else if (body.autor !== undefined && !isNaN(Number(body.autor))) {
+      dbData.id_autor = Number(body.autor);
+    } else {
+      dbData.id_autor = (req as any)?.user?.id || 1;
+    }
     if (body.activa !== undefined) dbData.activa = body.activa;
     if (body.fecha !== undefined) dbData.fecha = body.fecha;
     return dbData;
@@ -69,7 +74,7 @@ export class NoticiaController {
 
   public static async create(req: Request, res: Response) {
     try {
-      const item = await Noticia.create(NoticiaController.mapToDB(req.body));
+      const item = await Noticia.create(NoticiaController.mapToDB(req.body, req));
       
       // Reload to get the author name
       const reloadedItem = await Noticia.findByPk(item.id, {
@@ -87,7 +92,7 @@ export class NoticiaController {
       const item = await Noticia.findByPk(req.params.id);
       if (!item) return res.status(404).json({ error: 'No encontrado' });
       
-      await item.update(NoticiaController.mapToDB(req.body));
+      await item.update(NoticiaController.mapToDB(req.body, req));
       
       const reloadedItem = await Noticia.findByPk(item.id, {
         include: [{ model: User, as: 'autor', attributes: ['nombre'] }]

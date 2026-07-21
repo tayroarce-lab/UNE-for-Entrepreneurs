@@ -56,7 +56,8 @@ async function getUser(): Promise<User[]> {
       throw new Error(`Error ${respuesta.status}`);
     }
     const datos = await respuesta.json();
-    return datos || [];
+    const userList = Array.isArray(datos) ? datos : (datos.datos || []);
+    return userList;
   } catch (error) {
     console.error('Error al obtener los usuarios', error);
     toast.error('Error de conexión al obtener usuarios');
@@ -80,7 +81,7 @@ async function postUser(usuario: Omit<User, 'id'>): Promise<User | undefined> {
     }
 
     const datos = await respuesta.json();
-    return datos;
+    return datos.datos || datos;
   } catch (error) {
     console.error('Error al registrar el usuario', error);
     toast.error('Error al registrar el usuario');
