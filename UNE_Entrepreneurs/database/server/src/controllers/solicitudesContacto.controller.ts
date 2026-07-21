@@ -2,21 +2,43 @@ import { Request, Response } from 'express';
 import { SolicitudContacto } from '../models/solicitudContacto.model';
 
 export class SolicitudContactoController {
+  private static mapToClient(item: any) {
+    const data = item.toJSON ? item.toJSON() : item;
+    let estadoMapped = data.estado;
+    if (estadoMapped === 'Rechazado') estadoMapped = 'Descartado';
+    return {
+      ...data,
+      fechaRegistro: data.fecha_registro || data.fechaRegistro,
+      estado: estadoMapped,
+    };
+  }
+
+  private static mapToDB(body: any) {
+    const dbData: any = { ...body };
+    if (body.fechaRegistro !== undefined) {
+      dbData.fecha_registro = body.fechaRegistro;
+      delete dbData.fechaRegistro;
+    }
+    if (body.estado !== undefined) {
+      if (body.estado === 'Descartado') {
+        dbData.estado = 'Rechazado';
+      }
+    }
+    return dbData;
+  }
+
   public static async getAll(req: Request, res: Response) {
     try {
-      const { _sort, _order, userId } = req.query;
+      const { _sort, _order } = req.query;
       const order: any[] = [];
       if (_sort) {
-        order.push([_sort as string, _order === 'desc' ? 'DESC' : 'ASC']);
-      }
-      
-      const where: any = {};
-      if (userId) {
-        where['id_usuario'] = userId;
+        let sortField = _sort as string;
+        if (sortField === 'fechaRegistro') sortField = 'fecha_registro';
+        order.push([sortField, _order === 'desc' ? 'DESC' : 'ASC']);
       }
 
-      const items = await SolicitudContacto.findAll({ order, where });
-      return res.status(200).json(items);
+      const items = await SolicitudContacto.findAll({ order });
+      return res.status(200).json(items.map(item => SolicitudContactoController.mapToClient(item)));
     } catch (error: any) {
       return res.status(500).json({ error: error.message });
     }
@@ -26,7 +48,7 @@ export class SolicitudContactoController {
     try {
       const item = await SolicitudContacto.findByPk(req.params.id);
       if (!item) return res.status(404).json({ error: 'No encontrado' });
-      return res.status(200).json(item);
+      return res.status(200).json(SolicitudContactoController.mapToClient(item));
     } catch (error: any) {
       return res.status(500).json({ error: error.message });
     }
@@ -34,8 +56,8 @@ export class SolicitudContactoController {
 
   public static async create(req: Request, res: Response) {
     try {
-      const item = await SolicitudContacto.create(req.body);
-      return res.status(201).json(item);
+      const item = await SolicitudContacto.create(SolicitudContactoController.mapToDB(req.body));
+      return res.status(201).json(SolicitudContactoController.mapToClient(item));
     } catch (error: any) {
       return res.status(400).json({ error: error.message });
     }
@@ -45,8 +67,8 @@ export class SolicitudContactoController {
     try {
       const item = await SolicitudContacto.findByPk(req.params.id);
       if (!item) return res.status(404).json({ error: 'No encontrado' });
-      await item.update(req.body);
-      return res.status(200).json(item);
+      await item.update(SolicitudContactoController.mapToDB(req.body));
+      return res.status(200).json(SolicitudContactoController.mapToClient(item));
     } catch (error: any) {
       return res.status(400).json({ error: error.message });
     }

@@ -8,9 +8,33 @@ import {
   ShieldCheck,
   Lightbulb
 } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 
 export default function AdminDashboard() {
+  const navigate = useNavigate();
+
+  const handleExportReport = () => {
+    const csvData = [
+      ['Reporte General UNE Costa Rica', new Date().toLocaleDateString('es-CR')],
+      ['Métrica', 'Valor'],
+      ['Total Usuarios Registrados', '1254'],
+      ['Nuevos Tips Publicados', '12'],
+      ['Estado del Sistema', 'Operativo']
+    ].map(e => e.join(',')).join('\n');
+
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `reporte_une_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    toast.success('Reporte exportado correctamente');
+  };
+
   return (
     <AdminLayout>
         <AdminHeader placeholder="Buscar usuarios, noticias o recursos..." />
@@ -21,7 +45,7 @@ export default function AdminDashboard() {
               <h1 className="admin-page-title">Dashboard Principal</h1>
               <p className="admin-page-subtitle">Resumen de actividad para UNE Costa Rica</p>
             </div>
-            <button className="btn-admin btn-admin-outline">
+            <button className="btn-admin btn-admin-outline" onClick={handleExportReport}>
               <Download size={18} /> Exportar Reporte
             </button>
           </div>
@@ -108,7 +132,7 @@ export default function AdminDashboard() {
               <h2>Centralizar Noticias para Pymes</h2>
               <p>Actualice los consejos financieros y noticias del sector para que los usuarios de UNE Costa Rica estén siempre informados.</p>
             </div>
-            <button className="btn-admin btn-admin-secondary">
+            <button className="btn-admin btn-admin-secondary" onClick={() => navigate('/admin/noticias')}>
               <Plus size={20} /> Publicar Noticia
             </button>
           </div>

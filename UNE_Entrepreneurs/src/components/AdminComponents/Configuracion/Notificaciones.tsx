@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../../../styles/Notificaciones.css'
 import Swal from 'sweetalert2'
 import { toast } from 'sonner'
@@ -38,8 +39,6 @@ interface PreferenciaNotificacion {
   activa: boolean
 }
 
-
-
 // ── Helpers ────────────────────────────────────────────
 const iconoPorTipo = (tipo: TipoNotificacion) => {
   switch (tipo) {
@@ -76,6 +75,7 @@ const formatearFecha = (fecha: string): string => {
 
 // ── Componente principal ──────────────────────────────
 function Notificaciones() {
+  const navigate = useNavigate()
   const [tab, setTab] = useState<'centro' | 'preferencias'>('centro')
   const [notificaciones, setNotificaciones] = useState<Notificacion[]>([])
   const [preferencias, setPreferencias] = useState<PreferenciaNotificacion[]>([])
@@ -182,10 +182,10 @@ function Notificaciones() {
         <header>
           <h1><Bell size={24} /> Notificaciones</h1>
           <div style={{ display: 'flex', gap: '8px' }}>
-            <button onClick={() => window.location.href = "/Configuraciones"}>
+            <button onClick={() => navigate('/admin/configuraciones')}>
               <ArrowLeft size={16} /> Volver
             </button>
-            <button onClick={() => window.location.href = "/AdminDashboard"}>
+            <button onClick={() => navigate('/admin/dashboard')}>
               <LayoutDashboard size={16} /> Dashboard
             </button>
           </div>

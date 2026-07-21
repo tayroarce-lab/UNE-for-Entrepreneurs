@@ -27,6 +27,8 @@ import NuestraGente from '../pages/UserPages/NuestraGente';
 import RecursosPage from '../pages/UserPages/RecursosPage';
 import SuriaPage from '../pages/UserPages/Suria';
 import ContactSuria from '../pages/UserPages/ContactSuria';
+import FaqPage from '../pages/UserPages/FaqPage';
+import TerminosPage from '../pages/UserPages/TerminosPage';
 import NotFoundPage from '../pages/UserPages/NotFoundPage';
 
 // ── Router Guards ─────────────────────────────────────────────
@@ -46,14 +48,16 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       // ── Public Routes ─────────────────────────────────────
-      { path: '/',              element: <HomeUsers /> },
-      { path: '/noticias',      element: <NewsPage /> },
-      { path: '/suria',         element: <SuriaPage /> },
-      { path: '/nuestra-gente', element: <NuestraGente /> },
-      { path: '/recursos',      element: <RecursosPage /> },
-      { path: '/contacto',      element: <ContactSuria /> },
-      { path: '/login',         element: <InicioSesion /> },
-      { path: '/registro',      element: <RegistroUser /> },
+      { path: '/',                    element: <HomeUsers /> },
+      { path: '/noticias',            element: <NewsPage /> },
+      { path: '/suria',               element: <SuriaPage /> },
+      { path: '/nuestra-gente',       element: <NuestraGente /> },
+      { path: '/recursos',            element: <RecursosPage /> },
+      { path: '/contacto',            element: <ContactSuria /> },
+      { path: '/preguntas-frecuentes', element: <FaqPage /> },
+      { path: '/terminos',            element: <TerminosPage /> },
+      { path: '/login',               element: <InicioSesion /> },
+      { path: '/registro',            element: <RegistroUser /> },
 
       // ── Protected User Routes ─────────────────────────────
       {

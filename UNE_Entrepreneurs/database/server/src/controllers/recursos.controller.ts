@@ -12,7 +12,7 @@ export class RecursoController {
       
       const where: any = {};
       if (userId) {
-        where['id_usuario'] = userId;
+        where['id_autor'] = userId;
       }
 
       const items = await ContenidoRecurso.findAll({ order, where });
@@ -34,7 +34,11 @@ export class RecursoController {
 
   public static async create(req: Request, res: Response) {
     try {
-      const item = await ContenidoRecurso.create(req.body);
+      const payload = {
+        ...req.body,
+        id_autor: req.body.id_autor || req.body.id_usuario || (req as any).user?.id || 1,
+      };
+      const item = await ContenidoRecurso.create(payload);
       return res.status(201).json(item);
     } catch (error: any) {
       return res.status(400).json({ error: error.message });
