@@ -46,7 +46,12 @@ async function deleteUsuarios(id: string | number): Promise<boolean | undefined>
 // GET
 async function getUser(): Promise<User[]> {
   try {
-    const respuesta = await fetch(`${API_BASE}/usuarios`);
+    const token = localStorage.getItem('token');
+    const respuesta = await fetch(`${API_BASE}/usuarios`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
     if (!respuesta.ok) {
       throw new Error(`Error ${respuesta.status}`);
     }
@@ -82,4 +87,27 @@ async function postUser(usuario: Omit<User, 'id'>): Promise<User | undefined> {
   }
 }
 
-export default { patchUsuarios, deleteUsuarios, getUser, postUser };
+// POST (Login)
+async function login(email: string, password?: string): Promise<{ token: string, usuario: User } | undefined> {
+  try {
+    const respuesta = await fetch(`${API_BASE}/usuarios/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!respuesta.ok) {
+      throw new Error(`Error ${respuesta.status}`);
+    }
+
+    const datos = await respuesta.json();
+    return datos;
+  } catch (error) {
+    console.error('Error al iniciar sesión', error);
+    return undefined;
+  }
+}
+
+export default { patchUsuarios, deleteUsuarios, getUser, postUser, login };

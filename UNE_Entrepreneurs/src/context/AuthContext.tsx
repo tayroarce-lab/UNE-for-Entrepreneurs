@@ -80,19 +80,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return true;
       }
 
-      // 2. Check DB Users
-      const users: User[] = await UserServices.getUser();
-      const found = users?.find(u => u.email === email && u.password === password);
+      // 2. Check DB Users via backend login
+      const loginResponse = await UserServices.login(email, password);
 
-      if (found) {
+      if (loginResponse && loginResponse.usuario) {
+        const found = loginResponse.usuario;
         const authUser: AuthUser = {
           id: String(found.id),
           name: found.nombre || 'Usuario',
           email: found.email,
-          avatar: found.avatar,
-          isAdmin: found.role === 'admin' || found.email === 'admin@une.cr',
+          avatar: found.avatar || found.url_foto_perfil,
+          isAdmin: found.rol === 'admin' || found.role === 'admin' || found.email === 'admin@une.cr',
         };
         setUser(authUser);
+        // Save token to localStorage for authenticated requests
+        if (loginResponse.token) {
+          localStorage.setItem('token', loginResponse.token);
+        }
         // Save session — avatar may be base64 so try/catch for localStorage size
         try {
           localStorage.setItem('userSession', JSON.stringify({

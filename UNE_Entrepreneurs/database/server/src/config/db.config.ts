@@ -11,14 +11,22 @@ const dbPassword = process.env.DB_PASSWORD || '';
 const dbHost = process.env.DB_HOST || 'localhost';
 const dbPort = parseInt(process.env.DB_PORT || '3306', 10);
 
-const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
-  host: dbHost,
-  port: dbPort,
-  dialect: 'mysql',
-  logging: process.env.NODE_ENV === 'development' ? console.log : false,
-  define: {
-    timestamps: true,
-  },
-});
+const isTest = process.env.NODE_ENV === 'test';
+
+const sequelize = isTest
+  ? new Sequelize({
+      dialect: 'sqlite',
+      storage: ':memory:',
+      logging: false,
+    })
+  : new Sequelize(dbName, dbUser, dbPassword, {
+      host: dbHost,
+      port: dbPort,
+      dialect: 'mysql',
+      logging: process.env.NODE_ENV === 'development' ? console.log : false,
+      define: {
+        timestamps: true,
+      },
+    });
 
 export default sequelize;

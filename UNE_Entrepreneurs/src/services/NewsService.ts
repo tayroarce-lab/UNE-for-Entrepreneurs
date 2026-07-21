@@ -10,7 +10,7 @@ async function handleResponse<T>(response: Response): Promise<T> {
 }
 
 export const getNews = async (): Promise<Noticia[]> => {
-  const response = await fetch(`${API_BASE}/news`);
+  const response = await fetch(`${API_BASE}/news`, { cache: 'no-store' });
   return handleResponse<Noticia[]>(response);
 };
 
@@ -19,6 +19,7 @@ export const createNews = async (news: Omit<Noticia, 'id'>): Promise<Noticia> =>
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(news),
+    cache: 'no-store'
   });
   return handleResponse<Noticia>(response);
 };

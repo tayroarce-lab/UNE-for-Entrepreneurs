@@ -12,15 +12,15 @@ export interface UserAttributes {
 }
 
 export class User extends Model<UserAttributes> implements UserAttributes {
-  public id!: number;
-  public nombre!: string;
-  public email!: string;
-  public password!: string;
-  public rol!: 'admin' | 'emprendedor' | 'mentor';
-  public url_foto_perfil?: string;
+  public declare id: number;
+  public declare nombre: string;
+  public declare email: string;
+  public declare password: string;
+  public declare rol: 'admin' | 'emprendedor' | 'mentor';
+  public declare url_foto_perfil?: string;
 
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+  public declare readonly createdAt: Date;
+  public declare readonly updatedAt: Date;
 
   public static initialize(sequelize: Sequelize) {
     User.init(
