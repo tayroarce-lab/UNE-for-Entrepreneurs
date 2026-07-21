@@ -15,17 +15,15 @@ const HomeUsers: React.FC = () => {
   return (
     <>
       <Navbar />
-      <main>
-        <NewsCarouselSection />
-        <HeroSection />
-        <TrustBar />
-        <HowWorksSection />
-        <DashboardCTA />
-        <SuriaFeature />
-        <TestimonialsSection />
-        <FinalCTA />
-        <LocationScheduleSection />
-      </main>
+      <NewsCarouselSection />
+      <HeroSection />
+      <TrustBar />
+      <HowWorksSection />
+      <DashboardCTA />
+      <SuriaFeature />
+      <TestimonialsSection />
+      <FinalCTA />
+      <LocationScheduleSection />
       <Footer />
     </>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MoveRight } from 'lucide-react';
 import styles from './HeroSection.module.css';
-import heroImage from '../../../assets/hero_une.jpg';
+const heroImage = '/assets/hero_une.jpg';
 
 interface HeroSectionProps {
   badgeText?: string;
@@ -21,7 +21,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       El impulso que tu <span className={styles.titleAccent}>negocio</span> el éxito que te <span className={styles.titleAccent}>mereces</span>.
     </>
   ),
-  descriptionText = 'Sé parte de Süria: el programa de UNE que ha transformado la vida de 1,500 mujeres en Costa Rica. Financiamiento, formación y una comunidad imparable te esperan.',
+  descriptionText = 'Sé parte de Süria: el programa de UNE que ha transformado la vida de 1,500 mujeres en Costa Rica. Mentoría, formación y una comunidad imparable te esperan.',
   primaryButtonText = 'Aplicar al Programa Ahora',
   primaryButtonLink = '/contacto',
   secondaryButtonText = 'Ver detalles de Süria',
@@ -34,6 +34,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="container">
         <div className={styles.heroInner}>
           <div className={styles.heroText}>
+            <div className={styles.scriptLogo}>süria</div>
             <span className={styles.heroBadge}>{badgeText}</span>
             <h1 className={styles.heroTitle}>
               {titleContent}

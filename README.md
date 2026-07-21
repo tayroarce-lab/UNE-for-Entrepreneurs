@@ -1,131 +1,147 @@
-# 🌟 UNE Costa Rica & Modelo Süria - Plataforma de Incubación Empresarial
+# UNE Costa Rica & Modelo Süria
 
-**Proyecto FWD**  
-*Una plataforma integral de desarrollo y empoderamiento para mujeres emprendedoras en Costa Rica.*
+> **A comprehensive digital platform that connects female entrepreneurs with financial resources, training tools, and a support community.**
 
----
-
-## 📌 Descripción del Proyecto
-
-Este proyecto es una aplicación web responsiva diseñada bajo la arquitectura **"Mobile-First"** utilizando **React + TypeScript (Vite)**. Su propósito es digitalizar el proceso de **Incubación de Negocios** de UNE y la gestión del **Modelo Süria**, conectando a mujeres emprendedoras con recursos financieros, herramientas de capacitación y una comunidad de apoyo, todo centralizado en un mismo lugar.
-
-El desarrollo incluye dos perfiles principales:
-1. **Emprendedor (User):** Puede gestionar su perfil, acceder a un catálogo avanzado de financiamientos, crear simulaciones de presupuesto, leer noticias del ecosistema e interactuar con la línea directa del Modelo Süria.
-2. **Administrador (Admin):** Tiene acceso a un *Dashboard* analítico donde realiza las cuatro operaciones **CRUD** básicas: administrar usuarios, gestionar presupuestos simulados de las emprendedoras y mantener el portal al día publicando "Tips" y "Noticias".
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)](#)
+[![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)](#)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](#)
+<!-- ADD/REMOVE badges to match your actual stack -->
 
 ---
 
-## 🛠️ Tecnologías y Herramientas Utilizadas
+## The Problem
 
-- **Frontend:** React 18, TypeScript, Vite.
-- **Enrutamiento:** React Router v6 (Rutas Públicas y Protegidas).
-- **Estilos:** Vanilla CSS (CSS Modules encapsulados) asegurando cero colisiones globales, con diseño ultra-premium.
-- **Backend (Mock/Persistencia):** `json-server` operando sobre el archivo interactivo `db.json` local.
-- **Librerías Extra:** `lucide-react` (iconografía), `sweetalert2` y `sonner` (alertas profesionales), `react-leaflet` (mapa interactivo).
+Female entrepreneurs in Costa Rica face challenges in finding centralized resources for business incubation, financing options, and a supportive ecosystem. Managing these applications and resources manually creates friction and limits the reach of empowerment programs. Existing systems are often fragmented, making it hard to track progress or access real-time information.
 
----
+## The Solution
 
-## 📋 Requisitos Previos
+We built a responsive, mobile-first web application that digitizes the business incubation process for the "Modelo Süria". It provides entrepreneurs with a centralized portal to simulate budgets and find financing, while offering administrators a dashboard to manage users, publish content, and review applications efficiently.
 
-Asegúrese de tener instalado en su máquina:
-- [Node.js](https://nodejs.org/) (versión 16+ recomendada).
-- Una terminal (CMD, PowerShell, Git Bash, etc).
+**Note:** This is a frontend-only project (Fronin) that utilizes DBJSON (JSON Server) to imitate a real database for demonstration and prototyping purposes.
 
 ---
 
-## 🚀 Instalación y Ejecución Local
+## Architecture
+┌─────────────────────────────────────────────────────────┐
+│                                                         │
+│   Client (React/Vite)      ──→  DBJSON (Mock DB)        │
+│         ↑                               │               │
+│      AuthContext    ←───────────────────┘               │
+│                                                         │
+└─────────────────────────────────────────────────────────┘
 
-Para garantizar que tanto **el servidor de base de datos** como **la interfaz visual** se ejecuten correctamente y puedan comunicarse entre sí, debe abrir **2 terminales por separado** y ejecutar un paso en cada una.
+The React frontend handles all the UI, routing, and state management, differentiating between Entrepreneur (User) and Administrator (Admin) profiles. It communicates with a local JSON Server that acts as a mock backend, handling data persistence and simulating a real REST API for seamless CRUD operations without needing a complex backend infrastructure.
 
-### Paso 1: Levantar la Base de Datos Rest API (Servidor)
-Abra la primera terminal, navegue hasta la carpeta raíz del proyecto y corra el puente de persistencia del *JSON Server*:
+---
+
+## Tech Stack
+
+| Layer | Technology | Reason |
+|---|---|---|
+| Frontend | React + Vite + TypeScript | High performance, rapid development, and strict type safety to prevent runtime errors. |
+| Styling | Vanilla CSS (Modules) | Encapsulated styles to ensure zero global collisions while maintaining a premium design. |
+| Mock Backend | JSON Server (DBJSON) | Provides a fully functional REST API quickly using a local `db.json` file for frontend-only development. |
+| Routing | React Router v6 | Manages public and protected routes to separate Admin and User environments securely. |
+
+> **Design decisions worth noting:**  
+> — **"Composer" Architecture:** Pages only compose parts and delegate all logic to atomic components, keeping the codebase modular.
+> — **Frontend-Only Approach:** Using DBJSON allows for rapid iteration on the UI/UX without being blocked by backend development.
+> — **Strict Type Safety:** Zero implicit `any` in TypeScript to guarantee total type safety across the application.
+
+---
+
+## Key Features
+
+- **Role-Based Access Control** — Distinct portals and functionalities for Entrepreneurs (Users) and Administrators, protected by an `AuthContext`.
+- **Budget Simulation** — Tools for entrepreneurs to create and manage simulated budgets for their projects.
+- **Dynamic Content Management** — Admin dashboard to perform full CRUD operations on "Tips" and "News" that instantly update on the public portal.
+- **Resource Catalog** — A comprehensive directory of financing options and incubation requirements for the Modelo Süria.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
 ```bash
-# 1. Instalar dependencias si todavía no lo ha hecho:
+node >= 16
+```
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/tayroarce-lab/UNE-for-Entrepreneurs.git
+cd UNE-for-Entrepreneurs
+
+# Install dependencies
 npm install
 
-# 2. Iniciar el motor de Base de Datos en el puerto 3001:
+# Start the mock database (JSON Server)
+# In the first terminal:
 npx json-server --watch db.json --port 3001
-```
-*(Deje esta terminal abierta y corriendo. Verá un mensaje indicando que el servidor escucha en `http://localhost:3001`)*
 
-### Paso 2: Levantar el Portal Web (Frontend)
-Abra una **segunda terminal** en la misma carpeta raíz del proyecto y encienda Vite:
-```bash
-# Iniciar la interfaz gráfica de React (suele usar el puerto 5173):
+# Start the React frontend
+# In a second terminal:
 npm run dev
 ```
 
-Abra la URL que le genere la segunda terminal (generalmente `http://localhost:5173/`) en su navegador preferido.
+### Test Accounts
 
-## 🎮 Instrucciones de Uso
+| Role | Email | Password |
+|---|---|---|
+| Admin | `admin@une.com` | `Admin123!` |
+| User | `ashley@correo.com` | `Admin123!` |
 
-Una vez que ambos servidores estén corriendo (JSON Server y Vite), puede explorar la plataforma con los siguientes casos de uso:
+### Environment Variables
 
-### Como Usuario Invitado (Sin Cuenta):
-- Navegar por la página de **Inicio**, conocer las secciones de **Nuestra Gente** y explorar los requisitos del modelo de incubación en **Modelo Süria**.
-- Usar el botón en la navegación o en las tarjetas para dirigirse a `/registro`.
-
-### Como Usuario Emprendedor:
-1. Navegue a **Crear Cuenta** y postule su información.
-2. Inicie Sesión. Se le redirigirá al "Portal del Emprendedor" (Página principal modo usuario).
-3. Busque oportunidades en **Ver Opciones** dentro de la tarjeta del *Modelo Süria* o navegue a la pestaña de financiamientos.
-4. Puede leer *Noticias* enviadas por los administradores.
-
-### Como Usuario Administrador (Panel CRUD):
-1. Inicie sesión utilizando **admin@une.com** (contraseña: `Admin123!`).
-2. Se le redirigirá instantáneamente al `/admin/dashboard`.
-3. Desde la barra lateral, acceda a:
-   - **Manejo de Clientes**: Explore los usuarios registrados en el sistema, elimine o cree de ser necesario.
-   - **Gestión de Recursos**: Formule nuevos Tips o Noticias, las cuales aparecerán inmediatamente en el portal web (aplicación viva del CRUD).
-   - **Manejo de Presupuestos**: Observe los presupuestos simulados creados por las diferentes emprendedoras.
+| Variable | Description | Required |
+|---|---|---|
+| `VITE_API_URL` | API base URL (e.g., `http://localhost:3001`) | ❌ |
 
 ---
 
-## 🔒 Accesos de Prueba al Sistema
+## API Reference
 
-Para evaluar los dos tipos de portales (Admin/User), puede registrar una cuenta nueva en `/registro` o iniciar sesión con estas cuentas pre-cargadas en el `db.json`:
+> Full docs not applicable. The project uses `json-server` which automatically generates routes based on `db.json`.
 
-**1. Cuenta de Administrador:**
-- **Ruta:** `/login` -> Redirige al `/admin/dashboard`
-- **Correo:** `admin@une.com`
-- **Contraseña:** `Admin123!`
+GET    /users                   List all users
 
-**2. Cuenta de Emprendedora (Usuario regular):**
-- **Ruta:** `/login` -> Redirige al portal de usuario normal `/`
-- **Correo:** `ashley@correo.com`
-- **Contraseña:** `Admin123!`
+POST   /users                   Create new user
 
-*(Si prueba registrar un usuario nuevo, la contraseña debe cumplir reglas de seguridad: al menos 8 caracteres, 1 número, 1 mayúscula y 1 carácter especial).*
+GET    /news                    List news
 
----
+POST   /news                    Create news
 
-## 🏗️ Cumplimiento de Fases - Rúbrica FWD
+PATCH  /[resource]/:id          Update [resource]
 
-Este proyecto cubrió integralmente los puntos estipulados en la evaluación:
-
-- ✔️ **FASE 1 - LOGIN:** Formularios dinámicos y validados, comprobación en tiempo real contra el servidor JSON. Implementación de un `AuthContext` rígido que separa con el patrón *PrivateRoute* los accesos entre Administradores y Emprendedores (Login con protección de ruta).
-- ✔️ **FASE 2 Y 3 - HOME/INFO:** Estructura modular "Composer" sin mezclar HTML dentro de la vista maestra. Diseño complejo de *Landing Page*, Navbar reactiva y *Footer* rico en información. Carrousel dinámico conectado al backend.
-- ✔️ **FASE 4 Y 5 - CRUD DE PRODUCTOS (BACKEND):** Operaciones **GET, POST, PUT y DELETE** funcionando asíncronamente en todas las vistas del panel de administración (Noticias, Clientes y Presupuestos) interactuando directo contra el `json-server`. Formatos de creación prellenados antes de envíos *PUT*. 
-- ✔️ **FASE 6 - NAVEGACIÓN:** Múltiples entornos con sub-rutas anidades de `react-router-dom`, interceptores lógicos si no hay sesión. Navegaciones directas.
-- ✔️ **FASE 7 Y 8 - ARQUITECTURA "COMPOSER":** Patrón de diseño purista donde las "Pages" solo componen partes y delegan toda su lógica a "Componentes Atómicos". Cero `any` implícitos en **TypeScript**, garantizando total seguridad de tipos. CSS encapsulados usando la convención `*.module.css`.
+DELETE /[resource]/:id          Delete [resource]
 
 ---
 
-## ✨ Estructura del Proyecto
+## Project Structure
+src/
+├── assets/              # Images and graphics
+├── components/          # Reusable UI elements (Admin, User, Shared)
+├── context/             # AuthContext (Authentication State)
+├── pages/               # Master container pages (Composers)
+├── routes/              # Public and private route configurations
+├── services/            # Axios/Fetch asynchronous functions
+├── styles/              # Global CSS base and variables
+├── types/               # Strict TypeScript interfaces
+└── main.tsx             # React entry point
 
-El código fuente principal está en la carpeta `src/`, dividido según convenciones profesionales:
-```text
-📦 src/
- ┣ 📂 assets/              # Imágenes y gráficos
- ┣ 📂 components/
- ┃ ┣ 📂 AdminComponents/   # Bloques exclusivos del Dashboard Admin
- ┃ ┣ 📂 Shared/            # Navbar, Footers y elementos comunes reutilizables
- ┃ ┗ 📂 UserComponents/    # Componentes específicos de Vistas de Emprendedoras
- ┣ 📂 context/             # AuthContext (Estado de Autenticación)
- ┣ 📂 pages/               # Páginas contenedoras maestras (Composers)
- ┣ 📂 routes/              # Configuración de URLs públicas y privadas (App Router)
- ┣ 📂 services/            # Archivos que exponen funciones asíncronas de Axios/Fetch
- ┣ 📂 styles/              # CSS base globales (Variables Core).
- ┣ 📂 types/               # Definiciones (Interfaces) estrictas de TypeScript
- ┗ 📜 main.tsx             # Entry point de React.
-```
+---
+
+## What I'd Improve Next
+
+- [ ] Connect the application to a real backend (e.g., Node.js + Express) and a production database (e.g., PostgreSQL).
+- [ ] Implement actual JWT-based authentication instead of the mocked frontend authentication.
+- [ ] Add unit and integration tests using Vitest or Jest.
+
+---
+
+## Authors
+- **Steven Coto**
+- **Ashley Morera**
+- **Tayro Arce**  

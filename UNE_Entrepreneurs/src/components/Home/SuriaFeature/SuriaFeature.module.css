@@ -1,11 +1,11 @@
 .suriaFeature {
-  background: white;
-  padding: 4rem 1.25rem;
+  background: var(--suria-ivory);
+  padding: 80px 20px;
 }
 
 @media (min-width: 1024px) {
   .suriaFeature {
-    padding: 10rem 0;
+    padding: 120px 0;
   }
 }
 
@@ -14,12 +14,14 @@
   grid-template-columns: 1fr;
   gap: 4rem;
   align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 @media (min-width: 1024px) {
   .featureInner {
-    grid-template-columns: minmax(0, 1fr) 1.2fr;
-    gap: 10rem;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 8rem;
   }
 }
 
@@ -34,33 +36,37 @@
 }
 
 .featureBadge {
-  background: var(--suria-cream);
+  background: var(--suria-peach);
   color: var(--suria-crimson);
   padding: 0.6rem 1.5rem;
-  border-radius: 50px;
-  font-weight: 800;
+  border-radius: var(--radius-full);
+  font-weight: 700;
   font-size: 0.75rem;
   letter-spacing: 2px;
   margin-bottom: 2.5rem;
   display: inline-block;
   text-transform: uppercase;
+  font-family: var(--font-ui);
 }
 
 .featureTitle {
-  font-size: 2.5rem;
+  font-family: var(--font-display);
+  font-size: 3rem;
   color: var(--suria-plum);
   margin-bottom: 3.5rem;
   line-height: 1.1;
+  font-weight: 500;
 }
 
 @media (min-width: 1024px) {
   .featureTitle {
-    font-size: 4.8rem;
+    font-size: 4.5rem;
   }
 }
 
 .titleAccent {
   color: var(--suria-crimson);
+  font-style: italic;
 }
 
 .benefitList {
@@ -77,31 +83,34 @@
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: var(--suria-peach);
+  background: white;
   color: var(--suria-crimson);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
 }
 
 .benefitHeading {
+  font-family: var(--font-ui);
   font-size: 1.3rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--suria-plum);
   margin-bottom: 0.8rem;
 }
 
 .benefitDesc {
+  font-family: var(--font-body);
   font-size: 1rem;
   color: var(--suria-brown);
-  opacity: 0.8;
+  opacity: 0.85;
   line-height: 1.6;
 }
 
 @media (min-width: 1024px) {
   .benefitDesc {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
 }
 
@@ -118,9 +127,9 @@
 
 .mainImageWrapper {
   position: relative;
-  border-radius: 40px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 40px 100px rgba(169, 38, 43, 0.15);
+  box-shadow: 0 40px 100px rgba(169, 38, 43, 0.1);
 }
 
 .mainImage {
@@ -132,44 +141,42 @@
 .imageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(169, 38, 43, 0.2), transparent);
+  background: linear-gradient(to right, rgba(169, 38, 43, 0.1), transparent);
 }
 
 .floatingCard {
   position: absolute;
   bottom: 40px;
-  right: -20px;
+  right: -10px;
   background: white;
   padding: 1.5rem 2.5rem;
-  border-radius: 20px;
-  box-shadow: var(--shadow-xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
   z-index: 2;
+  text-align: center;
 }
 
 @media (min-width: 768px) {
   .floatingCard {
-    right: -40px;
-    padding: 2.5rem 4rem;
-    border-radius: 30px;
+    right: -30px;
+    padding: 2rem 3rem;
   }
 }
 
 .floatingValue {
-  font-size: 1.5rem;
-  font-weight: 900;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
   color: var(--suria-plum);
-}
-
-@media (min-width: 768px) {
-  .floatingValue {
-    font-size: 2.2rem;
-  }
+  line-height: 1;
+  margin-bottom: 0.5rem;
 }
 
 .floatingLabel {
-  font-size: 0.75rem;
-  font-weight: 800;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 700;
   color: var(--suria-brown);
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
 }

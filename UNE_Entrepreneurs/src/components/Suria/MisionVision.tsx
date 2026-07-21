@@ -18,10 +18,10 @@ const MisionVision: React.FC = () => {
         </div>
 
         {/* Misión + Visión */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', marginBottom: '6rem' }}>
+        <div className="suria-mv-grid" style={{ marginBottom: '6rem' }}>
 
           {/* Misión */}
-          <div style={{ background: 'var(--suria-plum)', borderRadius: '32px', padding: '4rem', color: 'white', position: 'relative', overflow: 'hidden' }}>
+          <div className="suria-mv-card" style={{ background: 'var(--suria-plum)', borderRadius: '32px', color: 'white', position: 'relative', overflow: 'hidden' }}>
             <div style={{ background: 'rgba(255,255,255,0.1)', width: '64px', height: '64px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2.5rem' }}>
               <Target size={32} color="var(--suria-gold)" />
             </div>
@@ -38,7 +38,7 @@ const MisionVision: React.FC = () => {
           </div>
 
           {/* Visión */}
-          <div style={{ background: 'var(--suria-ivory)', borderRadius: '32px', padding: '4rem', position: 'relative', overflow: 'hidden', border: '1px solid rgba(64,22,45,0.06)' }}>
+          <div className="suria-mv-card" style={{ background: 'var(--suria-ivory)', borderRadius: '32px', position: 'relative', overflow: 'hidden', border: '1px solid rgba(64,22,45,0.06)' }}>
             <div style={{ background: 'var(--suria-crimson)', width: '64px', height: '64px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2.5rem' }}>
               <Sparkles size={32} color="white" />
             </div>
@@ -55,9 +55,9 @@ const MisionVision: React.FC = () => {
         </div>
 
         {/* Frase insignia */}
-        <div style={{ background: 'var(--suria-cream)', borderRadius: '32px', padding: '5rem', textAlign: 'center', position: 'relative', overflow: 'hidden', border: '1px solid rgba(64,22,45,0.05)' }}>
+        <div className="suria-insignia-banner" style={{ background: 'var(--suria-cream)', borderRadius: '32px', textAlign: 'center', position: 'relative', overflow: 'hidden', border: '1px solid rgba(64,22,45,0.05)' }}>
           <Heart size={36} style={{ color: 'var(--suria-crimson)', marginBottom: '2rem', opacity: 0.7 }} />
-          <p className="accent-phrase" style={{ fontSize: '2rem', color: 'var(--suria-plum)', maxWidth: '800px', margin: '0 auto', lineHeight: 1.5 }}>
+          <p className="accent-phrase" style={{ fontSize: 'clamp(1.4rem, 5vw, 2rem)', color: 'var(--suria-plum)', maxWidth: '800px', margin: '0 auto', lineHeight: 1.5 }}>
             "Creemos que cuando una mujer fortalece su emprendimiento,<br />
             también se fortalece <span style={{ color: 'var(--suria-crimson)' }}>su comunidad</span>."
           </p>

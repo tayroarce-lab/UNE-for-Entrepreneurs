@@ -6,31 +6,31 @@ const Testimonials: React.FC = () => {
     {
       name: 'Marielos',
       trade: 'Cocinera',
-      avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300&h=300',
+      avatar: '/assets/Marielos.png',
       quote: 'Hoy estamos de fiesta por saber que las mujeres de Bagaces fueron escuchadas por UNE.'
     },
     {
       name: 'Katherine',
       trade: 'Panadera',
-      avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=300&h=300',
+      avatar: '/assets/katherine.png',
       quote: 'Esta ha sido una experiencia muy bonita, con compañeras muy buenas y una guía que está siempre presente.'
     },
     {
       name: 'Ginette',
       trade: 'Artesana',
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=300&h=300',
+      avatar: '/assets/Ginette.png',
       quote: 'A mí esto me ha abierto mucho los ojos. Ahora entiendo que si quiero que mi negocio crezca tengo que ordenarme.'
     },
     {
       name: 'Jaqueline',
       trade: 'Artesana',
-      avatar: 'https://images.unsplash.com/photo-1489424159676-112cb953046f?auto=format&fit=crop&q=80&w=300&h=300',
+      avatar: '/assets/Jaqueline.png',
       quote: 'Significa mucho saber que uno tiene el poder, la creatividad, las ideas y el don para que nos den esta oportunidad.'
     },
     {
       name: 'Damaris',
       trade: 'Artesana',
-      avatar: 'https://images.unsplash.com/photo-1554151228-14d9def656ec?auto=format&fit=crop&q=80&w=300&h=300',
+      avatar: '/assets/Damaris.png',
       quote: 'Confiaron en mí, en mi capacidad, y lo más bonito es ver cómo se realizan mis sueños, ver mi taller creciendo.'
     }
   ];

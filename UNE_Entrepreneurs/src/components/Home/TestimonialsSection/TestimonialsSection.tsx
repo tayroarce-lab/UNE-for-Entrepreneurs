@@ -1,9 +1,9 @@
 import React from 'react';
 import { Quote } from 'lucide-react';
 import styles from './TestimonialsSection.module.css';
-import marielosImg from '../../../assets/Marielos.png';
-import katherineImg from '../../../assets/katherine.png';
-import damarisImg from '../../../assets/Damaris.png';
+const marielosImg = '/assets/Marielos.png';
+const katherineImg = '/assets/katherine.png';
+const damarisImg = '/assets/Damaris.png';
 
 interface Testimonial {
   id: number;

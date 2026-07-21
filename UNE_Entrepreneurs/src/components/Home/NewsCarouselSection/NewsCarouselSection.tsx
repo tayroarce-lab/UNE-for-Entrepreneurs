@@ -12,14 +12,19 @@ const NewsCarouselSection: React.FC<NewsCarouselSectionProps> = ({
 }) => {
   return (
     <section className={styles.newsCarouselSection}>
-      <div className="container">
-        <div className={styles.sectionHeader}>
+      <header className={styles.sectionHeader}>
+        <div className={styles.titleWrapper}>
+          <span className={styles.sectionBadge}>
+            <Newspaper size={14} /> Blog & Noticias
+          </span>
           <h2 className={styles.sectionTitle}>
-            <Newspaper className={styles.titleIcon} size={42} /> {title}
+             {title.split(' ')[0]} <span className={styles.titleAccent}>{title.split(' ')[1]}</span>
           </h2>
         </div>
+      </header>
+      <div className="container">
+        <NewsCarousel />
       </div>
-      <NewsCarousel />
     </section>
   );
 };

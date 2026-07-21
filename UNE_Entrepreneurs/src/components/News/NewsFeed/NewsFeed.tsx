@@ -121,7 +121,7 @@ const NewsFeed: React.FC = () => {
             <article key={n.id} className={styles.card}>
               <div className={styles.cardImage}>
                 <img
-                  src={n.imagen && n.imagen.startsWith('http') ? n.imagen : 'https://images.unsplash.com/photo-1504711432869-efd597cdd045?q=80&w=2670&auto=format&fit=crop'}
+                  src={n.imagen || 'https://images.unsplash.com/photo-1504711432869-efd597cdd045?q=80&w=2670&auto=format&fit=crop'}
                   alt={n.titulo}
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1504711432869-efd597cdd045?q=80&w=2670&auto=format&fit=crop';

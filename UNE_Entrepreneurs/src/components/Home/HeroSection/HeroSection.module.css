@@ -1,13 +1,13 @@
 .heroSection {
   background: var(--suria-cream);
-  padding: 4rem 1.25rem;
+  padding: 100px 1.25rem 4rem;
   overflow: hidden;
   position: relative;
 }
 
 @media (min-width: 768px) {
   .heroSection {
-    padding: 8rem 2rem;
+    padding: 160px 2rem 8rem;
   }
 }
 
@@ -30,29 +30,49 @@
   flex: 1.2;
 }
 
+.scriptLogo {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 2.5rem;
+  color: var(--suria-crimson);
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .scriptLogo {
+    font-size: 1.8rem;
+    margin-bottom: 0.2rem;
+  }
+}
+
 .heroBadge {
-  background: var(--suria-crimson);
-  color: white;
+  background: var(--suria-gold);
+  color: var(--suria-plum);
   padding: 0.6rem 1.5rem;
-  border-radius: 50px;
-  font-weight: 800;
+  border-radius: var(--radius-full);
+  font-weight: 700;
   font-size: 0.7rem;
-  letter-spacing: 2px;
-  margin-bottom: 2rem;
+  letter-spacing: 1.2px;
+  margin-bottom: 1.5rem;
   display: inline-block;
   text-transform: uppercase;
+  font-family: var(--font-ui);
 }
 
 .heroTitle {
-  font-size: 2.8rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 3.2rem);
   color: var(--suria-plum);
   line-height: 1.1;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
 }
 
 @media (min-width: 768px) {
   .heroTitle {
-    font-size: 4.8rem;
+    font-size: 5rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -61,16 +81,17 @@
 }
 
 .heroDescription {
+  font-family: var(--font-body);
   font-size: 1.1rem;
   color: var(--suria-brown);
-  opacity: 0.9;
+  opacity: 0.95;
   margin-bottom: 3.5rem;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 @media (min-width: 1024px) {
   .heroDescription {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
   }
 }
 
@@ -83,7 +104,7 @@
 @media (min-width: 576px) {
   .heroButtons {
     flex-direction: row;
-    gap: 20px;
+    gap: 24px;
     align-items: center;
   }
 }
@@ -93,45 +114,65 @@
   color: white;
   padding: 1.25rem 2.5rem;
   font-size: 1rem;
-  border-radius: 50px;
-  font-weight: 800;
+  border-radius: var(--radius-full);
+  font-weight: 700;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  box-shadow: 0 10px 30px rgba(169, 38, 43, 0.3);
-  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(169, 38, 43, 0.2);
+  transition: var(--transition);
+  font-family: var(--font-ui);
 }
 
 @media (min-width: 768px) {
   .applyButton {
-    padding: 1.5rem 3.5rem;
-    font-size: 1.1rem;
+    padding: 1.4rem 3.2rem;
+    font-size: 1.05rem;
   }
 }
 
 .applyButton:hover {
+  background-color: var(--suria-dark-red);
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(169, 38, 43, 0.4);
+  box-shadow: 0 15px 40px rgba(125, 31, 48, 0.3);
 }
 
 .detailsButton {
   background: none;
-  border: none;
-  color: var(--suria-plum);
+  border: 2px solid var(--suria-crimson);
+  color: var(--suria-crimson);
+  padding: 1.25rem 2.5rem;
   font-weight: 700;
   cursor: pointer;
   font-family: var(--font-ui);
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 1px;
-  transition: opacity 0.3s;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+}
+
+@media (max-width: 576px) {
+  .applyButton, .detailsButton {
+    width: 100%;
+    justify-content: center;
+    border-radius: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .detailsButton {
+    padding: 1.4rem 3.2rem;
+  }
 }
 
 .detailsButton:hover {
-  opacity: 0.7;
+  background-color: var(--suria-crimson);
+  color: white;
+  transform: translateY(-2px);
 }
 
 /* Image section */
@@ -185,22 +226,24 @@
 }
 
 .statNumber {
-  font-size: 2rem;
-  font-weight: 900;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
   color: var(--suria-crimson);
   line-height: 1;
 }
 
 @media (min-width: 768px) {
   .statNumber {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
   }
 }
 
 .statLabel {
-  font-size: 0.65rem;
-  font-weight: 800;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 700;
   color: var(--suria-brown);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }

@@ -19,8 +19,32 @@
   margin-bottom: 2.5rem;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.inventoryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.75rem 1.25rem;
+  background: var(--suria-plum);
+  color: #fff;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.25s;
+  box-shadow: 0 4px 12px rgba(64, 22, 45, 0.2);
+  flex-shrink: 0;
+  min-height: 44px;
+}
+
+.inventoryBtn:hover {
+  background: var(--suria-crimson);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(169, 38, 43, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -28,17 +52,22 @@
     flex-direction: column;
     align-items: flex-start;
   }
+  .inventoryBtn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .titleArea h1 {
-  font-size: 2.25rem;
+  font-size: clamp(1.6rem, 8vw, 2.25rem);
   font-weight: 900;
-  color: var(--color-dark);
+  color: var(--suria-plum);
   letter-spacing: -0.025em;
+  line-height: 1.2;
 }
 
 .titleAccent {
-  color: var(--color-primary);
+  color: var(--suria-crimson);
 }
 
 .titleDesc {
@@ -81,6 +110,9 @@
 @media (max-width: 768px) {
   .tabBtn {
     white-space: nowrap;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    flex-shrink: 0;
   }
 }
 

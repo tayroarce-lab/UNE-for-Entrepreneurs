@@ -48,7 +48,7 @@ export default function FinanzasPanel() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState<number | string>('');
-  const [type, setType] = useState<'income' | 'expense' | 'investment'>('income');
+  const [type, setType] = useState<'income' | 'expense'>('income');
   const [category, setCategory] = useState('Venta de Productos');
   const [editingId, setEditingId] = useState<string | number | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
@@ -130,7 +130,8 @@ export default function FinanzasPanel() {
     setEditingId(t.id);
     setDescription(t.description);
     setAmount(t.amount);
-    setType(t.type || 'income');
+    // Map legacy 'investment' to 'expense' if encountered
+    setType((t.type === 'investment' ? 'expense' : t.type) as 'income' | 'expense');
     setCategory(t.category);
 
     // Redirect to form area orderly
@@ -297,20 +298,30 @@ export default function FinanzasPanel() {
               />
             </div>
             <div className="form-group" style={{ flex: '1 1 150px' }}>
-              <select value={type} onChange={(e) => setType((e.target.value as any) || 'income')} className="premium-select">
+              <select value={type} onChange={(e) => setType((e.target.value as 'income' | 'expense') || 'income')} className="premium-select">
                 <option value="income">Ingreso (+)</option>
                 <option value="expense">Egreso (-)</option>
-                <option value="investment">Inversión (🚀)</option>
               </select>
             </div>
             <div className="form-group" style={{ flex: '1 1 150px' }}>
-              <select value={category} onChange={(e) => setCategory(e.target.value)} className="premium-select">
-                <option value="Venta de Productos">Ganancias Ventas</option>
-                <option value="Costos Operativos">Costos Operativos</option>
-                <option value="Pago de Personal">Pagos Personal</option>
-                <option value="Publicidad">Marketing/Publi</option>
-                <option value="Maquinaria">Equipos/Inversión</option>
-              </select>
+              <datalist id="categorias-sugeridas">
+                <option value="Venta de Productos" />
+                <option value="Costos Operativos" />
+                <option value="Pago de Personal" />
+                <option value="Publicidad" />
+                <option value="Equipos" />
+                <option value="Servicios" />
+                <option value="Compras" />
+                <option value="Otros" />
+              </datalist>
+              <input
+                list="categorias-sugeridas"
+                type="text"
+                placeholder="Categoría (libre o sugerida)"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="premium-input"
+              />
             </div>
             <button className="btn-add-tx" onClick={handleAddTransaction}>
               <Plus size={20} /> {editingId ? 'Guardar Cambios' : 'Registrar'}

@@ -1,7 +1,8 @@
 import React from 'react';
-import { ShieldCheck, Users, HandCoins } from 'lucide-react';
+import { ShieldCheck, HandCoins } from 'lucide-react';
+import BrandAsset from '../../Shared/BrandAsset/BrandAsset';
 import styles from './SuriaFeature.module.css';
-import suriaWoman from '../../../assets/suria_hero.png';
+const suriaWoman = '/assets/suria_hero.png';
 
 interface Benefit {
   id: number;
@@ -20,12 +21,12 @@ const defaultBenefits: Benefit[] = [
   {
     id: 1,
     icon: <ShieldCheck size={32} />,
-    title: 'Crédito con Propósito',
-    description: 'Bajas tasas de interés colectivas diseñadas para ser pagadas con el crecimiento de tu negocio.'
+    title: 'Liderazgo con Propósito',
+    description: 'Programas de formación diseñados para impulsar el crecimiento real de tu negocio.'
   },
   {
     id: 2,
-    icon: <Users size={32} />,
+    icon: <BrandAsset type="people" size={32} />,
     title: 'Bancos Comunales',
     description: 'No estás sola. Creces junto a un grupo de mujeres que se respaldan mutuamente.'
   },
@@ -41,7 +42,7 @@ const SuriaFeature: React.FC<SuriaFeatureProps> = ({
   badge = 'DESCUBRE SÜRIA',
   title = (
     <>
-      Mucho más que un <br /> <span className={styles.titleAccent}>préstamo</span>: un ecosistema.
+      Mucho más que <br /> <span className={styles.titleAccent}>empoderamiento</span>: un ecosistema.
     </>
   ),
   benefits = defaultBenefits

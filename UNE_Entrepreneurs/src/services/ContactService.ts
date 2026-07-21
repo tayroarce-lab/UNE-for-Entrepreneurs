@@ -1,4 +1,4 @@
-import { API_BASE } from '../config';
+import { API_BASE } from '@/constants/config';
 
 export interface SolicitudContacto {
   id: string;

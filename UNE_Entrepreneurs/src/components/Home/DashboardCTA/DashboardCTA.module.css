@@ -1,13 +1,13 @@
 .dashboardCta {
   background: var(--suria-plum);
-  padding: 4rem 1.25rem;
+  padding: 80px 20px;
   position: relative;
   overflow: hidden;
 }
 
 @media (min-width: 1024px) {
   .dashboardCta {
-    padding: 10rem 0;
+    padding: 120px 0;
   }
 }
 
@@ -16,172 +16,197 @@
   grid-template-columns: 1fr;
   gap: 4rem;
   align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 @media (min-width: 1024px) {
   .ctaInner {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.1fr;
     gap: 8rem;
   }
 }
 
-.previewWrapper {
-  position: relative;
-  width: 100%;
-}
-
 .previewCard {
   background: white;
-  padding: 2.5rem;
-  border-radius: 30px;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+  position: relative;
 }
 
-.iconRow {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 3rem;
+@media (min-width: 576px) {
+  .previewCard {
+    padding: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .previewCard {
+    padding: 3rem;
+  }
 }
 
 .iconBox {
-  padding: 1.5rem;
+  padding: 1.25rem;
   background: var(--suria-cream);
-  border-radius: 20px;
+  border-radius: 16px;
   color: var(--suria-crimson);
+  width: fit-content;
 }
 
-.placeholderBar {
-  background: #f8f8f8;
-  height: 15px;
-  border-radius: 10px;
-  margin-bottom: 1.5rem;
-}
-
-.placeholderBarShort {
-  width: 80%;
-}
-
-.placeholderBarMid {
-  width: 90%;
+@media (min-width: 768px) {
+  .iconBox {
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
 }
 
 .statValue {
-  margin-top: 3rem;
+  font-family: var(--font-display);
+  margin-top: 2rem;
   font-size: 2.5rem;
-  font-weight: 900;
+  font-weight: 700;
   color: var(--suria-plum);
 }
 
+@media (min-width: 768px) {
+  .statValue {
+    margin-top: 3rem;
+    font-size: 3rem;
+  }
+}
+
 .statLabel {
-  font-size: 0.8rem;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
   color: var(--suria-brown);
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+}
+
+@media (min-width: 768px) {
+  .statLabel {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+  }
 }
 
 .floatingTag {
   position: absolute;
-  top: -20px;
-  right: -10px;
+  top: 10px;
+  right: 15px;
   background: var(--suria-gold);
   color: var(--suria-plum);
-  padding: 1rem 1.5rem;
-  border-radius: 20px;
-  font-weight: 900;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 800;
   box-shadow: 0 15px 30px rgba(212, 168, 83, 0.4);
   z-index: 2;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
 }
 
 @media (min-width: 768px) {
   .floatingTag {
-    top: -40px;
-    right: -40px;
-    padding: 1.5rem 2.5rem;
-  }
-}
-
-.ctaText {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .ctaText {
-    text-align: left;
+    top: 25px;
+    right: -25px;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.1rem;
   }
 }
 
 .ctaBadge {
   color: var(--suria-gold);
-  font-weight: 800;
-  font-size: 0.8rem;
-  letter-spacing: 3px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
   text-transform: uppercase;
   display: block;
 }
 
+@media (min-width: 768px) {
+  .ctaBadge {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+  }
+}
+
 .ctaTitle {
-  font-size: 2.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 8vw, 2.8rem);
   color: white;
-  margin-top: 2rem;
-  margin-bottom: 2.5rem;
-  line-height: 1.1;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  line-height: 1.15;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .ctaTitle {
+    font-size: 3rem;
+  }
 }
 
 @media (min-width: 1024px) {
   .ctaTitle {
-    font-size: 4.2rem;
-    margin-top: 2.5rem;
+    font-size: 4rem;
     margin-bottom: 3rem;
   }
 }
 
 .ctaTitleAccent {
   color: var(--suria-gold);
+  font-style: italic;
 }
 
 .ctaDesc {
-  color: rgba(255,255,255,0.8);
-  font-size: 1.1rem;
+  font-family: var(--font-body);
+  color: var(--suria-ivory);
+  opacity: 0.85;
+  font-size: 1.15rem;
   line-height: 1.7;
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
 }
 
 @media (min-width: 1024px) {
   .ctaDesc {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
     margin-bottom: 5rem;
   }
 }
 
 .ctaButton {
-  width: 100%;
   background: var(--suria-gold);
   color: var(--suria-plum);
-  padding: 1.25rem 2.5rem;
+  padding: 1.25rem 3.5rem;
   font-size: 1.1rem;
-  border-radius: 50px;
-  font-weight: 800;
+  border-radius: var(--radius-full);
+  font-weight: 700;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  transition: all 0.3s ease;
+  transition: var(--transition);
+  font-family: var(--font-ui);
+  box-shadow: 0 10px 30px rgba(212, 168, 83, 0.2);
+  width: fit-content;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 767px) {
   .ctaButton {
-    width: auto;
-    padding: 1.6rem 4rem;
-    font-size: 1.15rem;
+    width: 100%;
   }
 }
 
 .ctaButton:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 40px rgba(212, 168, 83, 0.4);
+  box-shadow: 0 15px 40px rgba(212, 168, 83, 0.4);
 }
 
 .bgDecoration {

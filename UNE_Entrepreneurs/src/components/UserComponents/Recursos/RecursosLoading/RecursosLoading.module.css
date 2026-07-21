@@ -1,0 +1,20 @@
+.loadingContainer {
+    text-align: center;
+    padding: 100px 0;
+    color: #8B1A1A;
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+.loadingContainer p {
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
