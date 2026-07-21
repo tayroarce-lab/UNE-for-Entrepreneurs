@@ -24,6 +24,12 @@ const sequelize = isTest
       port: dbPort,
       dialect: 'mysql',
       logging: process.env.NODE_ENV === 'development' ? console.log : false,
+      dialectOptions: process.env.NODE_ENV === 'production' ? {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false
+        }
+      } : undefined,
       define: {
         timestamps: true,
       },
